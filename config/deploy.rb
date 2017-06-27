@@ -1,7 +1,6 @@
 require 'mina/rails'
 require 'mina/git'
-# require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
-# require 'mina/rvm'    # for rvm support. (https://rvm.io)
+require 'mina/rvm'    # for rvm support. (https://rvm.io)
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -10,28 +9,29 @@ require 'mina/git'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 ENV['domain'] || raise('no domain provided')
-ENV['to'] ||= "dev"
+ENV['to'] ||= 'dev'
 
 print "Deploy to #{ENV['to']}\n"
 
 set :application_name, 'watchdoge'
 set :domain, ENV['domain']
-set :deploy_to, '/var/www/watchdogem'
+set :deploy_to, '/var/www/watchdoge'
 set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
 
 branch =
   begin
     case ENV['to']
-    when :production
+    when 'production'
       'master'
-    when :staging
+    when 'staging'
       'staging'
-    else
+    when 'dev'
       'develop'
     end
   end
 
 set :branch, branch
+ensure!(:branch)
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
@@ -51,7 +51,7 @@ task :environment do
 
   # For those using RVM, use this to load an RVM version@gemset.
   # invoke :'rvm:use', 'ruby-1.9.3-p125@default'
-  invoke :'rvm:use', '2.4.0@watchdoge'
+  invoke :'rvm:use', 'ruby-2.4.0@watchdoge'
 end
 
 # Put any custom commands you need to run at setup
@@ -71,7 +71,6 @@ task :deploy do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     command 'bundle exec crono start'
