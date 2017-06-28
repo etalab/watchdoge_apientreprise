@@ -15,7 +15,6 @@ gem 'puma', '~> 3.7'
 gem 'crono'
 gem 'daemons'
 gem 'haml'
-gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'logstasher'
 gem 'sinatra', require: nil
 
@@ -51,6 +50,7 @@ group :development do
   gem 'fuubar'
   gem 'guard'
   gem 'guard-rspec', require: false
+  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'mina'
   gem 'spring'
   gem 'spring-commands-rspec'
