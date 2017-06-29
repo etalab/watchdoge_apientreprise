@@ -16,6 +16,7 @@ gem 'crono'
 gem 'daemons'
 gem 'haml'
 gem 'logstasher'
+gem 'pg'
 gem 'sinatra', require: nil
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -50,6 +51,7 @@ group :development do
   gem 'fuubar'
   gem 'guard'
   gem 'guard-rspec', require: false
+  gem 'unindent'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'mina'
   gem 'spring'

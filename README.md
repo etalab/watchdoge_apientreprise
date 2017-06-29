@@ -1,24 +1,38 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Watchdoge is a watchdog for [API Entreprise](https://github.com/etalab/apientreprise), the monitoring done by Watchdoge is available on the [Dashboard](https://github.com/etalab/dashboard_apientreprise)
 
-Things you may want to cover:
+Watchdoge run on Ruby 2.4.0
 
-* Ruby version
+## Configuration
+### Database
+The database user should exists, it uses PostgreSQL (cf. `config/database.yml`). Execute the following command line to create the default user:
 
-* System dependencies
+``psql -f db/init.sql``
 
-* Configuration
+### Development environment
+Run:
 
-* Database creation
+``rake dev:init``
 
-* Database initialization
+It will init the development environement (defaults config files & database)
 
-* How to run the test suite
+## Deployment
+Run:
 
-* Services (job queues, cache servers, search engines, etc.)
+``mina deploy domain=<MY IP> to=<development|staging|production>``
 
-* Deployment instructions
+## Dependencies
+Needs PostgreSQL installed,  certifcates (and IP whitelist) for API Entreprise and it's providers
 
-* ...
+## Jobs
+Watchdoge use `crono` to perform periodic pings Mina start the deamon automatically.
+
+To do it manually :
+
+``bundle exec crono start -N watchdoge-crono -e <development>``
+
+## Tests
+Run:
+
+``rspec``

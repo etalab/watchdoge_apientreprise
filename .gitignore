@@ -1,3 +1,5 @@
+config/watchdoge_secrets.yml
+
 *.rbc
 capybara-*.html
 .rspec
