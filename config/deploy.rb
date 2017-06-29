@@ -11,8 +11,8 @@ set :application_name, 'watchdoge'
 set :domain, ENV['domain']
 set :deploy_to, '/var/www/watchdoge'
 set :rails_env, ENV['to']
-#set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
-set :repository, './'
+set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
+#set :repository, './'
 
 branch =
   begin
@@ -92,16 +92,26 @@ task :deploy => :environment do
     invoke :'bundle:install'
     invoke :'rails:db_migrate' # Database must exists here ;)
     invoke :'deploy:cleanup'
-    command %{bundle exec crono restart -N watchdoge-crono -e #{ENV['to']}}
+
 
     on :launch do
       in_path(fetch(:current_path)) do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
+
+        # Crono has to:
+        # - be in 'launch' if not Mina kill remaing processes
+        # - run in current_path to access bundle
+        # - re-run rvm:use after 'cd' command
+        invoke :'crono'
       end
     end
   end
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
   # run(:local){ say 'done' }
+end
+
+task :crono => :environment do
+   command %{./bin/bundle exec crono restart -N watchdoge-crono -e #{ENV['to']}}
 end
