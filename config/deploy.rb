@@ -11,8 +11,8 @@ set :application_name, 'watchdoge'
 set :domain, ENV['domain']
 set :deploy_to, '/var/www/watchdoge'
 set :rails_env, ENV['to']
-set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
-#set :repository, './'
+#set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
+set :repository, './'
 
 branch =
   begin
