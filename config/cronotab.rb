@@ -1,4 +1,4 @@
-# cronotab.rb — Crono configuration file
+# Crono configuration file
 #
 # Here you can specify periodic jobs and schedule.
 # You can use ActiveJob's jobs from `app/jobs/`
@@ -7,4 +7,4 @@
 #
 
 Crono.perform(TestJob).every 5.seconds
-# TODO crono truncate table every ??
+# TODO: crono truncate table every ??

@@ -1,5 +1,5 @@
-class TestJob < ActiveJob::Base
+class TestJob < ApplicationJob
   def perform
-    puts "This is a Crono test"
+    Rails.logger.info 'This is a Crono test'
   end
 end

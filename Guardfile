@@ -1,25 +1,6 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
-
-## Uncomment and set this to only include directories you want to watch
-# directories %w(app lib config test spec features) \
-#  .select{|d| Dir.exists?(d) ? d : UI.warning("Directory #{d} does not exist")}
-
-## Note: if you are using the `directories` clause above and you are not
-## watching the project directory ('.'), then you will want to move
-## the Guardfile to a watched dir and symlink it back, e.g.
-#
-#  $ mkdir config
-#  $ mv Guardfile config/
-#  $ ln -s config/Guardfile .
-#
-# and, you'll have to watch "config/Guardfile" instead of "Guardfile"
-
-guard :rspec, cmd: "bundle exec spring rspec" do
-  require "guard/rspec/dsl"
+guard :rspec, cmd: 'bundle exec spring rspec' do
+  require 'guard/rspec/dsl'
   dsl = Guard::RSpec::Dsl.new(self)
-
-  # Feel free to open issues for suggestions and improvements
 
   # RSpec files
   rspec = dsl.rspec
@@ -32,7 +13,7 @@ guard :rspec, cmd: "bundle exec spring rspec" do
   dsl.watch_spec_files_for(ruby.lib_files)
 
   # Rails files
-  rails = dsl.rails(view_extensions: %w(erb haml slim))
+  rails = dsl.rails(view_extensions: %w[erb haml slim])
   dsl.watch_spec_files_for(rails.app_files)
   dsl.watch_spec_files_for(rails.views)
 
@@ -57,25 +38,22 @@ guard :rspec, cmd: "bundle exec spring rspec" do
   # Turnip features and steps
   watch(%r{^spec/acceptance/(.+)\.feature$})
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
-    Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
+    Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance'
   end
 
   # Tmux
   notification :tmux,
-    display_message: true,
-    timeout: 2, # in seconds
-    success_message_format: 'All Good ;)',
-    default_message_format: '%s >> %s', # the first %s will show the title, the second the message
-    line_separator: ' > ', # since we are single line we need a separator
-    color_location: 'status-left-bg', # to customize which tmux element will change color
-
-    # Other options:
-    default_message_color: 'black',
-    success: 'green',
-    failure: 'colour174',
-    pending: 'colour179',
-
-    # Notify on all tmux clients
-    display_on_all_clients: false
-
+               display_message: true,
+               timeout: 2, # in seconds
+               success_message_format: 'All Good ;)',
+               default_message_format: '%s >> %s', # the first %s will show the title, the second the message
+               line_separator: ' > ', # since we are single line we need a separator
+               color_location: 'status-left-bg', # to customize which tmux element will change color
+               # Other options:
+               default_message_color: 'black',
+               success: 'green',
+               failure: 'colour174',
+               pending: 'colour179',
+               # Notify on all tmux clients
+               display_on_all_clients: false
 end

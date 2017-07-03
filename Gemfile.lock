@@ -43,6 +43,7 @@ GEM
     builder (3.2.3)
     byebug (9.0.6)
     coderay (1.1.1)
+    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     crono (1.1.2)
       activerecord (>= 4.0)
@@ -228,6 +229,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  colorize
   crono
   daemons
   fuubar

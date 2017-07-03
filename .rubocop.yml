@@ -1,0 +1,43 @@
+require: rubocop-rspec
+
+AllCops:
+  Exclude:
+    - db/**/*
+    - vendor/**/*
+    - log/**/*
+
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Enabled: false
+
+# Ruby 3.0 feature related stuff, will see later
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+# Do not force use of fail or raise only both have their use
+Style/SignalException:
+  Enabled: false
+
+# Do not force documentation at the top of classes
+Documentation:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Exclude:
+    - 'documentation/Gemfile'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Guardfile' # mono bloc inside...
+
+# only used in console no need to log
+Rails/Output:
+  Exclude:
+    - 'lib/tasks/project_init.rake'
+    - 'config/deploy.rb'
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'

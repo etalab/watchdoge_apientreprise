@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe TestJob, type: :job do
-  it 'should be true' do
-    expect(true).to be_truthy
+  it 'is true' do
+    t = true
+    expect(t).to be_truthy
   end
 end

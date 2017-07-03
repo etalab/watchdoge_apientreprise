@@ -1,18 +1,19 @@
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
+require 'colorize'
 
 ENV['domain'] || raise('no domain provided')
 ENV['to'] ||= 'development'
 
-print "Deploy to #{ENV['to']}\n"
+print "Deploy to #{ENV['to']}\n".green
 
 set :application_name, 'watchdoge'
 set :domain, ENV['domain']
 set :deploy_to, '/var/www/watchdoge'
 set :rails_env, ENV['to']
-set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
-#set :repository, './'
+# set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
+set :repository, './'
 
 branch =
   begin
@@ -63,25 +64,25 @@ end
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
 task :setup do
   # Production database has to be setup !
-  # command %{rbenv install 2.3.0}
-  command %{mkdir -p "#{fetch(:deploy_to)}/shared/log"}
-  command %{chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/log"}
+  # command %(rbenv install 2.3.0)
+  command %(mkdir -p "#{fetch(:deploy_to)}/shared/log")
+  command %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/log")
 
-  command %{mkdir -p "#{fetch(:deploy_to)}/shared/bin"}
-  command %{chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/bin"}
+  command %(mkdir -p "#{fetch(:deploy_to)}/shared/bin")
+  command %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/bin")
 
-  command %{mkdir -p "#{fetch(:deploy_to)}/shared/tmp/pids"}
-  command %{chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/tmp/pids"}
+  command %(mkdir -p "#{fetch(:deploy_to)}/shared/tmp/pids")
+  command %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/tmp/pids")
 
-  command %{mkdir -p "#{fetch(:deploy_to)}/shared/tmp/cache"}
-  command %{chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/tmp/cache"}
+  command %(mkdir -p "#{fetch(:deploy_to)}/shared/tmp/cache")
+  command %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/tmp/cache")
 
-  command %{mkdir -p "#{fetch(:deploy_to)}/shared/db"}
-  command %{chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/db"}
+  command %(mkdir -p "#{fetch(:deploy_to)}/shared/db")
+  command %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/db")
 end
 
-desc "Deploys the current version to the server."
-task :deploy => :environment do
+desc 'Deploys the current version to the server.'
+task deploy: :environment do
   # uncomment this line to make sure you pushed your local branch to the remote origin
   # invoke :'git:ensure_pushed'
   deploy do
@@ -93,17 +94,16 @@ task :deploy => :environment do
     invoke :'rails:db_migrate' # Database must exists here ;)
     invoke :'deploy:cleanup'
 
-
     on :launch do
       in_path(fetch(:current_path)) do
-        command %{mkdir -p tmp/}
-        command %{touch tmp/restart.txt}
+        command %(mkdir -p tmp/)
+        command %(touch tmp/restart.txt)
 
         # Crono has to:
         # - be in 'launch' if not Mina kill remaing processes
         # - run in current_path to access bundle
         # - re-run rvm:use after 'cd' command
-        invoke :'crono'
+        invoke :crono
       end
     end
   end
@@ -112,6 +112,6 @@ task :deploy => :environment do
   # run(:local){ say 'done' }
 end
 
-task :crono => :environment do
-   command %{./bin/bundle exec crono restart -N watchdoge-crono -e #{ENV['to']}}
+task crono: :environment do
+  command %(./bin/bundle exec crono restart -N watchdoge-crono -e #{ENV['to']})
 end
