@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  mount Crono::Web, at: '/crono'
+  #mount Crono::Web, at: '/crono'
 end

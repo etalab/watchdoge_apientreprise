@@ -15,10 +15,13 @@ gem 'puma', '~> 3.7'
 gem 'crono'
 gem 'daemons'
 gem 'haml'
+gem 'httparty'
 gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'logstasher'
+gem 'ougai'
 gem 'pg'
 gem 'sinatra', require: nil
+gem 'validates_timeliness'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
@@ -64,9 +67,12 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-# group :test do
+group :test do
+  gem 'rspec-json_expectations'
+  gem 'vcr'
+  gem 'webmock'
 #  gem 'factory_girl_rails', '~> 4.0'
 #  gem 'shoulda-matchers', '~> 3.1'
 #  gem 'faker'
 #  gem 'database_cleaner'
-# end
+end
