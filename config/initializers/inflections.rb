@@ -14,4 +14,5 @@
  ActiveSupport::Inflector.inflections(:en) do |inflect|
    inflect.acronym 'APIE'
    inflect.acronym 'ACOSS'
+   inflect.acronym 'V2'
  end

@@ -1,17 +1,19 @@
-RSpec.shared_examples 'logstashed_ping' do
+RSpec.shared_examples 'logstashable' do
   subject { described_class.new }
+  let(:value) { 'this is a value' }
+  let(:another_value) { 'this is another value' }
 
-  it 'writes in file in logstash format' do
-    value = 'this is a value'
-    another_value = 'this is another value'
+  before do
     subject.logger.info({
       rspec: value,
       another_rspec: another_value
     })
+  end
 
+  it 'writes in file in logstash format' do
     filename = described_class.send(:logfile)
     last_line = File.readlines(filename).last
-    json = JSON.parse(last_line, symbolize_keys: true)
+    json = JSON.parse(last_line)
 
     expect(json).to include_json(
       msg: 'ping',

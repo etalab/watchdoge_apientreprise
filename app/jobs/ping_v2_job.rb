@@ -1,11 +1,12 @@
-class PingAPIEV2Job < ApplicationJob
+class PingV2Job < ApplicationJob
   include HTTParty
   base_uri Rails.application.config_for(:watchdoge_secrets)['apie_base_uri']
 
   def perform
     service_names.each do |service_name|
-      status = perform_service(service_name)
-      ping = PingStatus.new(name: service_name, code: status, date: DateTime.now)
+      response = perform_service(service_name)
+      status = response.code == 200 ? 'up' : 'down'
+      ping = PingStatus.new(name: service_name, api_version: 2, status: status, date: DateTime.now)
 
       if ping.valid?
         ping.save
@@ -25,7 +26,7 @@ class PingAPIEV2Job < ApplicationJob
   def log(ping)
     logger.info({
       endpoint: ping.name,
-      code: ping.code,
+      status: ping.status,
       date: ping.date
     })
   end

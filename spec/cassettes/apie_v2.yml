@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 20 Jul 2017 15:46:04 GMT
+      - Fri, 21 Jul 2017 12:14:46 GMT
       Content-Type:
       - text/html
       Content-Length:
@@ -29,13 +29,13 @@ http_interactions:
       Location:
       - https://api-sandbox.apientreprise.fr/v2/ping?token=<APIE_TOKEN>&service=insee_etablissement
       X-Iplb-Instance:
-      - '8250'
+      - '8245'
     body:
       encoding: UTF-8
       string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
         bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
     http_version: 
-  recorded_at: Thu, 20 Jul 2017 15:46:04 GMT
+  recorded_at: Fri, 21 Jul 2017 12:14:46 GMT
 - request:
     method: get
     uri: https://api-sandbox.apientreprise.fr/v2/ping?service=insee_etablissement&token=<APIE_TOKEN>
@@ -57,7 +57,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 20 Jul 2017 15:46:04 GMT
+      - Fri, 21 Jul 2017 12:14:46 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -73,19 +73,19 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - c9bb3b6c-9c72-4b2d-a267-34d3887337cb
+      - e41b59e0-89fb-4004-8251-d44732f3bb55
       X-Runtime:
-      - '0.164706'
+      - '0.198378'
       X-Iplb-Instance:
       - '8245'
     body:
       encoding: ASCII-8BIT
       string: '{"code":200}'
     http_version: 
-  recorded_at: Thu, 20 Jul 2017 15:46:04 GMT
+  recorded_at: Fri, 21 Jul 2017 12:14:46 GMT
 - request:
     method: get
-    uri: http://api-sandbox.apientreprise.fr/v2/ping?service=insee_entreprise&token=<APIE_TOKEN>
+    uri: http://api-sandbox.apientreprise.fr/v2/ping?service=insee_etablissement&token=<APIE_TOKEN>
     body:
       encoding: US-ASCII
       string: ''
@@ -104,24 +104,24 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 20 Jul 2017 15:46:04 GMT
+      - Fri, 21 Jul 2017 12:14:46 GMT
       Content-Type:
       - text/html
       Content-Length:
       - '178'
       Location:
-      - https://api-sandbox.apientreprise.fr/v2/ping?token=<APIE_TOKEN>&service=insee_entreprise
+      - https://api-sandbox.apientreprise.fr/v2/ping?token=<APIE_TOKEN>&service=insee_etablissement
       X-Iplb-Instance:
-      - '8250'
+      - '8245'
     body:
       encoding: UTF-8
       string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
         bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
     http_version: 
-  recorded_at: Thu, 20 Jul 2017 15:46:04 GMT
+  recorded_at: Fri, 21 Jul 2017 12:14:46 GMT
 - request:
     method: get
-    uri: https://api-sandbox.apientreprise.fr/v2/ping?service=insee_entreprise&token=<APIE_TOKEN>
+    uri: https://api-sandbox.apientreprise.fr/v2/ping?service=insee_etablissement&token=<APIE_TOKEN>
     body:
       encoding: US-ASCII
       string: ''
@@ -140,7 +140,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 20 Jul 2017 15:46:05 GMT
+      - Fri, 21 Jul 2017 12:14:47 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -156,14 +156,14 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 253ea3ff-b585-4186-b848-ea670c7e862b
+      - 298da97b-912a-438f-af7a-d98367d3861f
       X-Runtime:
-      - '0.160639'
+      - '0.153856'
       X-Iplb-Instance:
       - '8245'
     body:
       encoding: ASCII-8BIT
       string: '{"code":200}'
     http_version: 
-  recorded_at: Thu, 20 Jul 2017 15:46:05 GMT
+  recorded_at: Fri, 21 Jul 2017 12:14:47 GMT
 recorded_with: VCR 3.0.3
