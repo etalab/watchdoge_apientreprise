@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 21 Jul 2017 12:14:46 GMT
+      - Wed, 02 Aug 2017 14:40:58 GMT
       Content-Type:
       - text/html
       Content-Length:
@@ -35,7 +35,7 @@ http_interactions:
       string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
         bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
     http_version: 
-  recorded_at: Fri, 21 Jul 2017 12:14:46 GMT
+  recorded_at: Wed, 02 Aug 2017 14:40:58 GMT
 - request:
     method: get
     uri: https://api-sandbox.apientreprise.fr/v2/ping?service=insee_etablissement&token=<APIE_TOKEN>
@@ -57,7 +57,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 21 Jul 2017 12:14:46 GMT
+      - Wed, 02 Aug 2017 14:40:58 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -73,97 +73,14 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - e41b59e0-89fb-4004-8251-d44732f3bb55
+      - dd0e8d60-c513-4b56-ad60-853d0553b787
       X-Runtime:
-      - '0.198378'
+      - '0.173444'
       X-Iplb-Instance:
       - '8245'
     body:
       encoding: ASCII-8BIT
       string: '{"code":200}'
     http_version: 
-  recorded_at: Fri, 21 Jul 2017 12:14:46 GMT
-- request:
-    method: get
-    uri: http://api-sandbox.apientreprise.fr/v2/ping?service=insee_etablissement&token=<APIE_TOKEN>
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 301
-      message: Moved Permanently
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 21 Jul 2017 12:14:46 GMT
-      Content-Type:
-      - text/html
-      Content-Length:
-      - '178'
-      Location:
-      - https://api-sandbox.apientreprise.fr/v2/ping?token=<APIE_TOKEN>&service=insee_etablissement
-      X-Iplb-Instance:
-      - '8245'
-    body:
-      encoding: UTF-8
-      string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
-        bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
-    http_version: 
-  recorded_at: Fri, 21 Jul 2017 12:14:46 GMT
-- request:
-    method: get
-    uri: https://api-sandbox.apientreprise.fr/v2/ping?service=insee_etablissement&token=<APIE_TOKEN>
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 21 Jul 2017 12:14:47 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Etag:
-      - W/"ae64196db7fe3eccb7a320032b6a44ca"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 298da97b-912a-438f-af7a-d98367d3861f
-      X-Runtime:
-      - '0.153856'
-      X-Iplb-Instance:
-      - '8245'
-    body:
-      encoding: ASCII-8BIT
-      string: '{"code":200}'
-    http_version: 
-  recorded_at: Fri, 21 Jul 2017 12:14:47 GMT
+  recorded_at: Wed, 02 Aug 2017 14:40:59 GMT
 recorded_with: VCR 3.0.3

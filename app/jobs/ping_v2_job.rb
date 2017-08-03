@@ -4,18 +4,28 @@ class PingV2Job < ApplicationJob
 
   def perform
     service_names.each do |service_name|
-      response = perform_service(service_name)
-      status = response.code == 200 ? 'up' : 'down'
-      ping = PingStatus.new(name: service_name, api_version: 2, status: status, date: DateTime.now)
+      ping = PingStatus.new(
+        name: service_name,
+        api_version: 2,
+        status: get_service_status(service_name),
+        date: DateTime.now
+      )
 
       if ping.valid?
-        ping.save
+        Tools::PingReaderWriter.new.write(self)
         log(ping)
+      else
+        Rails.logger.error "Fail to write PingStatus(#{ping.name}) it's invalid (#{ping.errors.messages})"
       end
     end
   end
 
   private
+
+  def get_service_status(service_name)
+    response = perform_service(service_name)
+    response.code == 200 ? 'up' : 'down'
+  end
 
   def perform_service(service_name)
     self.class.get(
