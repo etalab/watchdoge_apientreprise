@@ -20,7 +20,7 @@ describe PingV2Job, type: :job do
 
     it 'writes and log the new status' do
       expect(subject).to receive(:log)
-      expect_any_instance_of(Tools::PingReaderWriter).to receive(:write) # write consistency is not tested here
+      expect_any_instance_of(Tools::PingReaderWriter).to receive(:write).with(instance_of(PingStatus)) # write consistency is not tested here
 
       subject.perform
     end

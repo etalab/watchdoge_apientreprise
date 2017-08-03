@@ -12,7 +12,7 @@ class PingV2Job < ApplicationJob
       )
 
       if ping.valid?
-        Tools::PingReaderWriter.new.write(self)
+        Tools::PingReaderWriter.new.write(ping)
         log(ping)
       else
         Rails.logger.error "Fail to write PingStatus(#{ping.name}) it's invalid (#{ping.errors.messages})"
