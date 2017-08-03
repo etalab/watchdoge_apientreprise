@@ -34,7 +34,7 @@ Watchdoge use `crono` to perform periodic pings Mina start the deamon automatica
 
 To do it manually :
 
-`bundle exec crono start -N watchdoge-crono -e <development>`
+`bundle exec crono start -N watchdoge-crono -e development`
 
 ## Tests
 Run:
