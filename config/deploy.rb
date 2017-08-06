@@ -5,15 +5,22 @@ require 'colorize'
 
 ENV['domain'] || raise('no domain provided')
 ENV['to'] ||= 'development'
+%w(development staging production).include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
 
 print "Deploy to #{ENV['to']}\n".green
 
 set :application_name, 'watchdoge'
 set :domain, ENV['domain']
-set :deploy_to, '/var/www/watchdoge'
+set :deploy_to, "/var/www/watchdoge_#{ENV['to']}"
 set :rails_env, ENV['to']
-# set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
-set :repository, './'
+set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
+#set :repository, './'
+
+if ENV['domain'] != 'localhost'
+  set :forward_agent, true
+  set :user, "watchdoge_#{ENV['to']}"
+  #set :port, 2200
+end
 
 branch =
   begin
@@ -30,11 +37,6 @@ branch =
 set :branch, branch
 ensure!(:branch)
 
-# Optional settings:
-#   set :user, 'foobar'          # Username in the server to SSH to.
-#   set :port, '30000'           # SSH port number.
-#   set :forward_agent, true     # SSH forward_agent.
-
 # shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
 set :shared_dirs, fetch(:shared_dirs, []).push(
   'log',
@@ -44,20 +46,19 @@ set :shared_dirs, fetch(:shared_dirs, []).push(
 )
 
 set :shared_files, fetch(:shared_files, []).push(
-  'db/development.sqlite3',
-  'db/production.sqlite3'
+  'config/watchdoge_secrets.yml'
 )
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
 task :environment do
-  # If you're using rbenv, use this to load the rbenv environment.
-  # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-  # invoke :'rbenv:load'
-
-  # For those using RVM, use this to load an RVM version@gemset.
-  # invoke :'rvm:use', 'ruby-1.9.3-p125@default'
-  invoke :'rvm:use', '2.4.0@watchdoge'
+  if ENV['domain'] != 'localhost'
+    # Be sure to commit your .ruby-version or .rbenv-version to your repository.
+    # TODO ansible: rbenv !
+    #  invoke :'rbenv:load'
+  else
+    invoke :'rvm:use', '2.4.0@watchdoge'
+  end
 end
 
 # Put any custom commands you need to run at setup
@@ -98,6 +99,7 @@ task deploy: :environment do
       in_path(fetch(:current_path)) do
         command %(mkdir -p tmp/)
         command %(touch tmp/restart.txt)
+        command %(touch tmp/status.json)
 
         # Crono has to:
         # - be in 'launch' if not Mina kill remaing processes
@@ -113,5 +115,5 @@ task deploy: :environment do
 end
 
 task crono: :environment do
-  command %(./bin/bundle exec crono restart -N watchdoge-crono -e #{ENV['to']})
+  command %(./bin/bundle exec crono restart -N watchdoge-crono-#{ENV['to']} -e #{ENV['to']})
 end

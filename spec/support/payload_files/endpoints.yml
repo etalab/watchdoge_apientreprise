@@ -1,0 +1,3 @@
+endpoints:
+  - name: valid name
+    api_version: 50

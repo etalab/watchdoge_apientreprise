@@ -1,0 +1,18 @@
+shared: &SHARED
+  api_version: 2
+  options:
+    recipient: 'SGMAP'
+    context: 'Ping'
+
+endpoints:
+  - name: entreprises
+    parameter: 418166096
+    <<: *SHARED
+
+  - name: etablissements
+    parameter: 41816609600069
+    <<: *SHARED
+
+  - name: cotisations_msa
+    parameter: 38069910800011
+    <<: *SHARED

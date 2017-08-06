@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://api-sandbox.apientreprise.fr/v2/ping?service=insee_etablissement&token=<APIE_TOKEN>
+    uri: http://api-sandbox.apientreprise.fr/v2/entreprises/418166096?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>
     body:
       encoding: US-ASCII
       string: ''
@@ -21,24 +21,24 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 02 Aug 2017 14:40:58 GMT
+      - Sun, 06 Aug 2017 13:30:22 GMT
       Content-Type:
       - text/html
       Content-Length:
       - '178'
       Location:
-      - https://api-sandbox.apientreprise.fr/v2/ping?token=<APIE_TOKEN>&service=insee_etablissement
+      - https://api-sandbox.apientreprise.fr/v2/entreprises/418166096?token=<APIE_TOKEN>&context=Ping&recipient=SGMAP
       X-Iplb-Instance:
-      - '8245'
+      - '8250'
     body:
       encoding: UTF-8
       string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
         bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
     http_version: 
-  recorded_at: Wed, 02 Aug 2017 14:40:58 GMT
+  recorded_at: Sun, 06 Aug 2017 13:30:22 GMT
 - request:
     method: get
-    uri: https://api-sandbox.apientreprise.fr/v2/ping?service=insee_etablissement&token=<APIE_TOKEN>
+    uri: https://api-sandbox.apientreprise.fr/v2/entreprises/418166096?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>
     body:
       encoding: US-ASCII
       string: ''
@@ -57,7 +57,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 02 Aug 2017 14:40:58 GMT
+      - Sun, 06 Aug 2017 13:30:24 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -69,18 +69,185 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Etag:
-      - W/"ae64196db7fe3eccb7a320032b6a44ca"
+      - W/"94e379ee79871fc8f1389cdd08cfa277"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - dd0e8d60-c513-4b56-ad60-853d0553b787
+      - fba4aded-986e-4e4e-84b2-884ac3160a61
       X-Runtime:
-      - '0.173444'
+      - '1.339997'
       X-Iplb-Instance:
       - '8245'
     body:
       encoding: ASCII-8BIT
-      string: '{"code":200}'
+      string: !binary |-
+        eyJlbnRyZXByaXNlIjp7InNpcmVuIjoiNDE4MTY2MDk2IiwiY2FwaXRhbF9zb2NpYWwiOjUwOTUyNSwibnVtZXJvX3R2YV9pbnRyYWNvbW11bmF1dGFpcmUiOiJGUjE2NDE4MTY2MDk2IiwiZm9ybWVfanVyaWRpcXVlIjoiU0Egw6AgZGlyZWN0b2lyZSAocy5hLmkuKSIsImZvcm1lX2p1cmlkaXF1ZV9jb2RlIjoiNTY5OSIsIm5vbV9jb21tZXJjaWFsIjoiT0NUTy1URUNITk9MT0dZIiwicHJvY2VkdXJlX2NvbGxlY3RpdmUiOmZhbHNlLCJlbnNlaWduZSI6bnVsbCwicmFpc29uX3NvY2lhbGUiOiJPQ1RPLVRFQ0hOT0xPR1kiLCJzaXJldF9zaWVnZV9zb2NpYWwiOiI0MTgxNjYwOTYwMDA2OSIsImNvZGVfZWZmZWN0aWZfZW50cmVwcmlzZSI6IjMyIiwiZGF0ZV9jcmVhdGlvbiI6ODkxMzgxNjAwLCJub20iOm51bGwsInByZW5vbSI6bnVsbCwiZGF0ZV9yYWRpYXRpb24iOm51bGwsImNhdGVnb3JpZV9lbnRyZXByaXNlIjoiUE1FIiwidHJhbmNoZV9lZmZlY3RpZl9zYWxhcmllX2VudHJlcHJpc2UiOnsiZGUiOjI1MCwiYSI6NDk5LCJjb2RlIjoiMzIiLCJkYXRlX3JlZmVyZW5jZSI6IjIwMTUiLCJpbnRpdHVsZSI6IjI1MCDDoCA0OTkgc2FsYXJpw6lzIn0sIm1hbmRhdGFpcmVzX3NvY2lhdXgiOlt7Im5vbSI6IkhJU1FVSU4iLCJwcmVub20iOiJGUkFOQ09JUyIsImZvbmN0aW9uIjoiUFJFU0lERU5UIERVIERJUkVDVE9JUkUiLCJkYXRlX25haXNzYW5jZSI6IjE5NjUtMDEtMjciLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi0xNTU1MjM2MDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiTklCT1VSRUwiLCJwcmVub20iOiJDSFJJU1RJQU4iLCJmb25jdGlvbiI6IlBSRVNJREVOVCBEVSBDT05TRUlMIERFIFNVUlZFSUxMQU5DRSIsImRhdGVfbmFpc3NhbmNlIjoiMTk1OC0wMS0wOSIsImRhdGVfbmFpc3NhbmNlX3RpbWVzdGFtcCI6LTM3ODAwMzYwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiJERUdPTlNFIiwicHJlbm9tIjoiR0VSQVJEIiwiZm9uY3Rpb24iOiJWSUNFLVBSRVNJREVOVCIsImRhdGVfbmFpc3NhbmNlIjoiMTk0Ny0wNy0wMyIsImRhdGVfbmFpc3NhbmNlX3RpbWVzdGFtcCI6LTcxMDAzODgwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiJDSU5RVUlOIiwicHJlbm9tIjoiTFVET1ZJQyIsImZvbmN0aW9uIjoiTUVNQlJFIERVIERJUkVDVE9JUkUiLCJkYXRlX25haXNzYW5jZSI6IjE5NzItMDEtMjUiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOjY1MTQyMDAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifSx7Im5vbSI6IkRFR09OU0UiLCJwcmVub20iOiJHRVJBUkQiLCJmb25jdGlvbiI6Ik1FTUJSRSBEVSBDT05TRUlMIERFIFNVUlZFSUxMQU5DRSIsImRhdGVfbmFpc3NhbmNlIjoiMTk0Ny0wNy0wMyIsImRhdGVfbmFpc3NhbmNlX3RpbWVzdGFtcCI6LTcxMDAzODgwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiJCRU4gTUFITU9VRCIsInByZW5vbSI6IlNJSEVNIiwiZm9uY3Rpb24iOiJNRU1CUkUgRFUgQ09OU0VJTCBERSBTVVJWRUlMTEFOQ0UiLCJkYXRlX25haXNzYW5jZSI6IjE5NjctMDMtMTMiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi04ODU2MzYwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiJCT0tPQlpBIiwicHJlbm9tIjoiSkVBTi1QSUVSUkUiLCJmb25jdGlvbiI6Ik1FTUJSRSBEVSBDT05TRUlMIERFIFNVUlZFSUxMQU5DRSIsImRhdGVfbmFpc3NhbmNlIjoiMTk2MS0wNC0yNCIsImRhdGVfbmFpc3NhbmNlX3RpbWVzdGFtcCI6LTI3NDIzNzIwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiJDQU1QQkVMTCIsInByZW5vbSI6IkFMTEFOIiwiZm9uY3Rpb24iOiJNRU1CUkUgRFUgQ09OU0VJTCBERSBTVVJWRUlMTEFOQ0UiLCJkYXRlX25haXNzYW5jZSI6IjE5NjEtMDMtMzEiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi0yNzYzMTA4MDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiUExBTlRJTiIsInByZW5vbSI6IkpFQU4tRlJBTkNPSVMiLCJmb25jdGlvbiI6IkNPTU1JU1NBSVJFIEFVWCBDT01QVEVTIFRJVFVMQUlSRSIsImRhdGVfbmFpc3NhbmNlIjoiMTk1OS0wMS0yNyIsImRhdGVfbmFpc3NhbmNlX3RpbWVzdGFtcCI6LTM0NDkxMjQwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiIiLCJwcmVub20iOiIiLCJmb25jdGlvbiI6IkNPTU1JU1NBSVJFIEFVWCBDT01QVEVTIFRJVFVMQUlSRSIsImRhdGVfbmFpc3NhbmNlIjoiIiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjowLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiTUFaQVJTIC0gU09DSUVURSBBTk9OWU1FIiwiaWRlbnRpZmlhbnQiOiI3ODQ4MjQxNTMiLCJ0eXBlIjoiUE0ifSx7Im5vbSI6IiIsInByZW5vbSI6IiIsImZvbmN0aW9uIjoiQ09NTUlTU0FJUkUgQVVYIENPTVBURVMgU1VQUExFQU5UIiwiZGF0ZV9uYWlzc2FuY2UiOiIiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOjAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiJCQ1JIIFx1MDAyNiBBU1NPQ0lFUyAtIFNPQ0lFVEUgQSBSRVNQT05TQUJJTElURSBMSU1JVEVFIiwiaWRlbnRpZmlhbnQiOiI0OTAwOTI1NzQiLCJ0eXBlIjoiUE0ifSx7Im5vbSI6IlNJTU9OIiwicHJlbm9tIjoiSkVBTi1MT1VJUyIsImZvbmN0aW9uIjoiQ09NTUlTU0FJUkUgQVVYIENPTVBURVMgU1VQUExFQU5UIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTU5LTAyLTE3IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotMzQzMDk4MDAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifV19LCJldGFibGlzc2VtZW50X3NpZWdlIjp7InNpZWdlX3NvY2lhbCI6dHJ1ZSwic2lyZXQiOiI0MTgxNjYwOTYwMDA2OSIsIm5hZiI6IjYyMDJBIiwibGliZWxsZV9uYWYiOiJDb25zZWlsIGVuIHN5c3TDqG1lcyBldCBsb2dpY2llbHMgaW5mb3JtYXRpcXVlcyIsImRhdGVfbWlzZV9hX2pvdXIiOjE0ODE2NzAwMDAsInRyYW5jaGVfZWZmZWN0aWZfc2FsYXJpZV9ldGFibGlzc2VtZW50Ijp7ImRlIjoyNTAsImEiOjQ5OSwiY29kZSI6IjMyIiwiZGF0ZV9yZWZlcmVuY2UiOiIyMDE2IiwiaW50aXR1bGUiOiIyNTAgw6AgNDk5IHNhbGFyacOpcyJ9LCJkYXRlX2NyZWF0aW9uX2V0YWJsaXNzZW1lbnQiOjE0ODAyODc2MDAsInJlZ2lvbl9pbXBsYW50YXRpb24iOnsiY29kZSI6IjExIiwidmFsdWUiOiLDjmxlLWRlLUZyYW5jZSJ9LCJjb21tdW5lX2ltcGxhbnRhdGlvbiI6eyJjb2RlIjoiNzUxMDIiLCJ2YWx1ZSI6IlBBUklTIDIifSwicGF5c19pbXBsYW50YXRpb24iOnsiY29kZSI6bnVsbCwidmFsdWUiOm51bGx9LCJkaWZmdXNhYmxlX2NvbW1lcmNpYWxlbWVudCI6dHJ1ZSwiYWRyZXNzZSI6eyJsMSI6Ik9DVE8gVEVDSE5PTE9HWSIsImwyIjpudWxsLCJsMyI6bnVsbCwibDQiOiIzNCBBVkVOVUUgREUgTCBPUEVSQSIsImw1IjpudWxsLCJsNiI6Ijc1MDAyIFBBUklTIiwibDciOiJGUkFOQ0UiLCJudW1lcm9fdm9pZSI6IjM0IiwidHlwZV92b2llIjoiQVYiLCJub21fdm9pZSI6IkRFIEwgT1BFUkEiLCJjb21wbGVtZW50X2FkcmVzc2UiOm51bGwsImNvZGVfcG9zdGFsIjoiNzUwMDIiLCJsb2NhbGl0ZSI6IlBBUklTIDIiLCJjb2RlX2luc2VlX2xvY2FsaXRlIjoiNzUxMDIiLCJjZWRleCI6bnVsbH19LCJnYXRld2F5X2Vycm9yIjpmYWxzZX0=
     http_version: 
-  recorded_at: Wed, 02 Aug 2017 14:40:59 GMT
+  recorded_at: Sun, 06 Aug 2017 13:30:24 GMT
+- request:
+    method: get
+    uri: http://api-sandbox.apientreprise.fr/v2/etablissements/41816609600069?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 06 Aug 2017 13:30:24 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '178'
+      Location:
+      - https://api-sandbox.apientreprise.fr/v2/etablissements/41816609600069?token=<APIE_TOKEN>&context=Ping&recipient=SGMAP
+      X-Iplb-Instance:
+      - '8245'
+    body:
+      encoding: UTF-8
+      string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
+        bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+    http_version: 
+  recorded_at: Sun, 06 Aug 2017 13:30:24 GMT
+- request:
+    method: get
+    uri: https://api-sandbox.apientreprise.fr/v2/etablissements/41816609600069?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 06 Aug 2017 13:30:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Etag:
+      - W/"4e72fa63553f59d47fa70cdde32cc04f"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 4b761459-a237-4705-86b9-41e186b8074d
+      X-Runtime:
+      - '0.188752'
+      X-Iplb-Instance:
+      - '8250'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJldGFibGlzc2VtZW50Ijp7InNpZWdlX3NvY2lhbCI6dHJ1ZSwic2lyZXQiOiI0MTgxNjYwOTYwMDA2OSIsIm5hZiI6IjYyMDJBIiwibGliZWxsZV9uYWYiOiJDb25zZWlsIGVuIHN5c3TDqG1lcyBldCBsb2dpY2llbHMgaW5mb3JtYXRpcXVlcyIsImRhdGVfbWlzZV9hX2pvdXIiOjE0ODE2NzAwMDAsInRyYW5jaGVfZWZmZWN0aWZfc2FsYXJpZV9ldGFibGlzc2VtZW50Ijp7ImRlIjoyNTAsImEiOjQ5OSwiY29kZSI6IjMyIiwiZGF0ZV9yZWZlcmVuY2UiOiIyMDE2IiwiaW50aXR1bGUiOiIyNTAgw6AgNDk5IHNhbGFyacOpcyJ9LCJkYXRlX2NyZWF0aW9uX2V0YWJsaXNzZW1lbnQiOjE0ODAyODc2MDAsInJlZ2lvbl9pbXBsYW50YXRpb24iOnsiY29kZSI6IjExIiwidmFsdWUiOiLDjmxlLWRlLUZyYW5jZSJ9LCJjb21tdW5lX2ltcGxhbnRhdGlvbiI6eyJjb2RlIjoiNzUxMDIiLCJ2YWx1ZSI6IlBBUklTIDIifSwicGF5c19pbXBsYW50YXRpb24iOnsiY29kZSI6bnVsbCwidmFsdWUiOm51bGx9LCJkaWZmdXNhYmxlX2NvbW1lcmNpYWxlbWVudCI6dHJ1ZSwiYWRyZXNzZSI6eyJsMSI6Ik9DVE8gVEVDSE5PTE9HWSIsImwyIjpudWxsLCJsMyI6bnVsbCwibDQiOiIzNCBBVkVOVUUgREUgTCBPUEVSQSIsImw1IjpudWxsLCJsNiI6Ijc1MDAyIFBBUklTIiwibDciOiJGUkFOQ0UiLCJudW1lcm9fdm9pZSI6IjM0IiwidHlwZV92b2llIjoiQVYiLCJub21fdm9pZSI6IkRFIEwgT1BFUkEiLCJjb21wbGVtZW50X2FkcmVzc2UiOm51bGwsImNvZGVfcG9zdGFsIjoiNzUwMDIiLCJsb2NhbGl0ZSI6IlBBUklTIDIiLCJjb2RlX2luc2VlX2xvY2FsaXRlIjoiNzUxMDIiLCJjZWRleCI6bnVsbH19LCJnYXRld2F5X2Vycm9yIjpmYWxzZX0=
+    http_version: 
+  recorded_at: Sun, 06 Aug 2017 13:30:24 GMT
+- request:
+    method: get
+    uri: http://api-sandbox.apientreprise.fr/v2/cotisations_msa/38069910800011?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 06 Aug 2017 13:30:24 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '178'
+      Location:
+      - https://api-sandbox.apientreprise.fr/v2/cotisations_msa/38069910800011?token=<APIE_TOKEN>&context=Ping&recipient=SGMAP
+      X-Iplb-Instance:
+      - '8250'
+    body:
+      encoding: UTF-8
+      string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
+        bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+    http_version: 
+  recorded_at: Sun, 06 Aug 2017 13:30:24 GMT
+- request:
+    method: get
+    uri: https://api-sandbox.apientreprise.fr/v2/cotisations_msa/38069910800011?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 06 Aug 2017 13:30:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - 695336f5-8b46-4264-8dc9-b50b354be042
+      X-Runtime:
+      - '0.067497'
+      X-Iplb-Instance:
+      - '8250'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlcnJvcnMiOlsiVm90cmUgdG9rZW4gZXN0IHZhbGlkZSBtYWlzIHZvcyBwcml2aWzDqGdlcyBzb250IGluc3VmZmlzYW50cy4gTGlzdGV6IHZvcyBwcml2aWzDqGdlcyBncsOiY2Ugw6AgdW4gR0VUIHN1ciAvdjIvcHJpdmlsZWdlcz90b2tlbj1WT1RSRV9UT0tFTiJdfQ==
+    http_version: 
+  recorded_at: Sun, 06 Aug 2017 13:30:24 GMT
 recorded_with: VCR 3.0.3

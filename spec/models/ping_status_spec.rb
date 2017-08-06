@@ -48,7 +48,7 @@ describe PingStatus, type: :model do
           expect(json[:name]).not_to        be_nil
           expect(json[:api_version]).not_to be_nil
           expect(json[:date]).not_to        be_nil
-          expect(json[:status]).not_to        be_nil
+          expect(json[:status]).not_to      be_nil
         end
       end
 
@@ -61,7 +61,7 @@ describe PingStatus, type: :model do
           expect(json[:name]).to            be_empty
           expect(json[:api_version]).not_to be_nil
           expect(json[:date]).not_to        be_nil
-          expect(json[:code]).not_to        be_nil
+          expect(json[:status]).not_to        be_nil
         end
       end
     end
