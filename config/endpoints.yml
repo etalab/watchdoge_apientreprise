@@ -4,15 +4,84 @@ shared: &SHARED
     recipient: 'SGMAP'
     context: 'Ping'
 
+probtp: &PROBTP
+  parameter: 73582032600040
+
+generic_siren: &GENERIC_SIREN
+  parameter: 418166096
+
+generic_siret: &GENERIC_SIRET
+  parameter: 55203253400646
+
+fntp_acoss_siren: &FNTP_ACOSS_SIREN
+  parameter: 562077503
+
 endpoints:
+  - name: cotisations_msa
+    parameter: 38069910800011
+    <<: *SHARED
+
+  - name: eligibilites_cotisation_retraite_probtp
+    <<: *PROBTP
+    <<: *SHARED
+
+  - name: attestations_cotisation_retraite_probtp
+    <<: *PROBTP
+    <<: *SHARED
+
   - name: entreprises
-    parameter: 418166096
+    <<: *GENERIC_SIREN
+    <<: *SHARED
+
+  - name: extraits_rcs_infogreffe
+    <<: *GENERIC_SIREN
     <<: *SHARED
 
   - name: etablissements
     parameter: 41816609600069
     <<: *SHARED
 
-  - name: cotisations_msa
-    parameter: 38069910800011
+  - name: exercices
+    <<: *GENERIC_SIRET
+    <<: *SHARED
+
+  - name: attestations_agefiph
+    parameter: 00552017600016
+    <<: *SHARED
+
+  - name: attestations_fiscales_dgfip
+    api_version: 2
+    options:
+      recipient: 'SGMAP'
+      context: 'Ping'
+      siren_is: 55203253400646
+      siren_tva: 55203253400646
+    <<: *GENERIC_SIRET
+
+  - name: attestations_sociales_acoss
+    <<: *FNTP_ACOSS_SIREN
+    <<: *SHARED
+
+  - name: certificats_qualibat
+    parameter: 33592022900036
+    <<: *SHARED
+
+  - name: certificats_cnetp
+    parameter: 632049128
+    <<: *SHARED
+
+  - name: certificats_opqibi
+    parameter: 395301641
+    <<: *SHARED
+
+  - name: associations
+    parameter: W952002436
+    <<: *SHARED
+
+  - name: extraits_courts_inpi
+    parameter: 542065479
+    <<: *SHARED
+
+  - name: cartes_professionnelles_fntp
+    <<: *FNTP_ACOSS_SIREN
     <<: *SHARED
