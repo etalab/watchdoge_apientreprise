@@ -5,20 +5,20 @@ shared: &SHARED
     context: 'Ping'
 
 probtp: &PROBTP
-  parameter: 73582032600040
+  parameter: '73582032600040'
 
 generic_siren: &GENERIC_SIREN
-  parameter: 418166096
+  parameter: '418166096'
 
 generic_siret: &GENERIC_SIRET
-  parameter: 55203253400646
+  parameter: '55203253400646'
 
 fntp_acoss_siren: &FNTP_ACOSS_SIREN
-  parameter: 562077503
+  parameter: '562077503'
 
 endpoints:
   - name: cotisations_msa
-    parameter: 38069910800011
+    parameter: '38069910800011' # TODO MSA down
     <<: *SHARED
 
   - name: eligibilites_cotisation_retraite_probtp
@@ -38,7 +38,7 @@ endpoints:
     <<: *SHARED
 
   - name: etablissements
-    parameter: 41816609600069
+    parameter: '41816609600069'
     <<: *SHARED
 
   - name: exercices
@@ -46,40 +46,40 @@ endpoints:
     <<: *SHARED
 
   - name: attestations_agefiph
-    parameter: 00552017600016
+    parameter: '00552017600016'
     <<: *SHARED
 
   - name: attestations_fiscales_dgfip
     api_version: 2
+    parameter: '552032534'
     options:
       recipient: 'SGMAP'
       context: 'Ping'
-      siren_is: 55203253400646
-      siren_tva: 55203253400646
-    <<: *GENERIC_SIRET
+      siren_is: '552032534'
+      siren_tva: '552032534'
 
   - name: attestations_sociales_acoss
     <<: *FNTP_ACOSS_SIREN
     <<: *SHARED
 
   - name: certificats_qualibat
-    parameter: 33592022900036
+    parameter: '33592022900036'
     <<: *SHARED
 
   - name: certificats_cnetp
-    parameter: 632049128
+    parameter: '632049128'
     <<: *SHARED
 
   - name: certificats_opqibi
-    parameter: 395301641
+    parameter: '395301641'
     <<: *SHARED
 
   - name: associations
-    parameter: W952002436
+    parameter: 'W604004799'
     <<: *SHARED
 
   - name: extraits_courts_inpi
-    parameter: 542065479
+    parameter: '542065479'
     <<: *SHARED
 
   - name: cartes_professionnelles_fntp

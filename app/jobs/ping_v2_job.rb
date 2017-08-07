@@ -1,8 +1,18 @@
 class PingV2Job < ApplicationJob
   include HTTParty
+
+  attr_reader :pings
+
   base_uri Rails.application.config_for(:watchdoge_secrets)['apie_base_uri']
 
+  def initialize
+    super
+    @pings = []
+  end
+
   def perform
+    @pings.clear
+
     endpoints_v2.each do |endpoint|
       ping = PingStatus.new(
         name: endpoint.name,
@@ -12,6 +22,7 @@ class PingV2Job < ApplicationJob
       )
 
       if ping.valid?
+        @pings << ping
         Tools::PingReaderWriter.new.write(ping)
         log(ping)
       else
@@ -28,9 +39,11 @@ class PingV2Job < ApplicationJob
   end
 
   def perform_service(endpoint)
-    self.class.get(
-      "/v2/#{endpoint.name}/#{endpoint.parameter}?token=#{apie_token}&#{endpoint.options.to_param}"
-    )
+    self.class.get(request_url(endpoint))
+  end
+
+  def request_url(endpoint)
+    "/v2/#{endpoint.name}/#{endpoint.parameter}?token=#{apie_token}&#{endpoint.options.to_param}"
   end
 
   def log(ping)
