@@ -13,13 +13,12 @@ set :application_name, 'watchdoge'
 set :domain, ENV['domain']
 set :deploy_to, "/var/www/watchdoge_#{ENV['to']}"
 set :rails_env, ENV['to']
+set :forward_agent, true
 set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
 #set :repository, './'
 
 if ENV['domain'] != 'localhost'
-  set :forward_agent, true
-  set :user, "watchdoge_#{ENV['to']}"
-  #set :port, 2200
+  set :user, 'deploy'
 end
 
 branch =
