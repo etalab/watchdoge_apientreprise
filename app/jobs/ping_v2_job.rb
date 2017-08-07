@@ -14,12 +14,7 @@ class PingV2Job < ApplicationJob
     @pings.clear
 
     endpoints_v2.each do |endpoint|
-      ping = PingStatus.new(
-        name: endpoint.name,
-        api_version: 2,
-        status: get_service_status(endpoint),
-        date: DateTime.now
-      )
+      ping = perform_ping(endpoint)
 
       if ping.valid?
         @pings << ping
@@ -31,14 +26,25 @@ class PingV2Job < ApplicationJob
     end
   end
 
-  private
+  def perform_ping(endpoint)
+    http_response = get_http_response(endpoint)
 
-  def get_service_status(endpoint)
-    response = perform_service(endpoint)
-    response.code == 200 ? 'up' : 'down'
+    PingStatus.new(
+        name: endpoint.name,
+        api_version: 2,
+        status: get_service_status(http_response),
+        date: DateTime.now,
+        http_response: http_response
+      )
   end
 
-  def perform_service(endpoint)
+  private
+
+  def get_service_status(http_response)
+    http_response.code == 200 ? 'up' : 'down'
+  end
+
+  def get_http_response(endpoint)
     self.class.get(request_url(endpoint))
   end
 

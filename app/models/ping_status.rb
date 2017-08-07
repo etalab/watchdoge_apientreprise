@@ -1,7 +1,7 @@
 class PingStatus
   include ActiveModel::Model
 
-  attr_accessor :name, :api_version, :date, :status
+  attr_accessor :name, :api_version, :date, :status, :http_response
 
   validates :name, presence: true
   validates :api_version, numericality: { only_integer: true }, inclusion: { in: 2..3 }

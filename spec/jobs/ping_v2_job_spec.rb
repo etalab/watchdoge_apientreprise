@@ -20,6 +20,11 @@ describe PingV2Job, type: :job do
   it 'ensure all endpoints works', vcr: { cassette_name: 'apie_v2' } do
     expect(Rails.logger).not_to receive(:error)
     subject.perform
+
+    subject.pings.each do |p|
+      next if p.name == 'cotisations_msa' # TODO what a big shit here /o/
+      expect("#{p.name}: #{p.status}").to eq("#{p.name}: up")
+    end
   end
 
   it 'ensure PingReaderWriter has a write method' do
@@ -61,6 +66,7 @@ describe PingV2Job, type: :job do
     before do
       allow_any_instance_of(described_class).to receive(:endpoints_v2).and_return([endpoint_etablissements])
       allow_any_instance_of(PingStatus).to receive(:valid?).and_return(false)
+      allow(subject).to receive(:get_http_response).and_return(nil)
       allow(subject).to receive(:get_service_status).and_return('down')
     end
 
