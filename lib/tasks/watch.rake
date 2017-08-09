@@ -16,20 +16,26 @@ namespace :watch do
 
     env_info
 
-    raise 'Need an argument! ie: `rake watch:v2_job associations`' if ARGV[1].nil?
+    raise 'Need an argument! ie: `rake watch:v2_job associations`'.red if ARGV[1].nil?
+
     endpoint = Tools::EndpointFactory.new.create(ARGV[1], 2)
+    raise "#{ARGV[1]} not found in endpoints.yml".red if endpoint.nil?
+
     ping = PingV2Job.new.perform_ping(endpoint)
-    if ping.nil?
-      puts "#{ARGV[1]} not found in endpoints.yml"
-    else
-      print_ping(ping)
-    end
+    print_ping(ping)
   end
 
   def print_ping(ping)
     ping.status.upcase!
-    ping.status = ping.status == 'UP' ? ping.status.green : ping.status.red
-    puts "#{ping.name}: #{ping.status}"
+    failing_uri = ''
+    if ping.status == 'UP'
+      ping.status = ping.status.green
+    else
+      ping.status = ping.status.red
+      failing_uri = PingV2Job.new.send(:request_url, Tools::EndpointFactory.new.create(ping.name, ping.api_version))
+    end
+
+    puts "#{ping.name}: #{ping.status} #{failing_uri}"
   end
 
   def env_info
