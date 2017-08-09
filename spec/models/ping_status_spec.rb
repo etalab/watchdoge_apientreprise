@@ -4,13 +4,15 @@ describe PingStatus, type: :model do
     let(:api_version) { 2 }
     let(:date) { DateTime.now }
     let(:status) { 'up' }
+    let(:environment) { 'development' }
 
-    subject { described_class.new(name: name, api_version: api_version, date: date, status: status) }
+    subject { described_class.new(name: name, api_version: api_version, date: date, status: status, environment: environment) }
 
     its(:name) { is_expected.to eq(name) }
     its(:api_version) { is_expected.to eq(api_version) }
     its(:date) { is_expected.to eq(date) }
     its(:status) { is_expected.to eq(status) }
+    its(:environment) { is_expected.to eq(environment) }
     its(:valid?) { is_expected.to be_truthy }
 
     it 'print to json' do
@@ -22,7 +24,8 @@ describe PingStatus, type: :model do
       expect(json).to include_json(
         name: name,
         api_version: api_version,
-        status: status
+        status: status,
+        environment: environment
       )
     end
 
@@ -34,13 +37,14 @@ describe PingStatus, type: :model do
       expect(json).to include_json(
         name: name,
         api_version: api_version,
-        status: status
+        status: status,
+        environment: environment
       )
     end
 
     context 'is not valid' do
       describe 'invalid data' do
-        subject { described_class.new({api_version: 5, date: 'not a date', status: 'not a status'}) }
+        subject { described_class.new({api_version: 5, date: 'not a date', status: 'not a status', environment: 'not an env'}) }
 
         it 'contains specifics errors' do
           expect(subject.valid?).to be_falsy
@@ -49,6 +53,7 @@ describe PingStatus, type: :model do
           expect(json[:api_version]).not_to be_nil
           expect(json[:date]).not_to        be_nil
           expect(json[:status]).not_to      be_nil
+          expect(json[:environment]).not_to be_nil
         end
       end
 
@@ -61,7 +66,8 @@ describe PingStatus, type: :model do
           expect(json[:name]).to            be_empty
           expect(json[:api_version]).not_to be_nil
           expect(json[:date]).not_to        be_nil
-          expect(json[:status]).not_to        be_nil
+          expect(json[:status]).not_to      be_nil
+          expect(json[:environment]).not_to be_nil
         end
       end
     end

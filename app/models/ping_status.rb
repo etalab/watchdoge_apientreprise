@@ -1,12 +1,13 @@
 class PingStatus
   include ActiveModel::Model
 
-  attr_accessor :name, :api_version, :date, :status, :http_response
+  attr_accessor :name, :api_version, :date, :status, :environment, :http_response
 
   validates :name, presence: true
   validates :api_version, numericality: { only_integer: true }, inclusion: { in: 2..3 }
   validates_datetime :date
   validates :status, inclusion: { in: ['up', 'down'] }
+  validates :environment, inclusion: { in: ['development', 'test', 'sandbox', 'staging', 'production'] }
 
   def to_json(options = nil)
     super(json_options.merge(options || {}))
@@ -26,6 +27,6 @@ class PingStatus
   private
 
   def json_options
-    {only: ['name', 'api_version',  'date', 'status']}
+    {only: ['name', 'api_version',  'date', 'status', 'environment']}
   end
 end

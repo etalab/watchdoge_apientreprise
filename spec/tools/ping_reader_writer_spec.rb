@@ -3,13 +3,15 @@ describe Tools::PingReaderWriter do
   let(:api_version) { 2}
   let(:date) { DateTime.now }
   let(:status) { 'down' }
+  let(:environment) { 'test' }
   let(:ping_status) do
     PingStatus.new(
       {
         name: service_name,
         api_version: api_version,
         date: date,
-        status: status
+        status: status,
+        environment: environment
       }
     )
   end
@@ -25,6 +27,7 @@ describe Tools::PingReaderWriter do
       its(:name) { is_expected.to eq(service_name) }
       its(:api_version) { is_expected.to eq(2) }
       its(:status) { is_expected.to eq('up') }
+      its(:environment) { is_expected.to eq('test') }
 
       it 'is the correct date' do
         expect(DateTime.parse(subject.date)).to be_within(1.second).of DateTime.parse('2017-07-21T16:46:25.609+02:00')
@@ -63,7 +66,8 @@ describe Tools::PingReaderWriter do
         "v#{api_version}": [{
           name: service_name,
           api_version: api_version,
-          status: status
+          status: status,
+          environment: environment
         }]
       )
     end
@@ -97,24 +101,27 @@ describe Tools::PingReaderWriter do
       expect(DateTime.parse(subject[:v2][1][:date])).to be_within(1.second).of date
       expect(DateTime.parse(subject[:v3][0][:date])).to be_within(1.second).of date
       expect(subject).to include_json(
-        environment: 'rspec',
+        environment: 'test',
         v2: [
           {
             name: 'service name',
             api_version: 2,
-            status: 'up'
+            status: 'up',
+            environment: 'test'
           },
           {
             name: 'another service name',
             api_version: 2,
-            status: 'down'
+            status: 'down',
+            environment: 'test'
           }
         ],
         v3: [
           {
             name: 'service name',
             api_version: 3,
-            status: 'down'
+            status: 'down',
+            environment: 'test'
           }
         ]
       )

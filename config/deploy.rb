@@ -5,7 +5,7 @@ require 'colorize'
 
 ENV['domain'] || raise('no domain provided')
 ENV['to'] ||= 'development'
-%w[development staging production].include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
+%w[development sandbox staging production].include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
 
 print "Deploy to #{ENV['to']}\n".green
 

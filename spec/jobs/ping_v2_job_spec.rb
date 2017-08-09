@@ -19,9 +19,8 @@ describe PingV2Job, type: :job do
 
   it 'ensure all endpoints works', vcr: { cassette_name: 'apie_v2' } do
     expect(Rails.logger).not_to receive(:error)
-    subject.perform
 
-    subject.pings.each do |p|
+    subject.perform do |p|
       next if p.name == 'cotisations_msa' # TODO what a big shit here /o/
       expect("#{p.name}: #{p.status}").to eq("#{p.name}: up")
     end
@@ -57,7 +56,9 @@ describe PingV2Job, type: :job do
       expect(json).to include_json(
         msg: 'ping',
         endpoint: 'etablissements',
-        status: 'up'
+        status: 'up',
+        api_version: 2,
+        environment: 'test'
       )
     end
   end

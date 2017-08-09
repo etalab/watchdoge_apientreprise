@@ -1,17 +1,19 @@
 {
-  "environment": "rspec",
+  "environment": "test",
   "v2": [
     {
       "name":"service name",
       "api_version":2,
       "date":"2017-07-21T16:46:25.609+02:00",
-      "status":"up"
+      "status":"up",
+      "environment":"test"
     },
      {
       "name":"another service name",
       "api_version":2,
       "date":"2017-07-21T16:46:25.609+02:00",
-      "status":"down"
+      "status":"down",
+      "environment":"test"
     }
  ],
   "v3": [
@@ -19,7 +21,8 @@
       "name":"service name",
       "api_version":3,
       "date":"2017-07-21T16:46:25.609+02:00",
-      "status":"down"
+      "status":"down",
+      "environment":"test"
     }
   ]
 }
