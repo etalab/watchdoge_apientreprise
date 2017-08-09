@@ -16,6 +16,13 @@ class PingStatus
     super(json_options.merge(options || {}))
   end
 
+  # for debugging purpose its unreadable with htt_response on screen
+  def inspect
+    vars = self.instance_variables.
+      map{|v| "#{v}=#{instance_variable_get(v).inspect}" unless v == :@http_response}.join(", ")
+    "<#{self.class}: #{vars}>"
+  end
+
   private
 
   def json_options

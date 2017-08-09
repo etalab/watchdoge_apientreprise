@@ -20,6 +20,7 @@ class PingV2Job < ApplicationJob
         @pings << ping
         Tools::PingReaderWriter.new.write(ping)
         log(ping)
+        yield ping if block_given?
       else
         Rails.logger.error "Fail to write PingStatus(#{ping.name}) it's invalid (#{ping.errors.messages})"
       end

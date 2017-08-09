@@ -5,21 +5,18 @@ require 'colorize'
 
 ENV['domain'] || raise('no domain provided')
 ENV['to'] ||= 'development'
-%w(development staging production).include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
+%w[development staging production].include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
 
 print "Deploy to #{ENV['to']}\n".green
 
+set :user, 'deploy' if ENV['domain'] != 'localhost'
 set :application_name, 'watchdoge'
 set :domain, ENV['domain']
 set :deploy_to, "/var/www/watchdoge_#{ENV['to']}"
 set :rails_env, ENV['to']
 set :forward_agent, true
 set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
-#set :repository, './'
-
-if ENV['domain'] != 'localhost'
-  set :user, 'deploy'
-end
+# set :repository, './'
 
 branch =
   begin
