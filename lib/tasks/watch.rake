@@ -2,7 +2,7 @@ require 'colorize'
 
 namespace :watch do
   desc 'run watchdoge job on API Entreprise v2'
-  task :v2 => :environment do
+  task 'v2': :environment do
     env_info
 
     PingV2Job.new.perform do |ping|
@@ -11,8 +11,9 @@ namespace :watch do
   end
 
   desc 'run watchdoge specific job on API Entreprise v2'
-  task :v2_job => :environment do
-    ARGV.each { |a| task a.to_sym do ; end } # remove exit exception
+  task 'v2_endpoint': :environment do
+    # rubocop:disable Style/BlockDelimiters
+    ARGV.each { |a| task a.to_sym do; end } # remove exit exception
 
     env_info
 

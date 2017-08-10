@@ -11,8 +11,8 @@
 # end
 
 # These inflection rules are supported but not enabled by default:
- ActiveSupport::Inflector.inflections(:en) do |inflect|
-   inflect.acronym 'APIE'
-   inflect.acronym 'ACOSS'
-   inflect.acronym 'V2'
- end
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.acronym 'APIE'
+  inflect.acronym 'ACOSS'
+  inflect.acronym 'V2'
+end

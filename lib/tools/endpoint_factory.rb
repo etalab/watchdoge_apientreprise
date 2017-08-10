@@ -1,5 +1,4 @@
 class Tools::EndpointFactory
-
   def initialize
     @endpoints = []
   end
@@ -8,9 +7,7 @@ class Tools::EndpointFactory
     load_all
     endpoint = nil
     @endpoints.select do |ep|
-      if ep.name == name && ep.api_version == version
-        endpoint = ep
-      end
+      endpoint = ep if ep.name == name && ep.api_version == version
     end
 
     endpoint
@@ -39,6 +36,6 @@ class Tools::EndpointFactory
   end
 
   def endpoint_config_file
-    "#{Rails.root.to_s}/config/endpoints.yml"
+    Rails.root.join('config', 'endpoints.yml')
   end
 end

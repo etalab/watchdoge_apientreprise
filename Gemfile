@@ -66,13 +66,13 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :test do
-  gem 'rspec-rails', '~> 3.5'
   gem 'rspec-its'
   gem 'rspec-json_expectations'
+  gem 'rspec-rails', '~> 3.5'
   gem 'vcr'
   gem 'webmock'
-#  gem 'factory_girl_rails', '~> 4.0'
-#  gem 'shoulda-matchers', '~> 3.1'
-#  gem 'faker'
-#  gem 'database_cleaner'
+  # gem 'factory_girl_rails', '~> 4.0'
+  # gem 'shoulda-matchers', '~> 3.1'
+  # gem 'faker'
+  # gem 'database_cleaner'
 end

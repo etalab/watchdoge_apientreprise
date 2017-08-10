@@ -9,21 +9,14 @@ class Tools::PingReaderWriter
 
   def load(service_name, api_version)
     all_json = load_all_to_json
-    version = ('v'+api_version.to_s).to_sym
+    version = ('v' + api_version.to_s).to_sym
 
-    if all_json.key?(version)
-      json_ping = all_json[version].select do |ping|
-        ping[:name] == service_name
-      end
-
-      if json_ping.count > 0
-        if json_ping.count != 1
-          Rails.logger.error "Multiple services found in JSON #{json_ping.to_s}"
-        end
-
-        PingStatus.new(json_ping.first)
-      end
+    return unless all_json.key?(version)
+    json_pings = all_json[version].select do |ping|
+      ping[:name] == service_name
     end
+
+    create_ping_from_json(json_pings)
   end
 
   def write(ping_status)
@@ -44,9 +37,7 @@ class Tools::PingReaderWriter
   end
 
   def initialize_json(json)
-    if json.empty? || !json.key?(:environment)
-      json[:environment] = Rails.env
-    end
+    json[:environment] = Rails.env if json.empty? || !json.key?(:environment)
     json
   end
 
@@ -67,5 +58,14 @@ class Tools::PingReaderWriter
     end
 
     @json[@version_sym] << @ping.as_json
+  end
+
+  def create_ping_from_json(json_pings)
+    return unless json_pings.count.positive?
+    if json_pings.count != 1
+      Rails.logger.error "Multiple services found in JSON #{json_pings}"
+    end
+
+    PingStatus.new(json_pings.first)
   end
 end

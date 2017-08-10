@@ -22,6 +22,7 @@ class PingV2Job < ApplicationJob
     end
   end
 
+  # rubocop:disable MethodLength
   def perform_ping(endpoint)
     http_response = get_http_response(endpoint)
 
@@ -64,13 +65,13 @@ class PingV2Job < ApplicationJob
   end
 
   def log(ping)
-    logger.info({
+    @logger.info(
       endpoint: ping.name,
       status: ping.status,
       date: ping.date,
       api_version: ping.api_version,
       environment: ping.environment
-    })
+    )
   end
 
   def apie_token

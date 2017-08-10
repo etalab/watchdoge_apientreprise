@@ -2,11 +2,11 @@ class ApplicationJob < ActiveJob::Base
   attr_accessor :logger
 
   def initialize
-    self.logger = Ougai::Logger.new(self.class.logfile)
-    self.logger.default_message = 'ping'
+    @logger = Ougai::Logger.new(self.class.logfile)
+    @logger.default_message = 'ping'
   end
 
-  private
+  private_class_method
 
   def self.logfile
     "log/logstash_ping_#{Rails.env}.log"
