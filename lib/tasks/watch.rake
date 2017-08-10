@@ -2,16 +2,16 @@ require 'colorize'
 
 namespace :watch do
   desc 'run watchdoge job on API Entreprise v2'
-  task 'v2': :environment do
+  task 'apie_v2': :environment do
     env_info
 
-    PingV2Job.new.perform do |ping|
+    PingAPIEOnV2Job.new.perform do |ping|
       print_ping(ping)
     end
   end
 
   desc 'run watchdoge specific job on API Entreprise v2'
-  task 'v2_endpoint': :environment do
+  task 'apie_v2_endpoint': :environment do
     # rubocop:disable Style/BlockDelimiters
     ARGV.each { |a| task a.to_sym do; end } # remove exit exception
 
@@ -19,10 +19,10 @@ namespace :watch do
 
     raise 'Need an argument! ie: `rake watch:v2_job associations`'.red if ARGV[1].nil?
 
-    endpoint = Tools::EndpointFactory.new.create(ARGV[1], 2)
+    endpoint = Tools::EndpointFactory.new('apie').create(ARGV[1], 2)
     raise "#{ARGV[1]} not found in endpoints.yml".red if endpoint.nil?
 
-    ping = PingV2Job.new.perform_ping(endpoint)
+    ping = PingAPIEOnV2Job.new.perform_ping(endpoint)
     print_ping(ping)
   end
 
@@ -33,7 +33,7 @@ namespace :watch do
       ping.status = ping.status.green
     else
       ping.status = ping.status.red
-      failing_uri = PingV2Job.new.send(:request_url, Tools::EndpointFactory.new.create(ping.name, ping.api_version))
+      failing_uri = PingAPIEOnV2Job.new.send(:request_url, Tools::EndpointFactory.new('apie').create(ping.name, ping.api_version))
     end
 
     puts "#{ping.name}: #{ping.status} #{failing_uri}"

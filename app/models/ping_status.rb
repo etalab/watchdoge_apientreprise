@@ -8,6 +8,7 @@ class PingStatus
   validates_datetime :date
   validates :status, inclusion: { in: %w[up down] }
   validates :environment, inclusion: { in: %w[development test sandbox staging production] }
+  validate :expected_http_response?
 
   def to_json(options = nil)
     super(json_options.merge(options || {}))
@@ -26,6 +27,14 @@ class PingStatus
   end
 
   private
+
+  def expected_http_response?
+    # TODO: store http_response in json file like vcr
+    stub = true
+    if !stub
+      errors.add(:http_response, 'json response is not as expected!')
+    end
+  end
 
   def json_options
     { only: %w[name api_version date status environment] }

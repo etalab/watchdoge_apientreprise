@@ -3,7 +3,7 @@ require 'mina/git'
 require 'mina/rvm'
 require 'colorize'
 
-ENV['domain'] || raise('no domain provided')
+ENV['domain'] || raise('no domain provided'.red)
 ENV['to'] ||= 'development'
 %w[development sandbox staging production].include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
 

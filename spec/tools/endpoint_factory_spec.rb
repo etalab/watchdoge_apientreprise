@@ -1,5 +1,7 @@
 describe Tools::EndpointFactory do
-  subject(:factory) { described_class.new }
+  subject(:factory) { described_class.new(service) }
+
+  let(:service) { 'apie' }
 
   context 'happy path' do
     let(:count) do
@@ -17,7 +19,7 @@ describe Tools::EndpointFactory do
     end
 
     context 'create one endpoint' do
-      subject { described_class.new.create('cotisations_msa', 2) }
+      subject { described_class.new(service).create('cotisations_msa', 2) }
 
       its(:name) { is_expected.to eq('cotisations_msa') }
       its(:api_version) { is_expected.to be 2 }

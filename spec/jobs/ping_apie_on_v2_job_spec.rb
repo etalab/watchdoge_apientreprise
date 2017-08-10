@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PingV2Job, type: :job do
+describe PingAPIEOnV2Job, type: :job do
   subject(:job) { described_class.new }
 
   let(:endpoint_etablissements) do
@@ -44,7 +44,7 @@ describe PingV2Job, type: :job do
     end
 
     before do
-      allow_any_instance_of(described_class).to receive(:endpoints_v2).and_return([endpoint_etablissements])
+      allow_any_instance_of(described_class).to receive(:endpoints).and_return([endpoint_etablissements])
       allow_any_instance_of(Tools::PingReaderWriter).to receive(:write)
       File.truncate(filename, 0) if File.exist?(filename)
     end
@@ -69,7 +69,7 @@ describe PingV2Job, type: :job do
 
   context 'invalid ping' do
     before do
-      allow_any_instance_of(described_class).to receive(:endpoints_v2).and_return([endpoint_etablissements])
+      allow_any_instance_of(described_class).to receive(:endpoints).and_return([endpoint_etablissements])
       allow_any_instance_of(PingStatus).to receive(:valid?).and_return(false)
       allow(job).to receive(:get_http_response).and_return(nil)
       allow(job).to receive(:get_service_status).and_return('down')
