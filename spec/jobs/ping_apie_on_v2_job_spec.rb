@@ -39,13 +39,15 @@ describe PingAPIEOnV2Job, type: :job do
         endpoint: 'etablissements',
         status: 'up',
         api_version: 2,
-        environment: 'test'
+        environment: 'test',
+        service: 'apie'
       }
     end
 
     before do
       allow_any_instance_of(described_class).to receive(:endpoints).and_return([endpoint_etablissements])
       allow_any_instance_of(Tools::PingReaderWriter).to receive(:write)
+      allow_any_instance_of(HTTPResponseValidator).to receive(:valid?).and_return(true)
       File.truncate(filename, 0) if File.exist?(filename)
     end
 

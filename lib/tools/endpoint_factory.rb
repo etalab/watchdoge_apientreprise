@@ -37,6 +37,6 @@ class Tools::EndpointFactory
   end
 
   def endpoint_config_file
-    Rails.root.join('lib', 'endpoints', "#{@service}_endpoints.yml")
+    Rails.root.join('app', 'data', 'endpoints', "#{@service}_endpoints.yml")
   end
 end

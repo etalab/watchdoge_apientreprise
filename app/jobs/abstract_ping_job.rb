@@ -48,6 +48,10 @@ class AbstractPingJob < ApplicationJob
     fail 'should implement endpoints'
   end
 
+  def service_name
+    fail 'should implement service_name'
+  end
+
   private
 
   def after_request_check(ping)
@@ -74,7 +78,8 @@ class AbstractPingJob < ApplicationJob
       status: ping.status,
       date: ping.date,
       api_version: ping.api_version,
-      environment: ping.environment
+      environment: ping.environment,
+      service: service_name
     )
   end
 end
