@@ -1,25 +1,35 @@
 {
-  "environment": "test",
-  "v2": [
+  "sirene": [
+    {
+      "name":"sirene test",
+      "api_version":2,
+      "api_name":"sirene",
+      "date":"2017-07-21T16:46:25.609+02:00",
+      "status":"up",
+      "environment":"test"
+    }
+  ],
+  "apie": [
     {
       "name":"service name",
       "api_version":2,
+      "api_name":"apie",
       "date":"2017-07-21T16:46:25.609+02:00",
       "status":"up",
       "environment":"test"
     },
-     {
+    {
       "name":"another service name",
       "api_version":2,
+      "api_name":"apie",
       "date":"2017-07-21T16:46:25.609+02:00",
       "status":"down",
       "environment":"test"
-    }
- ],
-  "v3": [
+    },
     {
       "name":"service name",
       "api_version":3,
+      "api_name":"apie",
       "date":"2017-07-21T16:46:25.609+02:00",
       "status":"down",
       "environment":"test"
