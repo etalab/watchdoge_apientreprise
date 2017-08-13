@@ -1,6 +1,6 @@
 class Tools::EndpointFactory
-  def initialize(service)
-    @service = service
+  def initialize(api_name)
+    @api_name = api_name
     @endpoints = []
   end
 
@@ -27,6 +27,7 @@ class Tools::EndpointFactory
 
     hash['endpoints'].each do |h|
       endpoint = Endpoint.new(h)
+      endpoint.api_name = @api_name
 
       if endpoint.valid?
         @endpoints << endpoint
@@ -37,6 +38,6 @@ class Tools::EndpointFactory
   end
 
   def endpoint_config_file
-    Rails.root.join('app', 'data', 'endpoints', "#{@service}_endpoints.yml")
+    Rails.root.join('app', 'data', 'endpoints', "#{@api_name}.yml")
   end
 end

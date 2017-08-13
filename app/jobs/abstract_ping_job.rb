@@ -27,6 +27,7 @@ class AbstractPingJob < ApplicationJob
     ping = PingStatus.new(
       name: endpoint.name,
       api_version: endpoint.api_version,
+      api_name: endpoint.api_name,
       status: get_service_status(http_response),
       date: DateTime.now,
       environment: Rails.env,
@@ -46,10 +47,6 @@ class AbstractPingJob < ApplicationJob
 
   def endpoints
     fail 'should implement endpoints'
-  end
-
-  def service_name
-    fail 'should implement service_name'
   end
 
   private
@@ -78,8 +75,8 @@ class AbstractPingJob < ApplicationJob
       status: ping.status,
       date: ping.date,
       api_version: ping.api_version,
+      api_name: ping.api_name,
       environment: ping.environment,
-      service: service_name
     )
   end
 end

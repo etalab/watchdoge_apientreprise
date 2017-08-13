@@ -1,14 +1,16 @@
 describe Endpoint, type: :model do
   context 'happy path' do
-    subject { described_class.new(name: name, api_version: api_version, parameter: parameter, options: options) }
+    subject { described_class.new(name: name, api_version: api_version, api_name: api_name, parameter: parameter, options: options) }
 
     let(:name) { 'service name' }
     let(:api_version) { 2 }
+    let(:api_name) { 'apie' }
     let(:parameter) { '00000' }
     let(:options) { 'options' }
 
     its(:name) { is_expected.to eq(name) }
     its(:api_version) { is_expected.to eq(api_version) }
+    its(:api_name) { is_expected.to eq(api_name) }
     its(:parameter) { is_expected.to eq(parameter) }
     its(:options) { is_expected.to eq(options) }
     its(:valid?) { is_expected.to be_truthy }
@@ -24,6 +26,7 @@ describe Endpoint, type: :model do
 
       its([:name])        { is_expected.not_to be_nil }
       its([:api_version]) { is_expected.not_to be_nil }
+      its([:api_name])    { is_expected.not_to be_nil }
       its([:parameter])   { is_expected.not_to be_nil }
       its([:options])     { is_expected.not_to be_nil }
     end

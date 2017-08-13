@@ -4,16 +4,12 @@ class PingAPIEOnV2Job < AbstractPingJob
 
   protected
 
-  def service_name
-    'apie'
-  end
-
   def request_url(endpoint)
     "/v2/#{endpoint.name}/#{endpoint.parameter}?token=#{apie_token}&#{endpoint.options.to_param}"
   end
 
   def endpoints
-    Tools::EndpointFactory.new(service_name).load_all
+    Tools::EndpointFactory.new('apie').load_all
   end
 
   private

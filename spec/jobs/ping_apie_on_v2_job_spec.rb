@@ -7,6 +7,7 @@ describe PingAPIEOnV2Job, type: :job do
     Endpoint.new(
       name: 'etablissements',
       api_version: 2,
+      api_name: 'apie',
       parameter: '41816609600069',
       options:
       {
@@ -40,7 +41,6 @@ describe PingAPIEOnV2Job, type: :job do
         status: 'up',
         api_version: 2,
         environment: 'test',
-        service: 'apie'
       }
     end
 

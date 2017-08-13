@@ -32,7 +32,7 @@ namespace :watch do
 
     PingAPIEOnV2Job.new.perform do |ping|
       if ping.status == 'up'
-        filename = "#{HTTPResponseValidator.response_folder}/#{ping.name}.json"
+        filename = ping.response_file
         File.new(filename, 'w') unless File.exist?(filename)
         File.write(filename, ping.json_response_body.to_json)
 
