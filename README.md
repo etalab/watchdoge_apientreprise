@@ -24,11 +24,11 @@ It will init the development environement (defaults config files & database)
 
 Run the main job in a rake task and get debug info:
 
-`rake watch:apie_v2`
+`rake apie_v2:all`
 
 Store *HTTP Responses* for all endpoints in json files. They will be used to confirm HTTP responses validity in production:
 
-`rake watch:store_responses`
+`rake apie_v2:store_responses`
 
 ## Deployment
 
