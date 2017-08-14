@@ -4,7 +4,7 @@ require 'mina/rvm'
 require 'colorize'
 
 ENV['domain'] || raise('no domain provided'.red)
-ENV['to'] ||= 'development'
+ENV['to'] ||= 'sandbox'
 %w[development sandbox staging production].include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
 
 print "Deploy to #{ENV['to']}\n".green
@@ -25,7 +25,7 @@ branch =
       'master'
     when 'staging'
       'staging'
-    when 'development'
+    when 'development', 'sandbox'
       'develop'
     end
   end
@@ -37,11 +37,13 @@ ensure!(:branch)
 set :shared_dirs, fetch(:shared_dirs, []).push(
   'log',
   'bin',
+  'config/environments',
   'tmp/pids',
   'tmp/cache'
 )
 
 set :shared_files, fetch(:shared_files, []).push(
+  'config/database.yml',
   'config/watchdoge_secrets.yml'
 )
 
@@ -62,20 +64,6 @@ end
 task :setup do
   # Production database has to be setup !
   # command %(rbenv install 2.3.0)
-  command %(mkdir -p "#{fetch(:deploy_to)}/shared/log")
-  command %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/log")
-
-  command %(mkdir -p "#{fetch(:deploy_to)}/shared/bin")
-  command %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/bin")
-
-  command %(mkdir -p "#{fetch(:deploy_to)}/shared/tmp/pids")
-  command %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/tmp/pids")
-
-  command %(mkdir -p "#{fetch(:deploy_to)}/shared/tmp/cache")
-  command %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/tmp/cache")
-
-  command %(mkdir -p "#{fetch(:deploy_to)}/shared/db")
-  command %(chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/db")
 end
 
 desc 'Deploys the current version to the server.'

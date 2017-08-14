@@ -7,11 +7,10 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
+gem 'colorize'
 gem 'crono'
 gem 'daemons'
 gem 'haml'
@@ -38,8 +37,6 @@ gem 'validates_timeliness'
 # gem 'rack-cors'
 
 group :development, :test do
-  gem 'colorize'
-
   gem 'pry'
   gem 'pry-byebug'
 
