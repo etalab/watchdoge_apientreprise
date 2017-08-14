@@ -67,6 +67,12 @@ describe PingAPIEOnV2Job, type: :job do
       expect(DateTime.parse(json['date'])).to be_within(1.second).of DateTime.now
       expect(json).to include_json(expected_json)
     end
+
+    it 'uses a custom endpoint url' do
+      endpoint = Endpoints::EtablissementsPredecesseur.new
+      expect(job).to receive(:request_url).and_return(endpoint.custom_url)
+      job.perform_ping(endpoint)
+    end
   end
 
   context 'invalid ping' do

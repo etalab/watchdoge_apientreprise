@@ -6,7 +6,7 @@ describe Tools::EndpointFactory do
   context 'happy path' do
     let(:count) do
       hash = YAML.load_file(subject.send(:endpoint_config_file))
-      hash['endpoints'].count
+      hash['endpoints'].count + 2 # Etablissements predecesseur / successeur (yes not a perfect test...)
     end
 
     it 'return all the endpoints' do

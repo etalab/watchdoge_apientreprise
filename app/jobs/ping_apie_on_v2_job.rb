@@ -5,7 +5,7 @@ class PingAPIEOnV2Job < AbstractPingJob
   protected
 
   def request_url(endpoint)
-    "/v2/#{endpoint.name}/#{endpoint.parameter}?token=#{apie_token}&#{endpoint.options.to_param}"
+    endpoint.custom_url || "/v2/#{endpoint.name}/#{endpoint.parameter}?token=#{apie_token}&#{endpoint.options.to_param}"
   end
 
   def endpoints

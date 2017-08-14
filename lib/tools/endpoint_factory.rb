@@ -16,6 +16,7 @@ class Tools::EndpointFactory
 
   def load_all
     load_from_yaml
+    load_specific_endpoints
     @endpoints
   end
 
@@ -34,6 +35,14 @@ class Tools::EndpointFactory
       else
         Rails.logger.error "Fail to load endpoint from YAML: #{h} errors: #{endpoint.errors.messages}"
       end
+    end
+  end
+
+  def load_specific_endpoints
+    case @api_name
+    when 'apie'
+      @endpoints << Endpoints::EtablissementsPredecesseur.new
+      @endpoints << Endpoints::EtablissementsSuccesseur.new
     end
   end
 
