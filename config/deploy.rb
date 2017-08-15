@@ -99,5 +99,5 @@ task deploy: :environment do
 end
 
 task crono: :environment do
-  command %(./bin/bundle exec crono restart -N watchdoge-crono-#{ENV['to']} -e #{ENV['to']})
+  command %(bundle exec crono restart -N watchdoge-crono-#{ENV['to']} -e #{ENV['to']})
 end

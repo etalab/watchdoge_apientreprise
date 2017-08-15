@@ -142,10 +142,10 @@ describe Tools::PingReaderWriter do
 
     it 'is correctly loaded' do
       expect(pings_hash.class).to be(Hash)
-      expect(DateTime.parse(pings_hash[:sirene][0][:date])).to be_within(1.second).of date
-      expect(DateTime.parse(pings_hash[:apie][0][:date])).to be_within(1.second).of date
-      expect(DateTime.parse(pings_hash[:apie][1][:date])).to be_within(1.second).of date
-      expect(DateTime.parse(pings_hash[:apie][2][:date])).to be_within(1.second).of date
+      expect(DateTime.parse(pings_hash['sirene'][0]['date'])).to be_within(1.second).of date
+      expect(DateTime.parse(pings_hash['apie'][0]['date'])).to be_within(1.second).of date
+      expect(DateTime.parse(pings_hash['apie'][1]['date'])).to be_within(1.second).of date
+      expect(DateTime.parse(pings_hash['apie'][2]['date'])).to be_within(1.second).of date
       expect(pings_hash).to include_json(expected_json)
     end
   end

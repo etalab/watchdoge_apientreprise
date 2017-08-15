@@ -4,17 +4,16 @@ class Tools::PingReaderWriter
     content = File.read(status_file)
     content = '{}' if content.empty?
 
-    JSON.parse(content, symbolize_names: true)
+    JSON.parse(content)
   end
 
   def load(service_name, api_name, api_version)
-    api_name = api_name.to_sym
     all_json = load_all_to_json
 
     return unless all_json.key?(api_name)
 
     json_pings = all_json[api_name].select do |ping|
-      ping[:name] == service_name && ping[:api_version] == api_version
+      ping['name'] == service_name && ping['api_version'] == api_version
     end
 
     create_ping_from_json(json_pings)
@@ -49,7 +48,7 @@ class Tools::PingReaderWriter
 
   def update_json
     @json[@ping.api_name].delete_if do |ping|
-      ping[:name] == @ping.name && ping[:api_version] == @ping.api_version
+      ping['name'] == @ping.name && ping['api_version'] == @ping.api_version
     end
 
     @json[@ping.api_name] << @ping.as_json
