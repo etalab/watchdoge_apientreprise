@@ -83,7 +83,6 @@ task deploy: :environment do
       in_path(fetch(:current_path)) do
         command %(mkdir -p tmp/)
         command %(touch tmp/restart.txt)
-        command %(touch tmp/status.json)
 
         # Crono has to:
         # - be in 'launch' if not Mina kill remaing processes

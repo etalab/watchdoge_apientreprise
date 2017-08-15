@@ -54,7 +54,6 @@ class AbstractPingJob < ApplicationJob
   def after_request_check(ping)
     if ping.valid?
       @pings << ping
-      Tools::PingReaderWriter.new.write(ping) # this file is not used...
       log(ping)
     else
       Rails.logger.error "Fail to write PingStatus(#{ping.name}) it's invalid (#{ping.errors.messages})"

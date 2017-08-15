@@ -28,10 +28,6 @@ describe PingAPIEOnV2Job, type: :job do
     end
   end
 
-  it 'ensure PingReaderWriter has a write method' do
-    expect(Tools::PingReaderWriter.new).to respond_to(:write)
-  end
-
   context 'happy path', vcr: { cassette_name: 'apie_v2' } do
     let(:filename) { described_class.send(:logfile) }
     let(:expected_json) do
@@ -46,14 +42,12 @@ describe PingAPIEOnV2Job, type: :job do
 
     before do
       allow_any_instance_of(described_class).to receive(:endpoints).and_return([endpoint_etablissements])
-      allow_any_instance_of(Tools::PingReaderWriter).to receive(:write)
       allow_any_instance_of(HTTPResponseValidator).to receive(:valid?).and_return(true)
       File.truncate(filename, 0) if File.exist?(filename)
     end
 
-    it 'writes and log the new status' do
+    it 'log the new status' do
       expect(job).to receive(:log)
-      expect_any_instance_of(Tools::PingReaderWriter).to receive(:write).with(instance_of(PingStatus)) # write consistency is not tested here
 
       job.perform
     end
@@ -71,6 +65,7 @@ describe PingAPIEOnV2Job, type: :job do
     it 'uses a custom endpoint url' do
       endpoint = Endpoints::EtablissementsPredecesseur.new
       expect(job).to receive(:request_url).and_return(endpoint.custom_url)
+
       job.perform_ping(endpoint)
     end
   end
@@ -86,7 +81,7 @@ describe PingAPIEOnV2Job, type: :job do
     it 'raises an error and don t log or write' do
       expect(Rails.logger).to receive(:error).with("Fail to write PingStatus(etablissements) it's invalid ({})")
       expect(job).not_to receive(:log)
-      expect_any_instance_of(Tools::PingReaderWriter).not_to receive(:write)
+
       job.perform
     end
   end
