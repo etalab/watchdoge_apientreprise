@@ -26,6 +26,9 @@ endpoints:
     <<: *SHARED
 
   - name: attestations_cotisation_retraite_probtp
+    response_regexp:
+      - name: url
+        regexp: '^https:\/\/storage\.apientreprise\.fr\/siade(_dev|_staging|)\/attestation\%[a-zA-Z0-9]{34}_probtp_cotisation_retraite.pdf$'
     <<: *PROBTP
     <<: *SHARED
 
@@ -47,6 +50,9 @@ endpoints:
 
   - name: attestations_agefiph
     parameter: '00552017600016'
+    response_regexp:
+      - name: dump_date
+        regexp: '\d+'
     <<: *SHARED
 
   - name: attestations_fiscales_dgfip
@@ -57,17 +63,29 @@ endpoints:
       context: 'Ping'
       siren_is: '552032534'
       siren_tva: '552032534'
+    response_regexp:
+      - name: url
+        regexp: '^https:\/\/storage\.apientreprise\.fr\/siade(_dev|_staging|)\/attestation\%[a-zA-Z0-9]{34}_fiscale_dgfip.pdf$'
 
   - name: attestations_sociales_acoss
+    response_regexp:
+      - name: url
+        regexp: '^https:\/\/storage\.apientreprise\.fr\/siade(_dev|_staging|)\/attestation\%[a-zA-Z0-9]{34}_sociale.pdf$'
     <<: *FNTP_ACOSS_SIREN
     <<: *SHARED
 
   - name: certificats_qualibat
     parameter: '33592022900036'
+    response_regexp:
+      - name: url
+        regexp: '^https:\/\/storage\.apientreprise\.fr\/siade(_dev|_staging|)\/attestation\%[a-zA-Z0-9]{34}_qualibat.pdf$'
     <<: *SHARED
 
   - name: certificats_cnetp
     parameter: '632049128'
+    response_regexp:
+      - name: url
+        regexp: '^https:\/\/storage\.apientreprise\.fr\/siade(_dev|_staging|)\/attestation\%[a-zA-Z0-9]{34}_cnetp.pdf$'
     <<: *SHARED
 
   - name: certificats_opqibi
@@ -83,5 +101,8 @@ endpoints:
     <<: *SHARED
 
   - name: cartes_professionnelles_fntp
+    response_regexp:
+      - name: url
+        regexp: '^https:\/\/storage\.apientreprise\.fr\/siade(_dev|_staging|)\/attestation\%[a-zA-Z0-9]{34}_carte_professionnelle_fntp.pdf$'
     <<: *FNTP_ACOSS_SIREN
     <<: *SHARED
