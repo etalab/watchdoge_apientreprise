@@ -78,6 +78,10 @@ endpoints:
     parameter: 'W604004799'
     <<: *SHARED
 
+  - name: documents_associations
+    parameter: '77571979202585'
+    <<: *SHARED
+
   - name: extraits_courts_inpi
     parameter: '542065479'
     <<: *SHARED

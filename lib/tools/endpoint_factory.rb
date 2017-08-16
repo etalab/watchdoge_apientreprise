@@ -43,6 +43,9 @@ class Tools::EndpointFactory
     when 'apie'
       @endpoints << Endpoints::EtablissementsPredecesseur.new
       @endpoints << Endpoints::EtablissementsSuccesseur.new
+      @endpoints << Endpoints::LiassesFiscalesDGFIPDeclarations.new
+      @endpoints << Endpoints::LiassesFiscalesDGFIPDictionnaire.new
+      @endpoints << Endpoints::LiassesFiscalesDGFIPComplete.new
     end
   end
 
