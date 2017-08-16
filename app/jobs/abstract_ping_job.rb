@@ -31,8 +31,7 @@ class AbstractPingJob < ApplicationJob
       status: get_service_status(http_response),
       date: DateTime.now,
       environment: Rails.env,
-      http_response: http_response,
-      response_regexp: endpoint.response_regexp
+      http_response: http_response
     )
 
     after_request_check(ping)
@@ -76,7 +75,7 @@ class AbstractPingJob < ApplicationJob
       date: ping.date,
       api_version: ping.api_version,
       api_name: ping.api_name,
-      environment: ping.environment
+      environment: ping.environment,
     )
   end
 end

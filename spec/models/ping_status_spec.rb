@@ -13,8 +13,7 @@ describe PingStatus, type: :model do
         date: date,
         status: status,
         environment: environment,
-        http_response: http_response,
-        response_regexp: response_regexp
+        http_response: http_response
       )
     end
 
@@ -33,8 +32,14 @@ describe PingStatus, type: :model do
         environment: environment
       }
     end
-    let(:http_response) { nil }
-    let(:response_regexp) { nil }
+    let(:response_body) do
+      "{ \"key\": \"valid value\" }"
+    end
+    let(:http_response) { Net::HTTPResponse.new(1.0, 200, "OK") }
+
+    before do
+      allow(http_response).to receive(:body).and_return(response_body) # Quite dirty test here...
+    end
 
     its(:name) { is_expected.to eq(name) }
     its(:api_version) { is_expected.to eq(api_version) }
@@ -42,6 +47,7 @@ describe PingStatus, type: :model do
     its(:date) { is_expected.to eq(date) }
     its(:status) { is_expected.to eq(status) }
     its(:environment) { is_expected.to eq(environment) }
+    its(:json_response_body) { is_expected.to eq(JSON.parse(response_body)) }
     its(:response_file) { is_expected.to eq("app/data/responses/#{api_name}/#{name}.json") }
     its(:valid?) { is_expected.to be_truthy }
 
@@ -60,22 +66,6 @@ describe PingStatus, type: :model do
       expect(json.class).to be(Hash)
       expect(DateTime.parse(json['date'])).to be_within(1.second).of date
       expect(json).to include_json(expected_json)
-    end
-
-    context 'with non-nil http_response and response_regexp' do
-      let(:response_body) do
-        "{ \"key\": \"valid value\" }"
-      end
-      let(:http_response) { Net::HTTPResponse.new(1.0, 200, "OK") }
-      let(:response_regexp) { [ { 'name' => 'test', 'regexp' => 'valid regexp' }, { 'name' => 'other test', 'regexp' => 'valid regexp'} ] }
-
-      before do
-        allow(http_response).to receive(:body).and_return(response_body) # Quite dirty test here...
-        allow_any_instance_of(PingStatus).to receive(:valid_response_class).and_return(Net::HTTPResponse)
-      end
-
-      its(:json_response_body) { is_expected.to eq(JSON.parse(response_body)) }
-      its(:valid?) { is_expected.to be_truthy }
     end
   end
 
@@ -107,21 +97,19 @@ describe PingStatus, type: :model do
   end
 
   describe 'nil data' do
-    subject { described_class.new(name: 'valid name', http_response: "string object",  response_regexp: [{'test' => 'missing keys'}]) }
+    subject { described_class.new(name: 'valid name') }
 
     its(:valid?) { is_expected.to be_falsy }
 
     context 'errors messages' do
       subject { described_class.new(name: 'valid name').errors.messages }
 
-      its([:name])            { is_expected.to be_empty }
-      its([:api_version])     { is_expected.not_to be_nil }
-      its([:api_name])        { is_expected.not_to be_nil }
-      its([:date])            { is_expected.not_to be_nil }
-      its([:status])          { is_expected.not_to be_nil }
-      its([:environment])     { is_expected.not_to be_nil }
-      its([:http_response])   { is_expected.not_to be_nil }
-      its([:response_regexp]) { is_expected.not_to be_nil }
+      its([:name])        { is_expected.to be_empty }
+      its([:api_version]) { is_expected.not_to be_nil }
+      its([:api_name])    { is_expected.not_to be_nil }
+      its([:date])        { is_expected.not_to be_nil }
+      its([:status])      { is_expected.not_to be_nil }
+      its([:environment]) { is_expected.not_to be_nil }
     end
   end
 end

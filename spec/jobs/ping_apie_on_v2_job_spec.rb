@@ -20,8 +20,7 @@ describe PingAPIEOnV2Job, type: :job do
   it_behaves_like 'logstashable'
 
   it 'ensure all endpoints works', vcr: { cassette_name: 'apie_v2' } do
-    # expect(Rails.logger).not_to receive(:error) # TODO: what a big shit here /o/ cf lower...
-    expect(Rails.logger).to receive(:error).once
+    expect(Rails.logger).not_to receive(:error)
 
     job.perform do |p|
       next if p.name == 'cotisations_msa' # TODO: what a big shit here /o/
