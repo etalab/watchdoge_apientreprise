@@ -5,16 +5,19 @@ require 'colorize'
 
 ENV['domain'] || raise('no domain provided'.red)
 ENV['to'] ||= 'sandbox'
-%w[development sandbox staging production].include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
+%w[sandbox production].include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
 
 print "Deploy to #{ENV['to']}\n".green
 
 set :user, 'deploy' if ENV['domain'] != 'localhost'
 set :application_name, 'watchdoge'
 set :domain, ENV['domain']
-set :deploy_to, "/var/www/watchdoge_#{ENV['to']}"
+
+set :deploy_to, "/var/www/watchdoge_#{ ENV['to'] }"
 set :rails_env, ENV['to']
+
 set :forward_agent, true
+set :port, 22
 set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
 # set :repository, './'
 
@@ -23,8 +26,6 @@ branch =
     case ENV['to']
     when 'production'
       'master'
-    when 'staging'
-      'staging'
     when 'development', 'sandbox'
       'develop'
     end
@@ -35,9 +36,9 @@ ensure!(:branch)
 
 # shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
 set :shared_dirs, fetch(:shared_dirs, []).push(
-  'log',
   'bin',
   'config/environments',
+  'log',
   'tmp/pids',
   'tmp/cache'
 )
@@ -52,10 +53,10 @@ set :shared_files, fetch(:shared_files, []).push(
 task :environment do
   if ENV['domain'] != 'localhost'
     # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-    # TODO ansible: rbenv !
-    #  invoke :'rbenv:load'
+    # TODO: load rbenv path
+    invoke :'rbenv:load'
   else
-    invoke :'rvm:use', '2.4.0@watchdoge'
+    invoke :'rvm:use', '2.4.2@watchdoge'
   end
 end
 
@@ -88,7 +89,9 @@ task deploy: :environment do
         # - be in 'launch' if not Mina kill remaing processes
         # - run in current_path to access bundle
         # - re-run rvm:use after 'cd' command
-        invoke :crono
+        if ENV['to'] == 'production'
+          invoke :crono
+        end
       end
     end
   end

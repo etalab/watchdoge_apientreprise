@@ -5,7 +5,7 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-domain = 'ns3073182.ip-217-182-164.eu'
+domain = 'watchdoge.entreprise.api.gouv.fr'
 
 task :deploy_server do
   sh "bundle exec mina deploy domain=#{domain}"

@@ -18,7 +18,7 @@ fntp_acoss_siren: &FNTP_ACOSS_SIREN
 
 endpoints:
   - name: cotisations_msa
-    parameter: '38069910800011' # TODO MSA down
+    parameter: '81104725700019'
     <<: *SHARED
 
   - name: eligibilites_cotisation_retraite_probtp
