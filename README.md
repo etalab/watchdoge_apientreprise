@@ -2,7 +2,7 @@
 
 Watchdoge is a watchdog for [API Entreprise](https://github.com/etalab/apientreprise), the monitoring done by Watchdoge is available on the [Dashboard](https://github.com/etalab/dashboard_apientreprise)
 
-Watchdoge run on Ruby 2.4.0
+Watchdoge run on Ruby 2.4.2
 
 ## Configuration
 
@@ -22,13 +22,13 @@ It will init the development environement (defaults config files & database)
 
 ## Rake tasks
 
-Run the main job in a rake task and get debug info:
+Run the main job in a rake task and get debug info (specify RAILS_ENV):
 
 `rake apie_v2:all`
 
-Store *HTTP Responses* for all endpoints in json files. They will be used to confirm HTTP responses validity in production:
+Can run only one endpoint (specify RAILS_ENV):
 
-`rake apie_v2:store_responses`
+`rake apie_v2:one cotisations_msa`
 
 ## Deployment
 
