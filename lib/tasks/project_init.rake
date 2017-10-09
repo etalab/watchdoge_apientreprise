@@ -26,10 +26,15 @@ def watchdoge_secrets
   <<EOF
     defaults: &DEFAULTS
       apie_token: such_token
+      apie_base_uri: 'entreprie.api.gouv.fr
 
+    sandbox:
+      <<: *DEFAULTS
     development:
       <<: *DEFAULTS
     test:
+      <<: *DEFAULTS
+    production:
       <<: *DEFAULTS
 EOF
 end

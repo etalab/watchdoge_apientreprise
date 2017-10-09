@@ -14,10 +14,10 @@ test:
   database: watchdoge_test
   <<: *defaults
 
-staging:
-  database: watchdoge_staging
-  <<: *defaults
-
 production:
   database: watchdoge_production
+  <<: *defaults
+
+sandbox:
+  database: watchdoge_sandbox
   <<: *defaults

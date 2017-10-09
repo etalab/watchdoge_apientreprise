@@ -45,4 +45,3 @@ end
 def env_info
   puts "Running on #{Rails.env.to_s.green} env (#{Rails.application.config_for(:watchdoge_secrets)['apie_base_uri']})"
 end
-

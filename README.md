@@ -34,7 +34,7 @@ Store *HTTP Responses* for all endpoints in json files. They will be used to con
 
 Run:
 
-`mina deploy domain=<MY IP> to=<development|staging|production>`
+`mina deploy domain=<MY IP> to=<development|production>`
 
 ## Dependencies
 Needs PostgreSQL installed,  certifcates (and IP whitelist) for API Entreprise and it's providers
