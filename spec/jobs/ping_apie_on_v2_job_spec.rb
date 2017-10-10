@@ -21,7 +21,6 @@ describe PingAPIEOnV2Job, type: :job do
     expect(Rails.logger).not_to receive(:error)
 
     job.perform do |p|
-      next if p.name == 'cotisations_msa' # TODO: what a big shit here /o/
       expect("#{p.name}: #{p.status}").to eq("#{p.name}: up")
     end
   end
