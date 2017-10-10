@@ -1,6 +1,7 @@
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
+require 'mina/rbenv'
 require 'colorize'
 
 ENV['domain'] || raise('no domain provided'.red)
@@ -19,7 +20,6 @@ set :rails_env, ENV['to']
 set :forward_agent, true
 set :port, 22
 set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
-# set :repository, './'
 
 branch =
   begin
@@ -53,7 +53,7 @@ set :shared_files, fetch(:shared_files, []).push(
 task :environment do
   if ENV['domain'] != 'localhost'
     # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-    # TODO: load rbenv path
+    set :rbenv_path, '/usr/local/rbenv'
     invoke :'rbenv:load'
   else
     invoke :'rvm:use', '2.4.2@watchdoge'
@@ -62,7 +62,7 @@ end
 
 # Put any custom commands you need to run at setup
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
-task :setup do
+task setup: :environment do
   # Production database has to be setup !
   # command %(rbenv install 2.3.0)
 end
@@ -91,6 +91,8 @@ task deploy: :environment do
         # - re-run rvm:use after 'cd' command
         if ENV['to'] == 'production'
           invoke :crono
+        else
+          invoke :mono_ping
         end
       end
     end
@@ -101,5 +103,11 @@ task deploy: :environment do
 end
 
 task crono: :environment do
+  comment %{Restarting Crono Job}.green
   command %(bundle exec crono restart -N watchdoge-crono-#{ENV['to']} -e #{ENV['to']})
+end
+
+task mono_ping: :environment do
+  comment %{One Ping Attempt}.yellow
+  command %{bundle exec rake apie_v2:all RAILS_ENV=#{ENV['to']}}
 end
