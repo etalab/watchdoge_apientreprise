@@ -34,6 +34,9 @@ def print_ping(ping)
   when 'up'
     status = ping.status.upcase.green
 
+  when 'incomplete'
+    status = ping.status.upcase.yellow
+
   when 'down'
     status = ping.status.upcase.red
     debug_info = PingAPIEOnV2Job.new.send(:request_url, Tools::EndpointFactory.new('apie').create(ping.name, 2))
