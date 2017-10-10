@@ -2,7 +2,7 @@ class AbstractPingJob < ApplicationJob
   include HTTParty
 
   def perform
-    endpoints.each do |endpoint|
+    Tools::PingWorker.new(endpoints) do |endpoint|
       ping = perform_ping(endpoint)
       yield ping if block_given?
     end

@@ -31,5 +31,6 @@ module Watchdoge
     config.api_only = true
 
     config.autoload_paths << Rails.root.join('lib')
+    config.thread_number = 8
   end
 end
