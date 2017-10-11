@@ -4,7 +4,7 @@ class AbstractPingJob < ApplicationJob
   def perform
     Tools::PingWorker.new(endpoints) do |endpoint|
       ping = perform_ping(endpoint)
-      yield ping if block_given?
+      yield ping, endpoint if block_given?
     end
   end
 
