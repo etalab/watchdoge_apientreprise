@@ -39,13 +39,11 @@ class Tools::EndpointFactory
   end
 
   def load_specific_endpoints
-    case @api_name
-    when 'apie'
-      @endpoints << Endpoints::EtablissementsPredecesseur.new
-      @endpoints << Endpoints::EtablissementsSuccesseur.new
-      @endpoints << Endpoints::LiassesFiscalesDGFIPDeclarations.new
-      @endpoints << Endpoints::LiassesFiscalesDGFIPDictionnaire.new
-      @endpoints << Endpoints::LiassesFiscalesDGFIPComplete.new
+    return if @apie_name
+    dir = 'app/models/endpoints'
+    Dir[File.join(dir, '**', '*')].each do |file|
+      classname = 'Endpoints::' + File.basename(file, '.rb').classify
+      @endpoints << classname.constantize.new
     end
   end
 

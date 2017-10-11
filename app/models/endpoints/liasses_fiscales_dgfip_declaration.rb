@@ -1,4 +1,4 @@
-class Endpoints::LiassesFiscalesDGFIPDeclarations < Endpoint
+class Endpoints::LiassesFiscalesDGFIPDeclaration < Endpoint
   def initialize
     super
     @name = 'liasses_fiscales_dgfip_declarations'

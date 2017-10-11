@@ -9,7 +9,7 @@ class PingAPIEOnV2Job < AbstractPingJob
   end
 
   def endpoints
-    Tools::EndpointFactory.new('apie').load_all
+    Tools::EndpointFactory.new('apie').load_all.map { |ep| ep if ep.api_version == 2 }.compact
   end
 
   private
