@@ -85,6 +85,7 @@ task deploy: :environment do
         command %(mkdir -p tmp/)
         command %(touch tmp/restart.txt)
 
+        invoke :'passenger'
         # Crono has to:
         # - be in 'launch' if not Mina kill remaing processes
         # - run in current_path to access bundle
@@ -110,4 +111,16 @@ end
 task mono_ping: :environment do
   comment %{One Ping Attempt}.yellow
   command %{bundle exec rake apie_v2:all RAILS_ENV=#{ENV['to']}}
+end
+
+task :passenger do
+  comment %{Attempting to start Passenger app}.green
+  command %{
+    if (sudo passenger-status | grep watchdoge_#{ENV['to']}) >/dev/null
+    then
+      passenger-config restart-app /var/www/watchdoge_#{ENV['to']}/current
+    else
+      echo 'Skipping: no passenger app found (will be automatically loaded)'
+    fi
+  }
 end
