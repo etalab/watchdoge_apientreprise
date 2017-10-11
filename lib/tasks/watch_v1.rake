@@ -6,8 +6,9 @@ namespace :apie_v1 do
   task 'all': :environment do
     env_info
 
-    PingAPIEOnV1Job.new.perform do |ping|
-      print_ping(ping)
+    PingAPIEOnV1Job.new.perform do |ping, endpoint|
+      request_url = PingAPIEOnV1Job.new.send(:request_url, endpoint)
+      print_ping(ping, request_url)
     end
   end
 
@@ -24,7 +25,10 @@ namespace :apie_v1 do
     endpoint = Tools::EndpointFactory.new('apie').create(endpoint_name, 1)
     raise "#{endpoint_name} not found in endpoints.yml (and custom classes)".red if endpoint.nil?
 
-    ping = PingAPIEOnV1Job.new.perform_ping(endpoint)
-    print_ping(ping)
+    job = PingAPIEOnV1Job.new
+    request_url = job.send(:request_url, endpoint)
+    ping = job.perform_ping(endpoint)
+
+    print_ping(ping, request_url)
   end
 end

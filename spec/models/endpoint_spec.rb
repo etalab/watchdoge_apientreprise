@@ -1,14 +1,26 @@
 describe Endpoint, type: :model do
   context 'happy path' do
-    subject { described_class.new(name: name, api_version: api_version, api_name: api_name, parameter: parameter, options: options) }
+    subject do
+      described_class.new(
+        name: name,
+        sub_name: sub_name,
+        api_version: api_version,
+        api_name: api_name,
+        parameter: parameter,
+        options: options
+      )
+    end
 
     let(:name) { 'service name' }
+    let(:sub_name) { 'sub name' }
     let(:api_version) { 2 }
     let(:api_name) { 'apie' }
     let(:parameter) { '00000' }
     let(:options) { 'options' }
 
     its(:name) { is_expected.to eq(name) }
+    its(:sub_name) { is_expected.to eq(sub_name) }
+    its(:fullname) { is_expected.to eq("#{sub_name}/#{name}") }
     its(:api_version) { is_expected.to eq(api_version) }
     its(:api_name) { is_expected.to eq(api_name) }
     its(:parameter) { is_expected.to eq(parameter) }

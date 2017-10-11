@@ -13,7 +13,7 @@ class AbstractPingJob < ApplicationJob
     http_response = get_http_response(endpoint)
 
     PingStatus.new(
-      name: endpoint.name,
+      name: endpoint.fullname,
       http_response: http_response
     )
   end

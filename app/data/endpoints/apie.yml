@@ -1,5 +1,4 @@
 shared: &SHARED
-  api_version: 2
   options:
     recipient: 'SGMAP'
     context: 'Ping'
@@ -17,35 +16,46 @@ fntp_acoss_siren: &FNTP_ACOSS_SIREN
   parameter: '562077503'
 
 endpoints:
+# ###############
+# v2
+# ###############
   - name: cotisations_msa
+    api_version: 2
     parameter: '81104725700019'
     <<: *SHARED
 
   - name: eligibilites_cotisation_retraite_probtp
+    api_version: 2
     <<: *PROBTP
     <<: *SHARED
 
   - name: attestations_cotisation_retraite_probtp
+    api_version: 2
     <<: *PROBTP
     <<: *SHARED
 
   - name: entreprises
+    api_version: 2
     <<: *GENERIC_SIREN
     <<: *SHARED
 
   - name: extraits_rcs_infogreffe
+    api_version: 2
     <<: *GENERIC_SIREN
     <<: *SHARED
 
   - name: etablissements
+    api_version: 2
     parameter: '41816609600069'
     <<: *SHARED
 
   - name: exercices
+    api_version: 2
     <<: *GENERIC_SIRET
     <<: *SHARED
 
   - name: attestations_agefiph
+    api_version: 2
     parameter: '00552017600016'
     <<: *SHARED
 
@@ -59,33 +69,130 @@ endpoints:
       siren_tva: '552032534'
 
   - name: attestations_sociales_acoss
+    api_version: 2
     <<: *FNTP_ACOSS_SIREN
     <<: *SHARED
 
   - name: certificats_qualibat
+    api_version: 2
     parameter: '33592022900036'
     <<: *SHARED
 
   - name: certificats_cnetp
+    api_version: 2
     parameter: '632049128'
     <<: *SHARED
 
   - name: certificats_opqibi
+    api_version: 2
     parameter: '395301641'
     <<: *SHARED
 
   - name: associations
+    api_version: 2
     parameter: 'W604004799'
     <<: *SHARED
 
   - name: documents_associations
+    api_version: 2
     parameter: '77571979202585'
     <<: *SHARED
 
   - name: extraits_courts_inpi
+    api_version: 2
     parameter: '542065479'
     <<: *SHARED
 
   - name: cartes_professionnelles_fntp
+    api_version: 2
     <<: *FNTP_ACOSS_SIREN
     <<: *SHARED
+
+# ####################
+# v1
+# ####################
+  - name: associations
+    api_version: 1
+    parameter: 'W604004799'
+    <<: *SHARED
+
+  - name: eligibilite_cotisation_retraite
+    api_version: 1
+    sub_name: probtp
+    <<: *PROBTP
+    <<: *SHARED
+
+  - name: attestations_cotisation_retraite
+    api_version: 1
+    sub_name: probtp
+    <<: *PROBTP
+    <<: *SHARED
+
+  - name: attestations_fiscales
+    api_version: 1
+    parameter: '552032534'
+    options:
+      recipient: 'SGMAP'
+      context: 'Ping'
+      siren_is: '552032534'
+      siren_tva: '552032534'
+
+  - name: attestations_sociales
+    api_version: 1
+    <<: *FNTP_ACOSS_SIREN
+    options:
+      recipient: 'SGMAP'
+      context: 'Ping'
+      type_attestation: 'AVG_UR'
+
+  - name: certificat
+    sub_name: cnetp
+    api_version: 1
+    parameter: '632049128'
+    <<: *SHARED
+
+  - name: certificats_qualibat
+    api_version: 1
+    parameter: '33592022900036'
+    <<: *SHARED
+
+  - name: entreprises
+    api_version: 1
+    <<: *GENERIC_SIREN
+    <<: *SHARED
+
+  - name: etablissements
+    api_version: 1
+    parameter: '41816609600069'
+    <<: *SHARED
+
+  - name: exercices
+    sub_name: etablissements
+    api_version: 1
+    <<: *GENERIC_SIRET
+    <<: *SHARED
+
+  - name: cartes_professionnelles
+    sub_name: fntp
+    api_version: 1
+    <<: *FNTP_ACOSS_SIREN
+    <<: *SHARED
+
+  - name: extraits_rcs
+    sub_name: infogreffe
+    api_version: 1
+    <<: *GENERIC_SIREN
+    <<: *SHARED
+
+  - name: cotisations
+    sub_name: msa
+    api_version: 1
+    parameter: '81104725700019'
+    <<: *SHARED
+
+  - name: certificat
+    sub_name: opqibi
+    api_version: 1
+    parameter: '395301641'
+    <<: *SHARED
+
