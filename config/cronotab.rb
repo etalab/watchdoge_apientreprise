@@ -6,5 +6,6 @@
 # class should have a method `perform` without arguments.
 #
 
+Crono.perform(PingAPIEOnV1Job).every 5.minutes
 Crono.perform(PingAPIEOnV2Job).every 5.minutes
 # TODO: crono truncate table every ??

@@ -110,6 +110,7 @@ end
 
 task mono_ping: :environment do
   comment %{One Ping Attempt}.yellow
+  command %{bundle exec rake apie_v1:all RAILS_ENV=#{ENV['to']}}
   command %{bundle exec rake apie_v2:all RAILS_ENV=#{ENV['to']}}
 end
 
