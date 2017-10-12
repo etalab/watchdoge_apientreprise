@@ -1,4 +1,4 @@
-config/watchdoge_secrets.yml
+config/secrets.yml
 
 *.rbc
 capybara-*.html
