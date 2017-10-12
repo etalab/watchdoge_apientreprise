@@ -34,15 +34,15 @@ endpoints:
     <<: *PROBTP
     <<: *SHARED
 
-  - name: entreprises
-    api_version: 2
-    <<: *GENERIC_SIREN
-    <<: *SHARED
+#  - name: entreprises
+#    api_version: 2
+#    <<: *GENERIC_SIREN
+#    <<: *SHARED
 
-  - name: extraits_rcs_infogreffe
-    api_version: 2
-    <<: *GENERIC_SIREN
-    <<: *SHARED
+#  - name: extraits_rcs_infogreffe
+#    api_version: 2
+#    <<: *GENERIC_SIREN
+#    <<: *SHARED
 
   - name: etablissements
     api_version: 2
@@ -156,10 +156,10 @@ endpoints:
     parameter: '33592022900036'
     <<: *SHARED
 
-  - name: entreprises
-    api_version: 1
-    <<: *GENERIC_SIREN
-    <<: *SHARED
+#  - name: entreprises
+#    api_version: 1
+#    <<: *GENERIC_SIREN
+#    <<: *SHARED
 
   - name: etablissements
     api_version: 1
@@ -178,11 +178,11 @@ endpoints:
     <<: *FNTP_ACOSS_SIREN
     <<: *SHARED
 
-  - name: extraits_rcs
-    sub_name: infogreffe
-    api_version: 1
-    <<: *GENERIC_SIREN
-    <<: *SHARED
+#  - name: extraits_rcs
+#    sub_name: infogreffe
+#    api_version: 1
+#    <<: *GENERIC_SIREN
+#    <<: *SHARED
 
   - name: cotisations
     sub_name: msa
@@ -195,4 +195,3 @@ endpoints:
     api_version: 1
     parameter: '395301641'
     <<: *SHARED
-
