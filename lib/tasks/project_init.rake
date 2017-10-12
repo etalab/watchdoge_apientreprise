@@ -4,11 +4,11 @@ namespace :dev do
   desc 'initialize dev environment'
   task :init do
     puts 'Start initialization'.green
-    invoke :create_secrets
+    create_secrets
     init_database
   end
 
-  task :create_secrets do
+  def create_secrets
     puts 'create dummy Watchdoge secrets'.green
     content = watchdoge_secrets
     file = File.new('config/secrets.yml', 'w+')
