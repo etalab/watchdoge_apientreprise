@@ -86,7 +86,7 @@ task deploy: :environment do
         command %(mkdir -p tmp/)
         command %(touch tmp/restart.txt)
 
-        if ENV['to'] != 'production'
+        if ENV['to'] == 'production'
           comment %{Updating cronotab}.green
           invoke :'whenever:update'
         else
@@ -104,8 +104,7 @@ end
 
 task mono_ping: :environment do
   comment %{One Ping Attempt}.yellow
-  command %{bundle exec rake apie_v1:all RAILS_ENV=#{ENV['to']}}
-  command %{bundle exec rake apie_v2:all RAILS_ENV=#{ENV['to']}}
+  command %{bundle exec rake watch:all RAILS_ENV=#{ENV['to']}}
 end
 
 task :passenger do

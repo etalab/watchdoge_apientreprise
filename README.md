@@ -39,12 +39,8 @@ Run:
 ## Dependencies
 Needs PostgreSQL installed,  certifcates (and IP whitelist) for API Entreprise and it's providers
 
-## Jobs
-Watchdoge use `crono` to perform periodic pings Mina start the deamon automatically.
-
-To do it manually :
-
-`bundle exec crono start -N watchdoge-crono -e development`
+## Services
+Watchdoge use `whenever` to perform periodic pings. Mina updates cronotab on deployment.
 
 ## Tests
 Run:
