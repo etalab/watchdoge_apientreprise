@@ -1,4 +1,4 @@
-class PingAPIEOnV2Job < AbstractPingJob
+class PingAPIEOnV2 < AbstractPing
 
   base_uri Rails.application.config_for(:secrets)['apie_base_uri']
 

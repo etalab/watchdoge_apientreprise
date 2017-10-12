@@ -2,6 +2,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
 require 'mina/rbenv'
+require 'mina/whenever'
 require 'colorize'
 
 ENV['domain'] || raise('no domain provided'.red)
@@ -85,27 +86,20 @@ task deploy: :environment do
         command %(mkdir -p tmp/)
         command %(touch tmp/restart.txt)
 
-        invoke :'passenger'
-        # Crono has to:
-        # - be in 'launch' if not Mina kill remaing processes
-        # - run in current_path to access bundle
-        # - re-run rvm:use after 'cd' command
-        if ENV['to'] == 'production'
-          invoke :crono
+        if ENV['to'] != 'production'
+          comment %{Updating cronotab}.green
+          invoke :'whenever:update'
         else
           invoke :mono_ping
         end
+
+        invoke :'passenger'
       end
     end
   end
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
   # run(:local){ say 'done' }
-end
-
-task crono: :environment do
-  comment %{Restarting Crono Job}.green
-  command %(bundle exec crono restart -N watchdoge-crono-#{ENV['to']} -e #{ENV['to']})
 end
 
 task mono_ping: :environment do

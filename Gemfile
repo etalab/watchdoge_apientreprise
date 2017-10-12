@@ -11,14 +11,13 @@ gem 'rails', '~> 5.1.1'
 gem 'puma', '~> 3.7'
 
 gem 'colorize'
-gem 'crono'
-gem 'daemons'
 gem 'haml'
 gem 'httparty'
 gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'pg'
 gem 'sinatra', require: nil
 gem 'validates_timeliness'
+gem 'whenever'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
@@ -55,6 +54,8 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-checkstyle_formatter', require: false
   gem 'rubocop-rspec', require: false
+
+  gem 'mina-whenever'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

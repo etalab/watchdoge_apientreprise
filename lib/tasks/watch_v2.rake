@@ -2,17 +2,17 @@ load './lib/tasks/tools.rake'
 require 'colorize'
 
 namespace :apie_v2 do
-  desc 'run watchdoge job on API Entreprise v2'
+  desc 'run watchdoge service on API Entreprise v2'
   task 'all': :environment do
     env_info
 
-    PingAPIEOnV2Job.new.perform do |ping, endpoint|
-      request_url = PingAPIEOnV2Job.new.send(:request_url, endpoint)
+    PingAPIEOnV2.new.perform do |ping, endpoint|
+      request_url = PingAPIEOnV2.new.send(:request_url, endpoint)
       print_ping(ping, request_url)
     end
   end
 
-  desc 'run watchdoge on a specific job on API Entreprise v2: rake apie_v2:one associations'
+  desc 'run watchdoge on a specific service on API Entreprise v2: rake apie_v2:one associations'
   task 'one': :environment do
     env_info
 
@@ -25,9 +25,9 @@ namespace :apie_v2 do
     endpoint = Tools::EndpointFactory.new('apie').create(endpoint_name, 2)
     raise "#{endpoint_name} not found in endpoints.yml (and custom classes)".red if endpoint.nil?
 
-    job = PingAPIEOnV2Job.new
-    request_url = job.send(:request_url, endpoint)
-    ping = job.perform_ping(endpoint)
+    service = PingAPIEOnV2.new
+    request_url = service.send(:request_url, endpoint)
+    ping = service.perform_ping(endpoint)
 
     print_ping(ping, request_url)
   end

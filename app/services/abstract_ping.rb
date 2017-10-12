@@ -1,4 +1,4 @@
-class AbstractPingJob < ApplicationJob
+class AbstractPing
   include HTTParty
 
   def perform

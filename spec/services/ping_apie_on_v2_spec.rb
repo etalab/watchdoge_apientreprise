@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe PingAPIEOnV2Job, type: :job do
-  subject(:job) { described_class.new }
+describe PingAPIEOnV2, type: :service do
+  subject(:service) { described_class.new }
 
   let(:endpoint_etablissements) do
     Endpoint.new(
@@ -20,7 +20,7 @@ describe PingAPIEOnV2Job, type: :job do
   it 'ensure all endpoints works', vcr: { cassette_name: 'apie_v2' } do
     expect(Rails.logger).not_to receive(:error)
 
-    job.perform do |p|
+    service.perform do |p|
       expect("#{p.name}: #{p.status}").to eq("#{p.name}: up")
     end
   end
@@ -42,9 +42,9 @@ describe PingAPIEOnV2Job, type: :job do
 
     it 'uses a custom endpoint url' do
       endpoint = Endpoints::EtablissementsPredecesseur.new
-      expect(job).to receive(:request_url).and_return(endpoint.custom_url)
+      expect(service).to receive(:request_url).and_return(endpoint.custom_url)
 
-      job.perform_ping(endpoint)
+      service.perform_ping(endpoint)
     end
   end
 end

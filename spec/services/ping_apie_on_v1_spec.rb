@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe PingAPIEOnV1Job, type: :job do
-  subject(:job) { described_class.new }
+describe PingAPIEOnV1, type: :service do
+  subject(:service) { described_class.new }
 
   let(:endpoint_etablissements) do
     Endpoint.new(
@@ -20,7 +20,7 @@ describe PingAPIEOnV1Job, type: :job do
   it 'ensure all endpoints works', vcr: { cassette_name: 'apie_v1' } do
     expect(Rails.logger).not_to receive(:error)
 
-    job.perform do |p|
+    service.perform do |p|
       next if p.name == 'msa/cotisations' # TODO: what a big shit here /o/
       expect("#{p.name}: #{p.status}").to eq("#{p.name}: up")
     end
