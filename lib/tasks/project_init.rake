@@ -10,7 +10,7 @@ namespace :dev do
 
   def create_secrets
     puts 'create dummy Watchdoge secrets'.green
-    content = watchdoge_secrets
+    content = secrets
     file = File.new('config/secrets.yml', 'w+')
     file.write(content.unindent)
   end
@@ -22,7 +22,7 @@ namespace :dev do
   end
 end
 
-def watchdoge_secrets
+def secrets
   <<EOF
     defaults: &DEFAULTS
       apie_token: such_token

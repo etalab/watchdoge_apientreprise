@@ -16,5 +16,5 @@ def print_ping(ping, request_url)
 end
 
 def env_info
-  puts "Running on #{Rails.env.to_s.green} env (#{Rails.application.config_for(:watchdoge_secrets)['apie_base_uri']}) with #{Rails.application.config.thread_number.to_s.yellow} threads"
+  puts "Running on #{Rails.env.to_s.green} env (#{Rails.application.config_for(:secrets)['apie_base_uri']}) with #{Rails.application.config.thread_number.to_s.yellow} threads"
 end

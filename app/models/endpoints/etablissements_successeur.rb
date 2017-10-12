@@ -16,6 +16,6 @@ class Endpoints::EtablissementsSuccesseur < Endpoint
   end
 
   def apie_token
-    Rails.application.config_for(:watchdoge_secrets)['apie_token']
+    Rails.application.config_for(:secrets)['apie_token']
   end
 end

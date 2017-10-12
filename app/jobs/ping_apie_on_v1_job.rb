@@ -1,6 +1,6 @@
 class PingAPIEOnV1Job < AbstractPingJob
 
-  base_uri Rails.application.config_for(:watchdoge_secrets)['apie_base_uri']
+  base_uri Rails.application.config_for(:secrets)['apie_base_uri']
 
   protected
 
@@ -17,6 +17,6 @@ class PingAPIEOnV1Job < AbstractPingJob
   private
 
   def apie_token
-    Rails.application.config_for(:watchdoge_secrets)['apie_token']
+    Rails.application.config_for(:secrets)['apie_token']
   end
 end
