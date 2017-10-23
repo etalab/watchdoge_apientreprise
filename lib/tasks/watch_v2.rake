@@ -4,6 +4,7 @@ require 'colorize'
 namespace :apie_v2 do
   desc 'run watchdoge service on API Entreprise v2'
   task 'all': :environment do
+    puts 'V2'.green
     env_info
 
     PingAPIEOnV2.new.perform do |ping, endpoint|
