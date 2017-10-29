@@ -21,6 +21,6 @@ class PingStatus
     vars = instance_variables
     .map { |v| "#{v}=#{instance_variable_get(v).inspect}" unless v == :@http_response }
     .join(', ')
-    "<#{self.class}: #{vars}>"
+    "<#{self.class}: #{vars}, @status=#{status}>"
   end
 end

@@ -25,6 +25,19 @@ describe PingAPIEOnV2, type: :service do
     end
   end
 
+  describe 'send warning email if service down', vcr: { cassette_name: 'apie_v2' } do
+    before do
+      allow_any_instance_of(PingStatus).to receive(:status).and_return('down')
+    end
+
+    it 'asks to deliver an email' do
+      delivery = double
+      expect(delivery).to receive(:deliver_now).with(no_args)
+      expect(PingMailer).to receive(:ping).and_return(delivery)
+      service.perform_ping(endpoint_etablissements)
+    end
+  end
+
   context 'happy path', vcr: { cassette_name: 'apie_v2' } do
     let(:expected_json) do
       {

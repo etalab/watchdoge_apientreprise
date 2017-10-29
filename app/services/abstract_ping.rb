@@ -12,10 +12,16 @@ class AbstractPing
   def perform_ping(endpoint)
     http_response = get_http_response(endpoint)
 
-    PingStatus.new(
+    ping = PingStatus.new(
       name: endpoint.fullname,
       http_response: http_response
     )
+
+    if (ping.status != 'up')
+      PingMailer.ping(ping, endpoint).deliver_now
+    end
+
+    ping
   end
 
   protected

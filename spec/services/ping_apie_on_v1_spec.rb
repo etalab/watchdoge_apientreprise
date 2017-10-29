@@ -21,20 +21,7 @@ describe PingAPIEOnV1, type: :service do
     expect(Rails.logger).not_to receive(:error)
 
     service.perform do |p|
-      next if p.name == 'msa/cotisations' # TODO: what a big shit here /o/
       expect("#{p.name}: #{p.status}").to eq("#{p.name}: up")
-    end
-  end
-
-  context 'happy path', vcr: { cassette_name: 'apie_v1' } do
-    let(:expected_json) do
-      {
-        msg: 'ping',
-        endpoint: 'etablissements',
-        status: 'up',
-        api_version: 1,
-        environment: 'test',
-      }
     end
   end
 end
