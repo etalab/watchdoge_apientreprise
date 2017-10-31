@@ -5,7 +5,7 @@ require 'mina/rbenv'
 require 'mina/whenever'
 require 'colorize'
 
-ENV['domain'] || raise('no domain provided'.red)
+ENV['domain'] ||= 'watchdoge.entreprise.api.gouv.fr'
 ENV['to'] ||= 'sandbox'
 %w[sandbox production].include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
 
