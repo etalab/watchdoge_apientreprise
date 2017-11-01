@@ -1,4 +1,5 @@
 shared: &SHARED
+  period: 60
   options:
     recipient: 'SGMAP'
     context: 'Ping'
@@ -34,20 +35,23 @@ endpoints:
     <<: *PROBTP
     <<: *SHARED
 
-#  - name: entreprises
-#    api_version: 2
-#    <<: *GENERIC_SIREN
-#    <<: *SHARED
+  - name: entreprises
+    api_version: 2
+    <<: *GENERIC_SIREN
+    <<: *SHARED
 
-#  - name: extraits_rcs_infogreffe
-#    api_version: 2
-#    <<: *GENERIC_SIREN
-#    <<: *SHARED
+  - name: extraits_rcs_infogreffe
+    api_version: 2
+    <<: *GENERIC_SIREN
+    <<: *SHARED
 
   - name: etablissements
     api_version: 2
     parameter: '41816609600069'
-    <<: *SHARED
+    period: 1
+    options:
+      recipient: 'SGMAP'
+      context: 'Ping'
 
   - name: exercices
     api_version: 2
@@ -61,6 +65,7 @@ endpoints:
 
   - name: attestations_fiscales_dgfip
     api_version: 2
+    period: 60
     parameter: '552032534'
     options:
       recipient: 'SGMAP'
@@ -70,13 +75,19 @@ endpoints:
 
   - name: attestations_sociales_acoss
     api_version: 2
+    period: 1
+    options:
+      recipient: 'SGMAP'
+      context: 'Ping'
     <<: *FNTP_ACOSS_SIREN
-    <<: *SHARED
 
   - name: certificats_qualibat
     api_version: 2
     parameter: '33592022900036'
-    <<: *SHARED
+    period: 1
+    options:
+      recipient: 'SGMAP'
+      context: 'Ping'
 
   - name: certificats_cnetp
     api_version: 2
@@ -130,6 +141,7 @@ endpoints:
 
   - name: attestations_fiscales
     api_version: 1
+    period: 60
     parameter: '552032534'
     options:
       recipient: 'SGMAP'
@@ -139,6 +151,7 @@ endpoints:
 
   - name: attestations_sociales
     api_version: 1
+    period: 1
     <<: *FNTP_ACOSS_SIREN
     options:
       recipient: 'SGMAP'
@@ -154,17 +167,23 @@ endpoints:
   - name: certificats_qualibat
     api_version: 1
     parameter: '33592022900036'
-    <<: *SHARED
+    period: 1
+    options:
+      recipient: 'SGMAP'
+      context: 'Ping'
 
-#  - name: entreprises
-#    api_version: 1
-#    <<: *GENERIC_SIREN
-#    <<: *SHARED
+  - name: entreprises
+    api_version: 1
+    <<: *GENERIC_SIREN
+    <<: *SHARED
 
   - name: etablissements
     api_version: 1
     parameter: '41816609600069'
-    <<: *SHARED
+    period: 1
+    options:
+      recipient: 'SGMAP'
+      context: 'Ping'
 
   - name: exercices
     sub_name: etablissements
@@ -178,11 +197,11 @@ endpoints:
     <<: *FNTP_ACOSS_SIREN
     <<: *SHARED
 
-#  - name: extraits_rcs
-#    sub_name: infogreffe
-#    api_version: 1
-#    <<: *GENERIC_SIREN
-#    <<: *SHARED
+  - name: extraits_rcs
+    sub_name: infogreffe
+    api_version: 1
+    <<: *GENERIC_SIREN
+    <<: *SHARED
 
   - name: cotisations
     sub_name: msa

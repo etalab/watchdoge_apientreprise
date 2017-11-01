@@ -8,8 +8,8 @@ class PingAPIEOnV2 < AbstractPing
     endpoint.custom_url || "/v2/#{endpoint.name}/#{endpoint.parameter}?token=#{apie_token}&#{endpoint.options.to_param}"
   end
 
-  def endpoints
-    Tools::EndpointFactory.new('apie').load_all.map { |ep| ep if ep.api_version == 2 }.compact
+  def endpoints_conditions(endpoint)
+    endpoint.api_version == 2
   end
 
   private

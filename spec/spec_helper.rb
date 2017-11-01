@@ -13,6 +13,10 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+puts 'Some tests (spec/tasks/watch_v*_spec.rb) can randomly fail, if so re-run your tests'.yellow
+puts '(it is due to multitreading tasks)'.yellow
+
 RSpec.configure do |config|
   # Include support functions
   Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }

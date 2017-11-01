@@ -6,6 +6,7 @@ describe Endpoint, type: :model do
         sub_name: sub_name,
         api_version: api_version,
         api_name: api_name,
+        period: period,
         parameter: parameter,
         options: options
       )
@@ -15,6 +16,7 @@ describe Endpoint, type: :model do
     let(:sub_name) { 'sub name' }
     let(:api_version) { 2 }
     let(:api_name) { 'apie' }
+    let(:period) { 1 }
     let(:parameter) { '00000' }
     let(:options) { 'options' }
 
@@ -23,13 +25,14 @@ describe Endpoint, type: :model do
     its(:fullname) { is_expected.to eq("#{sub_name}/#{name}") }
     its(:api_version) { is_expected.to eq(api_version) }
     its(:api_name) { is_expected.to eq(api_name) }
+    its(:period) { is_expected.to eq(period) }
     its(:parameter) { is_expected.to eq(parameter) }
     its(:options) { is_expected.to eq(options) }
     its(:valid?) { is_expected.to be_truthy }
   end
 
   context 'is not valid' do
-    subject { described_class.new(api_version: 5) }
+    subject { described_class.new(api_version: 5, period: 12) }
 
     its(:valid?) { is_expected.to be_falsy }
 
@@ -39,6 +42,7 @@ describe Endpoint, type: :model do
       its([:name])        { is_expected.not_to be_nil }
       its([:api_version]) { is_expected.not_to be_nil }
       its([:api_name])    { is_expected.not_to be_nil }
+      its([:period])      { is_expected.not_to be_nil }
       its([:parameter])   { is_expected.not_to be_nil }
       its([:options])     { is_expected.not_to be_nil }
     end

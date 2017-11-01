@@ -24,11 +24,11 @@ It will init the development environement (defaults config files & database)
 
 Run the main job in a rake task and get debug info (specify RAILS_ENV):
 
-`rake apie_v2:all`
+`rake watch:all`
 
 Can run only one endpoint (specify RAILS_ENV):
 
-`rake apie_v2:one cotisations_msa`
+`rake watch_v2:one cotisations_msa`
 
 ## Deployment
 
@@ -43,6 +43,7 @@ Needs PostgreSQL installed,  certifcates (and IP whitelist) for API Entreprise a
 Watchdoge use `whenever` to perform periodic pings. Mina updates cronotab on deployment.
 
 ## Tests
+Due to Tools::PingWorker multithreading is can cause some tests to fails sometimes, re-run your tests to be sure
 Run:
 
 `rspec`

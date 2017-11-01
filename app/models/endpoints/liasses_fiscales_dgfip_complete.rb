@@ -4,6 +4,7 @@ class Endpoints::LiassesFiscalesDGFIPComplete < Endpoint
     @name = 'liasses_fiscales_dgfip_complete'
     @api_version = 2
     @api_name = 'apie'
+    @period = 60
     @parameter = '301028346'
     @options = { recipient: 'SGMAP', context: 'Ping' }
     @custom_url = endpoint_custom_url

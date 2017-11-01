@@ -1,14 +1,18 @@
 load './lib/tasks/tools.rake'
 require 'colorize'
 
-namespace :apie_v1 do
-  desc 'run watchdoge service  on API Entreprise v1'
-  task 'all': :environment do
-    puts 'V1'.green
+namespace :watch_v1 do
+  desc 'run watchdoge service on API Entreprise v1'
+  task 'all', [:period] => :environment do |t, args|
+    puts 'V1'.green unless ENV['RAILS_ENV'] = 'test'
+
     env_info
 
-    PingAPIEOnV1.new.perform do |ping, endpoint|
-      request_url = PingAPIEOnV1.new.send(:request_url, endpoint)
+    hash_options = args.to_h
+
+    service = PingAPIEOnV1.new(hash_options)
+    service.perform do |ping, endpoint|
+      request_url = service.send(:request_url, endpoint)
       print_ping(ping, request_url)
     end
   end

@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe PingAPIEOnV2, type: :service do
-  subject(:service) { described_class.new }
+  subject(:service) { described_class.new(hash) }
 
+  let(:hash) { nil }
   let(:endpoint_etablissements) do
     Endpoint.new(
       name: 'etablissements',
@@ -35,6 +36,13 @@ describe PingAPIEOnV2, type: :service do
       expect(delivery).to receive(:deliver_now).with(no_args)
       expect(PingMailer).to receive(:ping).and_return(delivery)
       service.perform_ping(endpoint_etablissements)
+    end
+  end
+
+  describe 'with a specific period' do
+    let(:hash) { { :period => 1 } }
+    it 'loads less endpoints' do
+      expect(service.send(:endpoints).count).to eq(3)
     end
   end
 

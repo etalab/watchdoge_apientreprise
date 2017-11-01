@@ -10,8 +10,8 @@ class PingAPIEOnV1 < AbstractPing
     (url + parameters).gsub!(%r{/+}, '/')
   end
 
-  def endpoints
-    Tools::EndpointFactory.new('apie').load_all.map{ |ep| ep if ep.api_version == 1 }.compact
+  def endpoints_conditions(endpoint)
+    endpoint.api_version == 1
   end
 
   private

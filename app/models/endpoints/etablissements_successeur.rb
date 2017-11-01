@@ -4,6 +4,7 @@ class Endpoints::EtablissementsSuccesseur < Endpoint
     @name = 'etablissements_successeur'
     @api_version = 2
     @api_name = 'apie'
+    @period = 60
     @parameter = '78414518700133'
     @options = { recipient: 'SGMAP', context: 'Ping' }
     @custom_url = endpoint_custom_url
