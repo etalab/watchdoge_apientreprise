@@ -4,7 +4,7 @@ require 'colorize'
 namespace :watch_v2 do
   desc 'run watchdoge service on API Entreprise v2'
   task 'all', [:period] => :environment do |t, args|
-    puts 'V2'.green unless ENV['RAILS_ENV'] = 'test'
+    puts 'V2'.green unless ENV['RAILS_ENV'] == 'test'
 
     env_info
 
