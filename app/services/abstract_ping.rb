@@ -1,14 +1,13 @@
 class AbstractPing
-  include HTTParty
+
+  APIE_BASE_URI = Rails.application.config_for(:secrets)['apie_base_uri']
+  APIE_TOKEN    = Rails.application.config_for(:secrets)['apie_token']
 
   def initialize(hash = nil)
     return if hash.nil?
     hash.symbolize_keys!
-    @period = hash.dig(:period)
-  end
 
-  def worker
-    Tools::PingWorker.new
+    @period = hash.dig(:period)
   end
 
   def perform
@@ -21,12 +20,8 @@ class AbstractPing
   # rubocop:disable MethodLength
   def perform_ping(endpoint)
     @endpoint = endpoint
-    ping = PingStatus.new(
-      name: @endpoint.fullname,
-      url: endpoint_url,
-      http_response: get_http_response
-    )
 
+    ping = execute_ping
     send_notification(ping)
 
     ping
@@ -40,21 +35,49 @@ class AbstractPing
 
   private
 
+  def get_http_response
+    HTTParty.get(APIE_BASE_URI + endpoint_url)
+  end
+
+  def worker
+    Tools::PingWorker.new
+  end
+
   def send_notification(ping)
     if (ping.status != 'up')
       PingMailer.ping(ping, @endpoint).deliver_now
     end
   end
 
-  def endpoints
-    Tools::EndpointFactory.new('apie').load_all.map { |ep|
-      if (@period.nil? || ep.period == @period) && ep.api_version == self.class::API_VERSION
-        ep
-      end
-    }.compact
+  def execute_ping
+    PingStatus.new(
+      name: @endpoint.fullname,
+      url: endpoint_url,
+      http_response: get_http_response
+    )
   end
 
-  def get_http_response
-    self.class.get(endpoint_url)
+  def endpoints
+    filter all_endpoints
+  end
+
+  def filter(endpoints)
+    endpoints.map do |ep|
+      if right_period?(ep) && right_version?(ep)
+        ep
+      end
+    end.compact
+  end
+
+  def all_endpoints
+    Tools::EndpointFactory.new('apie').load_all
+  end
+
+  def right_period?(endpoint)
+    @period.nil? || endpoint.period == @period
+  end
+
+  def right_version?(endpoint)
+    endpoint.api_version == self.class::API_VERSION
   end
 end

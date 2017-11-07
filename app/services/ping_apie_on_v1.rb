@@ -1,7 +1,7 @@
 class PingAPIEOnV1 < AbstractPing
 
   API_VERSION = 1
-  base_uri Rails.application.config_for(:secrets)['apie_base_uri']
+  #base_uri Rails.application.config_for(:secrets)['apie_base_uri']
 
   protected
 
@@ -14,16 +14,12 @@ class PingAPIEOnV1 < AbstractPing
 
   def build_url
     url = "/v1/#{@endpoint.sub_name}/#{@endpoint.name}/#{@endpoint.parameter}"
-    parameters = "?token=#{apie_token}&#{@endpoint.options.to_param}"
+    parameters = "?token=#{APIE_TOKEN}&#{@endpoint.options.to_param}"
 
     url + parameters
   end
 
   def sanitize(url)
     url.gsub!(%r{/+}, '/')
-  end
-
-  def apie_token
-    Rails.application.config_for(:secrets)['apie_token']
   end
 end
