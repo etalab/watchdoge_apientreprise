@@ -15,6 +15,7 @@ class Tools::EndpointFactory
   end
 
   def load_all
+    @endpoints.clear
     load_from_yaml
     load_specific_endpoints
     @endpoints
@@ -23,12 +24,10 @@ class Tools::EndpointFactory
   private
 
   def load_from_yaml
-    @endpoints.clear
     hash = YAML.load_file(endpoint_config_file)
 
     hash['endpoints'].each do |h|
-      endpoint = Endpoint.new(h)
-      endpoint.api_name = @api_name
+      endpoint = Endpoint.new(h.merge(api_name: @api_name))
 
       if endpoint.valid?
         @endpoints << endpoint
@@ -40,11 +39,19 @@ class Tools::EndpointFactory
 
   def load_specific_endpoints
     return if @apie_name
-    dir = 'app/models/endpoints'
-    Dir[File.join(dir, '**', '*')].each do |file|
-      classname = 'Endpoints::' + File.basename(file, '.rb').classify
-      @endpoints << classname.constantize.new
+
+    endpoints_files.each do |file|
+      @endpoints << classify(file).constantize.new
     end
+  end
+
+  def classify(file)
+    'Endpoints::' + File.basename(file, '.rb').classify
+  end
+
+  def endpoints_files
+    dir = 'app/models/endpoints'
+    Dir[File.join(dir, '**', '*')]
   end
 
   def endpoint_config_file
