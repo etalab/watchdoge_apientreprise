@@ -7,12 +7,12 @@ class Endpoints::EtablissementsPredecesseur < Endpoint
     @period = 60
     @parameter = '41816609600069'
     @options = { recipient: 'SGMAP', context: 'Ping' }
-    @custom_url = endpoint_custom_url
+    @specific_url = endpoint_specific_url
   end
 
   private
 
-  def endpoint_custom_url
+  def endpoint_specific_url
     "/v2/etablissements/#{@parameter}/predecesseur?token=#{apie_token}&#{@options.to_param}"
   end
 

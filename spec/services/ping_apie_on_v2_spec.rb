@@ -64,7 +64,7 @@ describe PingAPIEOnV2, type: :service do
 
     it 'uses a custom endpoint url' do
       endpoint = Endpoints::EtablissementsPredecesseur.new
-      expect(service).to receive(:endpoint_url).at_least(:once).and_return(endpoint.custom_url)
+      expect(service).to receive(:endpoint_url).at_least(:once).and_return(endpoint.specific_url)
 
       service.perform_ping(endpoint)
     end

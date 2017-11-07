@@ -1,7 +1,7 @@
 class Endpoint
   include ActiveModel::Model
 
-  attr_accessor :name, :sub_name, :api_version, :api_name, :period, :parameter, :options, :custom_url
+  attr_accessor :name, :sub_name, :api_version, :api_name, :period, :parameter, :options, :specific_url
 
   validates :name, presence: true
   validates :api_version, numericality: { only_integer: true }, inclusion: { in: 1..3 }

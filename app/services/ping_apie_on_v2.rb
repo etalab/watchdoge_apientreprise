@@ -5,7 +5,7 @@ class PingAPIEOnV2 < AbstractPing
   protected
 
   def endpoint_url
-    @endpoint.custom_url || build_url
+    @endpoint.specific_url || build_url
   end
 
   private
