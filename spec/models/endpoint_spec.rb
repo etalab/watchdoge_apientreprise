@@ -16,7 +16,7 @@ describe Endpoint, type: :model do
     let(:sub_name) { 'sub name' }
     let(:api_version) { 2 }
     let(:api_name) { 'apie' }
-    let(:period) { 1 }
+    let(:period) { 5 }
     let(:parameter) { '00000' }
     let(:options) { 'options' }
 

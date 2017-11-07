@@ -29,8 +29,8 @@ describe 'watch_v1:all', vcr: { cassette_name: 'apie_v1' } do
     end
   end
 
-  context 'call with period = 1' do
-    let(:period) { 1 }
+  context 'call with period = 5' do
+    let(:period) { 5 }
     it 'at least once' do
       expect_any_instance_of(PingAPIEOnV1).to receive(:perform_ping).at_least(:once).times.and_call_original
       subject.invoke(period)

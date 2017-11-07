@@ -40,7 +40,7 @@ describe PingAPIEOnV2, type: :service do
   end
 
   describe 'with a specific period' do
-    let(:hash) { { :period => 1 } }
+    let(:hash) { { :period => 5 } }
     it 'loads less endpoints' do
       expect(service.send(:endpoints).count).to eq(2)
     end
