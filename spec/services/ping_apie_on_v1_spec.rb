@@ -3,6 +3,10 @@ require 'rails_helper'
 describe PingAPIEOnV1, type: :service do
   subject(:service) { described_class.new }
 
+  before do
+    allow_any_instance_of(PingAPIEOnV1).to receive(:worker).and_return(FakeWorker.new)
+  end
+
   let(:endpoint_etablissements) do
     Endpoint.new(
       name: 'etablissements',
@@ -25,7 +29,7 @@ describe PingAPIEOnV1, type: :service do
     end
   end
 
-  describe 'with a specific period' do
+  describe 'with a specific period', vcr: { cassette_name: 'apie_v1' } do
     subject(:service) { described_class.new(hash) }
     let(:hash) { { :period => 60 } }
 

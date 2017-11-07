@@ -8,6 +8,14 @@ def endpoints_count
   configfile_count + classfile_count
 end
 
+class FakeWorker
+  def run(elements)
+    elements.each do |e|
+      yield e
+    end
+  end
+end
+
 def capture_output
   old_stdout = STDOUT.clone
   pipe_r, pipe_w = IO.pipe

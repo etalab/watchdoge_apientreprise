@@ -6,20 +6,18 @@ namespace :watch_v1 do
   task 'all', [:period] => :environment do |t, args|
     puts 'V1'.green unless ENV['RAILS_ENV'] == 'test'
 
-    env_info
+    print_env_info
 
     hash_options = args.to_h
 
-    service = PingAPIEOnV1.new(hash_options)
-    service.perform do |ping, endpoint|
-      request_url = service.send(:request_url, endpoint)
-      print_ping(ping, request_url)
+    PingAPIEOnV1.new(hash_options).perform do |ping, endpoint|
+      print_ping(ping)
     end
   end
 
   desc 'run watchdoge on a specific service on API Entreprise v1: rake apie_v1:one associations'
   task 'one': :environment do
-    env_info
+    print_env_info
 
     # rubocop:disable Style/BlockDelimiters
     ARGV.each { |a| task a.to_sym do; end } # it removes exit exception
@@ -30,10 +28,7 @@ namespace :watch_v1 do
     endpoint = Tools::EndpointFactory.new('apie').create(endpoint_name, 1)
     raise "#{endpoint_name} not found in endpoints.yml (and custom classes)".red if endpoint.nil?
 
-    service = PingAPIEOnV1.new
-    request_url = service.send(:request_url, endpoint)
-    ping = service.perform_ping(endpoint)
-
-    print_ping(ping, request_url)
+    ping = PingAPIEOnV1.new.perform_ping(endpoint)
+    print_ping(ping)
   end
 end
