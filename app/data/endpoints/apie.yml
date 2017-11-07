@@ -48,7 +48,7 @@ endpoints:
   - name: etablissements
     api_version: 2
     parameter: '41816609600069'
-    period: 1
+    period: 5
     options:
       recipient: 'SGMAP'
       context: 'Ping'
@@ -79,12 +79,12 @@ endpoints:
     options:
       recipient: 'SGMAP'
       context: 'Ping'
-    <<: *FNTP_ACOSS_SIREN
+    <<: *GENERIC_SIREN
 
   - name: certificats_qualibat
     api_version: 2
     parameter: '33592022900036'
-    period: 1
+    period: 5
     options:
       recipient: 'SGMAP'
       context: 'Ping'
@@ -152,7 +152,7 @@ endpoints:
   - name: attestations_sociales
     api_version: 1
     period: 60
-    <<: *FNTP_ACOSS_SIREN
+    <<: *GENERIC_SIREN
     options:
       recipient: 'SGMAP'
       context: 'Ping'
@@ -167,7 +167,7 @@ endpoints:
   - name: certificats_qualibat
     api_version: 1
     parameter: '33592022900036'
-    period: 1
+    period: 5
     options:
       recipient: 'SGMAP'
       context: 'Ping'
@@ -180,7 +180,7 @@ endpoints:
   - name: etablissements
     api_version: 1
     parameter: '41816609600069'
-    period: 1
+    period: 5
     options:
       recipient: 'SGMAP'
       context: 'Ping'
