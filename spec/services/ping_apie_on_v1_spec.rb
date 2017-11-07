@@ -30,7 +30,7 @@ describe PingAPIEOnV1, type: :service do
     let(:hash) { { :period => 60 } }
 
     it 'loads less endpoints' do
-      expect(service.send(:endpoints).count).to eq(11)
+      expect(service.send(:endpoints).count).to eq(12)
     end
   end
 end

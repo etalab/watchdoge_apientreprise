@@ -75,7 +75,7 @@ endpoints:
 
   - name: attestations_sociales_acoss
     api_version: 2
-    period: 1
+    period: 60
     options:
       recipient: 'SGMAP'
       context: 'Ping'
@@ -151,7 +151,7 @@ endpoints:
 
   - name: attestations_sociales
     api_version: 1
-    period: 1
+    period: 60
     <<: *FNTP_ACOSS_SIREN
     options:
       recipient: 'SGMAP'
