@@ -1,3 +1,5 @@
+require 'rails_helper.rb'
+
 describe Tools::EndpointFactory do
   subject(:factory) { described_class.new(service) }
 
