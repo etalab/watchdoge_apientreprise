@@ -23,6 +23,7 @@ describe PingAPIEOnV2, type: :service do
 
     service.perform do |p|
       expect("#{p.name}: #{p.status}").to eq("#{p.name}: up")
+      expect(p.url).not_to be_nil
     end
   end
 
@@ -63,7 +64,7 @@ describe PingAPIEOnV2, type: :service do
 
     it 'uses a custom endpoint url' do
       endpoint = Endpoints::EtablissementsPredecesseur.new
-      expect(service).to receive(:request_url).and_return(endpoint.custom_url)
+      expect(service).to receive(:endpoint_url).at_least(:once).and_return(endpoint.specific_url)
 
       service.perform_ping(endpoint)
     end

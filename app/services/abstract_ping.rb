@@ -1,14 +1,17 @@
 class AbstractPing
-  include HTTParty
+
+  APIE_BASE_URI = Rails.application.config_for(:secrets)['apie_base_uri']
+  APIE_TOKEN    = Rails.application.config_for(:secrets)['apie_token']
 
   def initialize(hash = nil)
     return if hash.nil?
     hash.symbolize_keys!
+
     @period = hash.dig(:period)
   end
 
   def perform
-    Tools::PingWorker.new(endpoints) do |endpoint|
+    worker.run(endpoints) do |endpoint|
       ping = perform_ping(endpoint)
       yield ping, endpoint if block_given?
     end
@@ -16,41 +19,65 @@ class AbstractPing
 
   # rubocop:disable MethodLength
   def perform_ping(endpoint)
-    http_response = get_http_response(endpoint)
+    @endpoint = endpoint
 
-    ping = PingStatus.new(
-      name: endpoint.fullname,
-      http_response: http_response
-    )
-
-    if (ping.status != 'up')
-      PingMailer.ping(ping, endpoint).deliver_now
-    end
+    ping = execute_ping
+    send_notification(ping)
 
     ping
   end
 
   protected
 
-  def request_url(endpoint)
-    fail 'should implement request_url'
-  end
-
-  def endpoints_conditions(endpoint)
-    fail 'should implement endpoints'
+  def endpoint_url
+    fail 'should implement endpoint_url'
   end
 
   private
 
-  def endpoints
-    Tools::EndpointFactory.new('apie').load_all.map { |ep|
-      if (@period.nil? || ep.period == @period) && endpoints_conditions(ep)
-        ep
-      end
-    }.compact
+  def get_http_response
+    HTTParty.get(APIE_BASE_URI + endpoint_url)
   end
 
-  def get_http_response(endpoint)
-    self.class.get(request_url(endpoint))
+  def worker
+    Tools::PingWorker.new
+  end
+
+  def send_notification(ping)
+    if (ping.status != 'up')
+      PingMailer.ping(ping, @endpoint).deliver_now
+    end
+  end
+
+  def execute_ping
+    PingStatus.new(
+      name: @endpoint.fullname,
+      url: endpoint_url,
+      http_response: get_http_response
+    )
+  end
+
+  def endpoints
+    filter all_endpoints
+  end
+
+  def filter(endpoints)
+    endpoints.map do |ep|
+      if right_period?(ep) && right_version?(ep)
+        ep
+      end
+    end.compact
+  end
+
+  def all_endpoints
+    Tools::EndpointFactory.new('apie').load_all
+  end
+
+  def right_period?(endpoint)
+    @period.nil? || endpoint.period == @period
+  end
+
+  def right_version?(endpoint)
+    endpoint.api_version == self.class::API_VERSION
   end
 end

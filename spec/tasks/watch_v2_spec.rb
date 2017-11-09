@@ -1,13 +1,11 @@
-# do NOT require this, VCR won't work, requests will be really made !
-#require 'support/rake_helper.rb'
+require 'rails_helper.rb'
 
 describe 'watch_v2:all', vcr: { cassette_name: 'apie_v2' } do
   include_context 'rake'
 
-  # /!\
-  # we use at_most+at_least instead of exactly because :
-  # Tools::PingWorker generate multiple threads and sometimes some threads are killed by rspec
-  # before they end so they never call the right number of times
+  before do
+    allow_any_instance_of(PingAPIEOnV2).to receive(:worker).and_return(FakeWorker.new)
+  end
 
   context 'with all endpoints' do
     it 'at least 5' do

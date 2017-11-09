@@ -1,3 +1,5 @@
+require 'rails_helper.rb'
+
 describe Endpoint, type: :model do
   context 'happy path' do
     subject do

@@ -1,3 +1,5 @@
+require 'rails_helper.rb'
+
 describe PingMailer, type: :mailer do
   let(:ping_name) { 'ping_name' }
   let(:endpoint) { Endpoint.new(name: ping_name, api_version: 2) }
