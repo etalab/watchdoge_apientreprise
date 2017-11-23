@@ -14,8 +14,8 @@ describe 'watch_v2:all', vcr: { cassette_name: 'apie_v2' } do
       sleep 0.1
     end
 
-    it 'at most 22' do
-      expect_any_instance_of(PingAPIEOnV2).to receive(:perform_ping).at_most(22).times.and_call_original
+    it 'at most 23' do
+      expect_any_instance_of(PingAPIEOnV2).to receive(:perform_ping).at_most(23).times.and_call_original
       subject.invoke
     end
 
