@@ -1,0 +1,47 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-1w/d",
+              "lte": "now/d"
+            }
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "terms": {
+            "controller.keyword": [
+              "api/v1/ping",
+              "api/v2/ping"
+            ]
+          }
+        }
+      ],
+      "filter": {
+        "exists": {
+          "field": "user_access.resource"
+        }
+      }
+    }
+  },
+  "aggs": {
+    "group_by_controller": {
+      "terms": {
+        "field": "controller.keyword"
+      },
+      "aggs": {
+        "endpoint_history": {
+          "date_histogram": {
+            "field": "@timestamp",
+            "interval": "hour"
+          }
+        }
+      }
+    }
+  }
+}
