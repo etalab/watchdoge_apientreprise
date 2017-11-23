@@ -41,7 +41,8 @@ class Tools::EndpointFactory
     return if @apie_name
 
     endpoints_files.each do |file|
-      @endpoints << classify(file).constantize.new
+      ep = classify(file).constantize.new
+      @endpoints << ep if ep.api_name == @api_name
     end
   end
 

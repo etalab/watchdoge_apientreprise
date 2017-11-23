@@ -1,8 +1,4 @@
 class AbstractPing
-
-  APIE_BASE_URI = Rails.application.config_for(:secrets)['apie_base_uri']
-  APIE_TOKEN    = Rails.application.config_for(:secrets)['apie_token']
-
   def initialize(hash = nil)
     return if hash.nil?
     hash.symbolize_keys!
@@ -36,7 +32,7 @@ class AbstractPing
   private
 
   def get_http_response
-    HTTParty.get(APIE_BASE_URI + endpoint_url)
+    HTTParty.get(self.class::APIE_BASE_URI + endpoint_url)
   end
 
   def worker
@@ -70,7 +66,7 @@ class AbstractPing
   end
 
   def all_endpoints
-    Tools::EndpointFactory.new('apie').load_all
+    Tools::EndpointFactory.new(self.class::SERVICE_NAME).load_all
   end
 
   def right_period?(endpoint)
