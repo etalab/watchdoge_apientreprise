@@ -1,0 +1,66 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-1d/d",
+              "lte": "now/d"
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "source": "siade_production*"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "terms": {
+            "controller.keyword": [
+              "api/v1/ping",
+              "api/v2/ping"
+            ]
+          }
+        }
+      ],
+      "filter": {
+        "exists": {
+          "field": "user_access.resource"
+        }
+      }
+    }
+  },
+  "aggs": {
+    "group_by_controller": {
+      "terms": {
+        "field": "controller.keyword",
+        "size": 100
+      },
+      "aggs": {
+        "agg_by_endpoint": {
+          "top_hits": {
+            "_source": {
+              "includes": [
+                "controller",
+                "status",
+                "@timestamp"
+              ]
+            },
+            "size": 1,
+            "sort": [
+              {
+                "@timestamp": {
+                  "order": "desc"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

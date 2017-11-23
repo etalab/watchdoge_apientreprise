@@ -1,0 +1,129 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://watchdoge.entreprise.api.gouv.fr:9200/_nodes/http
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.13.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
+    http_version: 
+  recorded_at: Thu, 23 Nov 2017 15:49:25 GMT
+- request:
+    method: get
+    uri: http://217.182.164.215:9200/_search
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "size": 0,
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "range": {
+                    "@timestamp": {
+                      "gte": "now-1d/d",
+                      "lte": "now/d"
+                    }
+                  }
+                },
+                {
+                  "wildcard": {
+                    "source": "siade_production*"
+                  }
+                }
+              ],
+              "must_not": [
+                {
+                  "terms": {
+                    "controller.keyword": [
+                      "api/v1/ping",
+                      "api/v2/ping"
+                    ]
+                  }
+                }
+              ],
+              "filter": {
+                "exists": {
+                  "field": "user_access.resource"
+                }
+              }
+            }
+          },
+          "aggs": {
+            "group_by_controller": {
+              "terms": {
+                "field": "controller.keyword",
+                "size": 100
+              },
+              "aggs": {
+                "agg_by_endpoint": {
+                  "top_hits": {
+                    "_source": {
+                      "includes": [
+                        "controller",
+                        "status",
+                        "@timestamp"
+                      ]
+                    },
+                    "size": 1,
+                    "sort": [
+                      {
+                        "@timestamp": {
+                          "order": "desc"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.13.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"took":18,"timed_out":false,"_shards":{"total":356,"successful":350,"failed":6,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"3tDGuNozQ5iYSmmUqklytw","index":".kibana"}},{"shard":0,"index":"my_index","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}}]},"hits":{"total":46865,"max_score":0.0,"hits":[]},"aggregations":{"group_by_controller":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":"api/v2/entreprises","doc_count":12287,"agg_by_endpoint":{"hits":{"total":12287,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkXHaz_-J--ddvMqF","_score":null,"_source":{"controller":"api/v2/entreprises","@timestamp":"2017-11-23T15:49:03.053Z","status":200},"sort":[1511452143053]}]}}},{"key":"api/v2/etablissements","doc_count":8271,"agg_by_endpoint":{"hits":{"total":8271,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkPjgz_-J--ddvMps","_score":null,"_source":{"controller":"api/v2/etablissements","@timestamp":"2017-11-23T15:48:31.434Z","status":200},"sort":[1511452111434]}]}}},{"key":"api/v1/etablissements","doc_count":8044,"agg_by_endpoint":{"hits":{"total":8044,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkXbNz_-J--ddvMqG","_score":null,"_source":{"controller":"api/v1/etablissements","@timestamp":"2017-11-23T15:49:03.517Z","status":200},"sort":[1511452143517]}]}}},{"key":"api/v1/entreprises","doc_count":3401,"agg_by_endpoint":{"hits":{"total":3401,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkW64z_-J--ddvMqD","_score":null,"_source":{"controller":"api/v1/entreprises","@timestamp":"2017-11-23T15:49:01.989Z","status":200},"sort":[1511452141989]}]}}},{"key":"api/v1/attestations_sociales","doc_count":2212,"agg_by_endpoint":{"hits":{"total":2212,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkX7Oz_-J--ddvMqI","_score":null,"_source":{"controller":"api/v1/attestations_sociales","@timestamp":"2017-11-23T15:49:05.810Z","status":422},"sort":[1511452145810]}]}}},{"key":"api/v1/attestations_fiscales","doc_count":1644,"agg_by_endpoint":{"hits":{"total":1644,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkDjDz_-J--ddvMoc","_score":null,"_source":{"controller":"api/v1/attestations_fiscales","@timestamp":"2017-11-23T15:47:42.719Z","status":422},"sort":[1511452062719]}]}}},{"key":"api/v1/fntp/carte_pro","doc_count":1498,"agg_by_endpoint":{"hits":{"total":1498,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkX7Zz_-J--ddvMqJ","_score":null,"_source":{"controller":"api/v1/fntp/carte_pro","@timestamp":"2017-11-23T15:49:06.108Z","status":404},"sort":[1511452146108]}]}}},{"key":"api/v1/certificats_qualibat","doc_count":983,"agg_by_endpoint":{"hits":{"total":983,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkYHQz_-J--ddvMqM","_score":null,"_source":{"controller":"api/v1/certificats_qualibat","@timestamp":"2017-11-23T15:49:07.171Z","status":404},"sort":[1511452147171]}]}}},{"key":"api/v1/msa/cotisations","doc_count":855,"agg_by_endpoint":{"hits":{"total":855,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkYXUz_-J--ddvMqQ","_score":null,"_source":{"controller":"api/v1/msa/cotisations","@timestamp":"2017-11-23T15:49:07.823Z","status":404},"sort":[1511452147823]}]}}},{"key":"api/v2/certificats_qualibat","doc_count":843,"agg_by_endpoint":{"hits":{"total":843,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pjd7Oz_-J--ddvMkb","_score":null,"_source":{"controller":"api/v2/certificats_qualibat","@timestamp":"2017-11-23T15:45:08.928Z","status":200},"sort":[1511451908928]}]}}},{"key":"api/v1/exercices","doc_count":821,"agg_by_endpoint":{"hits":{"total":821,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkWLFz_-J--ddvMp-","_score":null,"_source":{"controller":"api/v1/exercices","@timestamp":"2017-11-23T15:48:58.738Z","status":200},"sort":[1511452138738]}]}}},{"key":"api/v1/opqibi/certificat","doc_count":784,"agg_by_endpoint":{"hits":{"total":784,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkYHFz_-J--ddvMqL","_score":null,"_source":{"controller":"api/v1/opqibi/certificat","@timestamp":"2017-11-23T15:49:06.674Z","status":404},"sort":[1511452146674]}]}}},{"key":"api/v1/certificats_cnetp","doc_count":707,"agg_by_endpoint":{"hits":{"total":707,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkX7kz_-J--ddvMqK","_score":null,"_source":{"controller":"api/v1/certificats_cnetp","@timestamp":"2017-11-23T15:49:06.441Z","status":404},"sort":[1511452146441]}]}}},{"key":"api/v2/exercices","doc_count":627,"agg_by_endpoint":{"hits":{"total":627,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pka1Xz_-J--ddvMqY","_score":null,"_source":{"controller":"api/v2/exercices","@timestamp":"2017-11-23T15:49:18.351Z","status":200},"sort":[1511452158351]}]}}},{"key":"api/v2/attestations_agefiph","doc_count":608,"agg_by_endpoint":{"hits":{"total":608,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pZPMuz_-J--ddvLuT","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","@timestamp":"2017-11-23T15:00:26.979Z","status":404},"sort":[1511449226979]}]}}},{"key":"api/v1/eligibilites_cotisation_retraite_probtp","doc_count":497,"agg_by_endpoint":{"hits":{"total":497,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkCiPz_-J--ddvMoQ","_score":null,"_source":{"controller":"api/v1/eligibilites_cotisation_retraite_probtp","@timestamp":"2017-11-23T15:47:38.377Z","status":200},"sort":[1511452058377]}]}}},{"key":"api/v2/certificats_opqibi","doc_count":400,"agg_by_endpoint":{"hits":{"total":400,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pjPqmz_-J--ddvMjI","_score":null,"_source":{"controller":"api/v2/certificats_opqibi","@timestamp":"2017-11-23T15:44:10.664Z","status":404},"sort":[1511451850664]}]}}},{"key":"api/v2/certificats_cnetp","doc_count":396,"agg_by_endpoint":{"hits":{"total":396,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_o9tTcz_-J--ddvJht","_score":null,"_source":{"controller":"api/v2/certificats_cnetp","@timestamp":"2017-11-23T13:00:11.028Z","status":200},"sort":[1511442011028]}]}}},{"key":"api/v1/attestations_cotisation_retraite_probtp","doc_count":384,"agg_by_endpoint":{"hits":{"total":384,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkYXJz_-J--ddvMqP","_score":null,"_source":{"controller":"api/v1/attestations_cotisation_retraite_probtp","@timestamp":"2017-11-23T15:49:07.568Z","status":404},"sort":[1511452147568]}]}}},{"key":"api/v2/associations","doc_count":335,"agg_by_endpoint":{"hits":{"total":335,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pkbYLz_-J--ddvMqa","_score":null,"_source":{"controller":"api/v2/associations","@timestamp":"2017-11-23T15:49:20.532Z","status":200},"sort":[1511452160532]}]}}},{"key":"api/v2/attestations_fiscales_dgfip","doc_count":243,"agg_by_endpoint":{"hits":{"total":243,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pjOtPz_-J--ddvMi-","_score":null,"_source":{"controller":"api/v2/attestations_fiscales_dgfip","@timestamp":"2017-11-23T15:44:06.294Z","status":200},"sort":[1511451846294]}]}}},{"key":"api/v1/associations","doc_count":199,"agg_by_endpoint":{"hits":{"total":199,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pir1mz_-J--ddvMf_","_score":null,"_source":{"controller":"api/v1/associations","@timestamp":"2017-11-23T15:41:43.789Z","status":200},"sort":[1511451703789]}]}}},{"key":"api/v2/attestations_sociales_acoss","doc_count":181,"agg_by_endpoint":{"hits":{"total":181,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pjRgYz_-J--ddvMjX","_score":null,"_source":{"controller":"api/v2/attestations_sociales_acoss","@timestamp":"2017-11-23T15:44:18.127Z","status":404},"sort":[1511451858127]}]}}},{"key":"api/v2/cotisations_msa","doc_count":112,"agg_by_endpoint":{"hits":{"total":112,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pka1jz_-J--ddvMqZ","_score":null,"_source":{"controller":"api/v2/cotisations_msa","@timestamp":"2017-11-23T15:49:18.508Z","status":404},"sort":[1511452158508]}]}}},{"key":"api/v2/liasses_fiscales_dgfip","doc_count":93,"agg_by_endpoint":{"hits":{"total":93,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_o9sFSz_-J--ddvJhm","_score":null,"_source":{"controller":"api/v2/liasses_fiscales_dgfip","@timestamp":"2017-11-23T13:00:05.624Z","status":200},"sort":[1511442005624]}]}}},{"key":"api/v2/documents_associations","doc_count":91,"agg_by_endpoint":{"hits":{"total":91,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_o_BiZz_-J--ddvJpg","_score":null,"_source":{"controller":"api/v2/documents_associations","@timestamp":"2017-11-23T13:05:55.585Z","status":500},"sort":[1511442355585]}]}}},{"key":"api/v2/extraits_rcs_infogreffe","doc_count":72,"agg_by_endpoint":{"hits":{"total":72,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_piI3-z_-J--ddvMdK","_score":null,"_source":{"controller":"api/v2/extraits_rcs_infogreffe","@timestamp":"2017-11-23T15:39:21.133Z","status":404},"sort":[1511451561133]}]}}},{"key":"api/v2/attestations_cotisation_retraite_probtp","doc_count":65,"agg_by_endpoint":{"hits":{"total":65,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_ph6kHz_-J--ddvMcR","_score":null,"_source":{"controller":"api/v2/attestations_cotisation_retraite_probtp","@timestamp":"2017-11-23T15:38:21.073Z","status":404},"sort":[1511451501073]}]}}},{"key":"api/v2/eligibilites_cotisation_retraite_probtp","doc_count":59,"agg_by_endpoint":{"hits":{"total":59,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_ph6CVz_-J--ddvMcO","_score":null,"_source":{"controller":"api/v2/eligibilites_cotisation_retraite_probtp","@timestamp":"2017-11-23T15:38:19.255Z","status":200},"sort":[1511451499255]}]}}},{"key":"api/v2/cartes_professionnelles_fntp","doc_count":42,"agg_by_endpoint":{"hits":{"total":42,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_pQUlkz_-J--ddvK-1","_score":null,"_source":{"controller":"api/v2/cartes_professionnelles_fntp","@timestamp":"2017-11-23T14:21:29.188Z","status":404},"sort":[1511446889188]}]}}},{"key":"api/v2/etablissements/predecesseur","doc_count":31,"agg_by_endpoint":{"hits":{"total":31,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_o9sFdz_-J--ddvJhn","_score":null,"_source":{"controller":"api/v2/etablissements/predecesseur","@timestamp":"2017-11-23T13:00:05.792Z","status":200},"sort":[1511442005792]}]}}},{"key":"api/v2/etablissements/successeur","doc_count":31,"agg_by_endpoint":{"hits":{"total":31,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_o9r1yz_-J--ddvJhi","_score":null,"_source":{"controller":"api/v2/etablissements/successeur","@timestamp":"2017-11-23T13:00:04.948Z","status":200},"sort":[1511442004948]}]}}},{"key":"api/v2/extraits_courts_inpi","doc_count":31,"agg_by_endpoint":{"hits":{"total":31,"max_score":null,"hits":[{"_index":"logstash-2017.11.23","_type":"siade","_id":"AV_o9rm0z_-J--ddvJha","_score":null,"_source":{"controller":"api/v2/extraits_courts_inpi","@timestamp":"2017-11-23T13:00:04.333Z","status":200},"sort":[1511442004333]}]}}},{"key":"api/v1/infogreffe/extraits_rcs","doc_count":16,"agg_by_endpoint":{"hits":{"total":16,"max_score":null,"hits":[{"_index":"logstash-2017.11.22","_type":"siade","_id":"AV_kdSzqz_-J--ddu4YB","_score":null,"_source":{"controller":"api/v1/infogreffe/extraits_rcs","@timestamp":"2017-11-22T16:00:04.804Z","status":200},"sort":[1511366404804]}]}}},{"key":"api/v2/privileges","doc_count":2,"agg_by_endpoint":{"hits":{"total":2,"max_score":null,"hits":[{"_index":"logstash-2017.11.22","_type":"siade","_id":"AV_kRHokz_-J--ddu3WQ","_score":null,"_source":{"controller":"api/v2/privileges","@timestamp":"2017-11-22T15:06:52.927Z","status":401},"sort":[1511363212927]}]}}}]}}}'
+    http_version: 
+  recorded_at: Thu, 23 Nov 2017 15:49:25 GMT
+recorded_with: VCR 3.0.3
