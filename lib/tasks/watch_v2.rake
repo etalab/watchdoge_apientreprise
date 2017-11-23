@@ -28,7 +28,7 @@ namespace :watch_v2 do
     endpoint = Tools::EndpointFactory.new('apie').create(endpoint_name, 2)
     raise "#{endpoint_name} not found in endpoints.yml (and custom classes)".red if endpoint.nil?
 
-    PingAPIEOnV2.new.perform_ping(endpoint)
+    ping = PingAPIEOnV2.new.perform_ping(endpoint)
     print_ping(ping)
   end
 end
