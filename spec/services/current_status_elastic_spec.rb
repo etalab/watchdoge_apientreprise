@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe ElasticService, type: :service do
+describe CurrentStatusElastic, type: :service do
   describe 'Current status service', vcr: { cassette_name: 'current_status' } do
-    subject { described_class.new.get_current_status }
+    subject { described_class.new.get }
 
     it 'should be a success' do
       expect(subject.success?).to be_truthy
