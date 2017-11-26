@@ -25,8 +25,8 @@ describe AvailabilityHistoryElastic, type: :service do
           from = DateTime.parse(a[0])
           to = DateTime.parse(a[2])
 
-          expect(a[0]).to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/)
-          expect(a[2]).to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/)
+          expect(a[0]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
+          expect(a[2]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
           expect(to).to be >= from
 
           expect(a[1]).to be_in([0, 1])

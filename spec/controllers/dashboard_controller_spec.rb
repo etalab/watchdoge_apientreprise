@@ -52,9 +52,9 @@ describe DashboardController, type: :controller do
         expect(e['name']).not_to be_empty
         expect(e['sla']).to be_a(Float)
         e['availabilities'].each do |a|
-          expect(a['0']).to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/)
-          expect(a['1']).to match(/(0|1)/)
-          expect(a['2']).to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/)
+          expect(a[0]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
+          expect(a[1]).to be_in([0, 1])
+          expect(a[2]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
         end
       end
     end

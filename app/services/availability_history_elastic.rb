@@ -88,15 +88,15 @@ class AvailabilityHistoryElastic < AbstractElastic
 
   def add_new_availability
     current_availabilities << [
-      @current[:timestamp],
+      current_timestamp,
       current_status_code,
-      @current[:timestamp]
+      current_timestamp
     ]
   end
 
   def update_last_availability
     if (last_status_code == current_status_code)
-      last_availability[2] = @current[:timestamp]
+      last_availability[2] = current_timestamp
     else
       add_new_availability
     end
@@ -108,6 +108,10 @@ class AvailabilityHistoryElastic < AbstractElastic
 
   def current_availabilities
     @historical_data[@current[:fullname]][:availabilities]
+  end
+
+  def current_timestamp
+    DateTime.parse(@current[:timestamp]).strftime('%F %T')
   end
 
   def last_availability
