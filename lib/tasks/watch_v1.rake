@@ -6,7 +6,7 @@ namespace :watch_v1 do
   task 'all', [:period] => :environment do |t, args|
     puts 'V1'.green unless ENV['RAILS_ENV'] == 'test'
 
-    print_env_info
+    print_env_info_v1
 
     hash_options = args.to_h
 
@@ -32,7 +32,7 @@ namespace :watch_v1 do
     print_ping(ping)
   end
 
-  def print_env_info
+  def print_env_info_v1
     puts "Running on #{Rails.env.to_s.green} env (#{Rails.application.config_for(:secrets)['apie_base_uri_old']}) with #{Rails.application.config.thread_number.to_s.yellow} threads" unless ENV['RAILS_ENV'] == 'test'
   end
 end
