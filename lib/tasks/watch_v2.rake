@@ -31,4 +31,8 @@ namespace :watch_v2 do
     ping = PingAPIEOnV2.new.perform_ping(endpoint)
     print_ping(ping)
   end
+
+  def print_env_info
+    puts "Running on #{Rails.env.to_s.green} env (#{Rails.application.config_for(:secrets)['apie_base_uri_new']}) with #{Rails.application.config.thread_number.to_s.yellow} threads" unless ENV['RAILS_ENV'] == 'test'
+  end
 end

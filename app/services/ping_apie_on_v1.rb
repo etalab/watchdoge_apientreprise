@@ -1,7 +1,7 @@
 class PingAPIEOnV1 < AbstractPing
 
   SERVICE_NAME  = 'apie'
-  APIE_BASE_URI = Rails.application.config_for(:secrets)['apie_base_uri']
+  APIE_BASE_URI = Rails.application.config_for(:secrets)['apie_base_uri_old']
   APIE_TOKEN    = Rails.application.config_for(:secrets)['apie_token']
   API_VERSION   = 1
 
