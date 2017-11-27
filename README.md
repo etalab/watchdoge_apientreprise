@@ -4,6 +4,12 @@ Watchdoge is a watchdog for [API Entreprise](https://github.com/etalab/apientrep
 
 Watchdoge run on Ruby 2.4.2
 
+# Elasticsearch
+
+The API uses Elasticsearch API, only authorised IP can make requests to Elasticsearch API, add yours for development purpose.
+
+You can test your ELK queries in Kibana.
+
 ## Configuration
 
 ### Database

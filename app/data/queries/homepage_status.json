@@ -1,0 +1,28 @@
+{
+  "size": 1,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "wildcard": {
+            "source": "siade_production*"
+          }
+        },
+        {
+          "term": {
+            "controller.keyword": {
+              "value": "www"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc"
+      }
+    }
+  ]
+}

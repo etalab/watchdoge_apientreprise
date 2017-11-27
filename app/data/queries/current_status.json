@@ -15,6 +15,13 @@
           "wildcard": {
             "source": "siade_production*"
           }
+        },
+        {
+          "term": {
+            "parameters.context.keyword": {
+              "value": "Ping"
+            }
+          }
         }
       ],
       "must_not": [

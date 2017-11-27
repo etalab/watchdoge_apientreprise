@@ -1,5 +1,5 @@
 {
-  "size": 0,
+  "size": 10000,
   "query": {
     "bool": {
       "must": [
@@ -8,6 +8,13 @@
             "@timestamp": {
               "gte": "now-1w/d",
               "lte": "now/d"
+            }
+          }
+        },
+        {
+          "term": {
+            "parameters.context.keyword": {
+              "value": "Ping"
             }
           }
         }
@@ -29,19 +36,11 @@
       }
     }
   },
-  "aggs": {
-    "group_by_controller": {
-      "terms": {
-        "field": "controller.keyword"
-      },
-      "aggs": {
-        "endpoint_history": {
-          "date_histogram": {
-            "field": "@timestamp",
-            "interval": "hour"
-          }
-        }
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "asc"
       }
     }
-  }
+  ]
 }

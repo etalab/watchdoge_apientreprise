@@ -32,5 +32,12 @@ module Watchdoge
 
     config.autoload_paths << Rails.root.join('lib')
     config.thread_number = 8
+
+    # Eager load code on boot. This eager loads most of Rails and
+    # your application in memory, allowing both threaded web servers
+    # and those relying on copy on write to perform better.
+    # Rake tasks automatically ignore this option for performance.
+    config.eager_load = true
+    config.eager_load_paths += Dir["#{Rails.root}/lib/**/"]
   end
 end

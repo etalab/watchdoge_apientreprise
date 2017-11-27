@@ -12,4 +12,10 @@ describe 'Elk queries' do
       json = JSON.parse(data)
       expect(json.class).to be(Hash)
     end
+
+    it 'should be a JSON file' do
+      data = File.read('app/data/queries/homepage_status.json')
+      json = JSON.parse(data)
+      expect(json.class).to be(Hash)
+    end
 end

@@ -6,7 +6,7 @@ namespace :watch_v1 do
   task 'all', [:period] => :environment do |t, args|
     puts 'V1'.green unless ENV['RAILS_ENV'] == 'test'
 
-    print_env_info
+    print_env_info_v1
 
     hash_options = args.to_h
 
@@ -17,7 +17,7 @@ namespace :watch_v1 do
 
   desc 'run watchdoge on a specific service on API Entreprise v1: rake apie_v1:one associations'
   task 'one': :environment do
-    print_env_info
+    print_env_info_v1
 
     # rubocop:disable Style/BlockDelimiters
     ARGV.each { |a| task a.to_sym do; end } # it removes exit exception
@@ -30,5 +30,9 @@ namespace :watch_v1 do
 
     ping = PingAPIEOnV1.new.perform_ping(endpoint)
     print_ping(ping)
+  end
+
+  def print_env_info_v1
+    puts "Running on #{Rails.env.to_s.green} env (#{Rails.application.config_for(:secrets)['apie_base_uri_old']}) with #{Rails.application.config.thread_number.to_s.yellow} threads" unless ENV['RAILS_ENV'] == 'test'
   end
 end
