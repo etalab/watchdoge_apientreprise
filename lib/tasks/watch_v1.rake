@@ -17,7 +17,7 @@ namespace :watch_v1 do
 
   desc 'run watchdoge on a specific service on API Entreprise v1: rake apie_v1:one associations'
   task 'one': :environment do
-    print_env_info
+    print_env_info_v1
 
     # rubocop:disable Style/BlockDelimiters
     ARGV.each { |a| task a.to_sym do; end } # it removes exit exception
