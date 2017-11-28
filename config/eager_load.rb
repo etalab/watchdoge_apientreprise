@@ -1,1 +1,1 @@
-Rails.application.eager_load!
+Rails.application.eager_load! unless Rails.env.test?
