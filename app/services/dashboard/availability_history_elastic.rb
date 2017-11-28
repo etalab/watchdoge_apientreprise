@@ -1,4 +1,4 @@
-class AvailabilityHistoryElastic < AbstractElastic
+class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
   def get
     process_query do
       get_raw_response 'availability_history'

@@ -1,4 +1,4 @@
-class HomepageStatusElastic < AbstractElastic
+class Dashboard::HomepageStatusElastic < Dashboard::AbstractElastic
   def get
     process_query do
       get_raw_response 'homepage_status'

@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def current_status
-    service = CurrentStatusElastic.new.get
+    service = Dashboard::CurrentStatusElastic.new.get
 
     if service.success?
       render json: { results: service.results }, status: 200
@@ -10,7 +10,7 @@ class DashboardController < ApplicationController
   end
 
   def availability_history
-    service = AvailabilityHistoryElastic.new.get
+    service = Dashboard::AvailabilityHistoryElastic.new.get
 
     if service.success?
       render json: { results: service.results }, status: 200
@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
   end
 
   def homepage_status
-    service = HomepageStatusElastic.new.get
+    service = Dashboard::HomepageStatusElastic.new.get
 
     if service.success?
       render json: { results: service.results }, status: 200

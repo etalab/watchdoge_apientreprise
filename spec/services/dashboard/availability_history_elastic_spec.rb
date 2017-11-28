@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AvailabilityHistoryElastic, type: :service do
+describe Dashboard::AvailabilityHistoryElastic, type: :service do
   # TODO: share example to speed-up tests
   describe 'Availability history service', vcr: { cassette_name: 'availability_history' } do
     subject { described_class.new.get }

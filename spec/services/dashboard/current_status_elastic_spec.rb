@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CurrentStatusElastic, type: :service do
+describe Dashboard::CurrentStatusElastic, type: :service do
   describe 'Current status service', vcr: { cassette_name: 'current_status' } do
     subject { described_class.new.get }
 
