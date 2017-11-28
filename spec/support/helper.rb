@@ -8,6 +8,10 @@ def endpoints_count
   configfile_count + classfile_count
 end
 
+def providers_count
+  14
+end
+
 class FakeWorker
   def run(elements)
     elements.each do |e|

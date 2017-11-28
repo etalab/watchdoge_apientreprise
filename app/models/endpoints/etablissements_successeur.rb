@@ -2,6 +2,7 @@ class Endpoints::EtablissementsSuccesseur < Endpoint
   def initialize
     super
     @name = 'etablissements_successeur'
+    @provider = 'insee'
     @api_version = 2
     @api_name = 'apie'
     @period = 60

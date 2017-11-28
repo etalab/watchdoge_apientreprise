@@ -13,6 +13,9 @@ describe Tools::EndpointFactory do
       expect(endpoints.class).to be(Array)
       expect(endpoints.count).to eq(endpoints_count)
       expect(endpoints.first.class).to be(Endpoint)
+
+      providers = endpoints.map { |e| e.provider }.uniq
+      expect(providers.size).to equal(providers_count)
     end
 
     context 'create one endpoint' do

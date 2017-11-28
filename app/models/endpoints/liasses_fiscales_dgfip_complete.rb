@@ -2,6 +2,7 @@ class Endpoints::LiassesFiscalesDGFIPComplete < Endpoint
   def initialize
     super
     @name = 'liasses_fiscales_dgfip_complete'
+    @provider = 'dgfip'
     @api_version = 2
     @api_name = 'apie'
     @period = 60
