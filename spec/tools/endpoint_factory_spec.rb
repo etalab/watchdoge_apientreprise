@@ -37,8 +37,8 @@ describe Tools::EndpointFactory do
             'etablissements__2',
             'entreprises__1',
             'etablissements__1',
-            'etablissements_predecesseur__2',
-            'etablissements_successeur__2'
+            'etablissements_predecesseur_2',
+            'etablissements_successeur_2'
           ]
         }
       end

@@ -17,7 +17,7 @@ describe Dashboard::CurrentStatusElastic, type: :service do
         expect(e['name']).not_to be_empty
         expect(e['code']).to be_a(Integer)
         expect(e['code']).to be_between(200, 599)
-        expect(e['version']).to be_in(['v1', 'v2'])
+        expect(e['api_version']).to be_in([1, 2])
         expect(e['timestamp']).to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/)
       end
     end

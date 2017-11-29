@@ -48,13 +48,19 @@ describe DashboardController, type: :controller do
       json = JSON.parse(subject.body)
       expect(json).to be_a(Hash)
 
-      json['results'].each do |e|
-        expect(e['name']).not_to be_empty
-        expect(e['sla']).to be_a(Float)
-        e['availabilities'].each do |a|
-          expect(a[0]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
-          expect(a[1]).to be_in([0, 1])
-          expect(a[2]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
+      json['results'].each do |provider|
+        expect(provider['provider_name']).not_to be_empty
+
+        provider['endpoints_historicals'].each do |ep|
+          expect(ep['name']).to be_a(String)
+          expect(ep['sla']).to be_a(Float)
+          expect(ep['api_version']).to be_in([1, 2])
+
+          ep['availabilities'].each do |a|
+            expect(a[0]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
+            expect(a[1]).to be_in([0, 1])
+            expect(a[2]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
+          end
         end
       end
     end
