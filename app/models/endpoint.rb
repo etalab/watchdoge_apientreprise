@@ -15,4 +15,8 @@ class Endpoint
     return name unless sub_name
     "#{sub_name}/#{name}"
   end
+
+  def id
+    "#{name}_#{sub_name}_#{api_version}".gsub(/ /, '_')
+  end
 end

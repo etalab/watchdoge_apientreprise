@@ -24,6 +24,7 @@ describe Endpoint, type: :model do
     let(:parameter) { '00000' }
     let(:options) { 'options' }
 
+    its(:id) { is_expected.to eq('service_name_sub_name_2') }
     its(:name) { is_expected.to eq(name) }
     its(:sub_name) { is_expected.to eq(sub_name) }
     its(:provider) { is_expected.to eq(provider) }
