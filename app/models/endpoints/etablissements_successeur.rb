@@ -1,7 +1,8 @@
 class Endpoints::EtablissementsSuccesseur < Endpoint
   def initialize
     super
-    @name = 'etablissements_successeur'
+    @name = 'etablissements'
+    @sub_name = 'successeur'
     @provider = 'insee'
     @api_version = 2
     @api_name = 'apie'

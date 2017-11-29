@@ -1,7 +1,8 @@
 class Endpoints::LiassesFiscalesDGFIPComplete < Endpoint
   def initialize
     super
-    @name = 'liasses_fiscales_dgfip_complete'
+    @name = 'liasses_fiscales_dgfip'
+    @sub_name = 'complete'
     @provider = 'dgfip'
     @api_version = 2
     @api_name = 'apie'
