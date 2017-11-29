@@ -6,6 +6,10 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  # eager load code on boot.
+  config.eager_load = true
+  config.eager_load_paths += Dir["#{Rails.root}/lib/**/"]
+
   # Show full error reports.
   config.consider_all_requests_local = true
 
