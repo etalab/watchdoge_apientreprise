@@ -27,6 +27,26 @@ describe Tools::EndpointFactory do
       its(:options) { is_expected.to include_json(recipient: 'SGMAP', context: 'Ping') }
       its(:valid?) { is_expected.to be_truthy }
     end
+
+    context 'provider list' do
+      let(:expected_json) do
+        {
+          'name': 'insee',
+          'endpoints_ids': [
+            'entreprises__2',
+            'etablissements__2',
+            'entreprises__1',
+            'etablissements__1',
+            'etablissements_predecesseur__2',
+            'etablissements_successeur__2'
+          ]
+        }
+      end
+
+      it 'has an entry for insee correctly formatted' do
+        expect(subject.providers_infos['insee']).to include_json(expected_json)
+      end
+    end
   end
 
   context 'invalid endpoint.yml file' do
