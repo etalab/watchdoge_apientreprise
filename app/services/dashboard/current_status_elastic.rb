@@ -1,4 +1,4 @@
-class CurrentStatusElastic < AbstractElastic
+class Dashboard::CurrentStatusElastic < Dashboard::AbstractElastic
   def get
     process_query do
       get_raw_response 'current_status'

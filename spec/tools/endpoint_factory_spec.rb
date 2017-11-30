@@ -13,6 +13,9 @@ describe Tools::EndpointFactory do
       expect(endpoints.class).to be(Array)
       expect(endpoints.count).to eq(endpoints_count)
       expect(endpoints.first.class).to be(Endpoint)
+
+      providers = endpoints.map { |e| e.provider }.uniq
+      expect(providers.size).to equal(providers_count)
     end
 
     context 'create one endpoint' do
@@ -23,6 +26,26 @@ describe Tools::EndpointFactory do
       its(:parameter) { is_expected.to eq('81104725700019') }
       its(:options) { is_expected.to include_json(recipient: 'SGMAP', context: 'Ping') }
       its(:valid?) { is_expected.to be_truthy }
+    end
+
+    context 'provider list' do
+      let(:expected_json) do
+        {
+          'name': 'insee',
+          'endpoints_ids': [
+            'entreprises__2',
+            'etablissements__2',
+            'entreprises__1',
+            'etablissements__1',
+            'etablissements_predecesseur_2',
+            'etablissements_successeur_2'
+          ]
+        }
+      end
+
+      it 'has an entry for insee correctly formatted' do
+        expect(subject.providers_infos['insee']).to include_json(expected_json)
+      end
     end
   end
 

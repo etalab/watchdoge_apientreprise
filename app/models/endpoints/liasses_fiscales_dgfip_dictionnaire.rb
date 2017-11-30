@@ -1,7 +1,9 @@
 class Endpoints::LiassesFiscalesDGFIPDictionnaire < Endpoint
   def initialize
     super
-    @name = 'liasses_fiscales_dgfip_dictionnaire'
+    @name = 'liasses_fiscales_dgfip'
+    @sub_name = 'dictionnaire'
+    @provider = 'dgfip'
     @api_version = 2
     @api_name = 'apie'
     @period = 60

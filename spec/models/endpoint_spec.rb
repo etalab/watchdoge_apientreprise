@@ -6,6 +6,7 @@ describe Endpoint, type: :model do
       described_class.new(
         name: name,
         sub_name: sub_name,
+        provider: provider,
         api_version: api_version,
         api_name: api_name,
         period: period,
@@ -16,14 +17,17 @@ describe Endpoint, type: :model do
 
     let(:name) { 'service name' }
     let(:sub_name) { 'sub name' }
+    let(:provider) { 'provider name' }
     let(:api_version) { 2 }
     let(:api_name) { 'apie' }
     let(:period) { 5 }
     let(:parameter) { '00000' }
     let(:options) { 'options' }
 
+    its(:id) { is_expected.to eq('service_name_sub_name_2') }
     its(:name) { is_expected.to eq(name) }
     its(:sub_name) { is_expected.to eq(sub_name) }
+    its(:provider) { is_expected.to eq(provider) }
     its(:fullname) { is_expected.to eq("#{sub_name}/#{name}") }
     its(:api_version) { is_expected.to eq(api_version) }
     its(:api_name) { is_expected.to eq(api_name) }
@@ -39,14 +43,25 @@ describe Endpoint, type: :model do
     its(:valid?) { is_expected.to be_falsy }
 
     context 'errors messages' do
-      subject { described_class.new(api_version: 5).errors.messages }
+      subject(:endpoint) { described_class.new(api_version: 5) }
 
-      its([:name])        { is_expected.not_to be_nil }
-      its([:api_version]) { is_expected.not_to be_nil }
-      its([:api_name])    { is_expected.not_to be_nil }
-      its([:period])      { is_expected.not_to be_nil }
-      its([:parameter])   { is_expected.not_to be_nil }
-      its([:options])     { is_expected.not_to be_nil }
+      before do
+        endpoint.valid?
+      end
+
+      it 'should have errors' do
+        expect(endpoint.valid?).to be_falsey
+
+        messages = endpoint.errors.messages
+
+        expect(messages[:name]).not_to be_empty
+        expect(messages[:provider]).not_to be_empty
+        expect(messages[:api_version]).not_to be_empty
+        expect(messages[:api_name]).not_to be_empty
+        expect(messages[:period]).not_to be_empty
+        expect(messages[:parameter]).not_to be_empty
+        expect(messages[:options]).not_to be_empty
+      end
     end
   end
 end

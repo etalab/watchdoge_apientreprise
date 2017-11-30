@@ -1,4 +1,4 @@
-class AbstractElastic
+class Dashboard::AbstractElastic
   def initialize
     @client = Elasticsearch::Client.new({host: 'watchdoge.entreprise.api.gouv.fr', log: false})
     @client.transport.reload_connections!
@@ -19,8 +19,6 @@ class AbstractElastic
   def process_query
     begin
       yield
-    rescue
-      @success = false
     end
 
     self
@@ -28,7 +26,12 @@ class AbstractElastic
 
   def get_raw_response(query_name)
     query = load_query query_name
-    @raw_response = @client.search body: query
+
+    begin
+      @raw_response = @client.search body: query
+    rescue
+      @success = false
+    end
   end
 
   def load_query(query_name)
@@ -36,17 +39,21 @@ class AbstractElastic
   end
 
   def ping_infos_from_elasticsearch(raw_data)
-    version, name, subname = raw_data['controller'].split('/').slice(1, 4)
-    fullname = name + (subname || '') + version
-    name = name.gsub(/_/, ' ').capitalize
+    api_version, name, sub_name = raw_data['controller'].split('/').slice(1, 4)
+    name = name.gsub(/_/, ' ')
+    api_version = api_version.gsub('v', '').to_i
     status = raw_data['status']
     timestamp = raw_data['@timestamp']
 
+    # For liasse_fiscales_dgfip dictionnaire/complete/declaration
+    if name =~ /liasses fiscales dgfip/ && api_version == 2
+      sub_name = raw_data['action']
+    end
+
     {
       name: name,
-      subname: subname,
-      fullname: fullname,
-      version: version,
+      sub_name: sub_name,
+      api_version: api_version,
       code: status,
       timestamp: timestamp
     }

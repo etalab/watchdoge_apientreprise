@@ -21,7 +21,40 @@ class Tools::EndpointFactory
     @endpoints
   end
 
+  def providers_infos
+    load_all
+    @providers_infos = {}
+    @endpoints.each do |endpoint|
+      create_or_update_entry endpoint
+    end
+
+    @providers_infos
+  end
+
   private
+
+  def create_or_update_entry(endpoint)
+    if key_exists?(endpoint.provider)
+      update_key_with endpoint
+    else
+      create_key_with endpoint
+    end
+  end
+
+  def key_exists?(name)
+    @providers_infos.key?(name)
+  end
+
+  def update_key_with(endpoint)
+    @providers_infos[endpoint.provider][:endpoints_ids] << endpoint.id
+  end
+
+  def create_key_with(endpoint)
+    @providers_infos[endpoint.provider] = {
+      name: endpoint.provider,
+      endpoints_ids: [endpoint.id]
+    }
+  end
 
   def load_from_yaml
     hash = YAML.load_file(endpoint_config_file)
