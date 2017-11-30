@@ -10,21 +10,22 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
 
   def process_raw_availability_history
     @endpoints_history = {}
-    compute_all_availability_history
-    map_to_providers
+    compute_all_availability_history_from_pings
+    map_endpoints_to_providers
   end
 
-  def map_to_providers
+  def map_endpoints_to_providers
     formater = Tools::EndpointsHistoryJSONFormater.new
     @values = formater.format_to_json(@endpoints_history)
   end
 
-  def compute_all_availability_history
+  def compute_all_availability_history_from_pings
     raw_datas = @raw_response.dig('hits', 'hits')
 
     raw_datas.each do |raw_data|
       parse raw_data['_source']
-      create_or_update_key
+
+      create_or_update_hash_key
       add_availability
     end
   end
@@ -52,9 +53,9 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
     Rails.logger.error "Fail to add data (#{@current}) to availabilities" unless is_added
   end
 
-  def create_or_update_key
+  def create_or_update_hash_key
     if key_exists?
-      replace_current
+      replace_current_with_existing
     else
       add_new_key
     end
@@ -68,7 +69,7 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
     @endpoints_history[@current_endpoint_history.id] = @current_endpoint_history
   end
 
-  def replace_current
+  def replace_current_with_existing
     @current_endpoint_history = @endpoints_history[@current_endpoint_history.id]
   end
 end
