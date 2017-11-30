@@ -9,14 +9,14 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
   private
 
   def process_raw_availability_history
-    @endpoints_historicals = {}
+    @endpoints_history = {}
     compute_all_availability_history
     map_to_providers
   end
 
   def map_to_providers
-    formater = Tools::EndpointsHistoricalsJSONFormater.new
-    @values = formater.format_to_json(@endpoints_historicals)
+    formater = Tools::EndpointsHistoryJSONFormater.new
+    @values = formater.format_to_json(@endpoints_history)
   end
 
   def compute_all_availability_history
@@ -36,7 +36,7 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
 
     @current_timestamp = DateTime.parse(hash[:timestamp]).strftime('%F %T')
 
-    @current_endpoint_history = EndpointHistorical.new(
+    @current_endpoint_history = EndpointHistory.new(
         name: hash[:name],
         sub_name: hash[:sub_name],
         api_version: hash[:api_version]
@@ -61,14 +61,14 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
   end
 
   def key_exists?
-    @endpoints_historicals.key?(@current_endpoint_history.id)
+    @endpoints_history.key?(@current_endpoint_history.id)
   end
 
   def add_new_key
-    @endpoints_historicals[@current_endpoint_history.id] = @current_endpoint_history
+    @endpoints_history[@current_endpoint_history.id] = @current_endpoint_history
   end
 
   def replace_current
-    @current_endpoint_history = @endpoints_historicals[@current_endpoint_history.id]
+    @current_endpoint_history = @endpoints_history[@current_endpoint_history.id]
   end
 end

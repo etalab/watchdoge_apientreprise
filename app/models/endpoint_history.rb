@@ -1,4 +1,4 @@
-class EndpointHistorical
+class EndpointHistory
   include ActiveModel::Model
   attr_accessor :name, :sub_name, :sla, :api_version, :availabilities, :provider
 
@@ -47,11 +47,11 @@ class EndpointHistorical
   end
 
   def eligilite_probtp_v1?
-    @name == 'eligibilites cotisation retraite probtp'
+    @name == 'eligibilites_cotisation_retraite_probtp'
   end
 
   def attestation_probtp_v1?
-    @name == 'attestations cotisation retraite probtp'
+    @name == 'attestations_cotisation_retraite_probtp'
   end
 
   def cotisations_msa_v1?
@@ -67,7 +67,7 @@ class EndpointHistorical
   end
 
   def cnetp_v1?
-    @name == 'certificats cnetp'
+    @name == 'certificats_cnetp'
   end
 
   def fntp_v1?
@@ -75,10 +75,10 @@ class EndpointHistorical
   end
 
   def declaration_dgfip_v2?
-    @name == 'liasses fiscales dgfip' && @sub_name == 'declaration'
+    @name == 'liasses_fiscales_dgfip' && @sub_name == 'declaration'
   end
 
   def complete_dgfip_v2?
-    @name == 'liasses fiscales dgfip' && @sub_name == 'show'
+    @name == 'liasses_fiscales_dgfip' && @sub_name == 'show'
   end
 end

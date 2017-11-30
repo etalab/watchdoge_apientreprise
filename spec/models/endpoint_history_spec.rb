@@ -1,6 +1,6 @@
 require 'rails_helper.rb'
 
-describe EndpointHistorical, type: :model do
+describe EndpointHistory, type: :model do
   subject do
     described_class.new(
       name: 'test Oki',

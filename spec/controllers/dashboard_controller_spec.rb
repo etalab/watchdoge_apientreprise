@@ -51,7 +51,7 @@ describe DashboardController, type: :controller do
       json['results'].each do |provider|
         expect(provider['provider_name']).not_to be_empty
 
-        provider['endpoints_historicals'].each do |ep|
+        provider['endpoints_history'].each do |ep|
           expect(ep['name']).to be_a(String)
           expect(ep['sla']).to be_a(Float)
           expect(ep['api_version']).to be_in([1, 2])
