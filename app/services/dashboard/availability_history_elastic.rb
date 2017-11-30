@@ -15,7 +15,7 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
   end
 
   def map_endpoints_to_providers
-    formater = Tools::EndpointsHistoryJSONFormater.new
+    formater = Tools::EndpointsHistory::JSONFormater.new
     @values = formater.format_to_json(@endpoints_history)
   end
 

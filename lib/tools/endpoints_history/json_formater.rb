@@ -1,4 +1,4 @@
-class Tools::EndpointsHistoryJSONFormater
+class Tools::EndpointsHistory::JSONFormater
   def format_to_json(endpoints_history)
     @json_result = {}
     @endpoints_history = endpoints_history

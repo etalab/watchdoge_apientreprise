@@ -1,6 +1,6 @@
 require 'rails_helper.rb'
 
-describe Tools::EndpointsHistoryJSONFormater do
+describe Tools::EndpointsHistory::JSONFormater do
   subject(:json) { described_class.new.format_to_json(endpoints_history) }
 
   let(:datetime1) { '2017-01-10 10:14:04' }
