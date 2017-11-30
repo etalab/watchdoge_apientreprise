@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 describe Dashboard::AvailabilityHistoryElastic, type: :service do
-  # TODO: share example to speed-up tests
   describe 'Availability history service', vcr: { cassette_name: 'availability_history' } do
-    subject { described_class.new.get }
+    subject { @availability_results }
+
+    before do
+      remember_through_tests('availability_results') do
+        described_class.new.get
+      end
+    end
 
     it 'should be a success' do
       expect(subject.success?).to be_truthy
