@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe Dashboard::AvailabilityHistoryElastic, type: :service do
   describe 'Availability history service', vcr: { cassette_name: 'availability_history' } do
-    subject { @availability_results }
+    subject { @availability_results_get }
 
     before do
-      remember_through_tests('availability_results') do
+      remember_through_tests('availability_results_get') do
         described_class.new.get
       end
     end

@@ -10,6 +10,9 @@ class EndpointHistory
     @availabilities = Availabilities.new
   end
 
+  def add_ping(code, timestamp)
+    @availabilities.add_ping(code, timestamp)
+  end
   def sla
     @availabilities.sla
   end

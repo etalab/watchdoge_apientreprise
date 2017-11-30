@@ -3,7 +3,7 @@ class Availabilities
     @availabilities = []
   end
 
-  def add_history(code, datetime)
+  def add_ping(code, datetime)
     @code = code
     @datetime = datetime
 

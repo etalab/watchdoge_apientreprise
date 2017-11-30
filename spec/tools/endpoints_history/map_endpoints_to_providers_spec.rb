@@ -1,7 +1,7 @@
 require 'rails_helper.rb'
 
-describe Tools::EndpointsHistory::JSONFormater do
-  subject(:json) { described_class.new.format_to_json(endpoints_history) }
+describe Tools::EndpointsHistory::MapEndpointsToProviders do
+  subject(:json) { described_class.new(endpoints_history).to_json }
 
   let(:datetime1) { '2017-01-10 10:14:04' }
   let(:datetime2) { '2017-01-10 10:17:04' }
@@ -16,12 +16,12 @@ describe Tools::EndpointsHistory::JSONFormater do
   let(:endpoint_history_3) { EndpointHistory.new(name: 'name3', sub_name: 'sub name3', api_version: 1) }
   let(:endpoint_history_4) { EndpointHistory.new(name: 'name4', sub_name: 'sub name4', api_version: 2) }
   let(:endpoints_history) do
-    {
-      "#{endpoint_history_1.id}": endpoint_history_1,
-      "#{endpoint_history_2.id}": endpoint_history_2,
-      "#{endpoint_history_3.id}": endpoint_history_3,
-      "#{endpoint_history_4.id}": endpoint_history_4
-    }
+    [
+      endpoint_history_1,
+      endpoint_history_2,
+      endpoint_history_3,
+      endpoint_history_4
+    ]
   end
 
   let(:providers_infos) do
@@ -57,12 +57,12 @@ describe Tools::EndpointsHistory::JSONFormater do
   end
 
   before do
-    availabilities.add_history(1, datetime1)
-    availabilities.add_history(1, datetime2)
-    availabilities.add_history(1, datetime3)
-    availabilities.add_history(0, datetime4)
-    availabilities.add_history(0, datetime5)
-    availabilities.add_history(0, datetime6)
+    availabilities.add_ping(1, datetime1)
+    availabilities.add_ping(1, datetime2)
+    availabilities.add_ping(1, datetime3)
+    availabilities.add_ping(0, datetime4)
+    availabilities.add_ping(0, datetime5)
+    availabilities.add_ping(0, datetime6)
 
     endpoint_history_1.availabilities = availabilities
     endpoint_history_2.availabilities = availabilities

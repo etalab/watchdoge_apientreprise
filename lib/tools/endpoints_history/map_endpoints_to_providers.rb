@@ -1,7 +1,10 @@
-class Tools::EndpointsHistory::JSONFormater
-  def format_to_json(endpoints_history)
-    @json_result = {}
+class Tools::EndpointsHistory::MapEndpointsToProviders
+  def initialize(endpoints_history)
     @endpoints_history = endpoints_history
+  end
+
+  def to_json
+    @json_result = {}
 
     populate_json_result
 
@@ -11,14 +14,19 @@ class Tools::EndpointsHistory::JSONFormater
   private
 
   def populate_json_result
-    @endpoints_history.each do |key, value|
-      @current_eh = value
+    @endpoints_history.each do |eh|
+      @current_eh = eh
+
       add_provider_to_endpoint_history
-      if provider_key_exists?
-        update_json
-      else
-        create_json
-      end
+      create_or_update_hash_key
+    end
+  end
+
+  def create_or_update_hash_key
+    if provider_key_exists?
+      update_json
+    else
+      create_json
     end
   end
 
