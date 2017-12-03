@@ -35,7 +35,7 @@ describe Dashboard::AvailabilityHistoryElastic, type: :service do
           expect(ep['api_version']).to be_in([1, 2])
           expect(ep['sla']).to be_a(Float)
           expect(ep['sla'].to_s).to match(/^\d+\.\d+$/)
-          expect(ep['sla']).to be > 70
+          expect(ep['sla']).to be > 65
 
           ep['availabilities'].each do |a|
             from = DateTime.parse(a[0])
