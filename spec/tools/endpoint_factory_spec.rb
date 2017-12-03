@@ -35,6 +35,8 @@ describe Tools::EndpointFactory do
           'endpoints_ids': [
             'entreprises__2',
             'etablissements__2',
+            'entreprises_legacy__2',
+            'etablissements_legacy__2',
             'entreprises__1',
             'etablissements__1',
             'etablissements_predecesseur_2',

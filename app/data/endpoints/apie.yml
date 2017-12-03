@@ -136,6 +136,21 @@ endpoints:
     <<: *FNTP_ACOSS_SIREN
     <<: *SHARED
 
+  - name: entreprises_legacy
+    provider: insee
+    api_version: 2
+    <<: *GENERIC_SIREN
+    <<: *SHARED
+
+  - name: etablissements_legacy
+    provider: insee
+    api_version: 2
+    parameter: '41816609600069'
+    period: 5
+    options:
+      recipient: 'SGMAP'
+      context: 'Ping'
+
 # ####################
 # v1
 # ####################
