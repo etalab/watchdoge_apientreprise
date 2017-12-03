@@ -35,6 +35,10 @@ describe DashboardController, type: :controller do
       expect(json.dig('results', 0, 'code')).to be_a(Integer)
       expect(json.dig('results', 0, 'timestamp')).to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/)
     end
+
+    it 'matches json schema' do
+      expect(subject).to match_response_schema('homepage_status')
+    end
   end
 
   describe 'Availability history status happy path', vcr: { cassette_name: 'availability_history' } do
@@ -66,10 +70,19 @@ describe DashboardController, type: :controller do
           expect(ep['sla']).to be_a(Float)
           expect(ep['api_version']).to be_in([1, 2])
 
+          previous_end_datetime = nil
           ep['availabilities'].each do |a|
             expect(a[0]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
             expect(a[1]).to be_in([0, 1])
             expect(a[2]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
+
+            unless previous_end_datetime.nil?
+              end_datetime = DateTime.parse(a[2])
+              # expect(end_datetime).to eq(previous_end_datetime)
+              previous_end_datetime = end_datetime
+            else
+              previous_end_datetime = DateTime.parse(a[2])
+            end
           end
         end
       end
