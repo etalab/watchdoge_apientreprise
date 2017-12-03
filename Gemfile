@@ -63,6 +63,7 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :test do
+  gem 'json-schema'
   gem 'rspec-its'
   gem 'rspec-json_expectations'
   gem 'rspec-rails', '~> 3.5'

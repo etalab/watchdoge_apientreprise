@@ -37,20 +37,27 @@ describe Availabilities, type: :model do
       end
 
       it 'has coherent data inside' do
+        previous_end_datetime = nil
         avail.to_a.each do |e|
           from = DateTime.parse(e[0])
           to = DateTime.parse(e[2])
 
           expect(e[0]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
           expect(e[2]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
-          expect(to).to be >= from
+          expect(to).to be > from
+
+          unless previous_end_datetime.nil?
+            expect(from).to eq(previous_end_datetime)
+          end
+
+          previous_end_datetime = to
 
           expect(e[1]).to be_in([0, 1])
         end
       end
 
       it 'compute correct sla' do
-        expect(avail.sla).to eq(13.61)
+        expect(avail.sla).to eq(9.61)
       end
     end
   end

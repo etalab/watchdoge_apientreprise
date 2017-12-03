@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "code", "timestamp"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "APIE Homepage"
+          },
+          "code": {
+            "type": "integer",
+            "title": "The HTTP Code.",
+            "minimum": 200,
+            "maximum": 550
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "The Ping Timestamp",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}.\\d{2}:\\d{2}:\\d{2}"
+          }
+        }
+      }
+    }
+  }
+}

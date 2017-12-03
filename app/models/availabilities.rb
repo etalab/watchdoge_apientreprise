@@ -52,9 +52,8 @@ class Availabilities
   end
 
   def update_last_availability
-    if (last_status_code == @code)
-      last_availability[2] = @datetime
-    else
+    last_availability[2] = @datetime
+    if (last_status_code != @code)
       add_new_availability
     end
   end
