@@ -1,7 +1,10 @@
-class Tools::EndpointsHistoricalsJSONFormater
-  def format_to_json(endpoints_historicals)
+class Tools::EndpointsHistory::MapEndpointsToProviders
+  def initialize(endpoints_history)
+    @endpoints_history = endpoints_history
+  end
+
+  def to_json
     @json_result = {}
-    @endpoints_historicals = endpoints_historicals
 
     populate_json_result
 
@@ -11,18 +14,23 @@ class Tools::EndpointsHistoricalsJSONFormater
   private
 
   def populate_json_result
-    @endpoints_historicals.each do |key, value|
-      @current_eh = value
-      add_provider_to_endpoint_historical
-      if provider_key_exists?
-        update_json
-      else
-        create_json
-      end
+    @endpoints_history.each do |eh|
+      @current_eh = eh
+
+      add_provider_to_endpoint_history
+      create_or_update_hash_key
     end
   end
 
-  def add_provider_to_endpoint_historical
+  def create_or_update_hash_key
+    if provider_key_exists?
+      update_json
+    else
+      create_json
+    end
+  end
+
+  def add_provider_to_endpoint_history
     providers_infos.each do |key, value|
       if value[:endpoints_ids].include?(@current_eh.id)
         @current_eh.provider = value[:name]
@@ -40,17 +48,17 @@ class Tools::EndpointsHistoricalsJSONFormater
   end
 
   def update_json
-    @json_result[@current_eh.provider][:endpoints_historicals] << endpoint_historical_json
+    @json_result[@current_eh.provider][:endpoints_history] << endpoint_history_json
   end
 
   def create_json
     @json_result[@current_eh.provider] = {
       provider_name: @current_eh.provider,
-      endpoints_historicals: [endpoint_historical_json]
+      endpoints_history: [endpoint_history_json]
     }
   end
 
-  def endpoint_historical_json
+  def endpoint_history_json
     {
       id: @current_eh.id,
       name: @current_eh.name,

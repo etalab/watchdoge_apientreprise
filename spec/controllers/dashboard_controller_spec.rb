@@ -38,20 +38,30 @@ describe DashboardController, type: :controller do
   end
 
   describe 'Availability history status happy path', vcr: { cassette_name: 'availability_history' } do
-    subject { get :availability_history }
+    subject { @availability_results }
+
+    before do
+      remember_through_tests('availability_results') do
+        get :availability_history
+      end
+    end
 
     it 'returns 200' do
       expect(subject.status).to eq(200)
     end
 
-    it 'returns well formated json' do
+    it 'returns a hash' do
       json = JSON.parse(subject.body)
       expect(json).to be_a(Hash)
+    end
+
+    it 'returns well formated json' do
+      json = JSON.parse(subject.body)
 
       json['results'].each do |provider|
         expect(provider['provider_name']).not_to be_empty
 
-        provider['endpoints_historicals'].each do |ep|
+        provider['endpoints_history'].each do |ep|
           expect(ep['name']).to be_a(String)
           expect(ep['sla']).to be_a(Float)
           expect(ep['api_version']).to be_in([1, 2])

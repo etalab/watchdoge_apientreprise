@@ -1,15 +1,20 @@
 require 'rails_helper'
 
 describe Dashboard::AvailabilityHistoryElastic, type: :service do
-  # TODO: share example to speed-up tests
   describe 'Availability history service', vcr: { cassette_name: 'availability_history' } do
-    subject { described_class.new.get }
+    subject { @availability_results_get }
+
+    before do
+      remember_through_tests('availability_results_get') do
+        described_class.new.get
+      end
+    end
 
     it 'should be a success' do
       expect(subject.success?).to be_truthy
     end
 
-    it 'should contains 14 element' do
+    it 'should contains 13 element' do
       expect(subject.results.size).to equal(13)
     end
 
@@ -24,7 +29,7 @@ describe Dashboard::AvailabilityHistoryElastic, type: :service do
       subject.results.each do |provider|
         expect(provider['provider_name']).not_to be_empty
 
-        provider['endpoints_historicals'].each do |ep|
+        provider['endpoints_history'].each do |ep|
           expect(ep['id']).to be_a(String)
           expect(ep['name']).to be_a(String)
           expect(ep['api_version']).to be_in([1, 2])

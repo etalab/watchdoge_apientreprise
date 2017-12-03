@@ -12,19 +12,19 @@ describe Availabilities, type: :model do
 
   context 'happy path' do
     it 'adds a new endpoint to list' do
-      response = avail.add_history(1, datetime1)
+      response = avail.add_ping(1, datetime1)
       expect(response).to be_truthy
       expect(avail.to_a.size).to equal(1)
     end
 
     context 'to_a method return the right data' do
       before do
-        avail.add_history(1, datetime1)
-        avail.add_history(1, datetime2)
-        avail.add_history(0, datetime3)
-        avail.add_history(0, datetime4)
-        avail.add_history(0, datetime5)
-        avail.add_history(1, datetime6)
+        avail.add_ping(1, datetime1)
+        avail.add_ping(1, datetime2)
+        avail.add_ping(0, datetime3)
+        avail.add_ping(0, datetime4)
+        avail.add_ping(0, datetime5)
+        avail.add_ping(1, datetime6)
       end
 
       it 'is an array of arrays' do
@@ -57,31 +57,31 @@ describe Availabilities, type: :model do
 
   describe 'error path' do
     it 'do not add when code is not 1 or 0' do
-      response = avail.add_history('test', datetime1)
+      response = avail.add_ping('test', datetime1)
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end
 
     it 'do not add when code is not 1 or 0' do
-      response = avail.add_history(12, datetime1)
+      response = avail.add_ping(12, datetime1)
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end
 
     it 'do not add wrong formated datetime with /' do
-      response = avail.add_history(1, '2017/10/12 10:10:10')
+      response = avail.add_ping(1, '2017/10/12 10:10:10')
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end
 
     it 'do not add wrong formated datetime with T separator' do
-      response = avail.add_history(1, '2017-10-12T10:10:10')
+      response = avail.add_ping(1, '2017-10-12T10:10:10')
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end
 
     it 'do not add wrong formated datetime with timezone' do
-      response = avail.add_history(1, '2017-10-12 10:10:10.003Z')
+      response = avail.add_ping(1, '2017-10-12 10:10:10.003Z')
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end

@@ -51,25 +51,21 @@ set :shared_files, fetch(:shared_files, []).push(
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
-task :environment do
-  if ENV['domain'] != 'localhost'
-    # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-    set :rbenv_path, '/usr/local/rbenv'
-    invoke :'rbenv:load'
-  else
-    invoke :'rvm:use', '2.4.2@watchdoge'
-  end
+task :remote_environment do
+  # Be sure to commit your .ruby-version or .rbenv-version to your repository.
+  set :rbenv_path, '/usr/local/rbenv'
+  invoke :'rbenv:load'
 end
 
 # Put any custom commands you need to run at setup
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
-task setup: :environment do
+task setup: :remote_environment do
   # Production database has to be setup !
   # command %(rbenv install 2.3.0)
 end
 
 desc 'Deploys the current version to the server.'
-task deploy: :environment do
+task deploy: :remote_environment do
   # uncomment this line to make sure you pushed your local branch to the remote origin
   # invoke :'git:ensure_pushed'
   deploy do
@@ -102,7 +98,7 @@ task deploy: :environment do
   # run(:local){ say 'done' }
 end
 
-task mono_ping: :environment do
+task mono_ping: :remote_environment do
   comment %{One Ping Attempt}.yellow
   command %{bundle exec rake watch:all RAILS_ENV=#{ENV['to']}}
 end
