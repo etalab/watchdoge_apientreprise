@@ -22,7 +22,7 @@ set :forward_agent, true
 set :port, 22
 set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
 
-branch =
+branch = ENV['branch'] ||
   begin
     case ENV['to']
     when 'production'

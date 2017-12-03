@@ -1,6 +1,6 @@
 class Tools::EndpointsHistory::Generator
-  def initialize(raw_response)
-    @raw_datas = raw_response.dig('hits', 'hits')
+  def initialize(raw_datas)
+    @raw_datas = raw_datas
   end
 
   def to_endpoints_history
