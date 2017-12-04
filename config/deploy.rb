@@ -22,7 +22,7 @@ set :forward_agent, true
 set :port, 22
 set :repository, 'git@github.com:etalab/watchdoge_apientreprise.git'
 
-branch =
+branch = ENV['branch'] ||
   begin
     case ENV['to']
     when 'production'
@@ -104,7 +104,7 @@ end
 
 task mono_ping: :environment do
   comment %{One Ping Attempt}.yellow
-  command %{bundle exec rake watch:all RAILS_ENV=#{ENV['to']}}
+  command %{/usr/local/rbenv/shims/bundle exec rake watch:all RAILS_ENV=#{ENV['to']}}
 end
 
 task :passenger do

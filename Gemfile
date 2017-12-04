@@ -66,7 +66,7 @@ group :test do
   gem 'json-schema'
   gem 'rspec-its'
   gem 'rspec-json_expectations'
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails'
   gem 'vcr'
   gem 'webmock'
   # gem 'factory_girl_rails', '~> 4.0'
