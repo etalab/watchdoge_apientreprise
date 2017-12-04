@@ -16,17 +16,7 @@ class Dashboard::AbstractElastic
 
   protected
 
-  def process_query
-    begin
-      yield
-    end
-
-    self
-  end
-
-  def get_raw_response(query_name)
-    query = load_query query_name
-
+  def get_raw_response(query)
     begin
       @raw_response = @client.search body: query
     rescue

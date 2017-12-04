@@ -1,9 +1,8 @@
 class Dashboard::CurrentStatusElastic < Dashboard::AbstractElastic
   def get
-    process_query do
-      get_raw_response 'current_status'
-      process_raw_current_status
-    end
+    get_raw_response load_query('current_status')
+    process_raw_current_status
+    self
   end
 
   private
