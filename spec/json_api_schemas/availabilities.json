@@ -1,0 +1,25 @@
+{
+  "type": "array",
+  "items": {
+    "type": "array",
+    "items": [
+      {
+        "type": "string",
+        "title": "'from' date of the interval",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}.\\d{2}:\\d{2}:\\d{2}"
+      },
+      {
+        "type": "integer",
+        "title": "0 or 1 value for Visavail display",
+        "minimum": 0,
+        "maximum": 1
+      },
+      {
+        "type": "string",
+        "title": "'to' date of the interval",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}.\\d{2}:\\d{2}:\\d{2}"
+      }
+    ],
+    "additionalItems": false
+  }
+}

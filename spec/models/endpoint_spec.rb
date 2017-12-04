@@ -28,7 +28,7 @@ describe Endpoint, type: :model do
     its(:name) { is_expected.to eq(name) }
     its(:sub_name) { is_expected.to eq(sub_name) }
     its(:provider) { is_expected.to eq(provider) }
-    its(:fullname) { is_expected.to eq("#{sub_name}/#{name}") }
+    its(:full_name) { is_expected.to eq("#{sub_name}/#{name}") }
     its(:api_version) { is_expected.to eq(api_version) }
     its(:api_name) { is_expected.to eq(api_name) }
     its(:period) { is_expected.to eq(period) }

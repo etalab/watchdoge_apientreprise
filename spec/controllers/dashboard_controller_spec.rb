@@ -9,7 +9,7 @@ describe DashboardController, type: :controller do
     end
 
     it 'matches json schema' do
-      expect(subject).to match_response_schema('current_status')
+      expect(subject.body).to match_json_schema('current_status')
     end
   end
 
@@ -21,15 +21,15 @@ describe DashboardController, type: :controller do
     end
 
     it 'matches json schema' do
-      expect(subject).to match_response_schema('homepage_status')
+      expect(subject.body).to match_json_schema('homepage_status')
     end
   end
 
   describe 'Availability history status happy path', vcr: { cassette_name: 'availability_history' } do
-    subject { @availability_results }
+    subject { @availability_results_controller }
 
     before do
-      remember_through_tests('availability_results') do
+      remember_through_tests('availability_results_controller') do
         get :availability_history
       end
     end
@@ -38,35 +38,34 @@ describe DashboardController, type: :controller do
       expect(subject.status).to eq(200)
     end
 
-    it 'returns a hash' do
-      json = JSON.parse(subject.body)
-      expect(json).to be_a(Hash)
+    it 'matches json schema' do
+      expect(subject.body).to match_json_schema('availability_history')
     end
 
-    it 'returns well formated json' do
+    it 'availabilities have no gap and from < to' do
       json = JSON.parse(subject.body)
 
       json['results'].each do |provider|
-        expect(provider['provider_name']).not_to be_empty
-
         provider['endpoints_history'].each do |ep|
-          expect(ep['name']).to be_a(String)
-          expect(ep['sla']).to be_a(Float)
-          expect(ep['api_version']).to be_in([1, 2])
 
-          previous_end_datetime = nil
-          ep['availabilities'].each do |a|
-            expect(a[0]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
-            expect(a[1]).to be_in([0, 1])
-            expect(a[2]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
+          max_index = ep['availabilities'].size - 1
+          index = 0
+          previous_to_datetime = nil
 
-            unless previous_end_datetime.nil?
-              end_datetime = DateTime.parse(a[2])
-              # expect(end_datetime).to eq(previous_end_datetime)
-              previous_end_datetime = end_datetime
-            else
-              previous_end_datetime = DateTime.parse(a[2])
+          ep['availabilities'].each do |avail|
+            if index < max_index
+              # from < to (except for last one)
+              expect(DateTime.parse(avail[0])).to be < DateTime.parse(avail[2])
+              index = index + 1
             end
+
+            # has no gap
+            unless previous_to_datetime.nil?
+              from_datetime = DateTime.parse(avail[0])
+              expect(from_datetime).to eq(previous_to_datetime)
+            end
+
+            previous_to_datetime = DateTime.parse(avail[2])
           end
         end
       end

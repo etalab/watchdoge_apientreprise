@@ -3,74 +3,64 @@ require 'rails_helper.rb'
 describe Availabilities, type: :model do
   subject(:avail) { described_class.new }
 
-  let(:datetime1) { '2017-01-10 10:14:04' }
-  let(:datetime2) { '2017-01-10 10:17:04' }
-  let(:datetime3) { '2017-01-11 10:14:04' }
-  let(:datetime4) { '2017-01-11 10:14:08' }
-  let(:datetime5) { '2017-01-20 10:14:04' }
-  let(:datetime6) { '2017-01-20 20:14:04' }
-
   context 'happy path' do
     it 'adds a new endpoint to list' do
-      response = avail.add_ping(1, datetime1)
+      response = avail.add_ping(1, '2017-01-10 10:14:04')
       expect(response).to be_truthy
       expect(avail.to_a.size).to equal(1)
     end
 
-    context 'to_a method return the right data' do
+    context 'to_a' do
       before do
-        avail.add_ping(1, datetime1)
-        avail.add_ping(1, datetime2)
-        avail.add_ping(0, datetime3)
-        avail.add_ping(0, datetime4)
-        avail.add_ping(0, datetime5)
-        avail.add_ping(1, datetime6)
+        avail.add_ping(1, '2017-01-10 10:14:04')
+        avail.add_ping(1, '2017-01-10 10:17:04')
+        avail.add_ping(0, '2017-01-11 10:14:04')
+        avail.add_ping(0, '2017-01-11 10:14:08')
+        avail.add_ping(0, '2017-01-12 10:14:04')
+        avail.add_ping(1, '2017-01-13 20:14:04')
+        avail.add_ping(1, '2017-01-20 20:14:08')
+        avail.add_ping(0, '2017-01-20 20:14:10')
+        avail.add_ping(1, '2017-01-20 20:15:04')
+        avail.add_ping(0, '2017-01-20 20:15:10')
+        avail.add_ping(1, '2017-01-20 20:16:04')
+        avail.add_ping(1, '2017-01-25 20:17:04')
       end
 
-      it 'is an array of arrays' do
-        avail_array = avail.to_a
-        expect(avail_array).to be_a(Array)
-        avail_array.each do |e|
-          expect(e).to be_a(Array)
-          expect(e.size).to equal(3)
-        end
+      it 'matches json schema' do
+        expect(avail.to_a).to match_json_schema('availabilities')
       end
 
-      it 'has coherent data inside' do
-        previous_end_datetime = nil
-        avail.to_a.each do |e|
-          from = DateTime.parse(e[0])
-          to = DateTime.parse(e[2])
+      it 'has no gap and from < to' do
+        previous_to_datetime = nil
+        avail.to_a.each do |a|
+          # from < to
+          expect(DateTime.parse(a[0])).to be < DateTime.parse(a[2])
 
-          expect(e[0]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
-          expect(e[2]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
-          expect(to).to be > from
-
-          unless previous_end_datetime.nil?
-            expect(from).to eq(previous_end_datetime)
+          # has no gap
+          unless previous_to_datetime.nil?
+            from_datetime = DateTime.parse(a[0])
+            expect(from_datetime).to eq(previous_to_datetime)
           end
 
-          previous_end_datetime = to
-
-          expect(e[1]).to be_in([0, 1])
+          previous_to_datetime = DateTime.parse(a[2])
         end
       end
 
       it 'compute correct sla' do
-        expect(avail.sla).to eq(9.61)
+        expect(avail.sla).to eq(84.32)
       end
     end
   end
 
   describe 'error path' do
     it 'do not add when code is not 1 or 0' do
-      response = avail.add_ping('test', datetime1)
+      response = avail.add_ping('test', '2017-01-10 10:14:04')
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end
 
     it 'do not add when code is not 1 or 0' do
-      response = avail.add_ping(12, datetime1)
+      response = avail.add_ping(12, '2017-01-10 10:14:04')
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end

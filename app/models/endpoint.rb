@@ -11,7 +11,7 @@ class Endpoint
   validates :parameter, presence: true
   validates :options, presence: true
 
-  def fullname
+  def full_name
     return name unless sub_name
     "#{sub_name}/#{name}"
   end

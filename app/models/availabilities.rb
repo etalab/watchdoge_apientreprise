@@ -47,15 +47,20 @@ class Availabilities
     @availabilities << [
       @datetime,
       @code,
-      add_one_minute
+      @datetime
     ]
   end
 
   def update_last_availability
     last_availability[2] = @datetime
-    if (last_status_code != @code)
+
+    if different_code?
       add_new_availability
     end
+  end
+
+  def different_code?
+    last_status_code != @code
   end
 
   def last_status_code
@@ -69,12 +74,13 @@ class Availabilities
   def full_range_duration
     from = DateTime.parse(@availabilities.first.first)
     to = DateTime.parse(@availabilities.last.last)
+
     interval_to_seconds(to - from)
   end
 
   def down_duration
     down_time = @availabilities.map do |d|
-      if d[1] == 0
+      if d[1] == 0 # 0 => means down
         from = DateTime.parse(d[0])
         to = DateTime.parse(d[2])
         interval_to_seconds(to - from)
@@ -86,11 +92,5 @@ class Availabilities
 
   def interval_to_seconds(interval)
     (interval * 24 * 60 * 60).to_f
-  end
-
-  def add_one_minute
-    datetime = DateTime.parse(@datetime)
-    datetime = datetime + 1.minutes
-    datetime.strftime('%F %T')
   end
 end

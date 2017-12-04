@@ -1,7 +1,7 @@
-RSpec::Matchers.define :match_response_schema do |schema|
-  match do |response|
+RSpec::Matchers.define :match_json_schema do |schema|
+  match do |json|
     schema_directory = "#{Dir.pwd}/spec/json_api_schemas"
     schema_path = "#{schema_directory}/#{schema}.json"
-    JSON::Validator.validate!(schema_path, response.body, strict: true)
+    JSON::Validator.validate!(schema_path, json, strict: true)
   end
 end

@@ -36,6 +36,5 @@ describe PingStatus, type: :model do
       its(:http_response) { is_expected.to eq(http_response) }
       its(:status) { is_expected.to eq('down') }
     end
-
   end
 end

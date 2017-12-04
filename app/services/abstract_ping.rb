@@ -47,7 +47,7 @@ class AbstractPing
 
   def execute_ping
     PingStatus.new(
-      name: @endpoint.fullname,
+      name: @endpoint.full_name,
       url: endpoint_url,
       http_response: get_http_response
     )
