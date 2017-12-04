@@ -22,6 +22,6 @@ describe PingMailer, type: :mailer do
   end
 
   it 'do not raise exception' do
-    expect{ mail.deliver_now }.not_to raise_error
+    expect { mail.deliver_now }.not_to raise_error
   end
 end

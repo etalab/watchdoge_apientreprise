@@ -5,10 +5,11 @@ describe Tools::EndpointFactory do
 
   let(:service) { 'apie' }
 
-  context 'happy path' do
+  context 'when happy path' do
     it 'return all the endpoints' do
       expect(Rails.logger).not_to receive(:error)
 
+      # TODO: json-schema
       endpoints = factory.load_all
       expect(endpoints.class).to be(Array)
       expect(endpoints.count).to eq(endpoints_count)
@@ -18,7 +19,7 @@ describe Tools::EndpointFactory do
       expect(providers.size).to equal(providers_count)
     end
 
-    context 'create one endpoint' do
+    context 'when create one endpoint' do
       subject { described_class.new(service).create('cotisations_msa', 2) }
 
       its(:name) { is_expected.to eq('cotisations_msa') }
@@ -28,7 +29,7 @@ describe Tools::EndpointFactory do
       its(:valid?) { is_expected.to be_truthy }
     end
 
-    context 'provider list' do
+    context 'with provider list' do
       let(:expected_json) do
         {
           'name': 'insee',
@@ -51,7 +52,7 @@ describe Tools::EndpointFactory do
     end
   end
 
-  context 'invalid endpoint.yml file' do
+  context 'with invalid endpoint.yml file' do
     before do
       allow_any_instance_of(described_class).to receive(:endpoint_config_file).and_return('spec/support/payload_files/endpoints.yml')
     end

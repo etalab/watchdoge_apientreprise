@@ -31,7 +31,7 @@ class Tools::EndpointsHistory::MapEndpointsToProviders
   end
 
   def add_provider_to_endpoint_history
-    providers_infos.each do |key, value|
+    providers_infos.each_value do |value|
       if value[:endpoints_ids].include?(@current_eh.id)
         @current_eh.provider = value[:name]
         break

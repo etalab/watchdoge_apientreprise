@@ -1,6 +1,6 @@
 class Dashboard::AbstractElastic
   def initialize
-    @client = Elasticsearch::Client.new({host: 'watchdoge.entreprise.api.gouv.fr', log: false})
+    @client = Elasticsearch::Client.new(host: 'watchdoge.entreprise.api.gouv.fr', log: false)
     @client.transport.reload_connections!
     @values = []
     @success = true

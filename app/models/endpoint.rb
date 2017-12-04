@@ -7,7 +7,7 @@ class Endpoint
   validates :provider, presence: true
   validates :api_version, numericality: { only_integer: true }, inclusion: { in: 1..3 }
   validates :api_name, presence: true
-  validates :period, numericality: { only_integer: true}, inclusion: { in: [1, 5, 60] } # if you add a period add a schedule in config/schedule.rb !
+  validates :period, numericality: { only_integer: true }, inclusion: { in: [1, 5, 60] } # if you add a period add a schedule in config/schedule.rb !
   validates :parameter, presence: true
   validates :options, presence: true
 
@@ -17,6 +17,6 @@ class Endpoint
   end
 
   def id
-    "#{name}_#{sub_name}_#{api_version}".gsub(/ /, '_')
+    "#{name}_#{sub_name}_#{api_version}".tr(' ', '_')
   end
 end

@@ -13,10 +13,10 @@ describe Dashboard::HomepageStatusElastic, type: :service do
     end
 
     it 'should contains homepage status' do
-      expect(subject.results.dig(0,'name')).not_to be_empty
-      expect(subject.results.dig(0,'code')).to be_a(Integer)
-      expect(subject.results.dig(0,'code')).to be_between(200, 599)
-      expect(subject.results.dig(0,'timestamp')).to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/)
+      expect(subject.results.dig(0, 'name')).not_to be_empty
+      expect(subject.results.dig(0, 'code')).to be_a(Integer)
+      expect(subject.results.dig(0, 'code')).to be_between(200, 599)
+      expect(subject.results.dig(0, 'timestamp')).to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/)
     end
   end
 end

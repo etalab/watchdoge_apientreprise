@@ -13,7 +13,6 @@ class AbstractPing
     end
   end
 
-  # rubocop:disable MethodLength
   def perform_ping(endpoint)
     @endpoint = endpoint
 
@@ -31,6 +30,7 @@ class AbstractPing
 
   private
 
+  # rubocop:disable Naming/AccessorMethodName
   def get_http_response
     HTTParty.get(self.class::APIE_BASE_URI + endpoint_url)
   end

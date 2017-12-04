@@ -1,7 +1,7 @@
 require 'rails_helper.rb'
 
 describe Endpoint, type: :model do
-  context 'happy path' do
+  context 'when happy path' do
     subject do
       described_class.new(
         name: name,
@@ -37,18 +37,19 @@ describe Endpoint, type: :model do
     its(:valid?) { is_expected.to be_truthy }
   end
 
-  context 'is not valid' do
+  context 'when is not valid' do
     subject { described_class.new(api_version: 5, period: 12) }
 
     its(:valid?) { is_expected.to be_falsy }
 
-    context 'errors messages' do
+    context 'when has errors messages' do
       subject(:endpoint) { described_class.new(api_version: 5) }
 
       before do
         endpoint.valid?
       end
 
+      # rubocop:disable RSpec/MultipleExpectations
       it 'should have errors' do
         expect(endpoint.valid?).to be_falsey
 

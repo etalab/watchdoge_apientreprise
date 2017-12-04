@@ -1,6 +1,6 @@
 class EndpointHistory
   include ActiveModel::Model
-  attr_accessor :name, :sub_name, :sla, :api_version, :availabilities, :provider
+  attr_accessor :name, :sub_name, :api_version, :availabilities, :provider
 
   validates :name, presence: true
   validates :api_version, presence: true
@@ -13,6 +13,7 @@ class EndpointHistory
   def add_ping(code, timestamp)
     @availabilities.add_ping(code, timestamp)
   end
+
   def sla
     @availabilities.sla
   end

@@ -47,7 +47,6 @@ describe DashboardController, type: :controller do
 
       json['results'].each do |provider|
         provider['endpoints_history'].each do |ep|
-
           max_index = ep['availabilities'].size - 1
           index = 0
           previous_to_datetime = nil

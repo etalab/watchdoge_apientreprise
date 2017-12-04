@@ -15,7 +15,7 @@ set :user, 'deploy' if ENV['domain'] != 'localhost'
 set :application_name, 'watchdoge'
 set :domain, ENV['domain']
 
-set :deploy_to, "/var/www/watchdoge_#{ ENV['to'] }"
+set :deploy_to, "/var/www/watchdoge_#{ENV['to']}"
 set :rails_env, ENV['to']
 
 set :forward_agent, true

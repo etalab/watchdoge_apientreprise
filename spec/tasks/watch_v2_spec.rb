@@ -29,7 +29,7 @@ describe 'watch_v2:all', vcr: { cassette_name: 'apie_v2' } do
     end
   end
 
-  context 'only endpoints with period = 5' do
+  context 'when only endpoints with period = 5' do
     let(:period) { 5 }
 
     it 'at least 1' do

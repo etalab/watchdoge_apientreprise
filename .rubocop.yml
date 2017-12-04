@@ -6,6 +6,7 @@ AllCops:
     - db/**/*
     - vendor/**/*
     - log/**/*
+    - app/models/endpoint_history.rb
 
 Rails:
   Enabled: true
@@ -42,6 +43,10 @@ Bundler/OrderedGems:
   Exclude:
     - 'documentation/Gemfile'
 
+Layout/MultilineOperationIndentation:
+  Exclude:
+    - 'config/deploy.rb'
+
 Metrics/BlockLength:
   Exclude:
     - 'Guardfile' # mono bloc inside...
@@ -54,6 +59,14 @@ Metrics/AbcSize:
 
 Metrics/LineLength:
   Enabled: false
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/tasks/watch_v1_spec.rb'
+    - 'spec/tasks/watch_v2_spec.rb'
 
 RSpec/MultipleExpectations:
      Max: 5

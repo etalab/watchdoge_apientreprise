@@ -19,8 +19,8 @@ class PingStatus
   # for debugging purpose its unreadable with http_response on screen
   def inspect
     vars = instance_variables
-    .map { |v| "#{v}=#{instance_variable_get(v).inspect}" unless [:@http_response, :@url].include?(v) }
-    .join(', ')
+           .map { |v| "#{v}=#{instance_variable_get(v).inspect}" unless [:@http_response, :@url].include?(v) }
+           .join(', ')
     "<#{self.class}: #{vars}, @status=#{status}>"
   end
 end

@@ -26,10 +26,10 @@ class Tools::EndpointsHistory::Generator
     @current = Tools::ElasticsearchSourceParser.parse source
 
     @current_endpoint_history = EndpointHistory.new(
-        name: @current[:name],
-        sub_name: @current[:sub_name],
-        api_version: @current[:api_version]
-      )
+      name: @current[:name],
+      sub_name: @current[:sub_name],
+      api_version: @current[:api_version]
+    )
   end
 
   def create_or_update_hash_key

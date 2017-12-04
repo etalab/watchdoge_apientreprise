@@ -19,7 +19,7 @@ describe Dashboard::AvailabilityHistoryElastic, type: :service do
     end
 
     it 'should contains specifics providers' do
-      providers = subject.results.map{ |r| r['provider_name'] }.sort
+      providers = subject.results.map { |r| r['provider_name'] }.sort
       expected_providers = Tools::EndpointFactory.new('apie').providers_infos.keys.sort
       expected_providers.delete('apie')
       expect(expected_providers).to eq(providers)

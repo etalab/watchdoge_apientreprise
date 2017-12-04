@@ -47,7 +47,7 @@ describe Tools::EndpointsHistory::MapEndpointsToProviders do
           { id: 'name3_sub_name3_1', name: 'name3', sub_name: 'sub name3', api_version: 1, sla: 9.6, availabilities: availabilities.to_a },
         ]
       },
-     {
+      {
         provider_name: 'provider3',
         endpoints_history: [
           { id: 'name4_sub_name4_2', name: 'name4', sub_name: 'sub name4', api_version: 2, sla: 9.6, availabilities: availabilities.to_a }

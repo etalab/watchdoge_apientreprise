@@ -31,6 +31,7 @@ describe PingAPIEOnV1, type: :service do
 
   describe 'with a specific period', vcr: { cassette_name: 'apie_v1' } do
     subject(:service) { described_class.new(hash) }
+
     let(:hash) { { :period => 60 } }
 
     it 'loads less endpoints' do

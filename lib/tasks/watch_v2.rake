@@ -3,14 +3,14 @@ require 'colorize'
 
 namespace :watch_v2 do
   desc 'run watchdoge service on API Entreprise v2'
-  task 'all', [:period] => :environment do |t, args|
+  task 'all', [:period] => :environment do |_, args|
     puts 'V2'.green unless ENV['RAILS_ENV'] == 'test'
 
     print_env_info_v2
 
     hash_options = args.to_h
 
-    PingAPIEOnV2.new(hash_options).perform do |ping, endpoint|
+    PingAPIEOnV2.new(hash_options).perform do |ping, _|
       print_ping(ping)
     end
   end

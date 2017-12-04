@@ -3,14 +3,14 @@ require 'rails_helper.rb'
 describe Availabilities, type: :model do
   subject(:avail) { described_class.new }
 
-  context 'happy path' do
+  context 'when happy path' do
     it 'adds a new endpoint to list' do
       response = avail.add_ping(1, '2017-01-10 10:14:04')
       expect(response).to be_truthy
       expect(avail.to_a.size).to equal(1)
     end
 
-    context 'to_a' do
+    context 'with to_a' do
       before do
         avail.add_ping(1, '2017-01-10 10:14:04')
         avail.add_ping(1, '2017-01-10 10:17:04')

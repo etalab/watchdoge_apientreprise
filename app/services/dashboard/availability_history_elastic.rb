@@ -5,6 +5,7 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
     self
   end
 
+  # rubocop:disable Naming/AccessorMethodName
   def get_all_availability_history
     @hits = []
     loop do
@@ -27,7 +28,7 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
   end
 
   def query
-    query_hash.merge({'search_after' => @search_after}).compact.to_json
+    query_hash.merge('search_after' => @search_after).compact.to_json
   end
 
   def query_hash
