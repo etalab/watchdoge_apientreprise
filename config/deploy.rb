@@ -104,7 +104,7 @@ end
 
 task mono_ping: :environment do
   comment %{One Ping Attempt}.yellow
-  command %{bundle exec rake watch:all RAILS_ENV=#{ENV['to']}}
+  command %{/usr/local/rbenv/shims/bundle exec rake watch:all RAILS_ENV=#{ENV['to']}}
 end
 
 task :passenger do
