@@ -10,13 +10,13 @@ describe 'watch_v2:all', vcr: { cassette_name: 'apie_v2' } do
   context 'with all endpoints' do
     it 'at least 5' do
       expect_any_instance_of(PingAPIEOnV2).to receive(:perform_ping).at_least(5).times.and_call_original
-      subject.invoke
+      task.invoke
       sleep 0.1
     end
 
     it 'at most 25' do
       expect_any_instance_of(PingAPIEOnV2).to receive(:perform_ping).at_most(25).times.and_call_original
-      subject.invoke
+      task.invoke
     end
 
     it 'calls perform_ping, no mail and no errors' do
@@ -24,7 +24,7 @@ describe 'watch_v2:all', vcr: { cassette_name: 'apie_v2' } do
       # expect_any_instance_of(PingMailer).not_to receive(:ping)
       expect(Rails.logger).not_to receive(:error)
 
-      subject.invoke
+      task.invoke
       pending('insee down')
     end
   end
@@ -34,13 +34,13 @@ describe 'watch_v2:all', vcr: { cassette_name: 'apie_v2' } do
 
     it 'at least 1' do
       expect_any_instance_of(PingAPIEOnV2).to receive(:perform_ping).at_least(1).times.and_call_original
-      subject.invoke(period)
+      task.invoke(period)
       sleep 0.1
     end
 
     it 'at most 3' do
       expect_any_instance_of(PingAPIEOnV2).to receive(:perform_ping).at_most(3).times.and_call_original
-      subject.invoke(period)
+      task.invoke(period)
     end
 
     it 'calls the task with a period parameter' do
@@ -49,7 +49,7 @@ describe 'watch_v2:all', vcr: { cassette_name: 'apie_v2' } do
       # expect_any_instance_of(PingMailer).not_to receive(:ping)
       expect(Rails.logger).not_to receive(:error)
 
-      subject.invoke(period)
+      task.invoke(period)
       pending('insee down')
     end
   end

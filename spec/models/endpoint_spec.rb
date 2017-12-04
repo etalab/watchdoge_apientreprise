@@ -50,7 +50,8 @@ describe Endpoint, type: :model do
       end
 
       # rubocop:disable RSpec/MultipleExpectations
-      it 'should have errors' do
+      # rubocop:disable RSpec/ExampleLength
+      it 'has errors' do
         expect(endpoint.valid?).to be_falsey
 
         messages = endpoint.errors.messages

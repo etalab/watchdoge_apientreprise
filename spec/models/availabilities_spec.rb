@@ -30,6 +30,7 @@ describe Availabilities, type: :model do
         expect(avail.to_a).to match_json_schema('availabilities')
       end
 
+      # rubocop:disable RSpec/ExampleLength
       it 'has no gap and from < to' do
         previous_to_datetime = nil
         avail.to_a.each do |a|

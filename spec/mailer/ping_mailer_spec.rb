@@ -1,11 +1,11 @@
 require 'rails_helper.rb'
 
 describe PingMailer, type: :mailer do
+  subject(:mail) { described_class.ping(ping, endpoint) }
+
   let(:ping_name) { 'ping_name' }
   let(:endpoint) { Endpoint.new(name: ping_name, api_version: 2) }
   let(:ping) { PingStatus.new(name: ping_name, http_response: nil) }
-
-  subject(:mail) { described_class.ping(ping, endpoint) }
 
   before do
     allow_any_instance_of(PingStatus).to receive(:status).and_return('up')

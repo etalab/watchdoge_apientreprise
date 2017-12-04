@@ -1,7 +1,7 @@
 require 'rails_helper.rb'
 
 describe EndpointHistory, type: :model do
-  subject do
+  subject(:endpoint_history) do
     described_class.new(
       name: 'test Oki',
       sub_name: 'Sub name',
@@ -11,9 +11,9 @@ describe EndpointHistory, type: :model do
   end
 
   before do
-    subject.add_ping(1, '2017-10-10 10:10:10')
-    subject.add_ping(0, '2017-10-12 10:10:10')
-    subject.add_ping(1, '2017-10-14 10:10:10')
+    endpoint_history.add_ping(1, '2017-10-10 10:10:10')
+    endpoint_history.add_ping(0, '2017-10-12 10:10:10')
+    endpoint_history.add_ping(1, '2017-10-14 10:10:10')
   end
 
   its(:id) { is_expected.to eq('test_oki_sub_name_2') }

@@ -4,29 +4,19 @@ describe DashboardController, type: :controller do
   describe 'Current status happy path', vcr: { cassette_name: 'current_status' } do
     subject { get :current_status }
 
-    it 'returns 200' do
-      expect(subject.status).to eq(200)
-    end
-
-    it 'matches json schema' do
-      expect(subject.body).to match_json_schema('current_status')
-    end
+    its(:status) { is_expected.to eq(200) }
+    its(:body) { is_expected.to match_json_schema('current_status') }
   end
 
   describe 'Homepage status happy path', vcr: { cassette_name: 'homepage_status' } do
     subject { get :homepage_status }
 
-    it 'returns 200' do
-      expect(subject.status).to eq(200)
-    end
-
-    it 'matches json schema' do
-      expect(subject.body).to match_json_schema('homepage_status')
-    end
+    its(:status) { is_expected.to eq(200) }
+    its(:body) { is_expected.to match_json_schema('homepage_status') }
   end
 
   describe 'Availability history status happy path', vcr: { cassette_name: 'availability_history' } do
-    subject { @availability_results_controller }
+    subject(:response) { @availability_results_controller }
 
     before do
       remember_through_tests('availability_results_controller') do
@@ -34,16 +24,12 @@ describe DashboardController, type: :controller do
       end
     end
 
-    it 'returns 200' do
-      expect(subject.status).to eq(200)
-    end
+    its(:status) { is_expected.to eq(200) }
+    its(:body) { is_expected.to match_json_schema('availability_history') }
 
-    it 'matches json schema' do
-      expect(subject.body).to match_json_schema('availability_history')
-    end
-
+    # rubocop:disable RSpec/ExampleLength
     it 'availabilities have no gap and from < to' do
-      json = JSON.parse(subject.body)
+      json = JSON.parse(response.body)
 
       json['results'].each do |provider|
         provider['endpoints_history'].each do |ep|

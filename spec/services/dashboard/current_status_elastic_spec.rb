@@ -1,19 +1,23 @@
 require 'rails_helper'
 
 describe Dashboard::CurrentStatusElastic, type: :service do
-  describe 'Current status service', vcr: { cassette_name: 'current_status' } do
+  describe 'response', vcr: { cassette_name: 'current_status' } do
     subject { described_class.new.get }
 
-    it 'should be a success' do
-      expect(subject.success?).to be_truthy
-    end
+    its(:success?) { is_expected.to be_truthy }
+  end
 
-    it 'should contains endpoints' do
-      expect(subject.results.size).to equal(35)
-    end
+  describe 'results', vcr: { cassette_name: 'current_status' } do
+    subject(:temp) { service.results }
 
-    it 'should contains endpoints with name and version...' do
-      subject.results.each do |e|
+    let(:service) { described_class.new.get }
+
+    its(:size) { is_expected.to equal(35) }
+
+    # TODO: json-schema
+    # rubocop:disable RSpec/ExampleLength
+    it 'contains endpoints with name and version...' do
+      temp.each do |e|
         expect(e['name']).not_to be_empty
         expect(e['code']).to be_a(Integer)
         expect(e['code']).to be_between(200, 599)

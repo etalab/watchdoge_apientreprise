@@ -6,6 +6,7 @@ describe Tools::EndpointFactory do
   let(:service) { 'apie' }
 
   context 'when happy path' do
+    # rubocop:disable RSpec/ExampleLength
     it 'return all the endpoints' do
       expect(Rails.logger).not_to receive(:error)
 
@@ -30,6 +31,7 @@ describe Tools::EndpointFactory do
     end
 
     context 'with provider list' do
+      subject { factory.providers_infos }
       let(:expected_json) do
         {
           'name': 'insee',
@@ -46,9 +48,7 @@ describe Tools::EndpointFactory do
         }
       end
 
-      it 'has an entry for insee correctly formatted' do
-        expect(subject.providers_infos['insee']).to include_json(expected_json)
-      end
+      its(['insee']) { is_expected.to include_json(expected_json) }
     end
   end
 

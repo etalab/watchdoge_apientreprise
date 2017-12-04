@@ -1,32 +1,40 @@
 require 'rails_helper'
 
-describe Dashboard::AvailabilityHistoryElastic, type: :service do
-  describe 'Availability history service', vcr: { cassette_name: 'availability_history' } do
-    subject { @availability_results_get }
+describe Dashboard::AvailabilityHistoryElastic, type: :service, vcr: { cassette_name: 'availability_history' } do
+  let(:service) { @availability_results_get }
 
-    before do
-      remember_through_tests('availability_results_get') do
-        described_class.new.get
+  before do
+    remember_through_tests('availability_results_get') do
+      described_class.new.get
+    end
+  end
+
+  describe 'service' do
+    subject { service }
+
+    its(:success?) { is_expected.to be_truthy }
+  end
+
+  describe 'results' do
+    subject(:results) { service.results }
+
+    its(:size) { is_expected.to equal(13) }
+
+    describe 'providers' do
+      let(:providers) { results.map { |r| r['provider_name'] }.sort }
+      let(:expected_providers) { Tools::EndpointFactory.new('apie').providers_infos.keys.sort }
+
+      it 'contains specifics providers' do
+        expected_providers.delete('apie')
+        expect(expected_providers).to eq(providers)
       end
     end
 
-    it 'should be a success' do
-      expect(subject.success?).to be_truthy
-    end
-
-    it 'should contains 13 element' do
-      expect(subject.results.size).to equal(13)
-    end
-
-    it 'should contains specifics providers' do
-      providers = subject.results.map { |r| r['provider_name'] }.sort
-      expected_providers = Tools::EndpointFactory.new('apie').providers_infos.keys.sort
-      expected_providers.delete('apie')
-      expect(expected_providers).to eq(providers)
-    end
-
-    it 'should contains availability history' do
-      subject.results.each do |provider|
+    # TODO: json-schema
+    # rubocop:disable RSpec/ExampleLength
+    # rubocop:disable RSpec/MultipleExpectations
+    it 'contains availability history' do
+      results.each do |provider|
         expect(provider['provider_name']).not_to be_empty
 
         provider['endpoints_history'].each do |ep|
