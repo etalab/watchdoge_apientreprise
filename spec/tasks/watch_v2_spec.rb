@@ -20,12 +20,10 @@ describe 'watch_v2:all', vcr: { cassette_name: 'apie_v2' } do
     end
 
     it 'calls perform_ping, no mail and no errors' do
-      # TODO: remettre quand INSEE sera up
-      # expect_any_instance_of(PingMailer).not_to receive(:ping)
+      expect_any_instance_of(PingMailer).not_to receive(:ping)
       expect(Rails.logger).not_to receive(:error)
 
       task.invoke
-      pending('insee down')
     end
   end
 
@@ -45,12 +43,10 @@ describe 'watch_v2:all', vcr: { cassette_name: 'apie_v2' } do
 
     it 'calls the task with a period parameter' do
       expect(PingAPIEOnV2).to receive(:new).with(period: period).exactly(:once).and_call_original
-      expect_any_instance_of(PingMailer).to receive(:ping).once
-      # expect_any_instance_of(PingMailer).not_to receive(:ping)
+      expect_any_instance_of(PingMailer).not_to receive(:ping)
       expect(Rails.logger).not_to receive(:error)
 
       task.invoke(period)
-      pending('insee down')
     end
   end
 end
