@@ -40,9 +40,8 @@ class AbstractPing
   end
 
   def send_notification(ping)
-    if (ping.status != 'up')
-      PingMailer.ping(ping, @endpoint).deliver_now
-    end
+    return if ping.status == 'up'
+    PingMailer.ping(ping, @endpoint).deliver_now
   end
 
   def execute_ping
@@ -59,9 +58,7 @@ class AbstractPing
 
   def filter(endpoints)
     endpoints.map do |ep|
-      if right_period?(ep) && right_version?(ep)
-        ep
-      end
+      ep if right_period?(ep) && right_version?(ep)
     end.compact
   end
 

@@ -23,7 +23,7 @@ describe PingAPIEOnV2, type: :service do
     expect(Rails.logger).not_to receive(:error)
 
     service.perform do |p|
-      next if ['etablissements_legacy', 'entreprises_legacy'].include?(p.name) # TODO: re-run when it is up
+      next if %w[etablissements_legacy entreprises_legacy].include?(p.name) # TODO: re-run when it is up
       expect("#{p.name}: #{p.status}").to eq("#{p.name}: up")
       expect(p.url).not_to be_nil
     end
@@ -45,7 +45,7 @@ describe PingAPIEOnV2, type: :service do
   end
 
   describe 'with a specific period' do
-    let(:hash) { { :period => 5 } }
+    let(:hash) { { period: 5 } }
 
     it 'loads less endpoints' do
       expect(service.send(:endpoints).count).to eq(3)
@@ -59,7 +59,7 @@ describe PingAPIEOnV2, type: :service do
         endpoint: 'etablissements',
         status: 'up',
         api_version: 2,
-        environment: 'test',
+        environment: 'test'
       }
     end
 

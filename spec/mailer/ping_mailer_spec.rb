@@ -18,7 +18,7 @@ describe PingMailer, type: :mailer do
   end
 
   it 'renders the body' do
-    expect(mail.body).to match(/Le \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2}, le service V2 ping_name est UP/)
+    expect(mail.body).to match(/Le \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \+\d{4}, le service V2 ping_name est UP/)
   end
 
   it 'do not raise exception' do

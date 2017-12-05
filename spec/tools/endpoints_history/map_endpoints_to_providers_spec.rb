@@ -26,9 +26,9 @@ describe Tools::EndpointsHistory::MapEndpointsToProviders do
 
   let(:providers_infos) do
     {
-      'provider1': { name: 'provider1', endpoints_ids: ['name1_sub_name1_2'] },
-      'provider2': { name: 'provider2', endpoints_ids: ['name2__2', 'name3_sub_name3_1'] },
-      'provider3': { name: 'provider3', endpoints_ids: ['name4_sub_name4_2'] }
+      'provider1': { name: 'provider1', endpoints_ids: %w[name1_sub_name1_2] },
+      'provider2': { name: 'provider2', endpoints_ids: %w[name2__2 name3_sub_name3_1] },
+      'provider3': { name: 'provider3', endpoints_ids: %w[name4_sub_name4_2] }
     }
   end
 
@@ -44,7 +44,7 @@ describe Tools::EndpointsHistory::MapEndpointsToProviders do
         provider_name: 'provider2',
         endpoints_history: [
           { id: 'name2__2', name: 'name2', sub_name: nil, api_version: 2, sla: 9.6, availabilities: availabilities.to_a },
-          { id: 'name3_sub_name3_1', name: 'name3', sub_name: 'sub name3', api_version: 1, sla: 9.6, availabilities: availabilities.to_a },
+          { id: 'name3_sub_name3_1', name: 'name3', sub_name: 'sub name3', api_version: 1, sla: 9.6, availabilities: availabilities.to_a }
         ]
       },
       {

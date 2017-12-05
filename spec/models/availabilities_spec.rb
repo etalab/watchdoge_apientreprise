@@ -32,18 +32,18 @@ describe Availabilities, type: :model do
 
       # rubocop:disable RSpec/ExampleLength
       it 'has no gap and from < to' do
-        previous_to_datetime = nil
+        previous_to_time = nil
         avail.to_a.each do |a|
           # from < to
-          expect(DateTime.parse(a[0])).to be < DateTime.parse(a[2])
+          expect(Time.parse(a[0])).to be < Time.parse(a[2])
 
           # has no gap
-          unless previous_to_datetime.nil?
-            from_datetime = DateTime.parse(a[0])
-            expect(from_datetime).to eq(previous_to_datetime)
+          unless previous_to_time.nil?
+            from_time = Time.parse(a[0])
+            expect(from_time).to eq(previous_to_time)
           end
 
-          previous_to_datetime = DateTime.parse(a[2])
+          previous_to_time = Time.parse(a[2])
         end
       end
 
@@ -54,31 +54,31 @@ describe Availabilities, type: :model do
   end
 
   describe 'error path' do
-    it 'do not add when code is not 1 or 0' do
+    it 'do not add when code is a string' do
       response = avail.add_ping('test', '2017-01-10 10:14:04')
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end
 
-    it 'do not add when code is not 1 or 0' do
+    it 'do not add when code is 12' do
       response = avail.add_ping(12, '2017-01-10 10:14:04')
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end
 
-    it 'do not add wrong formated datetime with /' do
+    it 'do not add wrong formated Time with /' do
       response = avail.add_ping(1, '2017/10/12 10:10:10')
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end
 
-    it 'do not add wrong formated datetime with T separator' do
+    it 'do not add wrong formated Time with T separator' do
       response = avail.add_ping(1, '2017-10-12T10:10:10')
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)
     end
 
-    it 'do not add wrong formated datetime with timezone' do
+    it 'do not add wrong formated Time with timezone' do
       response = avail.add_ping(1, '2017-10-12 10:10:10.003Z')
       expect(response).to be_falsey
       expect(avail.to_a.size).to equal(0)

@@ -16,7 +16,7 @@ describe Tools::EndpointFactory do
       expect(endpoints.count).to eq(endpoints_count)
       expect(endpoints.first.class).to be(Endpoint)
 
-      providers = endpoints.map { |e| e.provider }.uniq
+      providers = endpoints.map(&:provider).uniq
       expect(providers.size).to equal(providers_count)
     end
 
@@ -32,18 +32,19 @@ describe Tools::EndpointFactory do
 
     context 'with provider list' do
       subject { factory.providers_infos }
+
       let(:expected_json) do
         {
           'name': 'insee',
-          'endpoints_ids': [
-            'entreprises__2',
-            'etablissements__2',
-            'entreprises_legacy__2',
-            'etablissements_legacy__2',
-            'entreprises__1',
-            'etablissements__1',
-            'etablissements_predecesseur_2',
-            'etablissements_successeur_2'
+          'endpoints_ids': %w[
+            entreprises__2
+            etablissements__2
+            entreprises_legacy__2
+            etablissements_legacy__2
+            entreprises__1
+            etablissements__1
+            etablissements_predecesseur_2
+            etablissements_successeur_2
           ]
         }
       end

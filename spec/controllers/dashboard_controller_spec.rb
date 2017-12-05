@@ -35,22 +35,22 @@ describe DashboardController, type: :controller do
         provider['endpoints_history'].each do |ep|
           max_index = ep['availabilities'].size - 1
           index = 0
-          previous_to_datetime = nil
+          previous_to_time = nil
 
           ep['availabilities'].each do |avail|
             if index < max_index
               # from < to (except for last one)
-              expect(DateTime.parse(avail[0])).to be < DateTime.parse(avail[2])
-              index = index + 1
+              expect(Time.parse(avail[0])).to be < Time.parse(avail[2])
+              index += 1
             end
 
             # has no gap
-            unless previous_to_datetime.nil?
-              from_datetime = DateTime.parse(avail[0])
-              expect(from_datetime).to eq(previous_to_datetime)
+            unless previous_to_time.nil?
+              from_time = Time.parse(avail[0])
+              expect(from_time).to eq(previous_to_time)
             end
 
-            previous_to_datetime = DateTime.parse(avail[2])
+            previous_to_time = Time.parse(avail[2])
           end
         end
       end

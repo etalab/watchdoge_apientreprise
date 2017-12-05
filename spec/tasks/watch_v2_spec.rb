@@ -44,7 +44,7 @@ describe 'watch_v2:all', vcr: { cassette_name: 'apie_v2' } do
     end
 
     it 'calls the task with a period parameter' do
-      expect(PingAPIEOnV2).to receive(:new).with(:period => period).exactly(:once).and_call_original
+      expect(PingAPIEOnV2).to receive(:new).with(period: period).exactly(:once).and_call_original
       expect_any_instance_of(PingMailer).to receive(:ping).once
       # expect_any_instance_of(PingMailer).not_to receive(:ping)
       expect(Rails.logger).not_to receive(:error)

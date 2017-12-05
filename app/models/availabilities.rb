@@ -3,9 +3,9 @@ class Availabilities
     @availabilities = []
   end
 
-  def add_ping(code, datetime)
+  def add_ping(code, time)
     @code = code
-    @datetime = datetime
+    @time = time
 
     return false unless valid?
 
@@ -24,19 +24,19 @@ class Availabilities
   private
 
   def valid?
-    valid_code? && valid_datetime?
+    valid_code? && valid_time?
   end
 
   def valid_code?
     [0, 1].include?(@code)
   end
 
-  def valid_datetime?
-    @datetime =~ /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
+  def valid_time?
+    @time =~ /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
   end
 
   def add_or_update
-    if (@availabilities.size == 0)
+    if @availabilities.size.zero?
       add_new_availability
     else
       update_last_availability
@@ -45,18 +45,16 @@ class Availabilities
 
   def add_new_availability
     @availabilities << [
-      @datetime,
+      @time,
       @code,
-      @datetime
+      @time
     ]
   end
 
   def update_last_availability
-    last_availability[2] = @datetime
+    last_availability[2] = @time
 
-    if different_code?
-      add_new_availability
-    end
+    add_new_availability if different_code?
   end
 
   def different_code?
@@ -72,19 +70,18 @@ class Availabilities
   end
 
   def full_range_duration
-    from = DateTime.parse(@availabilities.first.first)
-    to = DateTime.parse(@availabilities.last.last)
+    from = Time.parse(@availabilities.first.first)
+    to = Time.parse(@availabilities.last.last)
 
     interval_to_seconds(to - from)
   end
 
   def down_duration
     down_time = @availabilities.map do |d|
-      if d[1] == 0 # 0 => means down
-        from = DateTime.parse(d[0])
-        to = DateTime.parse(d[2])
-        interval_to_seconds(to - from)
-      end
+      next if d[1] == 1 # means it's UP
+      from = Time.parse(d[0])
+      to = Time.parse(d[2])
+      interval_to_seconds(to - from)
     end
 
     down_time.compact.inject(0, :+)

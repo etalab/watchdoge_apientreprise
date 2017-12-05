@@ -18,11 +18,9 @@ class Dashboard::AbstractElastic
 
   # rubocop:disable Lint/RescueWithoutErrorClass
   def get_raw_response(query)
-    begin
-      @raw_response = @client.search body: query
-    rescue
-      @success = false
-    end
+    @raw_response = @client.search body: query
+  rescue
+    @success = false
   end
 
   def load_query(query_name)

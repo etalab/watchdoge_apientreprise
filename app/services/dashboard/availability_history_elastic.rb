@@ -32,7 +32,7 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
   end
 
   def query_hash
-    JSON.parse(load_query query_name)
+    JSON.parse load_query(query_name)
   end
 
   def query_name

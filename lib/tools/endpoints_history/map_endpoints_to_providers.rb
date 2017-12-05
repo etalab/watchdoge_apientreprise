@@ -38,9 +38,11 @@ class Tools::EndpointsHistory::MapEndpointsToProviders
       end
     end
 
-    if @current_eh.provider.nil?
-      Rails.logger.error "Fail to map Elasticsearch result to a provider: #{@current_eh}"
-    end
+    log_error if @current_eh.provider.nil?
+  end
+
+  def log_error
+    Rails.logger.error "Fail to map Elasticsearch result to a provider: #{@current_eh}"
   end
 
   def provider_key_exists?

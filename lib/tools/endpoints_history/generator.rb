@@ -66,6 +66,6 @@ class Tools::EndpointsHistory::Generator
   end
 
   def current_timestamp
-    DateTime.parse(@current[:timestamp]).strftime('%F %T')
+    Time.parse(@current[:timestamp]).strftime('%F %T')
   end
 end
