@@ -12,7 +12,9 @@ describe Dashboard::CurrentStatusElastic, type: :service do
 
     let(:service) { described_class.new.get }
 
-    its(:size) { is_expected.to equal(35) }
+    its(:size) { is_expected.to equal(36) }
+
+    # TODO: check which endpoints is inside !
 
     # TODO: json-schema
     # rubocop:disable RSpec/ExampleLength

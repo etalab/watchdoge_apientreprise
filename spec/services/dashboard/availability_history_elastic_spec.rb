@@ -43,7 +43,7 @@ describe Dashboard::AvailabilityHistoryElastic, type: :service, vcr: { cassette_
           expect(ep['api_version']).to be_in([1, 2])
           expect(ep['sla']).to be_a(Float)
           expect(ep['sla'].to_s).to match(/^\d+\.\d+$/)
-          expect(ep['sla']).to be > 65
+          expect(ep['sla']).to be > 45
 
           ep['availabilities'].each do |a|
             from = Time.parse(a[0])
