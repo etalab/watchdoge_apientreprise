@@ -1,7 +1,7 @@
 class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
   def get
     get_all_availability_history
-    process_raw_availability_history
+    process_raw_availability_history if success?
     self
   end
 
@@ -10,11 +10,13 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
     @hits = []
     loop do
       get_raw_response(query)
-      retrieved_hits = @raw_response.dig('hits', 'hits')
+      break unless success?
       @hits.concat retrieved_hits
       @search_after = retrieved_hits.last['sort']
       break if retrieved_hits.count < 10_000
     end
+  rescue Elasticsearch::Transport::Transport::Errors::BadRequest
+    @success = false
   end
 
   private
@@ -27,8 +29,12 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
     @values = mapper.to_json
   end
 
+  def retrieved_hits
+    @raw_response.dig('hits', 'hits')
+  end
+
   def query
-    query_hash.merge('search_after' => @search_after).compact.to_json
+    query_hash.merge(search_after: @search_after).compact.to_json
   end
 
   def query_hash

@@ -1,7 +1,7 @@
 class Dashboard::HomepageStatusElastic < Dashboard::AbstractElastic
   def get
     get_raw_response load_query('homepage_status')
-    process_raw_homepage_status
+    process_raw_homepage_status if success?
     self
   end
 

@@ -28,7 +28,7 @@ describe DashboardController, type: :controller do
     its(:body) { is_expected.to match_json_schema('availability_history') }
 
     # rubocop:disable RSpec/ExampleLength
-    it 'availabilities have no gap and from < to' do
+    it 'has no gap and from < to' do
       json = JSON.parse(response.body)
 
       json['results'].each do |provider|

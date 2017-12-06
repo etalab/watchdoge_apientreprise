@@ -11,16 +11,22 @@ describe Dashboard::HomepageStatusElastic, type: :service do
     subject { service.results }
 
     let(:service) { described_class.new.get }
+    let(:json) { { results: service.results } }
 
     its(:size) { is_expected.to equal(1) }
 
-    describe 'first element' do
-      subject { service.results.dig(0) }
-
-      its(['name']) { is_expected.not_to be_empty }
-      its(['code']) { is_expected.to be_a(Integer) }
-      its(['code']) { is_expected.to be_between(200, 599) }
-      its(['timestamp']) { is_expected.to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/) }
+    it 'matches json-schema' do
+      expect(json).to match_json_schema('homepage_status')
     end
+  end
+
+  describe 'invalid query', vcr: { cassette_name: 'invalid_query' } do
+    subject { described_class.new.get }
+
+    before do
+      allow_any_instance_of(described_class).to receive(:load_query).and_return(query: { match_allllll: {} })
+    end
+
+    its(:success?) { is_expected.to be_falsey }
   end
 end

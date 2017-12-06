@@ -1,7 +1,7 @@
 class Dashboard::CurrentStatusElastic < Dashboard::AbstractElastic
   def get
     get_raw_response load_query('current_status')
-    process_raw_current_status
+    process_raw_current_status if success?
     self
   end
 

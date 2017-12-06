@@ -18,7 +18,6 @@ describe PingAPIEOnV2, type: :service do
     )
   end
 
-  # rubocop:disable RSpec/ExampleLength
   it 'ensure all endpoints works', vcr: { cassette_name: 'apie_v2' } do
     expect(Rails.logger).not_to receive(:error)
 
