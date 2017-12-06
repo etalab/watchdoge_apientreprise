@@ -9,7 +9,7 @@ ENV['domain'] ||= 'watchdoge.entreprise.api.gouv.fr'
 ENV['to'] ||= 'sandbox'
 %w[sandbox production].include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
 
-print "Deploy to #{ENV['to']}\n".green
+comment "Deploy to #{ENV['to']}\n".green
 
 set :user, 'deploy' if ENV['domain'] != 'localhost'
 set :application_name, 'watchdoge'
@@ -87,7 +87,7 @@ task deploy: :remote_environment do
         command %(touch tmp/restart.txt)
 
         if ENV['to'] == 'production'
-          comment %w[Updating cronotab].green
+          comment 'Updating cronotab'.green
           invoke :'whenever:update'
         else
           invoke :mono_ping
@@ -103,12 +103,12 @@ task deploy: :remote_environment do
 end
 
 task mono_ping: :remote_environment do
-  comment %w[One Ping Attempt].yellow
+  comment 'One Ping Attempt'.yellow
   command "/usr/local/rbenv/shims/bundle exec rake watch:all RAILS_ENV=#{ENV['to']}"
 end
 
 task :passenger do
-  comment %w[Attempting to start Passenger app].green
+  comment 'Attempting to start Passenger app'.green
   command %{
     if (sudo passenger-status | grep watchdoge_#{ENV['to']}) >/dev/null
     then
