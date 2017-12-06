@@ -21,7 +21,7 @@ describe Tools::EndpointsHistory::PingsAgregator, vcr: { cassette_name: 'availab
   it 'is an array of EndpointHistory' do
     endpoints_history.each do |eh|
       expect(eh).to be_a(EndpointHistory)
-      expect(eh.availabilities).to be_a(Availabilities)
+      expect(eh.availability_history).to be_a(AvailabilityHistory)
     end
   end
 end

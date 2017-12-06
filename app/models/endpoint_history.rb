@@ -1,21 +1,22 @@
 class EndpointHistory
   include ActiveModel::Model
-  attr_accessor :name, :sub_name, :api_version, :availabilities, :provider
+  attr_accessor :name, :sub_name, :api_version, :availability_history, :provider
 
   validates :name, presence: true
   validates :api_version, presence: true
+  validate :valid_availability_history
 
   def initialize(hash)
     super
-    @availabilities = Availabilities.new
+    @availability_history = AvailabilityHistory.new
   end
 
   def add_ping(code, timestamp)
-    @availabilities.add_ping(code, timestamp)
+    @availability_history.add_ping(code, timestamp)
   end
 
   def sla
-    @availabilities.sla
+    @availability_history.sla
   end
 
   def id
@@ -45,6 +46,10 @@ class EndpointHistory
   end
 
   private
+
+  def valid_availability_history
+    availability_history.valid?
+  end
 
   def exercices_v1?
     @name == 'exercices'

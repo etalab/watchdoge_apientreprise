@@ -33,11 +33,11 @@ describe DashboardController, type: :controller do
 
       json['results'].each do |provider|
         provider['endpoints_history'].each do |ep|
-          max_index = ep['availabilities'].size - 1
+          max_index = ep['availability_history'].size - 1
           index = 0
           previous_to_time = nil
 
-          ep['availabilities'].each do |avail|
+          ep['availability_history'].each do |avail|
             if index < max_index
               # from < to (except for last one)
               expect(Time.parse(avail[0])).to be < Time.parse(avail[2])

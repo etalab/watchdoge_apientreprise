@@ -10,7 +10,7 @@ describe Tools::EndpointsHistory::MapEndpointsToProviders do
   let(:datetime5) { '2017-01-20 10:14:04' }
   let(:datetime6) { '2017-01-20 20:14:04' }
 
-  let(:availabilities) { Availabilities.new }
+  let(:availability_history) { AvailabilityHistory.new }
   let(:endpoint_history_1) { EndpointHistory.new(name: 'name1', sub_name: 'sub name1', api_version: 2) }
   let(:endpoint_history_2) { EndpointHistory.new(name: 'name2', sub_name: nil, api_version: 2) }
   let(:endpoint_history_3) { EndpointHistory.new(name: 'name3', sub_name: 'sub name3', api_version: 1) }
@@ -37,37 +37,37 @@ describe Tools::EndpointsHistory::MapEndpointsToProviders do
       {
         provider_name: 'provider1',
         endpoints_history: [
-          { id: 'name1_sub_name1_2', name: 'name1', sub_name: 'sub name1', api_version: 2, sla: 9.6, availabilities: availabilities.to_a }
+          { id: 'name1_sub_name1_2', name: 'name1', sub_name: 'sub name1', api_version: 2, sla: 9.6, availability_history: availability_history.to_a }
         ]
       },
       {
         provider_name: 'provider2',
         endpoints_history: [
-          { id: 'name2__2', name: 'name2', sub_name: nil, api_version: 2, sla: 9.6, availabilities: availabilities.to_a },
-          { id: 'name3_sub_name3_1', name: 'name3', sub_name: 'sub name3', api_version: 1, sla: 9.6, availabilities: availabilities.to_a }
+          { id: 'name2__2', name: 'name2', sub_name: nil, api_version: 2, sla: 9.6, availability_history: availability_history.to_a },
+          { id: 'name3_sub_name3_1', name: 'name3', sub_name: 'sub name3', api_version: 1, sla: 9.6, availability_history: availability_history.to_a }
         ]
       },
       {
         provider_name: 'provider3',
         endpoints_history: [
-          { id: 'name4_sub_name4_2', name: 'name4', sub_name: 'sub name4', api_version: 2, sla: 9.6, availabilities: availabilities.to_a }
+          { id: 'name4_sub_name4_2', name: 'name4', sub_name: 'sub name4', api_version: 2, sla: 9.6, availability_history: availability_history.to_a }
         ]
       }
     ]
   end
 
   before do
-    availabilities.add_ping(1, datetime1)
-    availabilities.add_ping(1, datetime2)
-    availabilities.add_ping(1, datetime3)
-    availabilities.add_ping(0, datetime4)
-    availabilities.add_ping(0, datetime5)
-    availabilities.add_ping(0, datetime6)
+    availability_history.add_ping(1, datetime1)
+    availability_history.add_ping(1, datetime2)
+    availability_history.add_ping(1, datetime3)
+    availability_history.add_ping(0, datetime4)
+    availability_history.add_ping(0, datetime5)
+    availability_history.add_ping(0, datetime6)
 
-    endpoint_history_1.availabilities = availabilities
-    endpoint_history_2.availabilities = availabilities
-    endpoint_history_3.availabilities = availabilities
-    endpoint_history_4.availabilities = availabilities
+    endpoint_history_1.availability_history = availability_history
+    endpoint_history_2.availability_history = availability_history
+    endpoint_history_3.availability_history = availability_history
+    endpoint_history_4.availability_history = availability_history
 
     allow_any_instance_of(described_class).to receive(:providers_infos).and_return(providers_infos)
   end

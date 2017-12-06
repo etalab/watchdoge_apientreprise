@@ -1,6 +1,6 @@
 require 'rails_helper.rb'
 
-describe Availabilities, type: :model do
+describe AvailabilityHistory, type: :model do
   subject(:avail) { described_class.new }
 
   context 'when happy path' do
@@ -27,7 +27,7 @@ describe Availabilities, type: :model do
       end
 
       it 'matches json schema' do
-        expect(avail.to_a).to match_json_schema('availabilities')
+        expect(avail.to_a).to match_json_schema('availability_history_model')
       end
 
       # rubocop:disable RSpec/ExampleLength

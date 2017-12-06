@@ -67,7 +67,7 @@ class Tools::EndpointsHistory::MapEndpointsToProviders
       sub_name: @current_eh.sub_name,
       api_version: @current_eh.api_version,
       sla: @current_eh.sla,
-      availabilities: @current_eh.availabilities.to_a
+      availability_history: @current_eh.availability_history.to_a
     }
   end
 

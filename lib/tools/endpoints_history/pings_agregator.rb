@@ -46,7 +46,7 @@ class Tools::EndpointsHistory::PingsAgregator
       current_timestamp
     )
 
-    Rails.logger.error "Fail to add ping data (#{@current}) to availabilities" unless is_added
+    Rails.logger.error "Fail to add ping data (#{@current}) to availability_history" unless is_added
   end
 
   def key_exists?

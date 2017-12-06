@@ -1,6 +1,6 @@
-class Availabilities
+class AvailabilityHistory
   def initialize
-    @availabilities = []
+    @availability_history = []
   end
 
   def add_ping(code, time)
@@ -18,7 +18,7 @@ class Availabilities
   end
 
   def to_a
-    @availabilities
+    @availability_history
   end
 
   private
@@ -36,7 +36,7 @@ class Availabilities
   end
 
   def add_or_update
-    if @availabilities.size.zero?
+    if @availability_history.size.zero?
       add_new_availability
     else
       update_last_availability
@@ -44,7 +44,7 @@ class Availabilities
   end
 
   def add_new_availability
-    @availabilities << [
+    @availability_history << [
       @time,
       @code,
       @time
@@ -66,18 +66,18 @@ class Availabilities
   end
 
   def last_availability
-    @availabilities.last
+    @availability_history.last
   end
 
   def full_range_duration
-    from = Time.parse(@availabilities.first.first)
-    to = Time.parse(@availabilities.last.last)
+    from = Time.parse(@availability_history.first.first)
+    to = Time.parse(@availability_history.last.last)
 
     interval_to_seconds(to - from)
   end
 
   def down_duration
-    down_time = @availabilities.map do |d|
+    down_time = @availability_history.map do |d|
       next if d[1] == 1 # means it's UP
       from = Time.parse(d[0])
       to = Time.parse(d[2])

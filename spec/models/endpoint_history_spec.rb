@@ -21,5 +21,5 @@ describe EndpointHistory, type: :model do
   its(:api_version) { is_expected.to be_a(Integer) }
   its(:provider) { is_expected.to eq('provider') }
   its(:sla) { is_expected.to eq(50) }
-  its(:availabilities) { is_expected.not_to be_nil }
+  its(:availability_history) { is_expected.not_to be_nil }
 end

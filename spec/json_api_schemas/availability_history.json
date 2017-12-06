@@ -15,7 +15,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["id", "name", "sub_name", "api_version", "sla", "availabilities"],
+              "required": ["id", "name", "sub_name", "api_version", "sla", "availability_history"],
               "properties": {
                 "id": {
                   "type": "string",
@@ -42,12 +42,12 @@
                   "minimun": 0,
                   "maximum": 100
                 },
-                "availabilities": {
+                "availability_history": {
                   "type": "array",
                   "items": {
                     "type": "array",
                     "title": "Array of array for Visavail lib: [date_from, value, date_to]",
-                    "description": "This does not test availabilities integrity go to spec for that",
+                    "description": "This does not test availability_history integrity go to spec for that",
                     "items": [
                       {
                         "type": "string",
