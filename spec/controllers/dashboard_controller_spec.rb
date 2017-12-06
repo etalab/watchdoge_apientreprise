@@ -16,7 +16,7 @@ describe DashboardController, type: :controller do
   end
 
   describe 'Availability history status happy path', vcr: { cassette_name: 'availability_history' } do
-    subject(:response) { @availability_results_controller }
+    subject(:service_response) { @availability_results_controller }
 
     before do
       remember_through_tests('availability_results_controller') do
@@ -29,7 +29,7 @@ describe DashboardController, type: :controller do
 
     # rubocop:disable RSpec/ExampleLength
     it 'has no gap and from < to' do
-      json = JSON.parse(response.body)
+      json = JSON.parse(service_response.body)
 
       json['results'].each do |provider|
         provider['endpoints_history'].each do |ep|

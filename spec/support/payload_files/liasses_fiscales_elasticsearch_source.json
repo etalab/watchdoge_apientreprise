@@ -1,0 +1,49 @@
+{
+  "controller": "api/v2/liasses_fiscales_dgfip",
+  "geoip": {
+    "timezone": "Europe/Paris",
+    "ip": "217.182.164.215",
+    "latitude": 48.8582,
+    "country_name": "France",
+    "country_code2": "FR",
+    "continent_code": "EU",
+    "country_code3": "FR",
+    "location": {
+      "lon": 2.3387000000000002,
+      "lat": 48.8582
+    },
+    "longitude": 2.3387000000000002
+  },
+  "method": "GET",
+  "ip": "217.182.164.215",
+  "format": "*/*",
+  "source": "siade_production_production1",
+  "type": "siade",
+  "tags": [
+    "request"
+  ],
+  "duration": 132.14,
+  "path": "/v2/liasses_fiscales_dgfip/2016/declarations/301028346",
+  "view": 0.17,
+  "route": "api/v2/liasses_fiscales_dgfip#declaration",
+  "@timestamp": "2017-12-03T18:00:35.011Z",
+  "user_access": {
+    "access": "allow",
+    "demarche": "MPS",
+    "resource": "liasse_fiscale",
+    "user": "tech@apientreprise.fr"
+  },
+  "@version": "1",
+  "host": "production1",
+  "action": "declaration",
+  "request_id": "60312945-d6e8-4e15-b2d8-d0563ddda815",
+  "parameters": {
+    "siren": "301028346",
+    "context": "Ping",
+    "recipient": "SGMAP",
+    "annee": "2016",
+    "token": "[FILTERED]"
+  },
+  "db": 0.86,
+  "status": 200
+}

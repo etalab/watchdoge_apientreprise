@@ -1,7 +1,7 @@
 require 'rails_helper.rb'
 
 describe Tools::EndpointsHistory::MapEndpointsToProviders do
-  subject(:json) { described_class.new(endpoints_history).to_json }
+  subject { described_class.new(endpoints_history).to_json }
 
   let(:datetime1) { '2017-01-10 10:14:04' }
   let(:datetime2) { '2017-01-10 10:17:04' }
@@ -72,8 +72,7 @@ describe Tools::EndpointsHistory::MapEndpointsToProviders do
     allow_any_instance_of(described_class).to receive(:providers_infos).and_return(providers_infos)
   end
 
-  it 'returns a correctly formated JSON' do
-    expect(json).to be_a(Array)
-    expect(json.as_json).to include_json(expected_json)
+  it 'is the expected results' do
+    is_expected.to include_json(expected_json)
   end
 end

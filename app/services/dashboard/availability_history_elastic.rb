@@ -5,6 +5,8 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
     self
   end
 
+  private
+
   # rubocop:disable Naming/AccessorMethodName
   def get_all_availability_history
     @hits = []
@@ -19,14 +21,16 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
     @success = false
   end
 
-  private
-
   def process_raw_availability_history
-    generator = Tools::EndpointsHistory::Generator.new(@hits)
-    endpoints_history = generator.to_endpoints_history
+    agregator = Tools::EndpointsHistory::PingsAgregator.new(@hits)
+    endpoints_history = agregator.to_endpoints_history
 
     mapper = Tools::EndpointsHistory::MapEndpointsToProviders.new(endpoints_history)
     @values = mapper.to_json
+  end
+
+  def hits # for spec
+    @hits
   end
 
   def retrieved_hits

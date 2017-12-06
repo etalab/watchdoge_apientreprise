@@ -38,32 +38,24 @@ describe Endpoint, type: :model do
   end
 
   context 'when is not valid' do
-    subject { described_class.new(api_version: 5, period: 12) }
+    subject(:endpoint) { described_class.new(api_version: 5, period: 12) }
 
     its(:valid?) { is_expected.to be_falsy }
 
-    context 'when has errors messages' do
-      subject(:endpoint) { described_class.new(api_version: 5) }
+    context 'when errors are expected' do
+      subject { endpoint.errors.messages }
 
       before do
         endpoint.valid?
       end
 
-      # rubocop:disable RSpec/MultipleExpectations
-      # rubocop:disable RSpec/ExampleLength
-      it 'has errors' do
-        expect(endpoint).not_to be_valid
-
-        messages = endpoint.errors.messages
-
-        expect(messages[:name]).not_to be_empty
-        expect(messages[:provider]).not_to be_empty
-        expect(messages[:api_version]).not_to be_empty
-        expect(messages[:api_name]).not_to be_empty
-        expect(messages[:period]).not_to be_empty
-        expect(messages[:parameter]).not_to be_empty
-        expect(messages[:options]).not_to be_empty
-      end
+      its([:name]) { is_expected.not_to be_empty }
+      its([:provider]) { is_expected.not_to be_empty }
+      its([:api_version]) { is_expected.not_to be_empty }
+      its([:api_name]) { is_expected.not_to be_empty }
+      its([:period]) { is_expected.not_to be_empty }
+      its([:parameter]) { is_expected.not_to be_empty }
+      its([:options]) { is_expected.not_to be_empty }
     end
   end
 end

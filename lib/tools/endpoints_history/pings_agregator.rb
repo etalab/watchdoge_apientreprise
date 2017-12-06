@@ -1,4 +1,4 @@
-class Tools::EndpointsHistory::Generator
+class Tools::EndpointsHistory::PingsAgregator
   def initialize(raw_datas)
     @raw_datas = raw_datas
   end

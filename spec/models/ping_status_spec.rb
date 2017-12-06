@@ -2,7 +2,7 @@ require 'rails_helper.rb'
 
 describe PingStatus, type: :model do
   context 'with happy path' do
-    subject(:ping) do
+    subject do
       described_class.new(
         name: name,
         url: url,

@@ -7,7 +7,7 @@ class Availabilities
     @code = code
     @time = time
 
-    return false unless valid?
+    return false unless valid_parameters?
 
     add_or_update
     true
@@ -23,7 +23,7 @@ class Availabilities
 
   private
 
-  def valid?
+  def valid_parameters?
     valid_code? && valid_time?
   end
 
