@@ -1,9 +1,8 @@
 class Dashboard::HomepageStatusElastic < Dashboard::AbstractElastic
   def get
-    process_query do
-      get_raw_response 'homepage_status'
-      process_raw_homepage_status
-    end
+    get_raw_response load_query('homepage_status')
+    process_raw_homepage_status if success?
+    self
   end
 
   private

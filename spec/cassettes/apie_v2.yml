@@ -1206,50 +1206,6 @@ http_interactions:
   recorded_at: Thu, 23 Nov 2017 14:12:47 GMT
 - request:
     method: get
-    uri: "<APIE_BASE_URI_NEW>/v2/entreprises_legacy/418166096?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>"
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Status:
-      - 401 Unauthorized
-      Cache-Control:
-      - no-cache
-      X-Runtime:
-      - '0.005463'
-      X-Request-Id:
-      - db146cd7-8eb1-4470-a5d9-bb0d0ce566e0
-      Date:
-      - Sun, 03 Dec 2017 08:25:59 GMT
-      X-Powered-By:
-      - Phusion Passenger 5.1.11
-      Server:
-      - nginx + Phusion Passenger 5.1.11
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        eyJlcnJvcnMiOlsiVm90cmUgdG9rZW4gbidlc3QgcGFzIHZhbGlkZSBvdSBuJ2VzdCBwYXMgcmVuc2VpZ27DqSJdfQ==
-    http_version: 
-  recorded_at: Sun, 03 Dec 2017 08:25:59 GMT
-- request:
-    method: get
     uri: "<APIE_BASE_URI_NEW>/v2/etablissements_legacy/41816609600069?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>"
     body:
       encoding: US-ASCII
@@ -1263,8 +1219,8 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 401
-      message: Unauthorized
+      code: 200
+      message: OK
     headers:
       Content-Type:
       - application/json; charset=utf-8
@@ -1273,15 +1229,17 @@ http_interactions:
       Connection:
       - keep-alive
       Status:
-      - 401 Unauthorized
+      - 200 OK
       Cache-Control:
-      - no-cache
+      - max-age=0, private, must-revalidate
+      Etag:
+      - W/"4f554879d8ab4d1f726decf82a63e577"
       X-Runtime:
-      - '0.002380'
+      - '0.364114'
       X-Request-Id:
-      - b6e43d2f-c254-481e-919b-45a433c089ef
+      - 31183bc3-f293-4e3a-b9b9-83895b4f5d4d
       Date:
-      - Sun, 03 Dec 2017 08:25:59 GMT
+      - Tue, 05 Dec 2017 16:01:56 GMT
       X-Powered-By:
       - Phusion Passenger 5.1.11
       Server:
@@ -1289,7 +1247,53 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJlcnJvcnMiOlsiVm90cmUgdG9rZW4gbidlc3QgcGFzIHZhbGlkZSBvdSBuJ2VzdCBwYXMgcmVuc2VpZ27DqSJdfQ==
+        eyJldGFibGlzc2VtZW50Ijp7InNpZWdlX3NvY2lhbCI6dHJ1ZSwic2lyZXQiOiI0MTgxNjYwOTYwMDA2OSIsIm5hZiI6IjYyMDJBIiwibGliZWxsZV9uYWYiOiJDb25zZWlsIGVuIHN5c3TDqG1lcyBldCBsb2dpY2llbHMgaW5mb3JtYXRpcXVlcyIsImRhdGVfbWlzZV9hX2pvdXIiOjE1MDU3NzIwMDAsImV0YXRfYWRtaW5pc3RyYXRpZl9ldGFibGlzc2VtZW50Ijp7InZhbHVlIjoiQWN0aWYiLCJkYXRlX21pc2VfYV9qb3VyIjoxNDgwMjg3NjAwfSwiYWRyZXNzZSI6eyJsMSI6Ik9DVE8tVEVDSE5PTE9HWSIsImwyIjoiMzQgQVYgREUgTCBPUEVSQSIsImwzIjoiNzUwMDIgUEFSSVMgMiIsImw0IjpudWxsLCJsNSI6bnVsbCwibDYiOm51bGwsImw3IjpudWxsLCJudW1lcm9fdm9pZSI6IjM0IiwidHlwZV92b2llIjoiQVYiLCJub21fdm9pZSI6IkRFIEwgT1BFUkEiLCJjb21wbGVtZW50X2FkcmVzc2UiOm51bGwsImNvZGVfcG9zdGFsIjoiNzUwMDIiLCJsb2NhbGl0ZSI6IlBBUklTIDIiLCJjb2RlX2luc2VlX2xvY2FsaXRlIjoiNzUxMDIifX0sImdhdGV3YXlfZXJyb3IiOmZhbHNlfQ==
     http_version: 
-  recorded_at: Sun, 03 Dec 2017 08:25:59 GMT
+  recorded_at: Tue, 05 Dec 2017 16:01:56 GMT
+- request:
+    method: get
+    uri: "<APIE_BASE_URI_NEW>/v2/entreprises_legacy/418166096?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Etag:
+      - W/"7b6cd001430b6e063aaeb0bbf3846622"
+      X-Runtime:
+      - '0.904966'
+      X-Request-Id:
+      - cdb59b1c-5a5d-489e-9494-3845e0c8a1ff
+      Date:
+      - Tue, 05 Dec 2017 16:01:57 GMT
+      X-Powered-By:
+      - Phusion Passenger 5.1.11
+      Server:
+      - nginx + Phusion Passenger 5.1.11
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyZXByaXNlIjp7InNpcmVuIjoiNDE4MTY2MDk2IiwiY2FwaXRhbF9zb2NpYWwiOjUwOTUyNSwibnVtZXJvX3R2YV9pbnRyYWNvbW11bmF1dGFpcmUiOiJGUjE2NDE4MTY2MDk2IiwiZm9ybWVfanVyaWRpcXVlIjoiU0Egw6AgZGlyZWN0b2lyZSAocy5hLmkuKSIsImZvcm1lX2p1cmlkaXF1ZV9jb2RlIjoiNTY5OSIsIm5vbWJyZV9ldGFibGlzc2VtZW50c19hY3RpZnMiOjEsIm5vbV9jb21tZXJjaWFsIjoiT0NUTy1URUNITk9MT0dZIiwicHJvY2VkdXJlX2NvbGxlY3RpdmUiOmZhbHNlLCJyYWlzb25fc29jaWFsZSI6Ik9DVE8tVEVDSE5PTE9HWSIsInNpcmV0X3NpZWdlX3NvY2lhbCI6IjQxODE2NjA5NjAwMDY5IiwiY29kZV9lZmZlY3RpZl9lbnRyZXByaXNlIjoiMzIiLCJkYXRlX2NyZWF0aW9uIjo4OTEzODE2MDAsIm5vbSI6bnVsbCwicHJlbm9tIjpudWxsLCJldGF0X2FkbWluaXN0cmF0aWYiOnsidmFsdWUiOiJBY3RpZiIsImRhdGVfbWlzZV9hX2pvdXIiOjg5MTM4MTYwMH0sImRhdGVfcmFkaWF0aW9uIjpudWxsLCJtYW5kYXRhaXJlc19zb2NpYXV4IjpbeyJub20iOiJISVNRVUlOIiwicHJlbm9tIjoiRlJBTkNPSVMiLCJmb25jdGlvbiI6IlBSRVNJREVOVCBEVSBESVJFQ1RPSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTY1LTAxLTI3IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotMTU1NTIzNjAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifSx7Im5vbSI6Ik5JQk9VUkVMIiwicHJlbm9tIjoiQ0hSSVNUSUFOIiwiZm9uY3Rpb24iOiJQUkVTSURFTlQgRFUgQ09OU0VJTCBERSBTVVJWRUlMTEFOQ0UiLCJkYXRlX25haXNzYW5jZSI6IjE5NTgtMDEtMDkiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi0zNzgwMDM2MDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiREVHT05TRSIsInByZW5vbSI6IkdFUkFSRCIsImZvbmN0aW9uIjoiVklDRS1QUkVTSURFTlQiLCJkYXRlX25haXNzYW5jZSI6IjE5NDctMDctMDMiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi03MTAwMzg4MDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiQ0lOUVVJTiIsInByZW5vbSI6IkxVRE9WSUMiLCJmb25jdGlvbiI6Ik1FTUJSRSBEVSBESVJFQ1RPSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTcyLTAxLTI1IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjo2NTE0MjAwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiJERUdPTlNFIiwicHJlbm9tIjoiR0VSQVJEIiwiZm9uY3Rpb24iOiJNRU1CUkUgRFUgQ09OU0VJTCBERSBTVVJWRUlMTEFOQ0UiLCJkYXRlX25haXNzYW5jZSI6IjE5NDctMDctMDMiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi03MTAwMzg4MDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiQkVOIE1BSE1PVUQiLCJwcmVub20iOiJTSUhFTSIsImZvbmN0aW9uIjoiTUVNQlJFIERVIENPTlNFSUwgREUgU1VSVkVJTExBTkNFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTY3LTAzLTEzIiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotODg1NjM2MDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiQk9LT0JaQSIsInByZW5vbSI6IkpFQU4tUElFUlJFIiwiZm9uY3Rpb24iOiJNRU1CUkUgRFUgQ09OU0VJTCBERSBTVVJWRUlMTEFOQ0UiLCJkYXRlX25haXNzYW5jZSI6IjE5NjEtMDQtMjQiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi0yNzQyMzcyMDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiQ0FNUEJFTEwiLCJwcmVub20iOiJBTExBTiIsImZvbmN0aW9uIjoiTUVNQlJFIERVIENPTlNFSUwgREUgU1VSVkVJTExBTkNFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTYxLTAzLTMxIiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotMjc2MzEwODAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifSx7Im5vbSI6IkRFTE9STUUiLCJwcmVub20iOiJQQVNDQUwiLCJmb25jdGlvbiI6Ik1FTUJSRSBEVSBESVJFQ1RPSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTYyLTEyLTMwIiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotMjIxMTAxMjAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifSx7Im5vbSI6IkRPTk5BWSIsInByZW5vbSI6IkxBVVJFTlQiLCJmb25jdGlvbiI6Ik1FTUJSRSBEVSBESVJFQ1RPSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTcyLTEwLTI1IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjo4ODgxNTYwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiIiLCJwcmVub20iOiIiLCJmb25jdGlvbiI6IkNPTU1JU1NBSVJFIEFVWCBDT01QVEVTIFRJVFVMQUlSRSIsImRhdGVfbmFpc3NhbmNlIjoiIiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjowLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiTUFaQVJTIC0gU09DSUVURSBBTk9OWU1FIiwiaWRlbnRpZmlhbnQiOiI3ODQ4MjQxNTMiLCJ0eXBlIjoiUE0ifSx7Im5vbSI6IiIsInByZW5vbSI6IiIsImZvbmN0aW9uIjoiQ09NTUlTU0FJUkUgQVVYIENPTVBURVMgVElUVUxBSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOjAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiJLUE1HIC0gU09DSUVURSBBTk9OWU1FIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUE0ifSx7Im5vbSI6IiIsInByZW5vbSI6IiIsImZvbmN0aW9uIjoiQ09NTUlTU0FJUkUgQVVYIENPTVBURVMgU1VQUExFQU5UIiwiZGF0ZV9uYWlzc2FuY2UiOiIiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOjAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiJCQ1JIIFx1MDAyNiBBU1NPQ0lFUyAtIFNPQ0lFVEUgQSBSRVNQT05TQUJJTElURSBMSU1JVEVFIiwiaWRlbnRpZmlhbnQiOiI0OTAwOTI1NzQiLCJ0eXBlIjoiUE0ifSx7Im5vbSI6IlNJTU9OIiwicHJlbm9tIjoiSkVBTi1MT1VJUyIsImZvbmN0aW9uIjoiQ09NTUlTU0FJUkUgQVVYIENPTVBURVMgU1VQUExFQU5UIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTU5LTAyLTE3IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotMzQzMDk4MDAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifV19LCJnYXRld2F5X2Vycm9yIjpmYWxzZX0=
+    http_version: 
+  recorded_at: Tue, 05 Dec 2017 16:01:57 GMT
 recorded_with: VCR 3.0.3

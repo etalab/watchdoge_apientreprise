@@ -9,13 +9,13 @@ ENV['domain'] ||= 'watchdoge.entreprise.api.gouv.fr'
 ENV['to'] ||= 'sandbox'
 %w[sandbox production].include?(ENV['to']) || raise("target environment (#{ENV['to']}) not in the list")
 
-print "Deploy to #{ENV['to']}\n".green
+comment "Deploy to #{ENV['to']}\n".green
 
 set :user, 'deploy' if ENV['domain'] != 'localhost'
 set :application_name, 'watchdoge'
 set :domain, ENV['domain']
 
-set :deploy_to, "/var/www/watchdoge_#{ ENV['to'] }"
+set :deploy_to, "/var/www/watchdoge_#{ENV['to']}"
 set :rails_env, ENV['to']
 
 set :forward_agent, true
@@ -51,7 +51,7 @@ set :shared_files, fetch(:shared_files, []).push(
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
-task :environment do
+task :remote_environment do
   if ENV['domain'] != 'localhost'
     # Be sure to commit your .ruby-version or .rbenv-version to your repository.
     set :rbenv_path, '/usr/local/rbenv'
@@ -63,13 +63,13 @@ end
 
 # Put any custom commands you need to run at setup
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
-task setup: :environment do
+task setup: :remote_environment do
   # Production database has to be setup !
   # command %(rbenv install 2.3.0)
 end
 
 desc 'Deploys the current version to the server.'
-task deploy: :environment do
+task deploy: :remote_environment do
   # uncomment this line to make sure you pushed your local branch to the remote origin
   # invoke :'git:ensure_pushed'
   deploy do
@@ -87,13 +87,13 @@ task deploy: :environment do
         command %(touch tmp/restart.txt)
 
         if ENV['to'] == 'production'
-          comment %{Updating cronotab}.green
+          comment 'Updating cronotab'.green
           invoke :'whenever:update'
         else
           invoke :mono_ping
         end
 
-        invoke :'passenger'
+        invoke :passenger
       end
     end
   end
@@ -102,13 +102,13 @@ task deploy: :environment do
   # run(:local){ say 'done' }
 end
 
-task mono_ping: :environment do
-  comment %{One Ping Attempt}.yellow
-  command %{/usr/local/rbenv/shims/bundle exec rake watch:all RAILS_ENV=#{ENV['to']}}
+task mono_ping: :remote_environment do
+  comment 'One Ping Attempt'.yellow
+  command "/usr/local/rbenv/shims/bundle exec rake watch:all RAILS_ENV=#{ENV['to']}"
 end
 
 task :passenger do
-  comment %{Attempting to start Passenger app}.green
+  comment 'Attempting to start Passenger app'.green
   command %{
     if (sudo passenger-status | grep watchdoge_#{ENV['to']}) >/dev/null
     then

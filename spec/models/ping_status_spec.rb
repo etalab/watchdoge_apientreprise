@@ -1,8 +1,8 @@
 require 'rails_helper.rb'
 
 describe PingStatus, type: :model do
-  context 'happy path' do
-    subject(:ping) do
+  context 'with happy path' do
+    subject do
       described_class.new(
         name: name,
         url: url,
@@ -13,7 +13,7 @@ describe PingStatus, type: :model do
     let(:name) { 'service name' }
     let(:url)  { 'https://www.test.com' }
 
-    context 'code 200' do
+    context 'when code 200' do
       let(:http_response) { Net::HTTPResponse.new(1.0, 200, 'OK') }
 
       its(:name) { is_expected.to eq(name) }
@@ -23,19 +23,18 @@ describe PingStatus, type: :model do
       its(:valid?) { is_expected.to be_truthy }
     end
 
-    context 'code 206' do
+    context 'when code 206' do
       let(:http_response) { Net::HTTPResponse.new(1.0, 206, 'OK') }
 
       its(:http_response) { is_expected.to eq(http_response) }
       its(:status) { is_expected.to eq('incomplete') }
     end
 
-    context 'code 400' do
+    context 'when code 400' do
       let(:http_response) { Net::HTTPResponse.new(1.0, 400, 'OK') }
 
       its(:http_response) { is_expected.to eq(http_response) }
       its(:status) { is_expected.to eq('down') }
     end
-
   end
 end

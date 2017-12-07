@@ -1,21 +1,28 @@
 require 'rails_helper'
 
+# rubocop:disable RSpec/DescribeClass
 describe 'Elk queries' do
-    it 'should be a JSON file' do
+  context 'with current status' do
+    it 'is a JSON file' do
       data = File.read('app/data/queries/current_status.json')
       json = JSON.parse(data)
       expect(json.class).to be(Hash)
     end
+  end
 
-    it 'should be a JSON file' do
+  context 'with availability history' do
+    it 'is a JSON file' do
       data = File.read('app/data/queries/availability_history.json')
       json = JSON.parse(data)
       expect(json.class).to be(Hash)
     end
+  end
 
-    it 'should be a JSON file' do
+  context 'with homepage status' do
+    it 'is a JSON file' do
       data = File.read('app/data/queries/homepage_status.json')
       json = JSON.parse(data)
       expect(json.class).to be(Hash)
     end
+  end
 end

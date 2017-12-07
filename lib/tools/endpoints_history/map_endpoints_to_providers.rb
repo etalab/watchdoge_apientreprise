@@ -31,16 +31,18 @@ class Tools::EndpointsHistory::MapEndpointsToProviders
   end
 
   def add_provider_to_endpoint_history
-    providers_infos.each do |key, value|
+    providers_infos.each_value do |value|
       if value[:endpoints_ids].include?(@current_eh.id)
         @current_eh.provider = value[:name]
         break
       end
     end
 
-    if @current_eh.provider.nil?
-      Rails.logger.error "Fail to map Elasticsearch result to a provider: #{@current_eh}"
-    end
+    log_error if @current_eh.provider.nil?
+  end
+
+  def log_error
+    Rails.logger.error "Fail to map Elasticsearch result to a provider: #{@current_eh}"
   end
 
   def provider_key_exists?
@@ -64,8 +66,9 @@ class Tools::EndpointsHistory::MapEndpointsToProviders
       name: @current_eh.name,
       sub_name: @current_eh.sub_name,
       api_version: @current_eh.api_version,
+      timezone: @current_eh.timezone,
       sla: @current_eh.sla,
-      availabilities: @current_eh.availabilities.to_a
+      availability_history: @current_eh.availability_history.to_a
     }
   end
 

@@ -1,0 +1,84 @@
+{
+  "type": "object",
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["provider_name", "endpoints_history"],
+        "properties": {
+          "provider_name": {
+            "type": "string",
+            "title": "The provider_name"
+          },
+          "endpoints_history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "name", "sub_name", "api_version", "sla", "timezone", "availability_history"],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "title": "The id",
+                  "pattern": "^\\S*$"
+                },
+                "name": {
+                  "type": "string",
+                  "title": "The endpoint name"
+                },
+                "sub_name": {
+                  "type": ["string", "null"],
+                  "title": "The endpoint sub_name"
+                },
+                "api_version": {
+                  "type": "integer",
+                  "title": "The api_version",
+                  "minimum": 1,
+                  "maximum": 2
+                },
+                "sla": {
+                  "type": "number",
+                  "title": "The endpoint disponibility in %",
+                  "minimun": 0,
+                  "maximum": 100
+                },
+                "timezone": {
+                  "type": "string",
+                  "title": "The Timezone of the availability time",
+                  "pattern": "Europe/Paris"
+                },
+                "availability_history": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "title": "Array of array for Visavail lib: [date_from, value, date_to]",
+                    "description": "This does not test availability_history integrity go to spec for that",
+                    "items": [
+                      {
+                        "type": "string",
+                        "title": "'from' date of the interval",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}.\\d{2}:\\d{2}:\\d{2}"
+                      },
+                      {
+                        "type": "integer",
+                        "title": "0 or 1 value for Visavail display",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "string",
+                        "title": "'to' date of the interval",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}.\\d{2}:\\d{2}:\\d{2}"
+                      }
+                    ],
+                    "additionalItems": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

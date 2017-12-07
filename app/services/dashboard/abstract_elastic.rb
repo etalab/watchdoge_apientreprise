@@ -1,6 +1,6 @@
 class Dashboard::AbstractElastic
   def initialize
-    @client = Elasticsearch::Client.new({host: 'watchdoge.entreprise.api.gouv.fr', log: false})
+    @client = Elasticsearch::Client.new(host: 'watchdoge.entreprise.api.gouv.fr', log: false)
     @client.transport.reload_connections!
     @values = []
     @success = true
@@ -16,22 +16,10 @@ class Dashboard::AbstractElastic
 
   protected
 
-  def process_query
-    begin
-      yield
-    end
-
-    self
-  end
-
-  def get_raw_response(query_name)
-    query = load_query query_name
-
-    begin
-      @raw_response = @client.search body: query
-    rescue
-      @success = false
-    end
+  def get_raw_response(query)
+    @raw_response = @client.search body: query
+  rescue Elasticsearch::Transport::Transport::Errors::BadRequest
+    @success = false
   end
 
   def load_query(query_name)

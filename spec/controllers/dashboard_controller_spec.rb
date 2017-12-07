@@ -4,85 +4,53 @@ describe DashboardController, type: :controller do
   describe 'Current status happy path', vcr: { cassette_name: 'current_status' } do
     subject { get :current_status }
 
-    it 'returns 200' do
-      expect(subject.status).to eq(200)
-    end
-
-    it 'returns well formated json' do
-      json = JSON.parse(subject.body)
-      expect(json).to be_a(Hash)
-
-      json['results'].each do |e|
-        expect(e['name']).not_to be_empty
-        expect(e['code']).to be_a(Integer)
-        expect(e['timestamp']).to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/)
-      end
-    end
+    its(:status) { is_expected.to eq(200) }
+    its(:body) { is_expected.to match_json_schema('current_status') }
   end
 
   describe 'Homepage status happy path', vcr: { cassette_name: 'homepage_status' } do
     subject { get :homepage_status }
 
-    it 'returns 200' do
-      expect(subject.status).to eq(200)
-    end
-
-    it 'returns well formated json' do
-      json = JSON.parse(subject.body)
-      expect(json).to be_a(Hash)
-
-      expect(json.dig('results', 0, 'name')).not_to be_empty
-      expect(json.dig('results', 0, 'code')).to be_a(Integer)
-      expect(json.dig('results', 0, 'timestamp')).to match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[A-Z]/)
-    end
-
-    it 'matches json schema' do
-      expect(subject).to match_response_schema('homepage_status')
-    end
+    its(:status) { is_expected.to eq(200) }
+    its(:body) { is_expected.to match_json_schema('homepage_status') }
   end
 
   describe 'Availability history status happy path', vcr: { cassette_name: 'availability_history' } do
-    subject { @availability_results }
+    subject(:service_response) { @availability_results_controller }
 
     before do
-      remember_through_tests('availability_results') do
+      remember_through_tests('availability_results_controller') do
         get :availability_history
       end
     end
 
-    it 'returns 200' do
-      expect(subject.status).to eq(200)
-    end
+    its(:status) { is_expected.to eq(200) }
+    its(:body) { is_expected.to match_json_schema('availability_history') }
 
-    it 'returns a hash' do
-      json = JSON.parse(subject.body)
-      expect(json).to be_a(Hash)
-    end
-
-    it 'returns well formated json' do
-      json = JSON.parse(subject.body)
+    # rubocop:disable RSpec/ExampleLength
+    it 'has no gap and from < to' do
+      json = JSON.parse(service_response.body)
 
       json['results'].each do |provider|
-        expect(provider['provider_name']).not_to be_empty
-
         provider['endpoints_history'].each do |ep|
-          expect(ep['name']).to be_a(String)
-          expect(ep['sla']).to be_a(Float)
-          expect(ep['api_version']).to be_in([1, 2])
+          max_index = ep['availability_history'].size - 1
+          index = 0
+          previous_to_time = nil
 
-          previous_end_datetime = nil
-          ep['availabilities'].each do |a|
-            expect(a[0]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
-            expect(a[1]).to be_in([0, 1])
-            expect(a[2]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
-
-            unless previous_end_datetime.nil?
-              end_datetime = DateTime.parse(a[2])
-              # expect(end_datetime).to eq(previous_end_datetime)
-              previous_end_datetime = end_datetime
-            else
-              previous_end_datetime = DateTime.parse(a[2])
+          ep['availability_history'].each do |avail|
+            if index < max_index
+              # from < to (except for last one)
+              expect(Time.parse(avail[0])).to be < Time.parse(avail[2])
+              index += 1
             end
+
+            # has no gap
+            unless previous_to_time.nil?
+              from_time = Time.parse(avail[0])
+              expect(from_time).to eq(previous_to_time)
+            end
+
+            previous_to_time = Time.parse(avail[2])
           end
         end
       end

@@ -13,7 +13,6 @@ class AbstractPing
     end
   end
 
-  # rubocop:disable MethodLength
   def perform_ping(endpoint)
     @endpoint = endpoint
 
@@ -31,6 +30,7 @@ class AbstractPing
 
   private
 
+  # rubocop:disable Naming/AccessorMethodName
   def get_http_response
     HTTParty.get(self.class::APIE_BASE_URI + endpoint_url)
   end
@@ -40,14 +40,13 @@ class AbstractPing
   end
 
   def send_notification(ping)
-    if (ping.status != 'up')
-      PingMailer.ping(ping, @endpoint).deliver_now
-    end
+    return if ping.status == 'up'
+    PingMailer.ping(ping, @endpoint).deliver_now
   end
 
   def execute_ping
     PingStatus.new(
-      name: @endpoint.fullname,
+      name: @endpoint.full_name,
       url: endpoint_url,
       http_response: get_http_response
     )
@@ -59,9 +58,7 @@ class AbstractPing
 
   def filter(endpoints)
     endpoints.map do |ep|
-      if right_period?(ep) && right_version?(ep)
-        ep
-      end
+      ep if right_period?(ep) && right_version?(ep)
     end.compact
   end
 

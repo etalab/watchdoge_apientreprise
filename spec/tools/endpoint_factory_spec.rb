@@ -5,20 +5,22 @@ describe Tools::EndpointFactory do
 
   let(:service) { 'apie' }
 
-  context 'happy path' do
+  context 'when happy path' do
+    # rubocop:disable RSpec/ExampleLength
     it 'return all the endpoints' do
       expect(Rails.logger).not_to receive(:error)
 
+      # TODO: json-schema
       endpoints = factory.load_all
       expect(endpoints.class).to be(Array)
       expect(endpoints.count).to eq(endpoints_count)
       expect(endpoints.first.class).to be(Endpoint)
 
-      providers = endpoints.map { |e| e.provider }.uniq
+      providers = endpoints.map(&:provider).uniq
       expect(providers.size).to equal(providers_count)
     end
 
-    context 'create one endpoint' do
+    context 'when create one endpoint' do
       subject { described_class.new(service).create('cotisations_msa', 2) }
 
       its(:name) { is_expected.to eq('cotisations_msa') }
@@ -28,30 +30,30 @@ describe Tools::EndpointFactory do
       its(:valid?) { is_expected.to be_truthy }
     end
 
-    context 'provider list' do
+    context 'with provider list' do
+      subject { factory.providers_infos }
+
       let(:expected_json) do
         {
           'name': 'insee',
-          'endpoints_ids': [
-            'entreprises__2',
-            'etablissements__2',
-            'entreprises_legacy__2',
-            'etablissements_legacy__2',
-            'entreprises__1',
-            'etablissements__1',
-            'etablissements_predecesseur_2',
-            'etablissements_successeur_2'
+          'endpoints_ids': %w[
+            entreprises__2
+            etablissements__2
+            entreprises_legacy__2
+            etablissements_legacy__2
+            entreprises__1
+            etablissements__1
+            etablissements_predecesseur_2
+            etablissements_successeur_2
           ]
         }
       end
 
-      it 'has an entry for insee correctly formatted' do
-        expect(subject.providers_infos['insee']).to include_json(expected_json)
-      end
+      its(['insee']) { is_expected.to include_json(expected_json) }
     end
   end
 
-  context 'invalid endpoint.yml file' do
+  context 'with invalid endpoint.yml file' do
     before do
       allow_any_instance_of(described_class).to receive(:endpoint_config_file).and_return('spec/support/payload_files/endpoints.yml')
     end

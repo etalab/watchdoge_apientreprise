@@ -1,7 +1,7 @@
 require 'rails_helper.rb'
 
 describe Tools::EndpointsHistory::MapEndpointsToProviders do
-  subject(:json) { described_class.new(endpoints_history).to_json }
+  subject { described_class.new(endpoints_history).to_json }
 
   let(:datetime1) { '2017-01-10 10:14:04' }
   let(:datetime2) { '2017-01-10 10:17:04' }
@@ -10,11 +10,11 @@ describe Tools::EndpointsHistory::MapEndpointsToProviders do
   let(:datetime5) { '2017-01-20 10:14:04' }
   let(:datetime6) { '2017-01-20 20:14:04' }
 
-  let(:availabilities) { Availabilities.new }
-  let(:endpoint_history_1) { EndpointHistory.new(name: 'name1', sub_name: 'sub name1', api_version: 2) }
-  let(:endpoint_history_2) { EndpointHistory.new(name: 'name2', sub_name: nil, api_version: 2) }
-  let(:endpoint_history_3) { EndpointHistory.new(name: 'name3', sub_name: 'sub name3', api_version: 1) }
-  let(:endpoint_history_4) { EndpointHistory.new(name: 'name4', sub_name: 'sub name4', api_version: 2) }
+  let(:availability_history) { AvailabilityHistory.new }
+  let(:endpoint_history_1) { EndpointHistory.new(name: 'name1', sub_name: 'sub name1', timezone: 'Europe/Paris', api_version: 2) }
+  let(:endpoint_history_2) { EndpointHistory.new(name: 'name2', sub_name: nil, timezone: 'Europe/Paris', api_version: 2) }
+  let(:endpoint_history_3) { EndpointHistory.new(name: 'name3', sub_name: 'sub name3', timezone: 'Europe/Paris', api_version: 1) }
+  let(:endpoint_history_4) { EndpointHistory.new(name: 'name4', sub_name: 'sub name4', timezone: 'Europe/Paris', api_version: 2) }
   let(:endpoints_history) do
     [
       endpoint_history_1,
@@ -26,54 +26,54 @@ describe Tools::EndpointsHistory::MapEndpointsToProviders do
 
   let(:providers_infos) do
     {
-      'provider1': { name: 'provider1', endpoints_ids: ['name1_sub_name1_2'] },
-      'provider2': { name: 'provider2', endpoints_ids: ['name2__2', 'name3_sub_name3_1'] },
-      'provider3': { name: 'provider3', endpoints_ids: ['name4_sub_name4_2'] }
+      'provider1': { name: 'provider1', endpoints_ids: %w[name1_sub_name1_2] },
+      'provider2': { name: 'provider2', endpoints_ids: %w[name2__2 name3_sub_name3_1] },
+      'provider3': { name: 'provider3', endpoints_ids: %w[name4_sub_name4_2] }
     }
   end
 
+  # TODO: To json-schema
   let(:expected_json) do
     [
       {
         provider_name: 'provider1',
         endpoints_history: [
-          { id: 'name1_sub_name1_2', name: 'name1', sub_name: 'sub name1', api_version: 2, sla: 9.6, availabilities: availabilities.to_a }
+          { id: 'name1_sub_name1_2', name: 'name1', sub_name: 'sub name1', api_version: 2, timezone: 'Europe/Paris', sla: 9.6, availability_history: availability_history.to_a }
         ]
       },
       {
         provider_name: 'provider2',
         endpoints_history: [
-          { id: 'name2__2', name: 'name2', sub_name: nil, api_version: 2, sla: 9.6, availabilities: availabilities.to_a },
-          { id: 'name3_sub_name3_1', name: 'name3', sub_name: 'sub name3', api_version: 1, sla: 9.6, availabilities: availabilities.to_a },
+          { id: 'name2__2', name: 'name2', sub_name: nil, api_version: 2, timezone: 'Europe/Paris', sla: 9.6, availability_history: availability_history.to_a },
+          { id: 'name3_sub_name3_1', name: 'name3', sub_name: 'sub name3', api_version: 1, timezone: 'Europe/Paris', sla: 9.6, availability_history: availability_history.to_a }
         ]
       },
-     {
+      {
         provider_name: 'provider3',
         endpoints_history: [
-          { id: 'name4_sub_name4_2', name: 'name4', sub_name: 'sub name4', api_version: 2, sla: 9.6, availabilities: availabilities.to_a }
+          { id: 'name4_sub_name4_2', name: 'name4', sub_name: 'sub name4', api_version: 2, timezone: 'Europe/Paris', sla: 9.6, availability_history: availability_history.to_a }
         ]
       }
     ]
   end
 
   before do
-    availabilities.add_ping(1, datetime1)
-    availabilities.add_ping(1, datetime2)
-    availabilities.add_ping(1, datetime3)
-    availabilities.add_ping(0, datetime4)
-    availabilities.add_ping(0, datetime5)
-    availabilities.add_ping(0, datetime6)
+    availability_history.add_ping(1, datetime1)
+    availability_history.add_ping(1, datetime2)
+    availability_history.add_ping(1, datetime3)
+    availability_history.add_ping(0, datetime4)
+    availability_history.add_ping(0, datetime5)
+    availability_history.add_ping(0, datetime6)
 
-    endpoint_history_1.availabilities = availabilities
-    endpoint_history_2.availabilities = availabilities
-    endpoint_history_3.availabilities = availabilities
-    endpoint_history_4.availabilities = availabilities
+    endpoint_history_1.availability_history = availability_history
+    endpoint_history_2.availability_history = availability_history
+    endpoint_history_3.availability_history = availability_history
+    endpoint_history_4.availability_history = availability_history
 
     allow_any_instance_of(described_class).to receive(:providers_infos).and_return(providers_infos)
   end
 
-  it 'returns a correctly formated JSON' do
-    expect(json).to be_a(Array)
-    expect(json.as_json).to include_json(expected_json)
+  it 'is the expected results' do
+    is_expected.to include_json(expected_json)
   end
 end

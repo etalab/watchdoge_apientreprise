@@ -1,54 +1,75 @@
 require 'rails_helper'
 
-describe Dashboard::AvailabilityHistoryElastic, type: :service do
-  describe 'Availability history service', vcr: { cassette_name: 'availability_history' } do
-    subject { @availability_results_get }
+describe Dashboard::AvailabilityHistoryElastic, type: :service, vcr: { cassette_name: 'availability_history' } do
+  let(:service) { @availability_results_get }
 
-    before do
-      remember_through_tests('availability_results_get') do
-        described_class.new.get
+  before do
+    remember_through_tests('availability_results_get') do
+      described_class.new.get
+    end
+  end
+
+  describe 'service' do
+    subject { service }
+
+    its(:success?) { is_expected.to be_truthy }
+  end
+
+  describe 'results' do
+    subject(:results) { service.results }
+
+    let(:json) { { results: results } }
+
+    its(:size) { is_expected.to equal(13) }
+
+    describe 'providers' do
+      let(:providers) { results.map { |r| r['provider_name'] }.sort }
+      let(:expected_providers) { Tools::EndpointFactory.new('apie').providers_infos.keys.sort }
+
+      it 'contains specifics providers' do
+        expected_providers.delete('apie')
+        expect(expected_providers).to eq(providers)
       end
     end
 
-    it 'should be a success' do
-      expect(subject.success?).to be_truthy
+    it 'matches json-schema' do
+      expect(json).to match_json_schema('availability_history')
     end
 
-    it 'should contains 13 element' do
-      expect(subject.results.size).to equal(13)
-    end
-
-    it 'should contains specifics providers' do
-      providers = subject.results.map{ |r| r['provider_name'] }.sort
-      expected_providers = Tools::EndpointFactory.new('apie').providers_infos.keys.sort
-      expected_providers.delete('apie')
-      expect(expected_providers).to eq(providers)
-    end
-
-    it 'should contains availability history' do
-      subject.results.each do |provider|
-        expect(provider['provider_name']).not_to be_empty
-
+    # rubocop:disable RSpec/ExampleLength
+    it 'has no gap and from < to' do
+      results.each do |provider|
         provider['endpoints_history'].each do |ep|
-          expect(ep['id']).to be_a(String)
-          expect(ep['name']).to be_a(String)
-          expect(ep['api_version']).to be_in([1, 2])
-          expect(ep['sla']).to be_a(Float)
-          expect(ep['sla'].to_s).to match(/^\d+\.\d+$/)
-          expect(ep['sla']).to be > 65
+          max_index = ep['availability_history'].size - 1
+          index = 0
+          previous_to_time = nil
+          ep['availability_history'].each do |avail|
+            if index < max_index
+              # from < to (except for last one)
+              expect(Time.parse(avail[0])).to be < Time.parse(avail[2])
+              index += 1
+            end
 
-          ep['availabilities'].each do |a|
-            from = DateTime.parse(a[0])
-            to = DateTime.parse(a[2])
+            # has no gap
+            unless previous_to_time.nil?
+              from_time = Time.parse(avail[0])
+              expect(from_time).to eq(previous_to_time)
+            end
 
-            expect(a[0]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
-            expect(a[2]).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
-            expect(to).to be >= from
-
-            expect(a[1]).to be_in([0, 1])
+            previous_to_time = Time.parse(avail[2])
           end
         end
       end
     end
+  end
+
+  describe 'invalid query', vcr: { cassette_name: 'invalid_query' } do
+    subject { described_class.new.get }
+
+    before do
+      allow_any_instance_of(described_class).to receive(:load_query).and_return({ query: { match_allllll: {} } }.to_json)
+    end
+
+    its(:success?) { is_expected.to be_falsey }
   end
 end
