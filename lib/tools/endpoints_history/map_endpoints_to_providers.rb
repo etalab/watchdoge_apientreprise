@@ -66,6 +66,7 @@ class Tools::EndpointsHistory::MapEndpointsToProviders
       name: @current_eh.name,
       sub_name: @current_eh.sub_name,
       api_version: @current_eh.api_version,
+      timezone: @current_eh.timezone,
       sla: @current_eh.sla,
       availability_history: @current_eh.availability_history.to_a
     }

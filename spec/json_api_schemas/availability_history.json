@@ -15,7 +15,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["id", "name", "sub_name", "api_version", "sla", "availability_history"],
+              "required": ["id", "name", "sub_name", "api_version", "sla", "timezone", "availability_history"],
               "properties": {
                 "id": {
                   "type": "string",
@@ -41,6 +41,11 @@
                   "title": "The endpoint disponibility in %",
                   "minimun": 0,
                   "maximum": 100
+                },
+                "timezone": {
+                  "type": "string",
+                  "title": "The Timezone of the availability time",
+                  "pattern": "Europe/Paris"
                 },
                 "availability_history": {
                   "type": "array",

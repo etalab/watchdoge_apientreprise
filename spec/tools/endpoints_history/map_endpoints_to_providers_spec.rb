@@ -11,10 +11,10 @@ describe Tools::EndpointsHistory::MapEndpointsToProviders do
   let(:datetime6) { '2017-01-20 20:14:04' }
 
   let(:availability_history) { AvailabilityHistory.new }
-  let(:endpoint_history_1) { EndpointHistory.new(name: 'name1', sub_name: 'sub name1', api_version: 2) }
-  let(:endpoint_history_2) { EndpointHistory.new(name: 'name2', sub_name: nil, api_version: 2) }
-  let(:endpoint_history_3) { EndpointHistory.new(name: 'name3', sub_name: 'sub name3', api_version: 1) }
-  let(:endpoint_history_4) { EndpointHistory.new(name: 'name4', sub_name: 'sub name4', api_version: 2) }
+  let(:endpoint_history_1) { EndpointHistory.new(name: 'name1', sub_name: 'sub name1', timezone: 'Europe/Paris', api_version: 2) }
+  let(:endpoint_history_2) { EndpointHistory.new(name: 'name2', sub_name: nil, timezone: 'Europe/Paris', api_version: 2) }
+  let(:endpoint_history_3) { EndpointHistory.new(name: 'name3', sub_name: 'sub name3', timezone: 'Europe/Paris', api_version: 1) }
+  let(:endpoint_history_4) { EndpointHistory.new(name: 'name4', sub_name: 'sub name4', timezone: 'Europe/Paris', api_version: 2) }
   let(:endpoints_history) do
     [
       endpoint_history_1,
@@ -32,25 +32,26 @@ describe Tools::EndpointsHistory::MapEndpointsToProviders do
     }
   end
 
+  # TODO: To json-schema
   let(:expected_json) do
     [
       {
         provider_name: 'provider1',
         endpoints_history: [
-          { id: 'name1_sub_name1_2', name: 'name1', sub_name: 'sub name1', api_version: 2, sla: 9.6, availability_history: availability_history.to_a }
+          { id: 'name1_sub_name1_2', name: 'name1', sub_name: 'sub name1', api_version: 2, timezone: 'Europe/Paris', sla: 9.6, availability_history: availability_history.to_a }
         ]
       },
       {
         provider_name: 'provider2',
         endpoints_history: [
-          { id: 'name2__2', name: 'name2', sub_name: nil, api_version: 2, sla: 9.6, availability_history: availability_history.to_a },
-          { id: 'name3_sub_name3_1', name: 'name3', sub_name: 'sub name3', api_version: 1, sla: 9.6, availability_history: availability_history.to_a }
+          { id: 'name2__2', name: 'name2', sub_name: nil, api_version: 2, timezone: 'Europe/Paris', sla: 9.6, availability_history: availability_history.to_a },
+          { id: 'name3_sub_name3_1', name: 'name3', sub_name: 'sub name3', api_version: 1, timezone: 'Europe/Paris', sla: 9.6, availability_history: availability_history.to_a }
         ]
       },
       {
         provider_name: 'provider3',
         endpoints_history: [
-          { id: 'name4_sub_name4_2', name: 'name4', sub_name: 'sub name4', api_version: 2, sla: 9.6, availability_history: availability_history.to_a }
+          { id: 'name4_sub_name4_2', name: 'name4', sub_name: 'sub name4', api_version: 2, timezone: 'Europe/Paris', sla: 9.6, availability_history: availability_history.to_a }
         ]
       }
     ]

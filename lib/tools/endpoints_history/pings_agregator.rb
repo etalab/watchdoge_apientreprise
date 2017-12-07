@@ -1,6 +1,7 @@
 class Tools::EndpointsHistory::PingsAgregator
-  def initialize(raw_datas)
+  def initialize(raw_datas, timezone)
     @raw_datas = raw_datas
+    @timezone = timezone
   end
 
   def to_endpoints_history
@@ -28,7 +29,8 @@ class Tools::EndpointsHistory::PingsAgregator
     @current_endpoint_history = EndpointHistory.new(
       name: @current[:name],
       sub_name: @current[:sub_name],
-      api_version: @current[:api_version]
+      api_version: @current[:api_version],
+      timezone: @timezone
     )
   end
 
@@ -66,6 +68,6 @@ class Tools::EndpointsHistory::PingsAgregator
   end
 
   def current_timestamp
-    Time.parse(@current[:timestamp]).strftime('%F %T')
+    @current[:timestamp]
   end
 end

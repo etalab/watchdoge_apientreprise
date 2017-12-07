@@ -1,4 +1,6 @@
 class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
+  TIMEZONE = 'Europe/Paris'
+
   def get
     get_all_availability_history
     process_raw_availability_history if success?
@@ -22,7 +24,7 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
   end
 
   def process_raw_availability_history
-    agregator = Tools::EndpointsHistory::PingsAgregator.new(@hits)
+    agregator = Tools::EndpointsHistory::PingsAgregator.new(@hits, TIMEZONE)
     endpoints_history = agregator.to_endpoints_history
 
     mapper = Tools::EndpointsHistory::MapEndpointsToProviders.new(endpoints_history)

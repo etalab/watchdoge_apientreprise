@@ -1,8 +1,9 @@
 class EndpointHistory
   include ActiveModel::Model
-  attr_accessor :name, :sub_name, :api_version, :availability_history, :provider
+  attr_accessor :name, :sub_name, :api_version, :timezone, :availability_history, :provider
 
   validates :name, presence: true
+  validates :timezone, presence: true
   validates :api_version, presence: true
   validate :valid_availability_history
 
@@ -12,6 +13,7 @@ class EndpointHistory
   end
 
   def add_ping(code, timestamp)
+    timestamp = Time.parse(timestamp).in_time_zone(@timezone).strftime('%F %T')
     @availability_history.add_ping(code, timestamp)
   end
 
