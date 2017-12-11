@@ -2,7 +2,7 @@ defaults: &defaults
   adapter: postgresql
   encoding: unicode
   host: localhost
-  pool: 5
+  pool: 10
   username: watchdoge_development
   password: password
 
