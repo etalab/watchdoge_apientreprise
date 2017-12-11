@@ -1,1 +1,9 @@
-Le <%= Time.now %>, le service V<%= @endpoint.api_version %> <%= @ping.name %> est <%= @ping.status.upcase %>.
+<p>Le <%= Time.now %></p>
+<p>
+  Le service V<%= @ping_report.api_version %> <%= "#{@ping_report.name} #{@ping_report.sub_name}" %>
+<% if @ping_report.status.upcase == 'DOWN' %>
+  est <%= @ping_report.status.upcase %>.
+<% else %>
+  est UP. Il était DOWN depuis le <%= @ping_report.first_downtime %>
+<% end %>
+</p>

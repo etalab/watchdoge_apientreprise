@@ -20,6 +20,7 @@ describe 'watch_v1:all', vcr: { cassette_name: 'apie_v1' } do
     end
 
     it 'calls perform_ping, no mail and no errors ' do
+      create_report_for_all
       expect_any_instance_of(PingMailer).not_to receive(:ping)
       expect(Rails.logger).not_to receive(:error)
 
@@ -42,6 +43,7 @@ describe 'watch_v1:all', vcr: { cassette_name: 'apie_v1' } do
     end
 
     it 'calls the task with a period parameter' do
+      create_report_for_all
       expect(PingAPIEOnV1).to receive(:new).with(period: period).exactly(:once).and_call_original
       expect_any_instance_of(PingMailer).not_to receive(:ping)
       expect(Rails.logger).not_to receive(:error)

@@ -3,7 +3,9 @@ class PingStatus
 
   attr_accessor :name, :url, :http_response
 
-  # if we want JSON validation : https://github.com/ruby-json-schema/json-schema
+  def code
+    http_response.code
+  end
 
   def status
     case http_response.code

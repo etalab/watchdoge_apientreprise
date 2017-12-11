@@ -20,6 +20,7 @@ describe PingStatus, type: :model do
       its(:url) { is_expected.to eq(url) }
       its(:http_response) { is_expected.to eq(http_response) }
       its(:status) { is_expected.to eq('up') }
+      its(:code) { is_expected.to eq(200) }
       its(:valid?) { is_expected.to be_truthy }
     end
 
@@ -28,6 +29,7 @@ describe PingStatus, type: :model do
 
       its(:http_response) { is_expected.to eq(http_response) }
       its(:status) { is_expected.to eq('incomplete') }
+      its(:code) { is_expected.to eq(206) }
     end
 
     context 'when code 400' do
@@ -35,6 +37,7 @@ describe PingStatus, type: :model do
 
       its(:http_response) { is_expected.to eq(http_response) }
       its(:status) { is_expected.to eq('down') }
+      its(:code) { is_expected.to eq(400) }
     end
   end
 end

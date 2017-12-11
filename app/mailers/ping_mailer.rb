@@ -2,11 +2,18 @@ class PingMailer < ApplicationMailer
   default from: 'ping.watchdoge@watchdoge.entreprise.api.gouv.fr'
   layout 'mailer'
 
-  def ping(ping, endpoint)
-    @ping = ping
-    @endpoint = endpoint
-    to = Rails.application.config_for(:secrets)['ping_email_recipient']
-    subject = "[Watchdoge] V#{endpoint.api_version} #{ping.name} #{ping.status.upcase}"
+  def ping(ping_report)
+    @ping_report = ping_report
     mail(to: to, subject: subject)
+  end
+
+  private
+
+  def to
+    Rails.application.config_for(:secrets)['ping_email_recipient']
+  end
+
+  def subject
+    "[Watchdoge] V#{@ping_report.api_version} #{@ping_report.name} #{@ping_report.sub_name} #{@ping_report.status.upcase}"
   end
 end
