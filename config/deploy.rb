@@ -11,6 +11,7 @@ ENV['to'] ||= 'sandbox'
 
 comment "Deploy to #{ENV['to']}\n".green
 
+set :commit, ENV['COMMIT']
 set :user, 'deploy' if ENV['domain'] != 'localhost'
 set :application_name, 'watchdoge'
 set :domain, ENV['domain']
