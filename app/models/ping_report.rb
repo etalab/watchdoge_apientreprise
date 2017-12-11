@@ -60,7 +60,7 @@ class PingReport < ApplicationRecord
   end
 
   def going_up?
-    [200, 206].include?(@new_code) && ![200, 206].include?(last_code)
+    [200, 206].include?(@new_code) && ![200, 206].include?(last_code) && !last_code.nil?
   end
 
   def first_downtime_class
