@@ -27,16 +27,19 @@ describe PingAPIEOnV2, type: :service do
     end
   end
 
-  describe 'send warning email if service down', vcr: { cassette_name: 'apie_v2' } do
-    before do
-      allow_any_instance_of(PingStatus).to receive(:status).and_return('down')
-    end
+  describe 'send warning email if service status changed', vcr: { cassette_name: 'apie_v2' } do
+    context 'service is now DOWN' do
+      before do
+        allow_any_instance_of(Net::HTTPResponse).to receive(:code).and_return('503')
+        create(:ping_report, name: 'etablissements', sub_name: nil, api_version: 2)
+      end
 
-    it 'asks to deliver an email' do
-      delivery = double
-      expect(delivery).to receive(:deliver_now).with(no_args)
-      expect(PingMailer).to receive(:ping).and_return(delivery)
-      service.perform_ping(endpoint_etablissements)
+      it 'asks to deliver an email' do
+        delivery = double
+        expect(delivery).to receive(:deliver_now).with(no_args)
+        expect(PingMailer).to receive(:ping).and_return(delivery)
+        service.perform_ping(endpoint_etablissements)
+      end
     end
   end
 

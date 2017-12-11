@@ -40,8 +40,17 @@ class AbstractPing
   end
 
   def send_notification(ping)
-    return if ping.status == 'up'
-    PingMailer.ping(ping, @endpoint).deliver_now
+    last_report.notify_new_ping(ping.code, Time.now)
+
+    return unless last_report.has_changed?
+    PingMailer.ping(last_report).deliver_now
+  end
+
+  def last_report
+    @last_report ||= PingReport.get_latest_where(
+      name: @endpoint.name,
+      sub_name: @endpoint.sub_name,
+      api_version: @endpoint.api_version)
   end
 
   def execute_ping

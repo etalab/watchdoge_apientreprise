@@ -19,3 +19,10 @@ class FakeWorker
     end
   end
 end
+
+def create_report_for_all
+  endpoints = Tools::EndpointFactory.new('apie').load_all
+  endpoints.each do |ep|
+    create(:ping_report, name: ep.name, sub_name: ep.sub_name, api_version: ep.api_version)
+  end
+end
