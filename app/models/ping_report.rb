@@ -20,6 +20,7 @@ class PingReport < ApplicationRecord
     @new_code = code
     @timestamp = timestamp
     update_state
+    save
     self
   end
 
@@ -51,16 +52,14 @@ class PingReport < ApplicationRecord
     else
       @has_changed = false
     end
-
-    save
   end
 
   def going_down?
-    ![200, 206].include?(@new_code) && [200, 206].include?(last_code)
+    ![200, 206].include?(@new_code) && ([200, 206].include?(last_code) || last_code.nil?)
   end
 
   def going_up?
-    [200, 206].include?(@new_code) && ![200, 206].include?(last_code) && !last_code.nil?
+    [200, 206].include?(@new_code) && (![200, 206].include?(last_code) || last_code.nil?)
   end
 
   def first_downtime_class
