@@ -16,17 +16,36 @@ describe PingReport, type: :model do
     subject(:report) { described_class.get_latest_where(name: 'etablissements', sub_name: 'successeurs', api_version: 2) }
     let(:now) { Time.now }
 
-    describe 'saving in database when has_changed' do
-      it 'saves when UP > DOWN' do
-        create(:ping_report, last_code: 200)
-        expect(report).to receive(:save).and_return(true)
+    context 'when it does not exists yet' do
+      before do
         report.notify_new_ping(503, now)
       end
 
-      it 'saves when DOWN > UP' do
+      it 'saves when DOWN' do
+        new_report = described_class.find_by(name: 'etablissements', sub_name: 'successeurs', api_version: 2)
+        expect(new_report).not_to be_nil
+        expect(new_report.last_code).to eq(503)
+      end
+    end
+
+    context 'when it does not exists yet' do
+      before do
+        report.notify_new_ping(200, now)
+      end
+
+      it 'saves when UP' do
+        new_report = described_class.find_by(name: 'etablissements', sub_name: 'successeurs', api_version: 2)
+        expect(new_report).not_to be_nil
+        expect(new_report.last_code).to eq(200)
+      end
+    end
+
+    describe 'saving in database when has_changed' do
+      it 'exists and saves when DOWN > UP' do
         create(:ping_report, last_code: 503)
         expect(report).to receive(:save).and_return(true)
         report.notify_new_ping(200, now)
+        expect(described_class.find_by(name: 'etablissements', sub_name: 'successeurs', api_version: 2)).not_to be_nil
       end
     end
 
