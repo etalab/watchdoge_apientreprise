@@ -10,6 +10,16 @@ describe PingReport, type: :model do
     it 'do not alreay exists in database' do
       expect { described_class.get_latest_where(name: 'etablissements', sub_name: 'successeurs', api_version: 2) }.to change { PingReport.count }
     end
+
+    context 'first report generate with code 200' do
+      subject { PingReport.find_by(name: 'etablissements', sub_name: 'successeurs', api_version: 2) }
+
+      before do
+        described_class.get_latest_where(name: 'etablissements', sub_name: 'successeurs', api_version: 2)
+      end
+
+      its(:last_code) { is_expected.to eq(200) }
+    end
   end
 
   describe 'when notify new ping' do
