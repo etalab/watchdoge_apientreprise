@@ -20,7 +20,14 @@ class FakeWorker
   end
 end
 
-def create_report_for_all
+def create_random_ping_reports_for_all_endpoints
+  endpoints = Tools::EndpointFactory.new('apie').load_all
+  endpoints.each do |ep|
+    create(:ping_report, name: ep.name, sub_name: ep.sub_name, api_version: ep.api_version, last_code: [200, 400].sample, first_downtime: Time.now)
+  end
+end
+
+def create_ping_reports_for_all_endpoints
   endpoints = Tools::EndpointFactory.new('apie').load_all
   endpoints.each do |ep|
     create(:ping_report, name: ep.name, sub_name: ep.sub_name, api_version: ep.api_version)

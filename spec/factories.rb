@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :ping_report do
+    service_name 'apie'
     name 'etablissements'
     sub_name 'successeurs'
     api_version 2

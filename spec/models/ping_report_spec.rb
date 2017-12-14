@@ -4,18 +4,18 @@ describe PingReport, type: :model do
   describe 'load from database or create' do
     it 'aleady exists in database' do
       create(:ping_report)
-      expect { described_class.get_latest_where(name: 'etablissements', sub_name: 'successeurs', api_version: 2) }.not_to change { PingReport.count }
+      expect { described_class.get_latest_where(service_name: 'apie', name: 'etablissements', sub_name: 'successeurs', api_version: 2) }.not_to change { PingReport.count }
     end
 
     it 'do not alreay exists in database' do
-      expect { described_class.get_latest_where(name: 'etablissements', sub_name: 'successeurs', api_version: 2) }.to change { PingReport.count }
+      expect { described_class.get_latest_where(service_name: 'apie', name: 'etablissements', sub_name: 'successeurs', api_version: 2) }.to change { PingReport.count }
     end
 
     context 'first report generate with code 200' do
-      subject { PingReport.find_by(name: 'etablissements', sub_name: 'successeurs', api_version: 2) }
+      subject { PingReport.find_by(service_name: 'apie', name: 'etablissements', sub_name: 'successeurs', api_version: 2) }
 
       before do
-        described_class.get_latest_where(name: 'etablissements', sub_name: 'successeurs', api_version: 2)
+        described_class.get_latest_where(service_name: 'apie', name: 'etablissements', sub_name: 'successeurs', api_version: 2)
       end
 
       its(:last_code) { is_expected.to eq(200) }
@@ -23,7 +23,7 @@ describe PingReport, type: :model do
   end
 
   describe 'when notify new ping' do
-    subject(:report) { described_class.get_latest_where(name: 'etablissements', sub_name: 'successeurs', api_version: 2) }
+    subject(:report) { described_class.get_latest_where(service_name: 'apie', name: 'etablissements', sub_name: 'successeurs', api_version: 2) }
     let(:now) { Time.now }
 
     context 'when it does not exists yet' do
@@ -32,7 +32,7 @@ describe PingReport, type: :model do
       end
 
       it 'saves when DOWN' do
-        new_report = described_class.find_by(name: 'etablissements', sub_name: 'successeurs', api_version: 2)
+        new_report = described_class.find_by(service_name: 'apie', name: 'etablissements', sub_name: 'successeurs', api_version: 2)
         expect(new_report).not_to be_nil
         expect(new_report.last_code).to eq(503)
       end
@@ -44,7 +44,7 @@ describe PingReport, type: :model do
       end
 
       it 'saves when UP' do
-        new_report = described_class.find_by(name: 'etablissements', sub_name: 'successeurs', api_version: 2)
+        new_report = described_class.find_by(service_name: 'apie', name: 'etablissements', sub_name: 'successeurs', api_version: 2)
         expect(new_report).not_to be_nil
         expect(new_report.last_code).to eq(200)
       end
@@ -55,7 +55,7 @@ describe PingReport, type: :model do
         create(:ping_report, last_code: 503)
         expect(report).to receive(:save).and_return(true)
         report.notify_new_ping(200, now)
-        expect(described_class.find_by(name: 'etablissements', sub_name: 'successeurs', api_version: 2)).not_to be_nil
+        expect(described_class.find_by(service_name: 'apie', name: 'etablissements', sub_name: 'successeurs', api_version: 2)).not_to be_nil
       end
     end
 
@@ -111,12 +111,12 @@ describe PingReport, type: :model do
 
     it 'is in the database' do
       subject.save
-      expect(described_class.find_by(name: report.name, sub_name: report.sub_name, api_version: report.api_version)).not_to be_nil
+      expect(described_class.find_by(service_name: report.service_name, name: report.name, sub_name: report.sub_name, api_version: report.api_version)).not_to be_nil
     end
   end
 
   context 'when it is updated' do
-    subject { described_class.find_by(name: report.name, sub_name: report.sub_name, api_version: report.api_version) }
+    subject { described_class.find_by(service_name: report.service_name, name: report.name, sub_name: report.sub_name, api_version: report.api_version) }
 
     let(:report) { build(:ping_report) }
 
@@ -145,13 +145,14 @@ describe PingReport, type: :model do
       context 'with error messages' do
         subject { report.errors.messages }
 
+        its([:service_name]) { is_expected.not_to be_empty }
         its([:name]) { is_expected.not_to be_empty }
         its([:api_version]) { is_expected.not_to be_empty }
       end
     end
 
     context 'already existing report' do
-      let(:hash) { { name: 'etablissements', sub_name: 'successeurs', api_version: 2 } }
+      let(:hash) { { service_name: 'apie',  name: 'etablissements', sub_name: 'successeurs', api_version: 2 } }
 
       before do
         create(:ping_report)
