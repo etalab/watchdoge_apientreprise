@@ -10,6 +10,7 @@ class PingReport < ApplicationRecord
     latest_report = PingReport.find_by(hash)
 
     if latest_report.nil?
+      hash.merge!(last_code: 200, first_downtime: Time.now)
       PingReport.create(hash).tap(&:save)
     else
       latest_report
