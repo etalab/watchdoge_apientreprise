@@ -18,7 +18,7 @@ describe PingMailer, type: :mailer do
         ping_report.notify_new_ping(503, Time.now)
       end
 
-      its(:subject) { is_expected.to match(/\[Watchdoge\] V2 etablissements successeurs DOWN/) }
+      its(:subject) { is_expected.to match(/\[Watchdoge\] V2 etablissements successeurs DOWN à \d{2}h\d{2}/) }
 
       it 'body matches' do
         expect(mail.body.to_s.gsub(/\n/, '')).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.+V2.+etablissements successeurs.+DOWN/)
@@ -40,7 +40,7 @@ describe PingMailer, type: :mailer do
         ping_report.notify_new_ping(200, Time.now)
       end
 
-      its(:subject) { is_expected.to match(/\[Watchdoge\] V2 etablissements successeurs UP/) }
+      its(:subject) { is_expected.to match(/\[Watchdoge\] V2 etablissements successeurs UP à \d{2}h\d{2}/) }
 
       it 'body matches' do
         expect(mail.body.to_s.gsub(/\n/, '')).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.+V2.+etablissements successeurs.+UP.+Il était DOWN depuis le \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
