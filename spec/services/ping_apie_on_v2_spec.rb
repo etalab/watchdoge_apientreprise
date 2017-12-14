@@ -27,6 +27,21 @@ describe PingAPIEOnV2, type: :service do
     end
   end
 
+  describe 'sending a warning email when a service status changed', vcr: { cassette_name: 'apie_v2' } do
+    before do
+      create_random_ping_reports_for_all_endpoints
+      allow(service).to receive(:worker).and_return(FakeWorker.new)
+      allow_any_instance_of(PingStatus).to receive(:code).and_return([200, 400].sample)
+    end
+
+    it 'send a warning email if report has changed' do
+      service.perform do |ping, endpoint|
+        report = PingReport.find_by(service_name: endpoint.api_name, name: endpoint.name, sub_name: endpoint.sub_name, api_version: endpoint.api_version)
+        expect(report.last_code).to eq(ping.code)
+      end
+    end
+  end
+
   describe 'send warning email if service status changed', vcr: { cassette_name: 'apie_v2' } do
     context 'service is now DOWN' do
       before do
