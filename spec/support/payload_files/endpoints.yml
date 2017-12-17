@@ -1,3 +1,17 @@
-endpoints:
-  - name: valid name
-    api_version: 50
+- uname: apie_2_certificats_qualibat
+  name: Certificat Qualibat
+  api_name: apie
+  api_version: 2
+  provider: qualibat
+  ping_period: 60
+  ping_url: '/v2/certificats_qualibat/33592022900036'
+  json_options: '{ "context": "Ping", "recipient": "SGMAP" }'
+
+- uname: apie_1_eligibilites_cotisation_retraite_probtp
+  name: Eligibilité cotisations retraite ProBTP
+  api_name: apie
+  api_version: 1
+  provider: probtp
+  ping_period: 5
+  ping_url: '/v1/eligibilites_cotisation_retraite_probtp/73582032600040'
+  json_options: '{ "context": "Ping", "recipient": "SGMAP" }'
