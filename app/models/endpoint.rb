@@ -1,5 +1,5 @@
 class Endpoint < ApplicationRecord
-  validates :uname, presence: true
+  validates :uname, presence: true, uniqueness: true
   validates :name, presence: true
   validates :api_name, presence: true
   validates :api_version, numericality: { only_integer: true }
@@ -7,7 +7,6 @@ class Endpoint < ApplicationRecord
   validates :ping_period, numericality: { only_integer: true }
   validates :ping_url, presence: true
 
-  validates_uniqueness_of :uname
   validate :json_options_nil_or_json_string
 
   def http_response
@@ -21,11 +20,11 @@ class Endpoint < ApplicationRecord
   private
 
   def http_params
-    if api_name == 'apie'
-      '?' + {token: token}.merge(hash_options).to_param
-    else
-      ''
-    end
+    api_name == 'apie' ? apie_http_params : ''
+  end
+
+  def apie_http_params
+    '?' + { token: token }.merge(hash_options).to_param
   end
 
   def hash_options
@@ -33,9 +32,7 @@ class Endpoint < ApplicationRecord
   end
 
   def token
-    if api_name == 'apie'
-      Rails.application.config_for(:secrets)['apie_token']
-    end
+    Rails.application.config_for(:secrets)['apie_token'] if api_name == 'apie'
   end
 
   def base_url
@@ -61,8 +58,10 @@ class Endpoint < ApplicationRecord
   end
 
   def json_options_nil_or_json_string
-    unless json_options.nil? || json_options.valid_json?
-      errors.add(:json_options, 'must be nil or a JSON string')
-    end
+    errors.add(:json_options, 'must be nil or a JSON string') unless valid_json_options?
+  end
+
+  def valid_json_options?
+    json_options.nil? || json_options.valid_json?
   end
 end

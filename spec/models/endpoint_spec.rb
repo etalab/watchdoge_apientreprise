@@ -14,7 +14,7 @@ describe Endpoint, type: :model do
   end
   # End: real testing
 
-  context 'url is always good' do
+  describe 'url is always good' do
     it 'is an apie v1 endpoint' do
       ep = Endpoint.new(api_name: 'apie', api_version: 1, ping_url: '/v1/toto/SIREN')
       expect(ep.uri.scheme).to eq('https')
@@ -67,8 +67,8 @@ describe Endpoint, type: :model do
 
       before { endpoint.valid? }
 
-      its(:valid?) { is_expected.to be_falsey }
-      its(:save)   { is_expected.to be_falsey }
+      it { is_expected.not_to be_valid }
+      its(:save) { is_expected.to be_falsey }
     end
 
     describe 'has many errors' do
@@ -78,13 +78,13 @@ describe Endpoint, type: :model do
 
       before { endpoint.valid? }
 
-      its([:uname])       { is_expected.not_to be_empty }
-      its([:name])        { is_expected.not_to be_empty }
-      its([:api_name])    { is_expected.not_to be_empty }
+      its([:uname]) { is_expected.not_to be_empty }
+      its([:name]) { is_expected.not_to be_empty }
+      its([:api_name]) { is_expected.not_to be_empty }
       its([:api_version]) { is_expected.not_to be_empty }
-      its([:provider])    { is_expected.not_to be_empty }
+      its([:provider]) { is_expected.not_to be_empty }
       its([:ping_period]) { is_expected.not_to be_empty }
-      its([:ping_url])    { is_expected.not_to be_empty }
+      its([:ping_url]) { is_expected.not_to be_empty }
     end
 
     it 'has only hashes options' do
@@ -101,13 +101,14 @@ describe Endpoint, type: :model do
 
     it 'api_version is an integer' do
       endpoint = described_class.new(api_version: 'oki')
-      expect(endpoint.valid?).to be_falsy
+
+      expect(endpoint).not_to be_valid
       expect(endpoint.errors.messages[:api_version]).not_to be_empty
     end
 
     it 'period is an integer' do
       endpoint = described_class.new(ping_period: 'test')
-      expect(endpoint.valid?).to be_falsy
+      expect(endpoint).not_to be_valid
       expect(endpoint.errors.messages[:ping_period]).not_to be_empty
     end
   end
@@ -115,15 +116,15 @@ describe Endpoint, type: :model do
   context 'when creating new endpoint with valid parameters' do
     subject { create(:endpoint) }
 
-    its(:valid?) { is_expected.to be_truthy }
-    its(:save)   { is_expected.to be_truthy }
+    it { is_expected.to be_valid }
+    its(:save) { is_expected.to be_truthy }
   end
 
   context 'when creating new endpoint with valid parameters and empty options' do
     subject { create(:endpoint, json_options: nil) }
 
-    its(:valid?) { is_expected.to be_truthy }
-    its(:save)   { is_expected.to be_truthy }
+    it { is_expected.to be_valid }
+    its(:save) { is_expected.to be_truthy }
   end
 
   context 'when loading endpoint' do
