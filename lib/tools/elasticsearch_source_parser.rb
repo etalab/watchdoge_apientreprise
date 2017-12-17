@@ -1,5 +1,4 @@
 class Tools::ElasticsearchSourceParser
-  # rubocop:disable Metrics/MethodLength
   def self.parse(source)
     api_version, name, sub_name = source['controller'].split('/').slice(1, 4)
     api_version = api_version.tr('v', '').to_i
