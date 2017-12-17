@@ -36,6 +36,7 @@ gem 'whenever'
 group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
+  gem 'factory_bot_rails'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -63,7 +64,6 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :test do
-  gem 'factory_bot_rails'
   gem 'json-schema'
   gem 'rspec-its'
   gem 'rspec-json_expectations'
