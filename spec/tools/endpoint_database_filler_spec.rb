@@ -10,12 +10,17 @@ describe Tools::EndpointDatabaseFiller do
 
     before { filler.refill_database }
 
-    its(:count) { is_expected.to eq(40) }
+    its(:count) { is_expected.to eq(endpoints_count) }
 
-    it 'fills correctly the database' do
+    it 'fills database with valid endpoints' do
       endpoints.each do |ep|
         expect(ep).to be_valid
       end
+    end
+
+    it 'fills database with differents endpoints' do
+      expect(endpoints.map(&:uname).count).to eq(endpoints_count)
+      expect(endpoints.map(&:ping_url).count).to eq(endpoints_count)
     end
   end
 
