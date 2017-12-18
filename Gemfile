@@ -13,11 +13,9 @@ gem 'puma', '~> 3.7'
 gem 'colorize'
 gem 'elasticsearch'
 gem 'haml'
-gem 'httparty'
 gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'pg'
-gem 'sinatra', require: nil
-gem 'validates_timeliness'
+gem 'sidekiq'
 gem 'whenever'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -47,6 +45,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'mina'
+  gem 'mina-sidekiq'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -70,8 +69,4 @@ group :test do
   gem 'rspec-rails'
   gem 'vcr'
   gem 'webmock'
-  # gem 'factory_girl_rails', '~> 4.0'
-  # gem 'shoulda-matchers', '~> 3.1'
-  # gem 'faker'
-  # gem 'database_cleaner'
 end
