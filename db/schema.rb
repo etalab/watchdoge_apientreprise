@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214191136) do
+ActiveRecord::Schema.define(version: 20171218124153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,12 +27,9 @@ ActiveRecord::Schema.define(version: 20171214191136) do
   end
 
   create_table "ping_reports", force: :cascade do |t|
-    t.string "name"
-    t.string "sub_name"
-    t.integer "api_version"
     t.integer "last_code"
     t.datetime "first_downtime"
-    t.string "service_name"
+    t.string "uname"
   end
 
 end

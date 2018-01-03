@@ -1,15 +1,24 @@
 class PingWorker
   include Sidekiq::Worker
+  sidekiq_options :retry => 5
 
-  def perform(arg)
-    case arg
-    when 'easy'
-      sleep 2
-      puts 'easy oki'
-    when 'hard'
-      sleep 10
-      puts 'hard job'
-      raise 'error!!!!'
-    end
+  def perform(uname:)
+    @endpoint = Endpoint.find_by(uname: uname)
+    ping_report.notify_change(code_http)
+    send_notification if ping_report.changed?
+  end
+
+  private
+
+  def send_notification
+    PingMailer.ping(@endpoint, ping_report)
+  end
+
+  def ping_report
+    @ping_report ||= PingReport.find_or_create_by(uname: @endpoint.uname)
+  end
+
+  def code_http
+    @endpoint.http_response.code.to_i
   end
 end

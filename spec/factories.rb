@@ -11,10 +11,7 @@ FactoryBot.define do
   end
 
   factory :ping_report do
-    service_name 'apie'
-    name 'etablissements'
-    sub_name 'successeurs'
-    api_version 2
+    uname 'apie_2_etablissements'
     last_code 200
     first_downtime '2017-11-28T00:00:14.836Z'
   end
