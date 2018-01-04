@@ -68,3 +68,7 @@ RSpec/SubjectStub:
 
 RSpec/InstanceVariable:
   Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/tasks/watch_spec.rb'

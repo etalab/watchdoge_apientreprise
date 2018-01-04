@@ -13,9 +13,7 @@ describe Tools::EndpointDatabaseFiller do
     its(:count) { is_expected.to eq(endpoints_count) }
 
     it 'fills database with valid endpoints' do
-      endpoints.each do |ep|
-        expect(ep).to be_valid
-      end
+      expect(endpoints.all).to all(be_valid)
     end
 
     it 'fills database with differents endpoints' do
@@ -42,30 +40,38 @@ describe Tools::EndpointDatabaseFiller do
 
     its(:count) { is_expected.to eq(2) }
 
-    it 'has qualibat v2 endpoint' do
-      qualibat = endpoints.first
-      expect(qualibat).to be_valid
-      expect(qualibat.uname).to eq('apie_2_certificats_qualibat')
-      expect(qualibat.name).to eq('Certificat Qualibat')
-      expect(qualibat.api_name).to eq('apie')
-      expect(qualibat.api_version).to eq(2)
-      expect(qualibat.provider).to eq('qualibat')
-      expect(qualibat.ping_period).to eq(60)
-      expect(qualibat.ping_url).to eq('/v2/certificats_qualibat/33592022900036')
-      expect(JSON.parse(qualibat.json_options)).to include_json(context: 'Ping', recipient: 'SGMAP')
+    context 'when it is qualibat' do
+      subject(:qualibat) { endpoints.first }
+
+      it { is_expected.to be_valid }
+      its(:uname) { is_expected.to eq('apie_2_certificats_qualibat') }
+      its(:name) { is_expected.to eq('Certificat Qualibat') }
+      its(:api_name) { is_expected.to eq('apie') }
+      its(:api_version) { is_expected.to eq(2) }
+      its(:provider) { is_expected.to eq('qualibat') }
+      its(:ping_period) { is_expected.to eq(60) }
+      its(:ping_url) { is_expected.to eq('/v2/certificats_qualibat/33592022900036') }
+
+      it 'has a correct json_options' do
+        expect(JSON.parse(qualibat.json_options)).to include_json(context: 'Ping', recipient: 'SGMAP')
+      end
     end
 
-    it 'has ProBTP v2 endpoint' do
-      probtp = endpoints.second
-      expect(probtp).to be_valid
-      expect(probtp.uname).to eq('apie_1_eligibilites_cotisation_retraite_probtp')
-      expect(probtp.name).to eq('Eligibilité cotisations retraite ProBTP')
-      expect(probtp.api_name).to eq('apie')
-      expect(probtp.api_version).to eq(1)
-      expect(probtp.provider).to eq('probtp')
-      expect(probtp.ping_period).to eq(5)
-      expect(probtp.ping_url).to eq('/v1/eligibilites_cotisation_retraite_probtp/73582032600040')
-      expect(JSON.parse(probtp.json_options)).to include_json(context: 'Ping', recipient: 'SGMAP')
+    context 'when it is ProBTP' do
+      subject(:probtp) { endpoints.second }
+
+      it { is_expected.to be_valid }
+      its(:uname) { is_expected.to eq('apie_1_eligibilites_cotisation_retraite_probtp') }
+      its(:name) { is_expected.to eq('Eligibilité cotisations retraite ProBTP') }
+      its(:api_name) { is_expected.to eq('apie') }
+      its(:api_version) { is_expected.to eq(1) }
+      its(:provider) { is_expected.to eq('probtp') }
+      its(:ping_period) { is_expected.to eq(5) }
+      its(:ping_url) { is_expected.to eq('/v1/eligibilites_cotisation_retraite_probtp/73582032600040') }
+
+      it 'has a correct json_options' do
+        expect(JSON.parse(probtp.json_options)).to include_json(context: 'Ping', recipient: 'SGMAP')
+      end
     end
   end
 end

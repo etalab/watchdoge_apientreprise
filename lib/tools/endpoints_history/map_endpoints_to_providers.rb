@@ -73,6 +73,7 @@ class Tools::EndpointsHistory::MapEndpointsToProviders
   end
 
   def providers_infos
+    # TODO: redo this function !
     Tools::EndpointFactory.new('apie').providers_infos
   end
 end

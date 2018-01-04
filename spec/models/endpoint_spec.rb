@@ -2,9 +2,29 @@ require 'rails_helper.rb'
 
 describe Endpoint, type: :model do
   # Begin: real testing
+  context 'with one redirection' do
+    let(:uname) { 'apie_2_homepage' }
+
+    before { create(:endpoint, uname: uname, provider: 'apientreprise', ping_url: '/') }
+
+    it 'follows redirection once', vcr: { cassette_name: 'apie/v2_homepage' } do
+      expect_any_instance_of(described_class).to receive(:fetch_with_redirection).exactly(:twice).and_call_original
+      described_class.find_by(uname: uname).http_response
+    end
+  end
+
   describe 'all endpoints must be valids' do
-    before { create(:endpoint) }
-    it 'should test all endpoints'
+    before { Tools::EndpointDatabaseFiller.instance.refill_database }
+
+    it 'return 200 for all endpoints', vcr: { cassette_name: 'apie_all' } do
+      Endpoint.all.each do |ep|
+        # TODO: fixme remove this when provider are up (and update cassette)
+        next if ['apie_2_attestations_cotisation_retraite_probtp','apie_2_attestations_agefiph', 'apie_2_attestations_sociales_acoss', 'apie_1_attestations_cotisation_retraite_probtp', 'apie_1_attestations_sociales_acoss'].include?(ep.uname)
+        response = described_class.find_by(uname: ep.uname).http_response
+        expect(response).to be_a(Net::HTTPResponse)
+        expect(response.code).to eq('200')
+      end
+    end
 
     it 'return 200: qualibat v2', vcr: { cassette_name: 'apie/v2_qualibat' } do
       response = described_class.find_by(uname: 'apie_2_certificats_qualibat').http_response
@@ -18,7 +38,7 @@ describe Endpoint, type: :model do
     it 'is an apie v1 endpoint' do
       ep = Endpoint.new(api_name: 'apie', api_version: 1, ping_url: '/v1/toto/SIREN')
       expect(ep.uri.scheme).to eq('https')
-      expect(ep.uri.host).to eq('apientreprise.fr')
+      expect(ep.uri.host).to match(/apientreprise.fr/)
       expect(ep.uri.path).to eq('/v1/toto/SIREN')
       expect(ep.uri.query).to match(/token=.+/)
     end
@@ -26,7 +46,7 @@ describe Endpoint, type: :model do
     it 'is an apie v2 endpoint' do
       ep = Endpoint.new(api_name: 'apie', api_version: 2, ping_url: '/v2/toto/SIREN')
       expect(ep.uri.scheme).to eq('https')
-      expect(ep.uri.host).to eq('entreprise.api.gouv.fr')
+      expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
       expect(ep.uri.path).to eq('/v2/toto/SIREN')
       expect(ep.uri.query).to match(/token=.+/)
     end
@@ -34,7 +54,7 @@ describe Endpoint, type: :model do
     it 'is an apie v2 endpoint with options' do
       ep = Endpoint.new(api_name: 'apie', api_version: 2, ping_url: '/v2/toto/SIREN', json_options: '{"opt": "plop", "opt2": "test"}')
       expect(ep.uri.scheme).to eq('https')
-      expect(ep.uri.host).to eq('entreprise.api.gouv.fr')
+      expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
       expect(ep.uri.path).to eq('/v2/toto/SIREN')
       expect(ep.uri.query).to match(/opt2=test&opt=plop&token=.+/)
     end
@@ -54,7 +74,7 @@ describe Endpoint, type: :model do
     its(:http_response) { is_expected.to be_a(Net::HTTPResponse) }
     it 'is a correct uri' do
       expect(ep.uri.scheme).to eq('https')
-      expect(ep.uri.host).to eq('entreprise.api.gouv.fr')
+      expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
       expect(ep.uri.path).to eq('/v2/certificats_qualibat/33592022900036')
       expect(ep.uri.query).to match(/context=Ping&recipient=SGMAP&token=.+/)
     end

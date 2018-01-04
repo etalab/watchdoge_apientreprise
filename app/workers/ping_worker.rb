@@ -1,8 +1,8 @@
 class PingWorker
   include Sidekiq::Worker
-  sidekiq_options :retry => 5
+  sidekiq_options retry: 5
 
-  def perform(uname:)
+  def perform(uname)
     @endpoint = Endpoint.find_by(uname: uname)
     ping_report.notify_change(code_http)
     send_notification if ping_report.changed?

@@ -1,4 +1,8 @@
+require 'net/http'
+
 class Endpoint < ApplicationRecord
+  REDIRECT_LIMIT = 3
+
   validates :uname, presence: true, uniqueness: true
   validates :name, presence: true
   validates :api_name, presence: true
@@ -10,7 +14,7 @@ class Endpoint < ApplicationRecord
   validate :json_options_nil_or_json_string
 
   def http_response
-    Net::HTTP.get_response(uri)
+    fetch_with_redirection(uri, REDIRECT_LIMIT)
   end
 
   def uri
@@ -18,6 +22,24 @@ class Endpoint < ApplicationRecord
   end
 
   private
+
+  def fetch_with_redirection(location, redirect_limit)
+    response = Net::HTTP.get_response(location)
+
+    if redirect_limit.zero?
+      response
+    else
+      case response
+      when Net::HTTPSuccess then
+        response
+      when Net::HTTPRedirection then
+        location = response['location']
+        fetch_with_redirection(URI(location), redirect_limit - 1)
+      else
+        response.value
+      end
+    end
+  end
 
   def http_params
     api_name == 'apie' ? apie_http_params : ''

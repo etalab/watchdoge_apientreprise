@@ -1,17 +1,28 @@
 require 'rails_helper'
+require 'sidekiq/testing'
 
 describe PingWorker, type: :worker do
   let(:uname) { 'apie_2_certificats_qualibat' }
 
   before { create(:endpoint) }
 
-  it 'enqueue a job' do
-    expect { described_class.perform_async(uname: uname) }.to change { described_class.jobs.size }.by(1)
+  it 'fails to run the job' do
+    described_class.perform_async(uname: uname)
+    expect { described_class.drain }.to raise_error(TypeError)
   end
 
-  it 'calls apie_2_certificats_qualibat', vcr: { cassette_name: 'v2_qualibat' } do
+  it 'successfully run the job', vcr: { cassette_name: 'apie/v2_qualibat' } do
+    described_class.perform_async(uname)
+    expect { described_class.drain }.not_to raise_error
+  end
+
+  it 'enqueue a job' do
+    expect { described_class.perform_async(uname) }.to change { described_class.jobs.size }.by(1)
+  end
+
+  it 'calls apie_2_certificats_qualibat', vcr: { cassette_name: 'apie/v2_qualibat' } do
     expect_any_instance_of(Endpoint).to receive(:http_response).exactly(:once).and_call_original
-    described_class.new.perform(uname: uname)
+    described_class.new.perform(uname)
   end
 
   describe 'email functionnality' do
@@ -26,13 +37,13 @@ describe PingWorker, type: :worker do
       it 'is going DOWN' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(down_response)
         expect(PingMailer).to receive(:ping).exactly(:once)
-        described_class.new.perform(uname: uname)
+        described_class.new.perform(uname)
       end
 
       it 'is still UP' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(up_response)
         expect(PingMailer).not_to receive(:ping)
-        described_class.new.perform(uname: uname)
+        described_class.new.perform(uname)
       end
     end
 
@@ -42,13 +53,13 @@ describe PingWorker, type: :worker do
       it 'is still DOWN' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(down_response)
         expect(PingMailer).not_to receive(:ping)
-        described_class.new.perform(uname: uname)
+        described_class.new.perform(uname)
       end
 
       it 'is going UP' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(up_response)
         expect(PingMailer).to receive(:ping).exactly(:once)
-        described_class.new.perform(uname: uname)
+        described_class.new.perform(uname)
       end
     end
   end
