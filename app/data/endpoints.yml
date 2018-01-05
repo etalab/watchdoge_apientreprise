@@ -149,7 +149,7 @@
   provider: acoss
   api_version: 2
   ping_period: 60
-  ping_url: '/v2/attestations_sociales_acoss/418166096'
+  ping_url: '/v2/attestations_sociales_acoss/356000000'
   json_options: '{ "context": "Ping", "recipient": "SGMAP" }'
 
 - uname: apie_2_certificats_qualibat
@@ -278,8 +278,8 @@
   api_name: apie
   api_version: 1
   ping_period: 60
-  ping_url: '/v1/attestations_sociales/418166096'
-  json_options: '{ "context": "Ping", "recipient": "SGMAP" }'
+  ping_url: '/v1/attestations_sociales/356000000'
+  json_options: '{ "type_attestation": "AVG_UR", "context": "Ping", "recipient": "SGMAP" }'
 
 - uname: apie_1_certificat_cnetp
   name: Certificats CNETP

@@ -7,12 +7,12 @@ describe PingWorker, type: :worker do
   before { create(:endpoint) }
 
   it 'fails to run the job' do
-    described_class.perform_async(uname: uname)
+    described_class.perform_async(uname: uname) # wrong way to call the task
     expect { described_class.drain }.to raise_error(TypeError)
   end
 
   it 'successfully run the job', vcr: { cassette_name: 'apie/v2_qualibat' } do
-    described_class.perform_async(uname)
+    described_class.perform_async(uname) # correct way to call the task
     expect { described_class.drain }.not_to raise_error
   end
 
