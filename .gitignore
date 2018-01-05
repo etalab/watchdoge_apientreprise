@@ -47,3 +47,5 @@ bower.json
 
 # system files
 .gemrc
+
+\.idea/

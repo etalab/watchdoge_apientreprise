@@ -43,8 +43,8 @@ describe Tools::EndpointFactory do
             etablissements_legacy__2
             entreprises__1
             etablissements__1
-            etablissements_predecesseur_2
             etablissements_successeur_2
+            etablissements_predecesseur_2
           ]
         }
       end

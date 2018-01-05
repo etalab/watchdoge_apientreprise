@@ -526,53 +526,6 @@ http_interactions:
   recorded_at: Wed, 11 Oct 2017 14:57:38 GMT
 - request:
     method: get
-    uri: "<APIE_BASE_URI_NEW>/v2/attestations_sociales_acoss/562077503?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>"
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Wed, 11 Oct 2017 14:57:39 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Etag:
-      - W/"0ae6bb68530109813ec7c6d7f981d3bd"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 54245279-6207-48d4-b87b-e7ed30b78cd1
-      X-Runtime:
-      - '1.493496'
-      X-Iplb-Instance:
-      - '15640'
-    body:
-      encoding: ASCII-8BIT
-      string: '{"url":"https://storage.apientreprise.fr/siade_dev/attestation%2Dbd9575f7e100cc1340c72012d0943400_sociale.pdf"}'
-    http_version: 
-  recorded_at: Wed, 11 Oct 2017 14:57:39 GMT
-- request:
-    method: get
     uri: "<APIE_BASE_URI_NEW>/v2/extraits_courts_inpi/542065479?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>"
     body:
       encoding: US-ASCII
@@ -1100,57 +1053,6 @@ http_interactions:
   recorded_at: Tue, 31 Oct 2017 17:16:53 GMT
 - request:
     method: get
-    uri: "<APIE_BASE_URI_NEW>/v2/attestations_sociales_acoss/418166096?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>"
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Status:
-      - 200 OK
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Etag:
-      - W/"6628cccbd5cac6820de47df9f2ca72dc"
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Runtime:
-      - '8.325695'
-      X-Request-Id:
-      - 2c564ec5-7f56-4b9d-b1c0-266dedc2e6fe
-      Date:
-      - Tue, 07 Nov 2017 13:35:56 GMT
-      X-Powered-By:
-      - Phusion Passenger 5.1.8
-      Server:
-      - nginx + Phusion Passenger 5.1.8
-    body:
-      encoding: ASCII-8BIT
-      string: '{"url":"https://storage.apientreprise.fr/siade/attestation%2Dd76926d541efe6d70357c80441c593ce_sociale.pdf"}'
-    http_version: 
-  recorded_at: Tue, 07 Nov 2017 13:35:56 GMT
-- request:
-    method: get
     uri: "<APIE_BASE_URI_NEW>/?context=Ping&recipient=SGMAP"
     body:
       encoding: US-ASCII
@@ -1296,4 +1198,49 @@ http_interactions:
         eyJlbnRyZXByaXNlIjp7InNpcmVuIjoiNDE4MTY2MDk2IiwiY2FwaXRhbF9zb2NpYWwiOjUwOTUyNSwibnVtZXJvX3R2YV9pbnRyYWNvbW11bmF1dGFpcmUiOiJGUjE2NDE4MTY2MDk2IiwiZm9ybWVfanVyaWRpcXVlIjoiU0Egw6AgZGlyZWN0b2lyZSAocy5hLmkuKSIsImZvcm1lX2p1cmlkaXF1ZV9jb2RlIjoiNTY5OSIsIm5vbWJyZV9ldGFibGlzc2VtZW50c19hY3RpZnMiOjEsIm5vbV9jb21tZXJjaWFsIjoiT0NUTy1URUNITk9MT0dZIiwicHJvY2VkdXJlX2NvbGxlY3RpdmUiOmZhbHNlLCJyYWlzb25fc29jaWFsZSI6Ik9DVE8tVEVDSE5PTE9HWSIsInNpcmV0X3NpZWdlX3NvY2lhbCI6IjQxODE2NjA5NjAwMDY5IiwiY29kZV9lZmZlY3RpZl9lbnRyZXByaXNlIjoiMzIiLCJkYXRlX2NyZWF0aW9uIjo4OTEzODE2MDAsIm5vbSI6bnVsbCwicHJlbm9tIjpudWxsLCJldGF0X2FkbWluaXN0cmF0aWYiOnsidmFsdWUiOiJBY3RpZiIsImRhdGVfbWlzZV9hX2pvdXIiOjg5MTM4MTYwMH0sImRhdGVfcmFkaWF0aW9uIjpudWxsLCJtYW5kYXRhaXJlc19zb2NpYXV4IjpbeyJub20iOiJISVNRVUlOIiwicHJlbm9tIjoiRlJBTkNPSVMiLCJmb25jdGlvbiI6IlBSRVNJREVOVCBEVSBESVJFQ1RPSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTY1LTAxLTI3IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotMTU1NTIzNjAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifSx7Im5vbSI6Ik5JQk9VUkVMIiwicHJlbm9tIjoiQ0hSSVNUSUFOIiwiZm9uY3Rpb24iOiJQUkVTSURFTlQgRFUgQ09OU0VJTCBERSBTVVJWRUlMTEFOQ0UiLCJkYXRlX25haXNzYW5jZSI6IjE5NTgtMDEtMDkiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi0zNzgwMDM2MDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiREVHT05TRSIsInByZW5vbSI6IkdFUkFSRCIsImZvbmN0aW9uIjoiVklDRS1QUkVTSURFTlQiLCJkYXRlX25haXNzYW5jZSI6IjE5NDctMDctMDMiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi03MTAwMzg4MDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiQ0lOUVVJTiIsInByZW5vbSI6IkxVRE9WSUMiLCJmb25jdGlvbiI6Ik1FTUJSRSBEVSBESVJFQ1RPSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTcyLTAxLTI1IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjo2NTE0MjAwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiJERUdPTlNFIiwicHJlbm9tIjoiR0VSQVJEIiwiZm9uY3Rpb24iOiJNRU1CUkUgRFUgQ09OU0VJTCBERSBTVVJWRUlMTEFOQ0UiLCJkYXRlX25haXNzYW5jZSI6IjE5NDctMDctMDMiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi03MTAwMzg4MDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiQkVOIE1BSE1PVUQiLCJwcmVub20iOiJTSUhFTSIsImZvbmN0aW9uIjoiTUVNQlJFIERVIENPTlNFSUwgREUgU1VSVkVJTExBTkNFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTY3LTAzLTEzIiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotODg1NjM2MDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiQk9LT0JaQSIsInByZW5vbSI6IkpFQU4tUElFUlJFIiwiZm9uY3Rpb24iOiJNRU1CUkUgRFUgQ09OU0VJTCBERSBTVVJWRUlMTEFOQ0UiLCJkYXRlX25haXNzYW5jZSI6IjE5NjEtMDQtMjQiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOi0yNzQyMzcyMDAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiIiLCJpZGVudGlmaWFudCI6IiIsInR5cGUiOiJQUCJ9LHsibm9tIjoiQ0FNUEJFTEwiLCJwcmVub20iOiJBTExBTiIsImZvbmN0aW9uIjoiTUVNQlJFIERVIENPTlNFSUwgREUgU1VSVkVJTExBTkNFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTYxLTAzLTMxIiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotMjc2MzEwODAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifSx7Im5vbSI6IkRFTE9STUUiLCJwcmVub20iOiJQQVNDQUwiLCJmb25jdGlvbiI6Ik1FTUJSRSBEVSBESVJFQ1RPSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTYyLTEyLTMwIiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotMjIxMTAxMjAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifSx7Im5vbSI6IkRPTk5BWSIsInByZW5vbSI6IkxBVVJFTlQiLCJmb25jdGlvbiI6Ik1FTUJSRSBEVSBESVJFQ1RPSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTcyLTEwLTI1IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjo4ODgxNTYwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiIiLCJwcmVub20iOiIiLCJmb25jdGlvbiI6IkNPTU1JU1NBSVJFIEFVWCBDT01QVEVTIFRJVFVMQUlSRSIsImRhdGVfbmFpc3NhbmNlIjoiIiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjowLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiTUFaQVJTIC0gU09DSUVURSBBTk9OWU1FIiwiaWRlbnRpZmlhbnQiOiI3ODQ4MjQxNTMiLCJ0eXBlIjoiUE0ifSx7Im5vbSI6IiIsInByZW5vbSI6IiIsImZvbmN0aW9uIjoiQ09NTUlTU0FJUkUgQVVYIENPTVBURVMgVElUVUxBSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOjAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiJLUE1HIC0gU09DSUVURSBBTk9OWU1FIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUE0ifSx7Im5vbSI6IiIsInByZW5vbSI6IiIsImZvbmN0aW9uIjoiQ09NTUlTU0FJUkUgQVVYIENPTVBURVMgU1VQUExFQU5UIiwiZGF0ZV9uYWlzc2FuY2UiOiIiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOjAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiJCQ1JIIFx1MDAyNiBBU1NPQ0lFUyAtIFNPQ0lFVEUgQSBSRVNQT05TQUJJTElURSBMSU1JVEVFIiwiaWRlbnRpZmlhbnQiOiI0OTAwOTI1NzQiLCJ0eXBlIjoiUE0ifSx7Im5vbSI6IlNJTU9OIiwicHJlbm9tIjoiSkVBTi1MT1VJUyIsImZvbmN0aW9uIjoiQ09NTUlTU0FJUkUgQVVYIENPTVBURVMgU1VQUExFQU5UIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTU5LTAyLTE3IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotMzQzMDk4MDAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifV19LCJnYXRld2F5X2Vycm9yIjpmYWxzZX0=
     http_version: 
   recorded_at: Tue, 05 Dec 2017 16:01:57 GMT
+- request:
+    method: get
+    uri: "<APIE_BASE_URI_NEW>/v2/attestations_sociales_acoss/356000000?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Etag:
+      - W/"8db1ab0acf1add34cc6e30ade97c8dd7"
+      X-Runtime:
+      - '21.516587'
+      X-Request-Id:
+      - 5c7c422f-044c-4c6b-898a-a975c6c9ca42
+      Date:
+      - Fri, 05 Jan 2018 11:01:22 GMT
+      X-Powered-By:
+      - Phusion Passenger 5.1.11
+      Server:
+      - nginx + Phusion Passenger 5.1.11
+    body:
+      encoding: ASCII-8BIT
+      string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1515150081-ade71d1aaf4d0fa6b55c4acd86e7b46fb49fdaf8-attestation_vigilance_acoss.pdf"}'
+    http_version: 
+  recorded_at: Fri, 05 Jan 2018 11:01:22 GMT
 recorded_with: VCR 3.0.3
