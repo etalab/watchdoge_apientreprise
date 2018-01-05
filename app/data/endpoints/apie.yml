@@ -13,8 +13,11 @@ generic_siren: &GENERIC_SIREN
 generic_siret: &GENERIC_SIRET
   parameter: '55203253400646'
 
-fntp_acoss_siren: &FNTP_ACOSS_SIREN
+fntp_siren: &FNTP_SIREN
   parameter: '562077503'
+
+acoss_siren: &ACOSS_SIREN
+  parameter: '356000000'
 
 endpoints:
 # ###############
@@ -89,7 +92,7 @@ endpoints:
     options:
       recipient: 'SGMAP'
       context: 'Ping'
-    <<: *GENERIC_SIREN
+    <<: *ACOSS_SIREN
 
   - name: certificats_qualibat
     provider: qualibat
@@ -133,7 +136,7 @@ endpoints:
   - name: cartes_professionnelles_fntp
     provider: fntp
     api_version: 2
-    <<: *FNTP_ACOSS_SIREN
+    <<: *FNTP_SIREN
     <<: *SHARED
 
   - name: entreprises_legacy
@@ -189,7 +192,7 @@ endpoints:
     provider: acoss
     api_version: 1
     period: 60
-    <<: *GENERIC_SIREN
+    <<: *ACOSS_SIREN
     options:
       recipient: 'SGMAP'
       context: 'Ping'
@@ -237,7 +240,7 @@ endpoints:
     sub_name: fntp
     provider: fntp
     api_version: 1
-    <<: *FNTP_ACOSS_SIREN
+    <<: *FNTP_SIREN
     <<: *SHARED
 
   - name: extraits_rcs
