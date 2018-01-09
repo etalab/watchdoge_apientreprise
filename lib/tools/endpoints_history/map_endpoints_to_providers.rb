@@ -31,9 +31,9 @@ class Tools::EndpointsHistory::MapEndpointsToProviders
   end
 
   def add_provider_to_endpoint_history
-    providers_infos.each_value do |value|
-      if value[:endpoints_ids].include?(@current_eh.id)
-        @current_eh.provider = value[:name]
+    providers_infos.each do |provider|
+      if provider[:endpoints_unames].include?(@current_eh.id)
+        @current_eh.provider = provider[:uname]
         break
       end
     end
@@ -73,7 +73,6 @@ class Tools::EndpointsHistory::MapEndpointsToProviders
   end
 
   def providers_infos
-    # TODO: redo this function !
-    Tools::EndpointFactory.new('apie').providers_infos
+    Tools::ProviderInfos.instance.all
   end
 end

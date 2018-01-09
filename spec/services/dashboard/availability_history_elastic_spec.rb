@@ -24,7 +24,7 @@ describe Dashboard::AvailabilityHistoryElastic, type: :service, vcr: { cassette_
 
     describe 'providers' do
       let(:providers) { results.map { |r| r['provider_name'] }.sort }
-      let(:expected_providers) { Tools::EndpointFactory.new('apie').providers_infos.keys.sort }
+      let(:expected_providers) { Tools::ProviderInfos.instance.all.select { |p| p[:uname] }.sort }
 
       it 'contains specifics providers' do
         expected_providers.delete('apie')
