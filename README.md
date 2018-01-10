@@ -8,6 +8,12 @@ Watchdoge run on Ruby 2.4.2
 
 The API uses Elasticsearch API, only authorised IP can make requests to Elasticsearch API, add yours for development purpose.
 
+```
+sudo ufw allow from <your.ip> to any port 9200 proto tcp
+sudo ufw delte allow from <your.ip> to any port 9200 proto tcp
+```
+
+
 You can test your ELK queries in Kibana.
 
 ## Configuration
@@ -49,7 +55,6 @@ Needs PostgreSQL installed,  certifcates (and IP whitelist) for API Entreprise a
 Watchdoge use `whenever` to perform periodic pings. Mina updates cronotab on deployment.
 
 ## Tests
-Due to Tools::PingWorker multithreading is can cause some tests to fails sometimes, re-run your tests to be sure
 Run:
 
 `rspec`
