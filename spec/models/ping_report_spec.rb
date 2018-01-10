@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe PingReport, type: :model do
   let(:uname) { 'apie_2_etablissements' }

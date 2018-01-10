@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 # rubocop:disable Rspec/MultipleDescribes
 describe 'watch:all', vcr: { cassette_name: 'apie_all' } do

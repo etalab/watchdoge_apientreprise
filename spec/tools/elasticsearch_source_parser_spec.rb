@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe Tools::ElasticsearchSourceParser do
   subject { described_class.parse(source_example) }

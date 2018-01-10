@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe Tools::ProviderInfos do
   subject(:provider_infos) { described_class.instance }

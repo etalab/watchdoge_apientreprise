@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe EndpointHistory, type: :model do
   subject(:endpoint_history) do

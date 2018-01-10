@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe Tools::EndpointsHistory::MapEndpointsToProviders do
   subject { described_class.new(endpoints_history).to_json }

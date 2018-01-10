@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe Endpoint, type: :model do
   # Begin: real testing

@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe Tools::EndpointDatabaseFiller do
   subject(:filler) { described_class.instance }

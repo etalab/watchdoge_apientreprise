@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe Tools::EndpointsHistory::PingsAgregator, vcr: { cassette_name: 'availability_history' } do
   subject(:endpoints_history) { @endpoints_history_subject.to_endpoints_history }

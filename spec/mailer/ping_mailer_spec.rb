@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe PingMailer, type: :mailer do
   subject(:mail) { described_class.ping(endpoint, ping_report) }

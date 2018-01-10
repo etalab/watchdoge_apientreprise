@@ -1,4 +1,4 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe AvailabilityHistory, type: :model do
   subject(:avail) { described_class.new }
