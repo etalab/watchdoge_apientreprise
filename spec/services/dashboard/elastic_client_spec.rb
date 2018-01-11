@@ -20,6 +20,7 @@ describe Dashboard::ElasticClient, type: :service do
     its(:errors) { is_expected.to be_empty }
   end
 
+  # VCR cassette is not generated but it is mandatory a HTTP request is performed
   describe 'when API access is forbidden', vcr: { cassette_name: 'basic_json_query_denied' } do
     its(:success?) { is_expected.to be_falsey}
     its(:raw_response) { is_expected.to be_nil }

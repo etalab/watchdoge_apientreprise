@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Tools::PingsAggregator, vcr: { cassette_name: 'availability_history' } do
+describe Tools::PingsAggregator, vcr: { cassette_name: 'availability_history_shortened' } do
   subject(:endpoints_history) { @endpoints_history_subject.endpoints_history }
 
   let(:timezone) { 'Asia/Jerusalem' }
@@ -8,6 +8,7 @@ describe Tools::PingsAggregator, vcr: { cassette_name: 'availability_history' } 
   before do
     Tools::EndpointDatabaseFiller.instance.refill_database
 
+    allow_any_instance_of(Dashboard::AvailabilityHistoryElastic).to receive(:query_name).and_return('availability_history_shortened')
     remember_through_tests('endpoints_history_subject') do
       service = Dashboard::AvailabilityHistoryElastic.new
       service.send(:retrieve_all_availability_history)
