@@ -31,6 +31,8 @@ branch = ENV['branch'] ||
       'master'
     when 'development', 'sandbox'
       'develop'
+    else
+      raise 'to need to be set, default should be sandbox'
     end
   end
 

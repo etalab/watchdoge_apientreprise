@@ -4,11 +4,13 @@ class Dashboard::AvailabilityHistoryService
   extend Forwardable
   delegate %i[success? errors] => :@client
 
-  TIMEZONE = 'Europe/Paris'
+  TIMEZONE = 'Europe/Paris'.freeze
+
+  # for spec
+  attr_reader :hits
 
   def initialize
     @client = Dashboard::ElasticClient.new
-    @values = []
   end
 
   def perform
@@ -18,7 +20,7 @@ class Dashboard::AvailabilityHistoryService
   end
 
   def results
-    @values.as_json
+    @results.as_json
   end
 
   private
@@ -41,11 +43,7 @@ class Dashboard::AvailabilityHistoryService
     endpoints_history = aggregator.endpoints_history
 
     mapper = Tools::MapEndpointsToProviders.new(endpoints_history)
-    @values = mapper.to_json
-  end
-
-  def hits # for spec
-    @hits
+    @results = mapper.to_json
   end
 
   def retrieved_hits

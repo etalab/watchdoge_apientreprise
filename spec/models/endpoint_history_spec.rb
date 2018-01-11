@@ -8,7 +8,7 @@ describe EndpointHistory, type: :model do
     )
   end
 
-  let(:endpoint) { create(:endpoint)}
+  let(:endpoint) { create(:endpoint) }
 
   before do
     endpoint_history.aggregate(1, '2017-10-10 10:10:10')

@@ -84,7 +84,7 @@ describe PingReport, type: :model do
     its(:valid?) { is_expected.to be_truthy }
 
     it 'is in the database' do
-      subject.save
+      report.save
       expect(described_class.find_by(uname: uname)).not_to be_nil
     end
   end
@@ -104,6 +104,7 @@ describe PingReport, type: :model do
       before { create(:ping_report) }
 
       it 'do not increase report count' do
+        # rubocop:disable Lint/AmbiguousBlockAssociation
         expect { described_class.find_or_create_by(uname: uname) }.not_to change { PingReport.all.count }
       end
     end
@@ -121,7 +122,7 @@ describe PingReport, type: :model do
     its(:last_code) { is_expected.to eq(400) }
   end
 
-  context 'already existing report' do
+  context 'when report already exists' do
     subject(:report) { described_class.new(uname: uname) }
 
     before { create(:ping_report) }

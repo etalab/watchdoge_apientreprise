@@ -18,7 +18,7 @@ class Tools::ProviderInfos
 
   def fill_json
     Endpoint.all.each do |ep|
-      provider = @json.select { |p| p[:uname] == ep.provider}.first
+      provider = @json.select { |p| p[:uname] == ep.provider }.first
       provider[:endpoints_unames] << ep.uname
     end
   end

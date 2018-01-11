@@ -6,7 +6,7 @@ class Dashboard::HomepageStatusService
 
   def initialize
     @client = Dashboard::ElasticClient.new
-    @values = []
+    @results = []
   end
 
   def perform
@@ -16,7 +16,7 @@ class Dashboard::HomepageStatusService
   end
 
   def results
-    @values.as_json
+    @results.as_json
   end
 
   private
@@ -33,6 +33,6 @@ class Dashboard::HomepageStatusService
       'timestamp': raw_endpoint.dig('@timestamp')
     }
 
-    @values << endpoint
+    @results << endpoint
   end
 end

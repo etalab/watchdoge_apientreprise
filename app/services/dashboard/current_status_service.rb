@@ -6,7 +6,7 @@ class Dashboard::CurrentStatusService
 
   def initialize
     @client = Dashboard::ElasticClient.new
-    @values = []
+    @results = []
   end
 
   def perform
@@ -16,7 +16,7 @@ class Dashboard::CurrentStatusService
   end
 
   def results
-    @values.as_json
+    @results.as_json
   end
 
   private
@@ -29,7 +29,7 @@ class Dashboard::CurrentStatusService
     raw_endpoints = @client.raw_response.dig('aggregations', 'group_by_controller', 'buckets')
     raw_endpoints.each do |e|
       source = e.dig('agg_by_endpoint', 'hits', 'hits').first['_source']
-      @values << ElasticsearchSource.new(source).to_json
+      @results << ElasticsearchSource.new(source).to_json
     end
   end
 end

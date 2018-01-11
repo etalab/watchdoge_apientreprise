@@ -22,7 +22,7 @@ describe PingMailer, type: :mailer do
       its(:subject) { is_expected.to match(/\[Watchdoge\] V2 Certificats Qualibat DOWN à \d{2}h\d{2}/) }
 
       it 'body matches' do
-        expect(mail.body.to_s.gsub(/\n/, '')).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.+V2.+Certificats Qualibat.+DOWN/)
+        expect(mail.body.to_s.delete("\n")).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.+V2.+Certificats Qualibat.+DOWN/)
       end
 
       it 'devilver the email' do
@@ -41,7 +41,7 @@ describe PingMailer, type: :mailer do
       its(:subject) { is_expected.to match(/\[Watchdoge\] V2 Certificats Qualibat UP à \d{2}h\d{2}/) }
 
       it 'body matches' do
-        expect(mail.body.to_s.gsub(/\n/, '')).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.+V2.+Certificats Qualibat.+UP.+Il était DOWN depuis le \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
+        expect(mail.body.to_s.delete("\n")).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.+V2.+Certificats Qualibat.+UP.+Il était DOWN depuis le \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
       end
     end
 

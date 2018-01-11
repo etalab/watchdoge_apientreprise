@@ -47,15 +47,19 @@ class Endpoint < ApplicationRecord
     if redirect_limit.zero?
       response
     else
-      case response
-      when Net::HTTPSuccess then
-        response
-      when Net::HTTPRedirection then
-        location = response['location']
-        fetch_with_redirection(URI(location), redirect_limit - 1)
-      else
-        response.value
-      end
+      process_response(response, redirect_limit)
+    end
+  end
+
+  def process_response(response, redirect_limit)
+    case response
+    when Net::HTTPSuccess then
+      response
+    when Net::HTTPRedirection then
+      location = response['location']
+      fetch_with_redirection(URI(location), redirect_limit - 1)
+    else
+      response.value
     end
   end
 
