@@ -52,7 +52,7 @@
           "top_hits": {
             "_source": {
               "includes": [
-                "controller",
+                "path",
                 "status",
                 "@timestamp"
               ]

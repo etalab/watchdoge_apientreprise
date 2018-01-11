@@ -1,6 +1,31 @@
 require 'rails_helper'
 
 describe Endpoint, type: :model do
+  describe 'class methods' do
+    before { Tools::EndpointDatabaseFiller.instance.refill_database }
+
+    it 'finds Endpoint with perfect url' do
+      expect(described_class.find_by_ping_url('/v2/cotisations_msa/81104725700019').uname).to eq('apie_2_cotisations_msa')
+    end
+
+    it 'finds Endpoint with wrong parameter' do
+      expect(described_class.find_by_ping_url('v2/liasses_fiscales_dgfip/2016/declarations/811047257').uname).to eq('apie_2_liasses_fiscales_dgfip_declaration')
+    end
+
+    it 'finds Doc Asso Endpoint with wrong parameter' do
+      expect(described_class.find_by_ping_url('/v2/documents_associations/W262001597').uname).to eq('apie_2_documents_associations_rna')
+    end
+
+    it 'finds Endpoint without parameter' do
+      expect(described_class.find_by_ping_url('/v2/liasses_fiscales_dgfip/2013/dictionnaire').uname).to eq('apie_2_liasses_fiscales_dgfip_dictionnaire')
+    end
+
+    it 'logs an error when not found' do
+      expect(Rails.logger).to receive(:error)
+      described_class.find_by_ping_url('v2/plop/wrong/url')
+    end
+  end
+
   # Begin: real testing
   context 'with one redirection' do
     let(:uname) { 'apie_2_homepage' }
@@ -18,8 +43,6 @@ describe Endpoint, type: :model do
 
     it 'return 200 for all endpoints', vcr: { cassette_name: 'apie_all' } do
       Endpoint.all.each do |ep|
-        # TODO: fixme remove this when provider are up (and update cassette)
-        next if ['apie_2_attestations_cotisation_retraite_probtp','apie_2_attestations_agefiph', 'apie_2_attestations_sociales_acoss', 'apie_1_attestations_cotisation_retraite_probtp', 'apie_1_attestations_sociales_acoss'].include?(ep.uname)
         response = described_class.find_by(uname: ep.uname).http_response
         expect(response).to be_a(Net::HTTPResponse)
         expect(response.code).to eq('200')

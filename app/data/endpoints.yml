@@ -1,7 +1,7 @@
 - uname: sirene_1_homepage
   name: "Page d'accueil"
   provider: sirene
-  api_name: apie
+  api_name: sirene
   api_version: 1
   ping_period: 1
   ping_url: '/'

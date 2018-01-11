@@ -21,7 +21,25 @@ class Endpoint < ApplicationRecord
     URI(base_url + ping_url + http_params)
   end
 
+  def self.find_by_ping_url(url)
+    perfect_match_endpoint = Endpoint.find_by(ping_url: url)
+    return perfect_match_endpoint unless perfect_match_endpoint.nil?
+
+    find_by_ping_url_regexp(url)
+  end
+
   private
+
+  private_class_method def self.find_by_ping_url_regexp(url)
+    # replace siren/siret (2+ digits or RNA id W000000000) with regexp /\d+/ : siret/siren parameters in ELK can be different from those in the database
+    regexp_url = url.gsub(/[A-Z]?\d{2,}/, '.+')
+    # Warning '~' is specific to PGSQL !
+    endpoint = Endpoint.find_by('ping_url ~ ?', regexp_url)
+    return endpoint unless endpoint.nil?
+
+    # TODO: Sentry /Raven
+    Rails.logger.error "fail to find Endpoint with url: #{url}"
+  end
 
   def fetch_with_redirection(location, redirect_limit)
     response = Net::HTTP.get_response(location)
@@ -64,7 +82,7 @@ class Endpoint < ApplicationRecord
     when 'sirene'
       Rails.application.config_for(:secrets)['sirene_base_uri']
     else
-      raise "provider:#{provider} unsupported" # TODO: raven
+      raise "provider:#{provider} unsupported" # TODO: Sentry/Raven
     end
   end
 
@@ -75,7 +93,7 @@ class Endpoint < ApplicationRecord
     when 2
       Rails.application.config_for(:secrets)['apie_base_uri_new']
     else
-      raise "api_version:#{api_version} unsupported!" # TODO: raven
+      raise "api_version:#{api_version} unsupported!" # TODO: Sentry/Raven
     end
   end
 

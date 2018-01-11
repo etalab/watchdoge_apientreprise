@@ -21,6 +21,9 @@ Rails/Output:
 Rails/TimeZone:
   Enabled: false
 
+Rails/DynamicFindBy:
+  Enabled: false
+
 # Ruby 3.0 feature related stuff, will see later
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
@@ -49,6 +52,9 @@ Metrics/BlockLength:
     - 'Guardfile' # mono bloc inside...
 
 Metrics/LineLength:
+  Enabled: false
+
+Metrics/BlockLength:
   Enabled: false
 
 Naming/HeredocDelimiterNaming:
