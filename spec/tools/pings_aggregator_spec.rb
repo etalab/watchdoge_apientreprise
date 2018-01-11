@@ -8,9 +8,9 @@ describe Tools::PingsAggregator, vcr: { cassette_name: 'availability_history_sho
   before do
     Tools::EndpointDatabaseFiller.instance.refill_database
 
-    allow_any_instance_of(Dashboard::AvailabilityHistoryElastic).to receive(:query_name).and_return('availability_history_shortened')
+    allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:query_name).and_return('availability_history_shortened')
     remember_through_tests('endpoints_history_subject') do
-      service = Dashboard::AvailabilityHistoryElastic.new
+      service = Dashboard::AvailabilityHistoryService.new
       service.send(:retrieve_all_availability_history)
       raw_data = service.send(:hits)
       described_class.new(raw_data, timezone)

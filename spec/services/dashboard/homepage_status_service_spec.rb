@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Dashboard::HomepageStatusElastic, type: :service do
+describe Dashboard::HomepageStatusService, type: :service do
   describe 'response', vcr: { cassette_name: 'homepage_status' } do
     subject { described_class.new.perform }
 

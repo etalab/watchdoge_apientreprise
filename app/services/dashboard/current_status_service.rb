@@ -1,6 +1,6 @@
 require 'forwardable'
 
-class Dashboard::CurrentStatusElastic
+class Dashboard::CurrentStatusService
   extend Forwardable
   delegate %i[success? errors] => :@client
 
