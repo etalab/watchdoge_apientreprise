@@ -10,6 +10,7 @@ class Dashboard::AvailabilityHistoryService
   attr_reader :hits
 
   def initialize
+    @hits = []
     @client = Dashboard::ElasticClient.new
   end
 
@@ -26,10 +27,9 @@ class Dashboard::AvailabilityHistoryService
   private
 
   def retrieve_all_availabilities
-    @hits = []
     loop do
       @client.perform json_query
-      break unless success?
+      break unless @client.success?
       @hits.concat retrieved_hits
       @search_after = retrieved_hits.last['sort']
       break if retrieved_hits.count < 10_000

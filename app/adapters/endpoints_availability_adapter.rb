@@ -14,36 +14,40 @@ class EndpointsAvailabilityAdapter
 
   def populate_json_result
     @endpoints_avail_history.each do |endpoint_avail_history|
-      @current_eah = endpoint_avail_history
+      @current_avail_history = endpoint_avail_history
       create_key unless key_exists?
       add_current_eh_to_result
     end
   end
 
   def create_key
-    @providers[@current_eah.provider] = {
-      provider_name: @current_eah.provider,
+    @providers[current_provider] = {
+      provider_name: current_provider,
       endpoints_availability_history: []
     }
   end
 
   def key_exists?
-    @providers.key?(@current_eah.provider)
+    @providers.key?(current_provider)
   end
 
   def add_current_eh_to_result
-    @providers[@current_eah.provider][:endpoints_availability_history] << endpoint_history_json
+    @providers[current_provider][:endpoints_availability_history] << new_json_endpoint_history
   end
 
-  def endpoint_history_json
+  def new_json_endpoint_history
     {
-      uname: @current_eah.uname,
-      name: @current_eah.name,
-      provider: @current_eah.provider,
-      api_version: @current_eah.api_version,
-      timezone: @current_eah.timezone,
-      sla: @current_eah.sla,
-      availability_history: @current_eah.availability_history.to_a
+      uname: @current_avail_history.uname,
+      name: @current_avail_history.name,
+      provider: current_provider,
+      api_version: @current_avail_history.api_version,
+      timezone: @current_avail_history.timezone,
+      sla: @current_avail_history.sla,
+      availability_history: @current_avail_history.availability_history.to_a
     }
+  end
+
+  def current_provider
+    @current_avail_history.provider
   end
 end

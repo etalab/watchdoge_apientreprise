@@ -2,7 +2,7 @@ class Tools::PingsAggregator
   def initialize(raw_data, timezone)
     @raw_data = raw_data
     @timezone = timezone
-    @sources = []
+    @elk_sources = []
     @endpoints_availability_history = {}
   end
 
@@ -18,50 +18,51 @@ class Tools::PingsAggregator
 
   def parse_raw_data_into_sources
     @raw_data.each do |data|
-      source = ElasticsearchSource.new(data['_source'])
-      @sources << source
+      elk_source = ElasticsearchSource.new(data['_source'])
+      @elk_sources << elk_source
     end
 
     @raw_data.clear # 15Mo here...
   end
 
   def fill_history_with_pings
-    @sources.each do |source|
-      @current = source
+    @elk_sources.each do |elk_source|
+      @current_elk_source = elk_source
       create_key unless key_exists?
-      aggregate_current_status
+      aggregate_current_http_code
     end
   end
 
   def create_key
-    @endpoints_availability_history[@current.uname] = current_endpoint_history
+    @endpoints_availability_history[@current_elk_source.uname] = new_endpoint_avail_history
   end
 
-  def current_endpoint_history
+  def new_endpoint_avail_history
     EndpointAvailabilityHistory.new(
-      endpoint: @current.endpoint,
+      endpoint: @current_elk_source.endpoint,
       timezone: @timezone
     )
   end
 
-  def aggregate_current_status
-    is_aggregated = @endpoints_availability_history[@current.uname].aggregate(
-      current_code,
-      current_timestamp
-    )
+  def aggregate_current_http_code
+    is_aggregated = current_endpoint_avail_history.aggregate(current_code, current_timestamp)
 
-    Rails.logger.error "Fail to add ping data (#{@current}) to availability_history" unless is_aggregated
+    Rails.logger.error "Fail to add ping data (#{@current_elk_source}) to availability_history" unless is_aggregated
   end
 
   def key_exists?
-    @endpoints_availability_history.key?(@current.uname)
+    @endpoints_availability_history.key?(@current_elk_source.uname)
+  end
+
+  def current_endpoint_avail_history
+    @endpoints_availability_history[@current_elk_source.uname]
   end
 
   def current_code
-    @current.code == 200 ? 1 : 0
+    @current_elk_source.code == 200 ? 1 : 0
   end
 
   def current_timestamp
-    @current.timestamp
+    @current_elk_source.timestamp
   end
 end
