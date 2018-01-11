@@ -15,6 +15,7 @@ class Dashboard::CurrentStatusService
     self
   end
 
+  # cf json_api_schemas: current_status.json
   def results
     @results.as_json
   end

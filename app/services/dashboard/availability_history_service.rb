@@ -14,7 +14,7 @@ class Dashboard::AvailabilityHistoryService
   end
 
   def perform
-    retrieve_all_availability_history if success?
+    retrieve_all_availabilities if success?
     process_raw_response if success?
     self
   end
@@ -25,7 +25,7 @@ class Dashboard::AvailabilityHistoryService
 
   private
 
-  def retrieve_all_availability_history
+  def retrieve_all_availabilities
     @hits = []
     loop do
       @client.perform json_query
@@ -40,10 +40,10 @@ class Dashboard::AvailabilityHistoryService
 
   def process_raw_response
     aggregator = Tools::PingsAggregator.new(@hits, TIMEZONE)
-    endpoints_history = aggregator.endpoints_history
+    endpoints_availability_history = aggregator.endpoints_availability_history
 
-    mapper = Tools::MapEndpointsToProviders.new(endpoints_history)
-    @results = mapper.to_json
+    adapter = EndpointsAvailabilityAdapter.new(endpoints_availability_history)
+    @results = adapter.to_json_provider_list
   end
 
   def retrieved_hits

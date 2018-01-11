@@ -1,6 +1,6 @@
 require 'forwardable'
 
-class EndpointHistory
+class EndpointAvailabilityHistory
   include ActiveModel::Model
   extend Forwardable
 

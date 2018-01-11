@@ -3,15 +3,15 @@ class Tools::PingsAggregator
     @raw_data = raw_data
     @timezone = timezone
     @sources = []
-    @endpoints_history = {}
+    @endpoints_availability_history = {}
   end
 
-  def endpoints_history
-    if @endpoints_history.empty?
+  def endpoints_availability_history
+    if @endpoints_availability_history.empty?
       parse_raw_data_into_sources
       fill_history_with_pings
     end
-    @endpoints_history.values
+    @endpoints_availability_history.values
   end
 
   private
@@ -34,18 +34,18 @@ class Tools::PingsAggregator
   end
 
   def create_key
-    @endpoints_history[@current.uname] = current_endpoint_history
+    @endpoints_availability_history[@current.uname] = current_endpoint_history
   end
 
   def current_endpoint_history
-    EndpointHistory.new(
+    EndpointAvailabilityHistory.new(
       endpoint: @current.endpoint,
       timezone: @timezone
     )
   end
 
   def aggregate_current_status
-    is_aggregated = @endpoints_history[@current.uname].aggregate(
+    is_aggregated = @endpoints_availability_history[@current.uname].aggregate(
       current_code,
       current_timestamp
     )
@@ -54,7 +54,7 @@ class Tools::PingsAggregator
   end
 
   def key_exists?
-    @endpoints_history.key?(@current.uname)
+    @endpoints_availability_history.key?(@current.uname)
   end
 
   def current_code

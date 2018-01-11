@@ -5,13 +5,13 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["provider_name", "endpoints_history"],
+        "required": ["provider_name", "endpoints_availability_history"],
         "properties": {
           "provider_name": {
             "type": "string",
             "title": "The provider_name"
           },
-          "endpoints_history": {
+          "endpoints_availability_history": {
             "type": "array",
             "items": {
               "type": "object",

@@ -43,7 +43,7 @@ describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_
     # rubocop:disable RSpec/ExampleLength
     it 'has no gap and from < to' do
       results.each do |provider|
-        provider['endpoints_history'].each do |ep|
+        provider['endpoints_availability_history'].each do |ep|
           max_index = ep['availability_history'].size - 1
           index = 0
           previous_to_time = nil

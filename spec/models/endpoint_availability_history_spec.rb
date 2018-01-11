@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe EndpointHistory, type: :model do
+describe EndpointAvailabilityHistory, type: :model do
   subject(:endpoint_history) do
     described_class.new(
       endpoint: endpoint,

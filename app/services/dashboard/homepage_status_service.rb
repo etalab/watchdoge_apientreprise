@@ -15,6 +15,7 @@ class Dashboard::HomepageStatusService
     self
   end
 
+  # cf json_api_schemas: homepage_status.json
   def results
     @results.as_json
   end
