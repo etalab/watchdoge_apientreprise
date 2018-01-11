@@ -4,8 +4,8 @@
   api_version: 2
   provider: qualibat
   ping_period: 60
-  ping_url: '/v2/certificats_qualibat/33592022900036'
-  json_options: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_path: '/v2/certificats_qualibat/33592022900036'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
 
 - uname: apie_1_eligibilites_cotisation_retraite_probtp
   name: Eligibilité cotisations retraite ProBTP
@@ -13,5 +13,5 @@
   api_version: 1
   provider: probtp
   ping_period: 5
-  ping_url: '/v1/eligibilites_cotisation_retraite_probtp/73582032600040'
-  json_options: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_path: '/v1/eligibilites_cotisation_retraite_probtp/73582032600040'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'

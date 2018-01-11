@@ -6,8 +6,8 @@ FactoryBot.define do
     api_version 2
     provider 'qualibat'
     ping_period 60
-    ping_url '/v2/certificats_qualibat/33592022900036'
-    json_options '{ "context": "Ping", "recipient": "SGMAP" }'
+    http_path '/v2/certificats_qualibat/33592022900036'
+    http_query '{ "context": "Ping", "recipient": "SGMAP" }'
   end
 
   factory :ping_report do

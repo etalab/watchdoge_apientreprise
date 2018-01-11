@@ -13,7 +13,6 @@ sudo ufw allow from <your.ip> to any port 9200 proto tcp
 sudo ufw delte allow from <your.ip> to any port 9200 proto tcp
 ```
 
-
 You can test your ELK queries in Kibana.
 
 ## Configuration

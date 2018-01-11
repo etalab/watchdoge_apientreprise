@@ -18,7 +18,7 @@ describe Tools::EndpointDatabaseFiller do
 
     it 'fills database with differents endpoints' do
       expect(endpoints.map(&:uname).count).to eq(endpoints_count)
-      expect(endpoints.map(&:ping_url).count).to eq(endpoints_count)
+      expect(endpoints.map(&:http_path).count).to eq(endpoints_count)
     end
   end
 
@@ -50,10 +50,10 @@ describe Tools::EndpointDatabaseFiller do
       its(:api_version) { is_expected.to eq(2) }
       its(:provider) { is_expected.to eq('qualibat') }
       its(:ping_period) { is_expected.to eq(60) }
-      its(:ping_url) { is_expected.to eq('/v2/certificats_qualibat/33592022900036') }
+      its(:http_path) { is_expected.to eq('/v2/certificats_qualibat/33592022900036') }
 
-      it 'has a correct json_options' do
-        expect(JSON.parse(qualibat.json_options)).to include_json(context: 'Ping', recipient: 'SGMAP')
+      it 'has a correct http_query' do
+        expect(JSON.parse(qualibat.http_query)).to include_json(context: 'Ping', recipient: 'SGMAP')
       end
     end
 
@@ -67,10 +67,10 @@ describe Tools::EndpointDatabaseFiller do
       its(:api_version) { is_expected.to eq(1) }
       its(:provider) { is_expected.to eq('probtp') }
       its(:ping_period) { is_expected.to eq(5) }
-      its(:ping_url) { is_expected.to eq('/v1/eligibilites_cotisation_retraite_probtp/73582032600040') }
+      its(:http_path) { is_expected.to eq('/v1/eligibilites_cotisation_retraite_probtp/73582032600040') }
 
-      it 'has a correct json_options' do
-        expect(JSON.parse(probtp.json_options)).to include_json(context: 'Ping', recipient: 'SGMAP')
+      it 'has a correct http_query' do
+        expect(JSON.parse(probtp.http_query)).to include_json(context: 'Ping', recipient: 'SGMAP')
       end
     end
   end

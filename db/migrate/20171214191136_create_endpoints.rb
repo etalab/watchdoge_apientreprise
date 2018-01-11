@@ -7,8 +7,8 @@ class CreateEndpoints < ActiveRecord::Migration[5.1]
       t.integer :api_version
       t.string :provider
       t.integer :ping_period
-      t.string :ping_url
-      t.string :json_options
+      t.string :http_path
+      t.string :http_query
     end
   end
 end

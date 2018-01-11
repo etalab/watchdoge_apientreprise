@@ -5,24 +5,24 @@ describe Endpoint, type: :model do
     before { Tools::EndpointDatabaseFiller.instance.refill_database }
 
     it 'finds Endpoint with perfect url' do
-      expect(described_class.find_by_ping_url('/v2/cotisations_msa/81104725700019').uname).to eq('apie_2_cotisations_msa')
+      expect(described_class.find_by_http_path('/v2/cotisations_msa/81104725700019').uname).to eq('apie_2_cotisations_msa')
     end
 
     it 'finds Endpoint with wrong parameter' do
-      expect(described_class.find_by_ping_url('v2/liasses_fiscales_dgfip/2016/declarations/811047257').uname).to eq('apie_2_liasses_fiscales_dgfip_declaration')
+      expect(described_class.find_by_http_path('v2/liasses_fiscales_dgfip/2016/declarations/811047257').uname).to eq('apie_2_liasses_fiscales_dgfip_declaration')
     end
 
     it 'finds Doc Asso Endpoint with wrong parameter' do
-      expect(described_class.find_by_ping_url('/v2/documents_associations/W262001597').uname).to eq('apie_2_documents_associations_rna')
+      expect(described_class.find_by_http_path('/v2/documents_associations/W262001597').uname).to eq('apie_2_documents_associations_rna')
     end
 
     it 'finds Endpoint without parameter' do
-      expect(described_class.find_by_ping_url('/v2/liasses_fiscales_dgfip/2013/dictionnaire').uname).to eq('apie_2_liasses_fiscales_dgfip_dictionnaire')
+      expect(described_class.find_by_http_path('/v2/liasses_fiscales_dgfip/2013/dictionnaire').uname).to eq('apie_2_liasses_fiscales_dgfip_dictionnaire')
     end
 
     it 'logs an error when not found' do
       expect(Rails.logger).to receive(:error)
-      described_class.find_by_ping_url('v2/plop/wrong/url')
+      described_class.find_by_http_path('v2/plop/wrong/url')
     end
   end
 
@@ -30,7 +30,7 @@ describe Endpoint, type: :model do
   context 'with one redirection' do
     let(:uname) { 'apie_2_homepage' }
 
-    before { create(:endpoint, uname: uname, provider: 'apientreprise', ping_url: '/') }
+    before { create(:endpoint, uname: uname, provider: 'apientreprise', http_path: '/') }
 
     it 'follows redirection once', vcr: { cassette_name: 'apie/v2_homepage' } do
       expect_any_instance_of(described_class).to receive(:fetch_with_redirection).exactly(:twice).and_call_original
@@ -59,7 +59,7 @@ describe Endpoint, type: :model do
 
   describe 'url is always good' do
     it 'is an apie v1 endpoint' do
-      ep = Endpoint.new(api_name: 'apie', api_version: 1, ping_url: '/v1/toto/SIREN')
+      ep = Endpoint.new(api_name: 'apie', api_version: 1, http_path: '/v1/toto/SIREN')
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to match(/apientreprise.fr/)
       expect(ep.uri.path).to eq('/v1/toto/SIREN')
@@ -67,7 +67,7 @@ describe Endpoint, type: :model do
     end
 
     it 'is an apie v2 endpoint' do
-      ep = Endpoint.new(api_name: 'apie', api_version: 2, ping_url: '/v2/toto/SIREN')
+      ep = Endpoint.new(api_name: 'apie', api_version: 2, http_path: '/v2/toto/SIREN')
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
       expect(ep.uri.path).to eq('/v2/toto/SIREN')
@@ -75,7 +75,7 @@ describe Endpoint, type: :model do
     end
 
     it 'is an apie v2 endpoint with options' do
-      ep = Endpoint.new(api_name: 'apie', api_version: 2, ping_url: '/v2/toto/SIREN', json_options: '{"opt": "plop", "opt2": "test"}')
+      ep = Endpoint.new(api_name: 'apie', api_version: 2, http_path: '/v2/toto/SIREN', http_query: '{"opt": "plop", "opt2": "test"}')
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
       expect(ep.uri.path).to eq('/v2/toto/SIREN')
@@ -83,7 +83,7 @@ describe Endpoint, type: :model do
     end
 
     it 'is an sirene endpoint' do
-      ep = Endpoint.new(api_name: 'sirene', ping_url: '/')
+      ep = Endpoint.new(api_name: 'sirene', http_path: '/')
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to eq('sirene.entreprise.api.gouv.fr')
       expect(ep.uri.path).to eq('/')
@@ -127,13 +127,13 @@ describe Endpoint, type: :model do
       its([:api_version]) { is_expected.not_to be_empty }
       its([:provider]) { is_expected.not_to be_empty }
       its([:ping_period]) { is_expected.not_to be_empty }
-      its([:ping_url]) { is_expected.not_to be_empty }
+      its([:http_path]) { is_expected.not_to be_empty }
     end
 
     it 'has only hashes options' do
-      endpoint = described_class.new(json_options: 'test')
+      endpoint = described_class.new(http_query: 'test')
       expect(endpoint).not_to be_valid
-      expect(endpoint.errors.messages[:json_options].first).to eq('must be nil or a JSON string')
+      expect(endpoint.errors.messages[:http_query].first).to eq('must be nil or a JSON string')
     end
 
     it 'uname must be Unique' do
@@ -164,7 +164,7 @@ describe Endpoint, type: :model do
   end
 
   context 'when creating new endpoint with valid parameters and empty options' do
-    subject { create(:endpoint, json_options: nil) }
+    subject { create(:endpoint, http_query: nil) }
 
     it { is_expected.to be_valid }
     its(:save) { is_expected.to be_truthy }

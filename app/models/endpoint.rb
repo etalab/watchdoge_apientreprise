@@ -9,32 +9,32 @@ class Endpoint < ApplicationRecord
   validates :api_version, numericality: { only_integer: true }
   validates :provider, presence: true
   validates :ping_period, numericality: { only_integer: true }
-  validates :ping_url, presence: true
+  validates :http_path, presence: true
 
-  validate :json_options_nil_or_json_string
+  validate :http_query_nil_or_json_string
 
   def http_response
     fetch_with_redirection(uri, REDIRECT_LIMIT)
   end
 
   def uri
-    URI(base_url + ping_url + http_params)
+    URI(base_url + http_path + http_params)
   end
 
-  def self.find_by_ping_url(url)
-    perfect_match_endpoint = Endpoint.find_by(ping_url: url)
+  def self.find_by_http_path(url)
+    perfect_match_endpoint = Endpoint.find_by(http_path: url)
     return perfect_match_endpoint unless perfect_match_endpoint.nil?
 
-    find_by_ping_url_regexp(url)
+    find_by_http_path_regexp(url)
   end
 
   private
 
-  private_class_method def self.find_by_ping_url_regexp(url)
-    # replace siren/siret (2+ digits or RNA id W000000000) with regexp /\d+/ : siret/siren parameters in ELK can be different from those in the database
+  private_class_method def self.find_by_http_path_regexp(url)
+    # replace siren/siret (2+ digits or RNA id W000000000) with regexp /.+/ : siret/siren parameters in ELK can be different from those in YAML file
     regexp_url = url.gsub(/[A-Z]?\d{2,}/, '.+')
     # Warning '~' is specific to PGSQL !
-    endpoint = Endpoint.find_by('ping_url ~ ?', regexp_url)
+    endpoint = Endpoint.find_by('http_path ~ ?', regexp_url)
     return endpoint unless endpoint.nil?
 
     # TODO: Sentry /Raven
@@ -72,7 +72,7 @@ class Endpoint < ApplicationRecord
   end
 
   def hash_options
-    json_options.nil? ? {} : JSON.parse(json_options)
+    http_query.nil? ? {} : JSON.parse(http_query)
   end
 
   def token
@@ -101,11 +101,11 @@ class Endpoint < ApplicationRecord
     end
   end
 
-  def json_options_nil_or_json_string
-    errors.add(:json_options, 'must be nil or a JSON string') unless valid_json_options?
+  def http_query_nil_or_json_string
+    errors.add(:http_query, 'must be nil or a JSON string') unless valid_http_query?
   end
 
-  def valid_json_options?
-    json_options.nil? || json_options.valid_json?
+  def valid_http_query?
+    http_query.nil? || http_query.valid_json?
   end
 end

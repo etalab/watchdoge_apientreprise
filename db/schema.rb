@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20171218124153) do
     t.integer "api_version"
     t.string "provider"
     t.integer "ping_period"
-    t.string "ping_url"
-    t.string "json_options"
+    t.string "http_path"
+    t.string "http_query"
   end
 
   create_table "ping_reports", force: :cascade do |t|

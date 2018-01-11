@@ -2,11 +2,11 @@ require 'forwardable'
 
 class ElasticsearchSource
   extend Forwardable
-  delegate %i[uname name api_version ping_url provider] => :endpoint
+  delegate %i[uname name api_version http_path provider] => :endpoint
   attr_reader :endpoint, :code, :timestamp
 
   def initialize(source)
-    @endpoint = Endpoint.find_by_ping_url source['path']
+    @endpoint = Endpoint.find_by_http_path source['path']
     @code = source['status']
     @timestamp = source['@timestamp']
   end

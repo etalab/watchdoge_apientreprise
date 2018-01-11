@@ -16,7 +16,7 @@ describe ElasticsearchSource do
     its(:api_version) { is_expected.to eq(2) }
     its(:code) { is_expected.to eq(503) }
     its(:timestamp) { is_expected.to eq('2017-12-03T17:50:03.760Z') }
-    its(:ping_url) { is_expected.to eq('/v2/etablissements_legacy/41816609600069') }
+    its(:http_path) { is_expected.to eq('/v2/etablissements_legacy/41816609600069') }
     its(:to_json) { is_expected.to include_json(uname: 'apie_2_etablissements_legacy', name: 'Etablissements (legacy)', api_version: 2, provider: 'insee', code: 503, timestamp: '2017-12-03T17:50:03.760Z') }
   end
 
@@ -29,7 +29,7 @@ describe ElasticsearchSource do
     its(:api_version) { is_expected.to eq(1) }
     its(:code) { is_expected.to eq(200) }
     its(:timestamp) { is_expected.to eq('2018-01-03T00:01:15.418Z') }
-    its(:ping_url) { is_expected.to eq('/v1/infogreffe/extraits_rcs/418166096') }
+    its(:http_path) { is_expected.to eq('/v1/infogreffe/extraits_rcs/418166096') }
   end
 
   describe 'parsing with uname exception' do
@@ -41,7 +41,7 @@ describe ElasticsearchSource do
     its(:api_version) { is_expected.to eq(1) }
     its(:code) { is_expected.to eq(200) }
     its(:timestamp) { is_expected.to eq('2017-12-03T18:00:02.962Z') }
-    its(:ping_url) { is_expected.to eq('/v1/msa/cotisations/81104725700019') }
+    its(:http_path) { is_expected.to eq('/v1/msa/cotisations/81104725700019') }
   end
 
   describe 'parsing with liasse fiscale' do
@@ -53,6 +53,6 @@ describe ElasticsearchSource do
     its(:api_version) { is_expected.to eq(2) }
     its(:code) { is_expected.to eq(200) }
     its(:timestamp) { is_expected.to eq('2017-12-03T18:00:35.011Z') }
-    its(:ping_url) { is_expected.to eq('/v2/liasses_fiscales_dgfip/2016/declarations/301028346') }
+    its(:http_path) { is_expected.to eq('/v2/liasses_fiscales_dgfip/2016/declarations/301028346') }
   end
 end
