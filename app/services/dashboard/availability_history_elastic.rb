@@ -1,19 +1,32 @@
-class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
+require 'forwardable'
+
+class Dashboard::AvailabilityHistoryElastic
+  extend Forwardable
+  delegate %i[success? errors] => :@client
+
   TIMEZONE = 'Europe/Paris'
 
-  def get
-    get_all_availability_history
-    process_raw_availability_history if success?
+  def initialize
+    @client = Dashboard::ElasticClient.new
+    @values = []
+  end
+
+  def perform
+    retrieve_all_availability_history if success?
+    process_raw_response if success?
     self
+  end
+
+  def results
+    @values.as_json
   end
 
   private
 
-  # rubocop:disable Naming/AccessorMethodName
-  def get_all_availability_history
+  def retrieve_all_availability_history
     @hits = []
     loop do
-      get_raw_response(query)
+      @client.perform json_query
       break unless success?
       @hits.concat retrieved_hits
       @search_after = retrieved_hits.last['sort']
@@ -23,11 +36,11 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
     @success = false
   end
 
-  def process_raw_availability_history
-    agregator = Tools::EndpointsHistory::PingsAgregator.new(@hits, TIMEZONE)
-    endpoints_history = agregator.to_endpoints_history
+  def process_raw_response
+    aggregator = Tools::PingsAggregator.new(@hits, TIMEZONE)
+    endpoints_history = aggregator.endpoints_history
 
-    mapper = Tools::EndpointsHistory::MapEndpointsToProviders.new(endpoints_history)
+    mapper = Tools::MapEndpointsToProviders.new(endpoints_history)
     @values = mapper.to_json
   end
 
@@ -36,15 +49,19 @@ class Dashboard::AvailabilityHistoryElastic < Dashboard::AbstractElastic
   end
 
   def retrieved_hits
-    @raw_response.dig('hits', 'hits')
+    @client.raw_response.dig('hits', 'hits')
   end
 
-  def query
+  def json_query
     query_hash.merge(search_after: @search_after).compact.to_json
   end
 
   def query_hash
     JSON.parse load_query(query_name)
+  end
+
+  def load_query(query_name)
+    File.read(File.join('app', 'data', 'queries', query_name + '.json'))
   end
 
   def query_name

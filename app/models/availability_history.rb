@@ -3,7 +3,7 @@ class AvailabilityHistory
     @availability_history = []
   end
 
-  def add_ping(code, time)
+  def aggregate(code, time)
     @code = code
     @time = time
 

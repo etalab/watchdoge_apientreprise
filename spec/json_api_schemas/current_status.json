@@ -5,15 +5,19 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["name", "sub_name", "api_version", "code", "timestamp"],
+        "required": ["uname", "name", "provider", "api_version", "code", "timestamp"],
         "properties": {
+          "uname": {
+            "type": "string",
+            "title": "The Unique Name of the endpoint."
+          },
           "name": {
             "type": "string",
             "title": "The Name of the endpoint."
           },
-          "sub_name": {
-            "type": ["string", "null"],
-            "title": "The sub_name of the endpoint can be null"
+          "provider": {
+            "type": "string",
+            "title": "The data provider of the endpoint"
           },
           "api_version": {
             "type": "integer",

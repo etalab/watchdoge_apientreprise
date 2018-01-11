@@ -2,6 +2,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
 require 'mina/rbenv'
+require 'mina_sidekiq/tasks'
 require 'mina/whenever'
 require 'colorize'
 
@@ -67,6 +68,8 @@ end
 task setup: :remote_environment do
   # Production database has to be setup !
   # command %(rbenv install 2.3.0)
+  command %(mkdir -p "#{fetch(:deploy_to)}/shared/pids/")
+  command %(mkdir -p "#{fetch(:deploy_to)}/shared/log/")
 end
 
 desc 'Deploys the current version to the server.'
@@ -87,6 +90,8 @@ task deploy: :remote_environment do
       in_path(fetch(:current_path)) do
         command %(mkdir -p tmp/)
         command %(touch tmp/restart.txt)
+
+        invoke :'sidekiq:restart'
 
         if ENV['to'] == 'production'
           comment 'Updating cronotab'.green

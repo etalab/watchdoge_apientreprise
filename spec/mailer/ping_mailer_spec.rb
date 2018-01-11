@@ -1,27 +1,28 @@
-require 'rails_helper.rb'
+require 'rails_helper'
 
 describe PingMailer, type: :mailer do
-  subject(:mail) { described_class.ping(ping_report) }
+  subject(:mail) { described_class.ping(endpoint, ping_report) }
 
-  let(:ping_report) { create(:ping_report, last_code: last_code) }
+  let(:endpoint) { create(:endpoint) }
+  let(:ping_report) { create(:ping_report, uname: 'apie_2_certificats_qualibat', last_code: last_code) }
 
   context 'when situation has changed' do
     let(:last_code) { 200 }
+    let(:new_code) { 200 }
+
+    before { ping_report.notify_change(new_code) }
 
     its(:to)      { is_expected.to eq([Rails.application.config_for(:secrets)['ping_email_recipient']]) }
     its(:from)    { is_expected.to eq(['ping.watchdoge@watchdoge.entreprise.api.gouv.fr']) }
 
     context 'when UP to DOWN' do
       let(:last_code) { 200 }
+      let(:new_code) { 503 }
 
-      before do
-        ping_report.notify_new_ping(503, Time.now)
-      end
-
-      its(:subject) { is_expected.to match(/\[Watchdoge\] V2 etablissements successeurs DOWN à \d{2}h\d{2}/) }
+      its(:subject) { is_expected.to match(/\[Watchdoge\] V2 Certificats Qualibat DOWN à \d{2}h\d{2}/) }
 
       it 'body matches' do
-        expect(mail.body.to_s.gsub(/\n/, '')).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.+V2.+etablissements successeurs.+DOWN/)
+        expect(mail.body.to_s.gsub(/\n/, '')).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.+V2.+Certificats Qualibat.+DOWN/)
       end
 
       it 'devilver the email' do
@@ -35,15 +36,12 @@ describe PingMailer, type: :mailer do
 
     context 'when DOWN to UP' do
       let(:last_code) { 503 }
+      let(:new_code) { 200 }
 
-      before do
-        ping_report.notify_new_ping(200, Time.now)
-      end
-
-      its(:subject) { is_expected.to match(/\[Watchdoge\] V2 etablissements successeurs UP à \d{2}h\d{2}/) }
+      its(:subject) { is_expected.to match(/\[Watchdoge\] V2 Certificats Qualibat UP à \d{2}h\d{2}/) }
 
       it 'body matches' do
-        expect(mail.body.to_s.gsub(/\n/, '')).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.+V2.+etablissements successeurs.+UP.+Il était DOWN depuis le \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
+        expect(mail.body.to_s.gsub(/\n/, '')).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.+V2.+Certificats Qualibat.+UP.+Il était DOWN depuis le \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)
       end
     end
 
@@ -54,11 +52,5 @@ describe PingMailer, type: :mailer do
     it 'devilver the email' do
       expect { mail.deliver_now }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
-  end
-
-  context 'when report has not a sub_name' do
-    let(:ping_report) { create(:ping_report, sub_name: nil) }
-
-    its(:subject) { is_expected.to match(/\[Watchdoge\] V2 etablissements  UP/) }
   end
 end

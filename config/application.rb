@@ -32,5 +32,7 @@ module Watchdoge
 
     config.autoload_paths << Rails.root.join('lib')
     config.thread_number = 8
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

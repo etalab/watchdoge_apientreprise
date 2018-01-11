@@ -1,9 +1,0 @@
-endpoints:
-  - name: homepage
-    provider: apie
-    api_version: 1
-    period: 1
-    parameter: 'homepage'
-    options:
-      recipient: 'SGMAP'
-      context: 'Ping'

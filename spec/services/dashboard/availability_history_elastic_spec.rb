@@ -1,11 +1,14 @@
 require 'rails_helper'
 
-describe Dashboard::AvailabilityHistoryElastic, type: :service, vcr: { cassette_name: 'availability_history' } do
-  let(:service) { @availability_results_get }
+describe Dashboard::AvailabilityHistoryElastic, type: :service, vcr: { cassette_name: 'availability_history_shortened' } do
+  let(:service) { @availability_results_perform }
 
   before do
-    remember_through_tests('availability_results_get') do
-      described_class.new.get
+    Tools::EndpointDatabaseFiller.instance.refill_database
+    
+    allow_any_instance_of(Dashboard::AvailabilityHistoryElastic).to receive(:query_name).and_return('availability_history_shortened')
+    remember_through_tests('availability_results_perform') do
+      described_class.new.perform
     end
   end
 
@@ -24,11 +27,12 @@ describe Dashboard::AvailabilityHistoryElastic, type: :service, vcr: { cassette_
 
     describe 'providers' do
       let(:providers) { results.map { |r| r['provider_name'] }.sort }
-      let(:expected_providers) { Tools::EndpointFactory.new('apie').providers_infos.keys.sort }
+      let(:expected_providers) { Tools::ProviderInfos.instance.all.map { |p| p[:uname] }.sort }
 
       it 'contains specifics providers' do
-        expected_providers.delete('apie')
-        expect(expected_providers).to eq(providers)
+        expected_providers.delete('apientreprise')
+        expected_providers.delete('sirene')
+        expect(providers).to eq(expected_providers)
       end
     end
 
@@ -64,7 +68,7 @@ describe Dashboard::AvailabilityHistoryElastic, type: :service, vcr: { cassette_
   end
 
   describe 'invalid query', vcr: { cassette_name: 'invalid_query' } do
-    subject { described_class.new.get }
+    subject { described_class.new.perform }
 
     before do
       allow_any_instance_of(described_class).to receive(:load_query).and_return({ query: { match_allllll: {} } }.to_json)

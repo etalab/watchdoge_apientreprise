@@ -1,0 +1,23 @@
+{
+  "type": "array",
+  "minItems": 15,
+  "maxItems": 15,
+  "items": {
+    "type:": "object",
+    "required": ["uname", "endpoints_unames"],
+    "properties": {
+      "uname": {
+        "type": "string",
+        "title": "unique name of the provider"
+      },
+      "endpoints_unames": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "string",
+          "title": "unique name of the endpoint"
+        }
+      }
+    }
+  }
+}
