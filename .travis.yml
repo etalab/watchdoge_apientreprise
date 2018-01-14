@@ -6,5 +6,6 @@ services:
 before_script:
   - psql -c 'create database watchdoge_test_travis;' -U postgres
   - cp config/database.travis.yml config/database.yml
+  - bundle exec rake dev:secrets
 script:
   - bundle exec rspec spec

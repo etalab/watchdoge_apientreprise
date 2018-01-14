@@ -35,6 +35,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry'
   gem 'pry-byebug'
+  gem 'unindent'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -49,7 +50,6 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'unindent'
 
   # ruby syntax analyze
   gem 'rubocop', require: false

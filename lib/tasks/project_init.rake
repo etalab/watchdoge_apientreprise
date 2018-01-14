@@ -1,18 +1,19 @@
 require 'fileutils'
 
 namespace :dev do
-  desc 'initialize dev environment'
-  task :init do
-    puts 'Start initialization'.green
-    create_secrets
-    init_database
-  end
-
-  def create_secrets
+  desc 'create secrets'
+  task :secrets do
     puts 'create dummy Watchdoge secrets'.green
     content = secrets
     file = File.new('config/secrets.yml', 'w+')
     file.write(content.unindent)
+  end
+
+  desc 'initialize dev environment'
+  task :init do
+    puts 'Start initialization'.green
+    Rake::Task['dev:secrets'].invoke
+    init_database
   end
 
   def init_database
