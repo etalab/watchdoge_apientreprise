@@ -4,6 +4,10 @@ Watchdoge is a watchdog for [API Entreprise](https://github.com/etalab/apientrep
 
 Watchdoge run on Ruby 2.4.2
 
+master: [![Build Status](https://travis-ci.org/etalab/watchdoge_apientreprise.svg?branch=master)](https://travis-ci.org/etalab/watchdoge_apientreprise)
+ 
+develop: [![Build Status](https://travis-ci.org/etalab/watchdoge_apientreprise.svg?branch=develop)](https://travis-ci.org/etalab/watchdoge_apientreprise)
+
 # Elasticsearch
 
 The API uses Elasticsearch API, only authorised IP can make requests to Elasticsearch API, add yours for development purpose.
@@ -21,7 +25,11 @@ You can test your ELK queries in Kibana.
 
 The database user should exists, it uses PostgreSQL (cf. `config/database.yml`). Execute the following command line to create the default user:
 
-`psql -f db/init.sql`
+```
+sudo -u postgres -i
+cd /path/to/watchdoge
+psql -f db/init.sql
+```
 
 ### Development environment
 
