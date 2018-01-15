@@ -14,7 +14,7 @@ class Endpoint < ApplicationRecord
   validate :http_query_nil_or_json_string
 
   def http_response
-    fetch_with_redirection(uri, REDIRECT_LIMIT)
+    @http_response ||= fetch_with_redirection(uri, REDIRECT_LIMIT)
   end
 
   def uri
@@ -59,7 +59,7 @@ class Endpoint < ApplicationRecord
       location = response['location']
       fetch_with_redirection(URI(location), redirect_limit - 1)
     else
-      response.value
+      response
     end
   end
 

@@ -1,19 +1,6 @@
 require 'rails_helper'
 
 # rubocop:disable Rspec/MultipleDescribes
-describe 'watch:all', vcr: { cassette_name: 'apie_all' } do
-  include_context 'rake'
-
-  before { Tools::EndpointDatabaseFiller.instance.refill_database }
-
-  context 'with all endpoints' do
-    it 'exactly send 40 workers to sidekiq' do
-      task.invoke
-      expect { PingWorker.drain }.to change { PingWorker.jobs.size }.from(endpoints_count).to(0)
-    end
-  end
-end
-
 describe 'watch:period_1', vcr: { cassette_name: 'apie_all' } do
   include_context 'rake'
 
