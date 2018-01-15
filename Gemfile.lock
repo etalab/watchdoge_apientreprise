@@ -141,6 +141,7 @@ GEM
     public_suffix (3.0.1)
     puma (3.11.0)
     rack (2.0.3)
+    rack-cors (1.0.2)
     rack-protection (2.0.0)
       rack
     rack-test (0.8.2)
@@ -273,6 +274,7 @@ DEPENDENCIES
   pry
   pry-byebug
   puma (~> 3.7)
+  rack-cors
   rails (~> 5.1.1)
   rspec-its
   rspec-json_expectations

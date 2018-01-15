@@ -28,9 +28,6 @@ gem 'whenever'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
-
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry'
@@ -53,6 +50,9 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-checkstyle_formatter', require: false
   gem 'rubocop-rspec', require: false
+
+  # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+  gem 'rack-cors'
 
   gem 'mina'
   gem 'mina-whenever'
