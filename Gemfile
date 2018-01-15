@@ -45,8 +45,6 @@ group :development do
   gem 'fuubar'
   gem 'guard'
   gem 'guard-rspec', require: false
-  gem 'mina'
-  gem 'mina-sidekiq'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -56,6 +54,7 @@ group :development do
   gem 'rubocop-checkstyle_formatter', require: false
   gem 'rubocop-rspec', require: false
 
+  gem 'mina'
   gem 'mina-whenever'
 end
 
