@@ -42,6 +42,7 @@ group :development do
   gem 'fuubar'
   gem 'guard'
   gem 'guard-rspec', require: false
+  gem 'simplecov'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -57,9 +58,6 @@ group :development do
   gem 'mina'
   gem 'mina-whenever'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :test do
   gem 'json-schema'

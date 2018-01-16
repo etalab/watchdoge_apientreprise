@@ -14,7 +14,7 @@ The API uses Elasticsearch API, only authorised IP can make requests to Elastics
 
 ```
 sudo ufw allow from <your.ip> to any port 9200 proto tcp
-sudo ufw delte allow from <your.ip> to any port 9200 proto tcp
+sudo ufw delete allow from <your.ip> to any port 9200 proto tcp
 ```
 
 You can test your ELK queries in Kibana.
