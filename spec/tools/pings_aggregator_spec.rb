@@ -6,8 +6,6 @@ describe Tools::PingsAggregator, vcr: { cassette_name: 'availability_history_sho
   let(:timezone) { 'Asia/Jerusalem' }
 
   before do
-    Tools::EndpointDatabaseFiller.instance.refill_database
-
     allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:query_name).and_return('availability_history_shortened')
     remember_through_tests('endpoints_history_subject') do
       service = Dashboard::AvailabilityHistoryService.new

@@ -16,8 +16,8 @@ describe EndpointAvailabilityHistory, type: :model do
     endpoint_history.aggregate(1, '2017-10-14 10:10:10')
   end
 
-  its(:uname) { is_expected.to eq('apie_2_certificats_qualibat') }
-  its(:name) { is_expected.to eq('Certificats Qualibat') }
+  its(:uname) { is_expected.to eq('apie_2_certificats_test') }
+  its(:name) { is_expected.to eq('Certificats Test') }
   its(:api_version) { is_expected.to eq(2) }
   its(:timezone) { is_expected.to eq('Asia/Jerusalem') }
   its(:provider) { is_expected.to eq('qualibat') }

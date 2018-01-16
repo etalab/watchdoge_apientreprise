@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe Endpoint, type: :model do
   describe 'class methods' do
-    before { Tools::EndpointDatabaseFiller.instance.refill_database }
-
     it 'finds Endpoint with perfect url' do
       expect(described_class.find_by_http_path('/v2/cotisations_msa/81104725700019').uname).to eq('apie_2_cotisations_msa')
     end
@@ -28,7 +26,7 @@ describe Endpoint, type: :model do
 
   # Begin: real testing
   context 'with one redirection' do
-    let(:uname) { 'apie_2_homepage' }
+    let(:uname) { 'apie_2_homepage_test' }
 
     before { create(:endpoint, uname: uname, provider: 'apientreprise', http_path: '/') }
 
@@ -39,8 +37,6 @@ describe Endpoint, type: :model do
   end
 
   describe 'all endpoints must be valids' do
-    before { Tools::EndpointDatabaseFiller.instance.refill_database }
-
     it 'return 200 for all endpoints', vcr: { cassette_name: 'apie_all' } do
       Endpoint.all.each do |ep|
         response = described_class.find_by(uname: ep.uname).http_response
@@ -92,9 +88,10 @@ describe Endpoint, type: :model do
   end
 
   describe 'ping behaviour', vcr: { cassette_name: 'apie/v2_qualibat' } do
-    subject(:ep) { create(:endpoint) }
+    subject(:ep) { Endpoint.find_by(uname: 'apie_2_certificats_qualibat') }
 
     its(:http_response) { is_expected.to be_a(Net::HTTPResponse) }
+
     it 'is a correct uri' do
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
@@ -171,15 +168,17 @@ describe Endpoint, type: :model do
   end
 
   context 'when loading endpoint' do
-    subject { described_class.find_by(uname: 'apie_2_certificats_qualibat') }
+    subject { described_class.find_by(uname: 'not_existing_uname') }
 
     it { is_expected.to be_nil }
 
     context 'when endpoint exists' do
+      subject { described_class.find_by(uname: 'apie_2_certificats_test') }
+
       before { create(:endpoint) }
 
       it { is_expected.not_to be_nil }
-      its(:uname) { is_expected.to eq('apie_2_certificats_qualibat') }
+      its(:uname) { is_expected.to eq('apie_2_certificats_test') }
     end
   end
 

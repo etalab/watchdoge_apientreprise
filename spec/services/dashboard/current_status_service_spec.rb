@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe Dashboard::CurrentStatusService, type: :service do
-  before { Tools::EndpointDatabaseFiller.instance.refill_database }
-
   describe 'response', vcr: { cassette_name: 'current_status' } do
     subject { described_class.new.perform }
 

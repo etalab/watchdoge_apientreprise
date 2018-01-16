@@ -106,6 +106,13 @@ class Endpoint < ApplicationRecord
   end
 
   def valid_http_query?
-    http_query.nil? || http_query.valid_json?
+    http_query.nil? || valid_json?(http_query)
+  end
+
+  def valid_json?(s)
+    JSON.parse(s)
+    return true
+  rescue JSON::ParserError
+    return false
   end
 end

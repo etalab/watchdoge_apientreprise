@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe DashboardController, type: :controller do
-  before { Tools::EndpointDatabaseFiller.instance.refill_database }
-
   describe 'Current status happy path', vcr: { cassette_name: 'current_status' } do
     subject { get :current_status }
 

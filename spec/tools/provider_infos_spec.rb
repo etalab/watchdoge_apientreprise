@@ -3,8 +3,6 @@ require 'rails_helper'
 describe Tools::ProviderInfos do
   subject(:provider_infos) { described_class.instance }
 
-  before { Tools::EndpointDatabaseFiller.instance.refill_database }
-
   it { is_expected.to be_a_kind_of(described_class) }
 
   # Json schema can't check uniqueness

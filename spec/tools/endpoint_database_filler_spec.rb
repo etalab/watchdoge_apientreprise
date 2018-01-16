@@ -22,12 +22,18 @@ describe Tools::EndpointDatabaseFiller do
     end
   end
 
-  it 'empties the database' do
-    create(:endpoint)
-    expect(Endpoint.all.count).to eq(1)
-    allow(filler).to receive(:fill_database).and_return(nil)
-    filler.refill_database
-    expect(Endpoint.all.count).to eq(0)
+  describe 'empty the database' do
+    before do
+      Endpoint.delete_all
+      create(:endpoint)
+    end
+
+    it 'empties the database' do
+      expect(Endpoint.all.count).to eq(1)
+      allow(filler).to receive(:fill_database).and_return(nil)
+      filler.refill_database
+      expect(Endpoint.all.count).to eq(0)
+    end
   end
 
   describe 'refill with payload file' do

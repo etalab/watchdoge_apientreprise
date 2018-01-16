@@ -5,8 +5,6 @@ describe ElasticsearchSource do
 
   let(:source_example) { JSON.parse(File.read(filename)) }
 
-  before { Tools::EndpointDatabaseFiller.instance.refill_database }
-
   describe 'basic parsing' do
     let(:filename) { 'spec/support/payload_files/legacy_elasticsearch_source.json' }
 

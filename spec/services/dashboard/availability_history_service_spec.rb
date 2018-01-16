@@ -4,8 +4,6 @@ describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_
   let(:service) { @availability_results_perform }
 
   before do
-    Tools::EndpointDatabaseFiller.instance.refill_database
-
     allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:query_name).and_return('availability_history_shortened')
     remember_through_tests('availability_results_perform') do
       described_class.new.perform
