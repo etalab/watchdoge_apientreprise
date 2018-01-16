@@ -291,6 +291,7 @@ DEPENDENCIES
   rubocop-rspec
   sidekiq
   simplecov
+  simplecov-html
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)

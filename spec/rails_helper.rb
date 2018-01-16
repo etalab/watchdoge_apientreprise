@@ -9,6 +9,9 @@ require 'rspec/json_expectations'
 require 'support/factory_bot'
 require 'vcr_helper'
 require 'sidekiq/testing'
+require 'simplecov'
+
+SimpleCov.start
 
 Sidekiq::Testing.fake!
 

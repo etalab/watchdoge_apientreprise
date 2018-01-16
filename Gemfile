@@ -43,6 +43,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'simplecov'
+  gem 'simplecov-html'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
