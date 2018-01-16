@@ -2,14 +2,8 @@ require 'colorize'
 
 # These tasks are for local development and have no tests
 namespace :watch do
-  desc 'refill development database'
-  task 'refill': :environment do
-    puts 'Dropping Endpoint database... refilling database...'.blue
-    Tools::EndpointDatabaseFiller.instance.refill_database
-  end
-
   desc 'run watchdoge service on all endpoints'
-  task 'all': :refill do
+  task 'all': :environment do
     Endpoint.all.each do |endpoint|
       endpoint.http_response
       print_console_infos endpoint
@@ -17,7 +11,7 @@ namespace :watch do
   end
 
   desc 'run a specific endpoint by uname'
-  task 'one': :refill do
+  task 'one': :environment do
     # rubocop:disable Style/BlockDelimiters
     ARGV.each { |a| task a.to_sym do; end } # it removes exit exception
 
