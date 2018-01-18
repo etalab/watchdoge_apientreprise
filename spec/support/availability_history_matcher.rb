@@ -1,12 +1,13 @@
 RSpec::Matchers.define  :be_a_valid_availabilities_history do
   match do |availability_history|
     availability_history.each do |provider|
-      provider['endpoints_availability_history'].each do |ep|
-        max_index = ep['availability_history'].size - 1
+      provider['endpoints_availability_history'].each do |endpoint|
+        # there is an exception on last index
+        max_index = endpoint['availability_history'].size - 1
         index = 0
         previous_to_time = nil
 
-        ep['availability_history'].each do |avail|
+        endpoint['availability_history'].each do |avail|
           if index < max_index
             # from < to (except for last one)
             expect(Time.parse(avail[0])).to be < Time.parse(avail[2])

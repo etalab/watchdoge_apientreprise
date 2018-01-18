@@ -42,6 +42,6 @@ class Dashboard::CurrentStatusService
 
   def json_from_raw_endpoint(raw_endpoint)
     source = raw_endpoint.dig('agg_by_endpoint', 'hits', 'hits').first['_source']
-    ElasticsearchSource.new(source).to_json
+    EndpointPingResult.new(source).to_json
   end
 end

@@ -1,6 +1,6 @@
 require 'forwardable'
 
-class ElasticsearchSource
+class EndpointPingResult
   extend Forwardable
   delegate %i[uname name api_version http_path provider] => :endpoint
   attr_reader :endpoint, :code, :timestamp
