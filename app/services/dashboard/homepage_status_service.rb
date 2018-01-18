@@ -6,12 +6,16 @@ class Dashboard::HomepageStatusService
 
   def initialize
     @client = Dashboard::ElasticClient.new
+    @client.establish_connection
     @raw_results = []
   end
 
   def perform
-    @client.perform json_query
-    process_raw_response if success?
+    if @client.connected?
+      @client.perform json_query
+      process_raw_response if @client.success?
+    end
+
     self
   end
 
@@ -23,7 +27,7 @@ class Dashboard::HomepageStatusService
   private
 
   def json_query
-    File.read(File.join('app', 'data', 'queries', 'homepage_status.json'))
+    File.read('app/data/queries/homepage_status.json')
   end
 
   def process_raw_response

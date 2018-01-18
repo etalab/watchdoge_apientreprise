@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 describe Dashboard::ElasticClient, type: :service do
-  subject { service }
+  subject(:client) { described_class.new }
 
-  let(:service) { described_class.new.perform(basic_json_query) }
+  before do
+    client.establish_connection
+    client.perform basic_json_query
+  end
 
   let(:basic_json_query) do
     {

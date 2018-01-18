@@ -6,18 +6,22 @@ class Dashboard::CurrentStatusService
 
   def initialize
     @client = Dashboard::ElasticClient.new
-    @results = []
+    @client.establish_connection
+    @raw_results = []
   end
 
   def perform
-    @client.perform json_query
-    process_raw_response if success?
+    if @client.connected?
+      @client.perform json_query
+      process_raw_response if @client.success?
+    end
+
     self
   end
 
   # cf json_api_schemas: current_status.json
   def results
-    @results.as_json
+    @raw_results.as_json
   end
 
   private
@@ -28,7 +32,7 @@ class Dashboard::CurrentStatusService
 
   def process_raw_response
     raw_endpoints.each do |raw_endpoint|
-      @results << json_from_raw_endpoint(raw_endpoint)
+      @raw_results << json_from_raw_endpoint(raw_endpoint)
     end
   end
 

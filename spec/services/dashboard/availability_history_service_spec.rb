@@ -38,30 +38,8 @@ describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_
       expect(json).to match_json_schema('availability_history')
     end
 
-    # rubocop:disable RSpec/ExampleLength
     it 'has no gap and from < to' do
-      results.each do |provider|
-        provider['endpoints_availability_history'].each do |ep|
-          max_index = ep['availability_history'].size - 1
-          index = 0
-          previous_to_time = nil
-          ep['availability_history'].each do |avail|
-            if index < max_index
-              # from < to (except for last one)
-              expect(Time.parse(avail[0])).to be < Time.parse(avail[2])
-              index += 1
-            end
-
-            # has no gap
-            unless previous_to_time.nil?
-              from_time = Time.parse(avail[0])
-              expect(from_time).to eq(previous_to_time)
-            end
-
-            previous_to_time = Time.parse(avail[2])
-          end
-        end
-      end
+      expect(results).to be_a_valid_availabilities_history
     end
   end
 
