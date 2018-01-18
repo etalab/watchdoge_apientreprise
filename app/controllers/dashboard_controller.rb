@@ -1,16 +1,16 @@
 class DashboardController < ApplicationController
   class << self
-    def expose_services_status(*status_service_classes)
-      status_service_classes.each do |status_service_class|
-        expose_service_status(status_service_class)
+    def expose_services(*service_classes)
+      service_classes.each do |service_class|
+        expose_service(service_class)
       end
     end
 
-    def expose_service_status(status_service_class)
-      method_name = status_service_class.name.split('::').last.sub('Service','').underscore
+    def expose_service(service_class)
+      method_name = service_class.name.split('::').last.sub('Service', '').underscore
 
       define_method(method_name) do
-        service = status_service_class.new.perform
+        service = service_class.new.perform
 
         if service.success?
           render json: { results: service.results }, status: 200
@@ -21,7 +21,8 @@ class DashboardController < ApplicationController
     end
   end
 
-  expose_services_status  Dashboard::CurrentStatusService,
-                          Dashboard::AvailabilityHistoryService,
-                          Dashboard::HomepageStatusService
+  expose_services Dashboard::CurrentStatusService,
+                  Dashboard::AvailabilityHistoryService,
+                  Dashboard::HomepageStatusService
+
 end
