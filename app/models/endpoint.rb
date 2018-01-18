@@ -18,7 +18,7 @@ class Endpoint < ApplicationRecord
   end
 
   def uri
-    URI(base_url + http_path + http_params)
+    URI(tool_api.base_url + http_path + http_params)
   end
 
   def self.find_by_http_path(url)
@@ -57,44 +57,20 @@ class Endpoint < ApplicationRecord
     end
   end
 
-  def http_params
-    send("#{api_name}_http_params")
-  rescue NoMethodError
-    ''
+  def tool_api
+    @tool_api ||= Tools::API.new(api_name: api_name, api_version: api_version)
   end
 
-  def apie_http_params
-    '?' + { token: token }.merge(hash_options).to_param
+  def http_params
+    '?' + { token: token }.merge(hash_options).compact.to_param
+  end
+
+  def token
+    tool_api.token
   end
 
   def hash_options
     http_query.nil? ? {} : JSON.parse(http_query)
-  end
-
-  def token
-    Rails.application.config_for(:secrets)['apie_token'] if api_name == 'apie'
-  end
-
-  def base_url
-    case api_name
-    when 'apie'
-      apie_base_url
-    when 'sirene'
-      Rails.application.config_for(:secrets)['sirene_base_uri']
-    else
-      raise "provider:#{provider} unsupported" # TODO: Sentry/Raven
-    end
-  end
-
-  def apie_base_url
-    case api_version
-    when 1
-      Rails.application.config_for(:secrets)['apie_base_uri_old']
-    when 2
-      Rails.application.config_for(:secrets)['apie_base_uri_new']
-    else
-      raise "api_version:#{api_version} unsupported!" # TODO: Sentry/Raven
-    end
   end
 
   def http_query_nil_or_json_string
