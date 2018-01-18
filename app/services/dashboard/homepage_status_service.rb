@@ -6,7 +6,7 @@ class Dashboard::HomepageStatusService
 
   def initialize
     @client = Dashboard::ElasticClient.new
-    @results = []
+    @raw_results = []
   end
 
   def perform
