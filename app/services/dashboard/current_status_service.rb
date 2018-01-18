@@ -23,14 +23,21 @@ class Dashboard::CurrentStatusService
   private
 
   def json_query
-    File.read(File.join('app', 'data', 'queries', 'current_status.json'))
+    File.read('app/data/queries/current_status.json')
   end
 
   def process_raw_response
-    raw_endpoints = @client.raw_response.dig('aggregations', 'group_by_controller', 'buckets')
-    raw_endpoints.each do |e|
-      source = e.dig('agg_by_endpoint', 'hits', 'hits').first['_source']
-      @results << ElasticsearchSource.new(source).to_json
+    raw_endpoints.each do |raw_endpoint|
+      @results << json_from_raw_endpoint(raw_endpoint)
     end
+  end
+
+  def raw_endpoints
+    @client.raw_response.dig('aggregations', 'group_by_controller', 'buckets')
+  end
+
+  def json_from_raw_endpoint(raw_endpoint)
+    source = raw_endpoint.dig('agg_by_endpoint', 'hits', 'hits').first['_source']
+    ElasticsearchSource.new(source).to_json
   end
 end

@@ -11,6 +11,11 @@ class Dashboard::AvailabilityHistoryService
 
   def initialize
     @hits = []
+    initialize_es_client_connection
+  end
+
+  def initialize_es_client_connection
+    # This attempts to connect immediatly
     @client = Dashboard::ElasticClient.new
   end
 
@@ -21,7 +26,7 @@ class Dashboard::AvailabilityHistoryService
   end
 
   def results
-    @results.as_json
+    @raw_results.as_json
   end
 
   private
@@ -43,7 +48,7 @@ class Dashboard::AvailabilityHistoryService
     endpoints_availability_history = aggregator.endpoints_availability_history
 
     adapter = EndpointsAvailabilityAdapter.new(endpoints_availability_history)
-    @results = adapter.to_json_provider_list
+    @raw_results = adapter.to_json_provider_list
   end
 
   def retrieved_hits

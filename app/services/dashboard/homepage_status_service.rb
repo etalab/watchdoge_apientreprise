@@ -17,7 +17,7 @@ class Dashboard::HomepageStatusService
 
   # cf json_api_schemas: homepage_status.json
   def results
-    @results.as_json
+    @raw_results.as_json
   end
 
   private
@@ -34,6 +34,6 @@ class Dashboard::HomepageStatusService
       'timestamp': raw_endpoint.dig('@timestamp')
     }
 
-    @results << endpoint
+    @raw_results << endpoint
   end
 end

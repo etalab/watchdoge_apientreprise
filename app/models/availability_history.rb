@@ -54,10 +54,10 @@ class AvailabilityHistory
   def update_last_availability
     last_availability[2] = @time
 
-    add_new_availability if different_code?
+    add_new_availability if code_changed?
   end
 
-  def different_code?
+  def code_changed?
     last_status_code != @code
   end
 
