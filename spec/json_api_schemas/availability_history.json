@@ -5,30 +5,30 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["provider_name", "endpoints_history"],
+        "required": ["provider_name", "endpoints_availability_history"],
         "properties": {
           "provider_name": {
             "type": "string",
             "title": "The provider_name"
           },
-          "endpoints_history": {
+          "endpoints_availability_history": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["id", "name", "sub_name", "api_version", "sla", "timezone", "availability_history"],
+              "required": ["uname", "name", "provider", "api_version", "sla", "timezone", "availability_history"],
               "properties": {
-                "id": {
+                "uname": {
                   "type": "string",
-                  "title": "The id",
+                  "title": "The unique name of the endpoint",
                   "pattern": "^\\S*$"
                 },
                 "name": {
                   "type": "string",
                   "title": "The endpoint name"
                 },
-                "sub_name": {
-                  "type": ["string", "null"],
-                  "title": "The endpoint sub_name"
+                "provider": {
+                  "type": "string",
+                  "title": "The data provider of the endpoint"
                 },
                 "api_version": {
                   "type": "integer",

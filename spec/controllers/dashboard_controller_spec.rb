@@ -32,7 +32,7 @@ describe DashboardController, type: :controller do
       json = JSON.parse(service_response.body)
 
       json['results'].each do |provider|
-        provider['endpoints_history'].each do |ep|
+        provider['endpoints_availability_history'].each do |ep|
           max_index = ep['availability_history'].size - 1
           index = 0
           previous_to_time = nil
@@ -55,5 +55,29 @@ describe DashboardController, type: :controller do
         end
       end
     end
+  end
+
+  describe 'Current status error path', vcr: { cassette_name: 'current_status' } do
+    subject { get :current_status }
+
+    before { allow_any_instance_of(Dashboard::CurrentStatusService).to receive(:success?).and_return(false) }
+
+    its(:status) { is_expected.to eq(500) }
+  end
+
+  describe 'Homepage status error path', vcr: { cassette_name: 'homepage_status' } do
+    subject { get :homepage_status }
+
+    before { allow_any_instance_of(Dashboard::HomepageStatusService).to receive(:success?).and_return(false) }
+
+    its(:status) { is_expected.to eq(500) }
+  end
+
+  describe 'Availability History error path', vcr: { cassette_name: 'availability_history' } do
+    subject { get :availability_history }
+
+    before { allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:success?).and_return(false) }
+
+    its(:status) { is_expected.to eq(500) }
   end
 end

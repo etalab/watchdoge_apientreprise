@@ -1,4 +1,5 @@
-# README
+# README [![Build Status](https://travis-ci.org/etalab/watchdoge_apientreprise.svg?branch=master)](https://travis-ci.org/etalab/watchdoge_apientreprise) [![Maintainability](https://api.codeclimate.com/v1/badges/5f93054ca32409448a42/maintainability)](https://codeclimate.com/github/etalab/watchdoge_apientreprise/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/5f93054ca32409448a42/test_coverage)](https://codeclimate.com/github/etalab/watchdoge_apientreprise/test_coverage)
+[![Build Status](https://travis-ci.org/etalab/watchdoge_apientreprise.svg?branch=develop)](https://travis-ci.org/etalab/watchdoge_apientreprise) (develop branch)
 
 Watchdoge is a watchdog for [API Entreprise](https://github.com/etalab/apientreprise), the monitoring done by Watchdoge is available on the [Dashboard](https://github.com/etalab/dashboard_apientreprise)
 
@@ -8,6 +9,11 @@ Watchdoge run on Ruby 2.4.2
 
 The API uses Elasticsearch API, only authorised IP can make requests to Elasticsearch API, add yours for development purpose.
 
+```
+sudo ufw allow from <your.ip> to any port 9200 proto tcp
+sudo ufw delete allow from <your.ip> to any port 9200 proto tcp
+```
+
 You can test your ELK queries in Kibana.
 
 ## Configuration
@@ -16,7 +22,11 @@ You can test your ELK queries in Kibana.
 
 The database user should exists, it uses PostgreSQL (cf. `config/database.yml`). Execute the following command line to create the default user:
 
-`psql -f db/init.sql`
+```
+sudo -u postgres -i
+cd /path/to/watchdoge
+psql -f db/init.sql
+```
 
 ### Development environment
 
@@ -49,7 +59,6 @@ Needs PostgreSQL installed,  certifcates (and IP whitelist) for API Entreprise a
 Watchdoge use `whenever` to perform periodic pings. Mina updates cronotab on deployment.
 
 ## Tests
-Due to Tools::PingWorker multithreading is can cause some tests to fails sometimes, re-run your tests to be sure
 Run:
 
 `rspec`

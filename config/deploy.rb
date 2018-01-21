@@ -30,6 +30,8 @@ branch = ENV['branch'] ||
       'master'
     when 'development', 'sandbox'
       'develop'
+    else
+      raise 'to need to be set, default should be sandbox'
     end
   end
 
@@ -67,6 +69,8 @@ end
 task setup: :remote_environment do
   # Production database has to be setup !
   # command %(rbenv install 2.3.0)
+  command %(mkdir -p "#{fetch(:deploy_to)}/shared/pids/")
+  command %(mkdir -p "#{fetch(:deploy_to)}/shared/log/")
 end
 
 desc 'Deploys the current version to the server.'
@@ -88,6 +92,8 @@ task deploy: :remote_environment do
         command %(mkdir -p tmp/)
         command %(touch tmp/restart.txt)
 
+        invoke :sidekiq
+
         if ENV['to'] == 'production'
           comment 'Updating cronotab'.green
           invoke :'whenever:update'
@@ -107,6 +113,19 @@ end
 task mono_ping: :remote_environment do
   comment 'One Ping Attempt'.yellow
   command "/usr/local/rbenv/shims/bundle exec rake watch:all RAILS_ENV=#{ENV['to']}"
+end
+
+task :sidekiq do
+  comment 'Checking Sidekiq status:'.green
+  command %{
+    if [ -z $(sudo systemctl status sidekiq_watchdoge_#{ENV['to']} | grep running) ]
+    then
+      echo 'Restarting sidekiq...'
+      sudo systemctl restart sidekiq_watchdoge_#{ENV['to']}
+    else
+      echo 'Sidekiq is UP and running !'
+    fi
+  }
 end
 
 task :passenger do

@@ -1,12 +1,13 @@
 require: rubocop-rspec
 
+#inherit_from: .rubocop_todo.yml
+
 AllCops:
   TargetRubyVersion: 2.4
   Exclude:
     - db/**/*
     - vendor/**/*
     - log/**/*
-    - app/models/endpoint_history.rb
 
 Rails:
   Enabled: true
@@ -18,6 +19,9 @@ Rails/Output:
     - 'config/deploy.rb'
 
 Rails/TimeZone:
+  Enabled: false
+
+Rails/DynamicFindBy:
   Enabled: false
 
 # Ruby 3.0 feature related stuff, will see later
@@ -39,10 +43,6 @@ Style/ClassAndModuleChildren:
 Documentation:
   Enabled: false
 
-Bundler/OrderedGems:
-  Exclude:
-    - 'documentation/Gemfile'
-
 Layout/MultilineOperationIndentation:
   Exclude:
     - 'config/deploy.rb'
@@ -50,23 +50,15 @@ Layout/MultilineOperationIndentation:
 Metrics/BlockLength:
   Exclude:
     - 'Guardfile' # mono bloc inside...
-    - 'spec/**/*_spec.rb'
-    - 'lib/tasks/*.rake'
-
-Metrics/AbcSize:
-  Exclude:
-    - 'lib/tasks/watch.rake'
 
 Metrics/LineLength:
   Enabled: false
 
-Naming/HeredocDelimiterNaming:
+Metrics/BlockLength:
   Enabled: false
 
-RSpec/DescribeClass:
-  Exclude:
-    - 'spec/tasks/watch_v1_spec.rb'
-    - 'spec/tasks/watch_v2_spec.rb'
+Naming/HeredocDelimiterNaming:
+  Enabled: false
 
 RSpec/MultipleExpectations:
      Max: 5
@@ -82,3 +74,7 @@ RSpec/SubjectStub:
 
 RSpec/InstanceVariable:
   Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/tasks/watch_spec.rb'

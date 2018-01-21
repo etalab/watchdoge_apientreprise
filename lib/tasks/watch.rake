@@ -1,33 +1,36 @@
-load './lib/tasks/tools.rake'
 require 'colorize'
 
+# /!\ Any change in the name MUST be impacted in schedule.rb
 namespace :watch do
-  desc 'run watchdoge service on all endpoints'
-  task 'all': :environment do
-    Rake::Task['watch_sirene:all'].invoke
-    Rake::Task['watch_v1:all'].invoke
-    Rake::Task['watch_v2:all'].invoke
-  end
-
   desc 'run watchdoge service on all endpoints with a period of 1 minute'
-  task 'period_1': :environment do # /!\ Any change in the name MUST be impacted in schedule.rb
-    puts 'Period 1'
-    Rake::Task['watch_sirene:all'].invoke(1)
-    Rake::Task['watch_v1:all'].invoke(1)
-    Rake::Task['watch_v2:all'].invoke(1)
+  task 'period_1': :environment do
+    watch(period: 1)
   end
 
   desc 'run watchdoge service on all endpoints with a period of 5 minute'
-  task 'period_5': :environment do # /!\ Any change in the name MUST be impacted in schedule.rb
-    puts 'Period 5'
-    Rake::Task['watch_v1:all'].invoke(5)
-    Rake::Task['watch_v2:all'].invoke(5)
+  task 'period_5': :environment do
+    watch(period: 5)
   end
 
   desc 'run watchdoge service on all endpoints with a period of 60 minutes'
-  task 'period_60': :environment do # /!\ Any change in the name MUST be impacted in schedule.rb
-    puts 'Period 60'
-    Rake::Task['watch_v1:all'].invoke(60)
-    Rake::Task['watch_v2:all'].invoke(60)
+  task 'period_60': :environment do
+    watch(period: 60)
+  end
+
+  def watch(period:)
+    puts "Period #{period}" unless ENV['RAILS_ENV'] == 'test'
+    Endpoint.where(ping_period: period).each do |endpoint|
+      perform_async endpoint
+    end
+  end
+
+  def perform_async(endpoint)
+    PingWorker.perform_async(endpoint.uname)
+    print_sidekiq_infos(endpoint)
+  end
+
+  def print_sidekiq_infos(endpoint)
+    url = ENV['DEBUG'] ? "(url: #{endpoint.uri})" : ''
+    puts "#{endpoint.uname.blue} added to sidekiq #{url}" unless ENV['RAILS_ENV'] == 'test'
   end
 end

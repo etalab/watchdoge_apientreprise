@@ -1,33 +1,17 @@
 class PingReport < ApplicationRecord
-  validates :service_name, presence: true
-  validates :name, presence: true
-  validates :api_version, numericality: { only_integer: true }, inclusion: { in: 1..3 }
-  validates_uniqueness_of :name, scope: %i(service_name sub_name api_version)
+  validates :uname, presence: true, uniqueness: true
   validates :last_code, numericality: { only_integer: true }, inclusion: { in: 200..599 }, allow_nil: true
   validate :first_downtime_class
 
-  def self.get_latest_where(hash)
-    hash.delete_if { |key| !key.to_s.match(/(service_name|name|sub_name|api_version)/) }
-    latest_report = PingReport.find_by(hash)
-
-    if latest_report.nil?
-      hash.merge!(last_code: 200, first_downtime: Time.now)
-      PingReport.create(hash).tap(&:save)
-    else
-      latest_report
-    end
-  end
-
-  def notify_new_ping(code, timestamp)
+  def notify_change(code)
     @new_code = code
-    @timestamp = timestamp
     update_state
     save
     self
   end
 
-  def has_changed?
-    @has_changed || false
+  def changed?
+    @changed || false
   end
 
   def status
@@ -44,16 +28,9 @@ class PingReport < ApplicationRecord
   private
 
   def update_state
-    if going_down?
-      @has_changed = true
-      self.last_code = @new_code
-      self.first_downtime = @timestamp
-    elsif going_up?
-      @has_changed = true
-      self.last_code = @new_code
-    else
-      @has_changed = false
-    end
+    @changed = going_down? || going_up?
+    self.first_downtime = Time.now if going_down?
+    self.last_code = @new_code
   end
 
   def going_down?

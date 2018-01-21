@@ -2,7 +2,8 @@ class PingMailer < ApplicationMailer
   default from: 'ping.watchdoge@watchdoge.entreprise.api.gouv.fr'
   layout 'mailer'
 
-  def ping(ping_report)
+  def ping(endpoint, ping_report)
+    @endpoint = endpoint
     @ping_report = ping_report
     mail(to: to, subject: subject)
   end
@@ -14,6 +15,6 @@ class PingMailer < ApplicationMailer
   end
 
   def subject
-    "[Watchdoge] V#{@ping_report.api_version} #{@ping_report.name} #{@ping_report.sub_name} #{@ping_report.status.upcase} à #{Time.now.strftime('%kh%M')}"
+    "[Watchdoge] V#{@endpoint.api_version} #{@endpoint.name} #{@ping_report.status.upcase} à #{Time.now.strftime('%kh%M')}"
   end
 end
