@@ -83,7 +83,7 @@ describe Endpoint, type: :model do
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to eq('sirene.entreprise.api.gouv.fr')
       expect(ep.uri.path).to eq('/')
-      expect(ep.uri.query).to be_nil
+      expect(ep.uri.query).to be_empty
     end
   end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ElasticsearchSource do
+describe EndpointPingResult do
   subject { described_class.new(source_example) }
 
   let(:source_example) { JSON.parse(File.read(filename)) }

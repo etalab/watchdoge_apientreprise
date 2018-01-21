@@ -6,24 +6,28 @@ class Dashboard::HomepageStatusService
 
   def initialize
     @client = Dashboard::ElasticClient.new
-    @results = []
+    @client.establish_connection
+    @raw_results = []
   end
 
   def perform
-    @client.perform json_query
-    process_raw_response if success?
+    if @client.connected?
+      @client.perform json_query
+      process_raw_response if @client.success?
+    end
+
     self
   end
 
   # cf json_api_schemas: homepage_status.json
   def results
-    @results.as_json
+    @raw_results.as_json
   end
 
   private
 
   def json_query
-    File.read(File.join('app', 'data', 'queries', 'homepage_status.json'))
+    File.read('app/data/queries/homepage_status.json')
   end
 
   def process_raw_response
@@ -34,6 +38,6 @@ class Dashboard::HomepageStatusService
       'timestamp': raw_endpoint.dig('@timestamp')
     }
 
-    @results << endpoint
+    @raw_results << endpoint
   end
 end

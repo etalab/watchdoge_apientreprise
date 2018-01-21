@@ -12,16 +12,21 @@ class Dashboard::AvailabilityHistoryService
   def initialize
     @hits = []
     @client = Dashboard::ElasticClient.new
+    @client.establish_connection
   end
 
   def perform
-    retrieve_all_availabilities if success?
-    process_raw_response if success?
+    if @client.connected?
+      retrieve_all_availabilities
+      process_raw_response if @client.success?
+    end
+
     self
   end
 
+  # cf json_api_schemas: availability_history.json
   def results
-    @results.as_json
+    @raw_results.as_json
   end
 
   private
@@ -43,7 +48,7 @@ class Dashboard::AvailabilityHistoryService
     endpoints_availability_history = aggregator.endpoints_availability_history
 
     adapter = EndpointsAvailabilityAdapter.new(endpoints_availability_history)
-    @results = adapter.to_json_provider_list
+    @raw_results = adapter.to_json_provider_list
   end
 
   def retrieved_hits
@@ -55,13 +60,14 @@ class Dashboard::AvailabilityHistoryService
   end
 
   def query_hash
-    JSON.parse load_query(query_name)
+    JSON.parse load_query
   end
 
-  def load_query(query_name)
-    File.read(File.join('app', 'data', 'queries', query_name + '.json'))
+  def load_query
+    File.read('app/data/queries/' + query_name + '.json')
   end
 
+  # for specs
   def query_name
     'availability_history'
   end

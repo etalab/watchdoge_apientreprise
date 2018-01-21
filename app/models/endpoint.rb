@@ -14,11 +14,11 @@ class Endpoint < ApplicationRecord
   validate :http_query_nil_or_json_string
 
   def http_response
-    @http_response ||= fetch_with_redirection(uri, REDIRECT_LIMIT)
+    @http_response ||= fetch_with_redirection(uri)
   end
 
   def uri
-    URI(base_url + http_path + http_params)
+    URI(tool_api.base_url + http_path + http_params)
   end
 
   def self.find_by_http_path(url)
@@ -26,6 +26,9 @@ class Endpoint < ApplicationRecord
     return perfect_match_endpoint unless perfect_match_endpoint.nil?
 
     find_by_http_path_regexp(url)
+
+    # TODO REFACTOR choisir entre self et find_by
+    #Endpoint.find_by(http_path: url) || find_by_http_path_regexp(url)
   end
 
   private
@@ -41,64 +44,33 @@ class Endpoint < ApplicationRecord
     Rails.logger.error "fail to find Endpoint with url: #{url}"
   end
 
-  def fetch_with_redirection(location, redirect_limit)
+  def fetch_with_redirection(location, redirection_follow_count=0)
     response = Net::HTTP.get_response(location)
 
-    if redirect_limit.zero?
-      response
+    if response.kind_of? Net::HTTPRedirection
+      return response if redirection_follow_count == REDIRECT_LIMIT
+
+      redirect_location = URI(response['location'])
+      fetch_with_redirection(redirect_location, redirection_follow_count + 1)
     else
-      process_response(response, redirect_limit)
+      response
     end
   end
 
-  def process_response(response, redirect_limit)
-    case response
-    when Net::HTTPSuccess then
-      response
-    when Net::HTTPRedirection then
-      location = response['location']
-      fetch_with_redirection(URI(location), redirect_limit - 1)
-    else
-      response
-    end
+  def tool_api
+    @tool_api ||= Tools::API.new(api_name: api_name, api_version: api_version)
   end
 
   def http_params
-    api_name == 'apie' ? apie_http_params : ''
+    '?' + { token: token }.merge(hash_options).compact.to_param
   end
 
-  def apie_http_params
-    '?' + { token: token }.merge(hash_options).to_param
+  def token
+    tool_api.token
   end
 
   def hash_options
     http_query.nil? ? {} : JSON.parse(http_query)
-  end
-
-  def token
-    Rails.application.config_for(:secrets)['apie_token'] if api_name == 'apie'
-  end
-
-  def base_url
-    case api_name
-    when 'apie'
-      apie_base_url
-    when 'sirene'
-      Rails.application.config_for(:secrets)['sirene_base_uri']
-    else
-      raise "provider:#{provider} unsupported" # TODO: Sentry/Raven
-    end
-  end
-
-  def apie_base_url
-    case api_version
-    when 1
-      Rails.application.config_for(:secrets)['apie_base_uri_old']
-    when 2
-      Rails.application.config_for(:secrets)['apie_base_uri_new']
-    else
-      raise "api_version:#{api_version} unsupported!" # TODO: Sentry/Raven
-    end
   end
 
   def http_query_nil_or_json_string
@@ -106,13 +78,12 @@ class Endpoint < ApplicationRecord
   end
 
   def valid_http_query?
-    http_query.nil? || valid_json?(http_query)
+    http_query.nil? || valid_json_query?(http_query)
   end
 
-  def valid_json?(s)
+  def valid_json_query?(s)
     JSON.parse(s)
-    return true
   rescue JSON::ParserError
-    return false
+    false
   end
 end

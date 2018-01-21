@@ -30,21 +30,8 @@ describe AvailabilityHistory, type: :model do
         expect(avail.to_a).to match_json_schema('availability_history_model')
       end
 
-      # rubocop:disable RSpec/ExampleLength
       it 'has no gap and from < to' do
-        previous_to_time = nil
-        avail.to_a.each do |a|
-          # from < to
-          expect(Time.parse(a[0])).to be < Time.parse(a[2])
-
-          # has no gap
-          unless previous_to_time.nil?
-            from_time = Time.parse(a[0])
-            expect(from_time).to eq(previous_to_time)
-          end
-
-          previous_to_time = Time.parse(a[2])
-        end
+        expect(avail).to be_a_valid_availability_history
       end
 
       it 'compute correct sla' do

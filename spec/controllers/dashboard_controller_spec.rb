@@ -15,7 +15,7 @@ describe DashboardController, type: :controller do
     its(:body) { is_expected.to match_json_schema('homepage_status') }
   end
 
-  describe 'Availability history status happy path', vcr: { cassette_name: 'availability_history' } do
+  describe 'Availability history status happy path', very_long_test: true, vcr: { cassette_name: 'availability_history' } do
     subject(:service_response) { @availability_results_controller }
 
     before do
@@ -27,35 +27,31 @@ describe DashboardController, type: :controller do
     its(:status) { is_expected.to eq(200) }
     its(:body) { is_expected.to match_json_schema('availability_history') }
 
-    # rubocop:disable RSpec/ExampleLength
     it 'has no gap and from < to' do
       json = JSON.parse(service_response.body)
-
-      json['results'].each do |provider|
-        provider['endpoints_availability_history'].each do |ep|
-          max_index = ep['availability_history'].size - 1
-          index = 0
-          previous_to_time = nil
-
-          ep['availability_history'].each do |avail|
-            if index < max_index
-              # from < to (except for last one)
-              expect(Time.parse(avail[0])).to be < Time.parse(avail[2])
-              index += 1
-            end
-
-            # has no gap
-            unless previous_to_time.nil?
-              from_time = Time.parse(avail[0])
-              expect(from_time).to eq(previous_to_time)
-            end
-
-            previous_to_time = Time.parse(avail[2])
-          end
-        end
-      end
+      expect(json['results']).to be_a_valid_availabilities_history
     end
   end
+
+  describe 'Availability history status happy path', vcr: { cassette_name: 'availability_history_shortened' } do
+    subject(:service_response) { @availability_results_controller }
+
+    before do
+      allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:query_name).and_return('availability_history_shortened')
+      remember_through_tests('availability_results_controller') do
+        get :availability_history
+      end
+    end
+
+    its(:status) { is_expected.to eq(200) }
+    its(:body) { is_expected.to match_json_schema('availability_history') }
+
+    it 'has no gap and from < to' do
+      json = JSON.parse(service_response.body)
+      expect(json['results']).to be_a_valid_availabilities_history
+    end
+  end
+
 
   describe 'Current status error path', vcr: { cassette_name: 'current_status' } do
     subject { get :current_status }
@@ -73,10 +69,13 @@ describe DashboardController, type: :controller do
     its(:status) { is_expected.to eq(500) }
   end
 
-  describe 'Availability History error path', vcr: { cassette_name: 'availability_history' } do
+  describe 'Availability History error path', vcr: { cassette_name: 'availability_history_shortened' } do
     subject { get :availability_history }
 
-    before { allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:success?).and_return(false) }
+    before do
+      allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:query_name).and_return('availability_history_shortened')
+      allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:success?).and_return(false)
+    end
 
     its(:status) { is_expected.to eq(500) }
   end

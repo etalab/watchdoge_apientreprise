@@ -18,7 +18,7 @@ class Tools::PingsAggregator
 
   def parse_raw_data_into_sources
     @raw_data.each do |data|
-      elk_source = ElasticsearchSource.new(data['_source'])
+      elk_source = EndpointPingResult.new(data['_source'])
       @elk_sources << elk_source
     end
 
