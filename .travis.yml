@@ -11,6 +11,7 @@ before_script:
   - cp config/database.travis.yml config/database.yml
   - bundle exec rake dev:secrets
   - RAILS_ENV=test bundle exec rake db:migrate
+  - RAILS_ENV=test bundle exec rake refill_database
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
