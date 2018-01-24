@@ -92,6 +92,8 @@ task deploy: :remote_environment do
         command %(mkdir -p tmp/)
         command %(touch tmp/restart.txt)
 
+        invoke :refill_database
+
         if ENV['to'] == 'production'
           invoke :sidekiq
           comment 'Updating cronotab'.green
@@ -107,6 +109,11 @@ task deploy: :remote_environment do
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
   # run(:local){ say 'done' }
+end
+
+task refill_database: :remote_environment do
+  comment 'Refill Endpoints table'.yellow
+  command "/usr/local/rbenv/shims/bundle exec rake refill_database RAILS_ENV=#{ENV['to']}"
 end
 
 task mono_ping: :remote_environment do
