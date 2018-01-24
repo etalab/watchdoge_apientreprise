@@ -2,9 +2,12 @@ class Tools::EndpointDatabaseFiller
   include Singleton
 
   def refill_database
-    empty_database
-    fill_database
-    self
+    ActiveRecord::Base.transaction do
+      # WARN: this is specific to Postgres
+      ActiveRecord::Base.connection.execute("LOCK #{Endpoint.table_name} IN ACCESS EXCLUSIVE MODE")
+      empty_database
+      fill_database
+    end
   end
 
   private
@@ -15,7 +18,8 @@ class Tools::EndpointDatabaseFiller
 
   def fill_database
     endpoints.each do |endpoint|
-      Endpoint.create(endpoint).save
+      ep = Endpoint.create(endpoint)
+      ep.save if ep.valid?
     end
   end
 
