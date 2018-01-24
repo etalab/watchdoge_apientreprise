@@ -55,7 +55,7 @@ describe Endpoint, type: :model do
 
   describe 'url is always good' do
     it 'is an apie v1 endpoint' do
-      ep = Endpoint.new(api_name: 'apie', api_version: 1, http_path: '/v1/toto/SIREN')
+      ep = create(:endpoint, api_name: 'apie', api_version: 1, http_path: '/v1/toto/SIREN')
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to match(/apientreprise.fr/)
       expect(ep.uri.path).to eq('/v1/toto/SIREN')
@@ -63,7 +63,7 @@ describe Endpoint, type: :model do
     end
 
     it 'is an apie v2 endpoint' do
-      ep = Endpoint.new(api_name: 'apie', api_version: 2, http_path: '/v2/toto/SIREN')
+      ep = create(:endpoint, api_name: 'apie', api_version: 2, http_path: '/v2/toto/SIREN')
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
       expect(ep.uri.path).to eq('/v2/toto/SIREN')
@@ -71,7 +71,7 @@ describe Endpoint, type: :model do
     end
 
     it 'is an apie v2 endpoint with options' do
-      ep = Endpoint.new(api_name: 'apie', api_version: 2, http_path: '/v2/toto/SIREN', http_query: '{"opt": "plop", "opt2": "test"}')
+      ep = create(:endpoint, api_name: 'apie', api_version: 2, http_path: '/v2/toto/SIREN', http_query: '{"opt": "plop", "opt2": "test"}')
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
       expect(ep.uri.path).to eq('/v2/toto/SIREN')
@@ -79,7 +79,7 @@ describe Endpoint, type: :model do
     end
 
     it 'is an sirene endpoint' do
-      ep = Endpoint.new(api_name: 'sirene', http_path: '/')
+      ep = create(:endpoint, api_name: 'sirene', http_path: '/', http_query: nil)
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to eq('sirene.entreprise.api.gouv.fr')
       expect(ep.uri.path).to eq('/')
