@@ -62,4 +62,6 @@ Rails.application.configure do
       resource '*', :headers => :any, :methods => [:get, :post, :options]
     end
   end
+
+  Sidekiq::Logging.logger.level = Logger::WARN
 end
