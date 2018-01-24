@@ -92,9 +92,8 @@ task deploy: :remote_environment do
         command %(mkdir -p tmp/)
         command %(touch tmp/restart.txt)
 
-        invoke :sidekiq
-
         if ENV['to'] == 'production'
+          invoke :sidekiq
           comment 'Updating cronotab'.green
           invoke :'whenever:update'
         else
