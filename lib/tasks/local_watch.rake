@@ -22,7 +22,7 @@ namespace :watch do
 
   def print_console_infos(endpoint)
     url = ENV['DEBUG'] ? "(url: #{endpoint.uri})" : ''
-    puts "#{endpoint.uname.blue} is #{status(endpoint)} #{url}" unless ENV['RAILS_ENV'] == 'test'
+    puts "#{endpoint.uname.blue} is #{status(endpoint)} #{url}" if ENV['RAILS_ENV'] == 'development'
   end
 
   def status(endpoint)

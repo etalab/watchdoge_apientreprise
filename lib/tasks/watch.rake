@@ -18,7 +18,7 @@ namespace :watch do
   end
 
   def watch(period:)
-    puts "Period #{period}" unless ENV['RAILS_ENV'] == 'test'
+    puts "Period #{period}" if ENV['RAILS_ENV'] == 'development'
     Endpoint.where(ping_period: period).each do |endpoint|
       perform_async endpoint
     end
@@ -31,6 +31,6 @@ namespace :watch do
 
   def print_sidekiq_infos(endpoint)
     url = ENV['DEBUG'] ? "(url: #{endpoint.uri})" : ''
-    puts "#{endpoint.uname.blue} added to sidekiq #{url}" unless ENV['RAILS_ENV'] == 'test'
+    puts "#{endpoint.uname.blue} added to sidekiq #{url}" if ENV['RAILS_ENV'] == 'development'
   end
 end
