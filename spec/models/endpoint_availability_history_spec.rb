@@ -4,22 +4,24 @@ describe EndpointAvailabilityHistory, type: :model do
   subject(:endpoint_history) do
     described_class.new(
       endpoint: endpoint,
-      timezone: 'Asia/Jerusalem'
+      timezone: 'Asia/Jerusalem',
+      provider_name: 'some provider'
     )
   end
 
   let(:endpoint) { create(:endpoint) }
 
   before do
-    endpoint_history.aggregate(1, '2017-10-10 10:10:10')
-    endpoint_history.aggregate(0, '2017-10-12 10:10:10')
-    endpoint_history.aggregate(1, '2017-10-14 10:10:10')
+    endpoint_history.aggregate(200, '2017-10-10 10:10:10')
+    endpoint_history.aggregate(500, '2017-10-12 10:10:10')
+    endpoint_history.aggregate(206, '2017-10-14 10:10:10')
   end
 
   its(:uname) { is_expected.to eq('apie_2_certificats_test') }
   its(:name) { is_expected.to eq('Certificats Test') }
   its(:api_version) { is_expected.to eq(2) }
   its(:timezone) { is_expected.to eq('Asia/Jerusalem') }
+  its(:provider_name) { is_expected.to eq('some provider') }
   its(:provider) { is_expected.to eq('qualibat') }
   its(:sla) { is_expected.to eq(50) }
   its(:availability_history) { is_expected.not_to be_nil }

@@ -5,25 +5,25 @@ describe AvailabilityHistory, type: :model do
 
   context 'when happy path' do
     it 'adds a new endpoint to list' do
-      response = avail.aggregate(1, '2017-01-10 10:14:04')
+      response = avail.aggregate(200, '2017-01-10 10:14:04')
       expect(response).to be_truthy
       expect(avail.to_a.size).to equal(1)
     end
 
     context 'with to_a' do
       before do
-        avail.aggregate(1, '2017-01-10 10:14:04')
-        avail.aggregate(1, '2017-01-10 10:17:04')
-        avail.aggregate(0, '2017-01-11 10:14:04')
-        avail.aggregate(0, '2017-01-11 10:14:08')
-        avail.aggregate(0, '2017-01-12 10:14:04')
-        avail.aggregate(1, '2017-01-13 20:14:04')
-        avail.aggregate(1, '2017-01-20 20:14:08')
-        avail.aggregate(0, '2017-01-20 20:14:10')
-        avail.aggregate(1, '2017-01-20 20:15:04')
-        avail.aggregate(0, '2017-01-20 20:15:10')
-        avail.aggregate(1, '2017-01-20 20:16:04')
-        avail.aggregate(1, '2017-01-25 20:17:04')
+        avail.aggregate(200, '2017-01-10 10:14:04')
+        avail.aggregate(200, '2017-01-10 10:17:04')
+        avail.aggregate(500, '2017-01-11 10:14:04')
+        avail.aggregate(500, '2017-01-11 10:14:08')
+        avail.aggregate(212, '2017-01-12 10:14:04')
+        avail.aggregate(212, '2017-01-13 20:14:04')
+        avail.aggregate(200, '2017-01-20 20:14:08')
+        avail.aggregate(206, '2017-01-20 20:14:10')
+        avail.aggregate(206, '2017-01-20 20:15:04')
+        avail.aggregate(212, '2017-01-20 20:15:10')
+        avail.aggregate(512, '2017-01-20 20:16:04')
+        avail.aggregate(512, '2017-01-25 20:17:04')
       end
 
       it 'matches json schema' do
@@ -35,7 +35,7 @@ describe AvailabilityHistory, type: :model do
       end
 
       it 'compute correct sla' do
-        expect(avail.sla).to eq(84.32)
+        expect(avail.sla).to eq(61.08)
       end
     end
   end

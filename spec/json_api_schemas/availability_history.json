@@ -15,7 +15,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["uname", "name", "provider", "api_version", "sla", "timezone", "availability_history"],
+              "required": ["uname", "name", "provider", "api_version", "sla", "timezone", "provider_name", "availability_history"],
               "properties": {
                 "uname": {
                   "type": "string",
@@ -47,6 +47,10 @@
                   "title": "The Timezone of the availability time",
                   "pattern": "Europe/Paris"
                 },
+                "provider_name": {
+                  "type": [null, "string"],
+                  "title": "data source name (can be null)"
+                },
                 "availability_history": {
                   "type": "array",
                   "items": {
@@ -61,9 +65,8 @@
                       },
                       {
                         "type": "integer",
-                        "title": "0 or 1 value for Visavail display",
-                        "minimum": 0,
-                        "maximum": 1
+                        "title": "HTTP Codes for Visavail display",
+                        "enum": [200, 206, 212, 500, 512]
                       },
                       {
                         "type": "string",

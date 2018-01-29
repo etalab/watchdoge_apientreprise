@@ -10,9 +10,8 @@
       },
       {
         "type": "integer",
-        "title": "0 or 1 value for Visavail display",
-        "minimum": 0,
-        "maximum": 1
+        "title": "HTTP Codes for Visavail display",
+        "enum": [200, 206, 212, 500, 512]
       },
       {
         "type": "string",

@@ -28,7 +28,8 @@ class AvailabilityHistory
   end
 
   def valid_code?
-    [0, 1].include?(@code)
+    # 200: OK, 206: Partial Response, 212: OK (backup used), 500, KO, 512: KO (backup used)
+    [200, 206, 212, 500, 512].include?(@code)
   end
 
   def valid_time?
@@ -77,10 +78,11 @@ class AvailabilityHistory
   end
 
   def down_duration
-    down_time = @availability_history.map do |d|
-      next if d[1] == 1 # means it's UP
-      from = Time.parse(d[0])
-      to = Time.parse(d[2])
+    down_time = @availability_history.map do |history|
+      http_code = history[1]
+      next if http_code < 300 # means it's UP
+      from = Time.parse(history[0])
+      to = Time.parse(history[2])
       interval_to_seconds(to - from)
     end
 

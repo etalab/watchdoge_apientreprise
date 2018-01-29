@@ -5,7 +5,7 @@ class EndpointAvailabilityHistory
   extend Forwardable
 
   delegate %i[uname name api_version http_path provider] => :endpoint
-  attr_accessor :endpoint, :timezone, :availability_history
+  attr_accessor :endpoint, :timezone, :provider_name, :availability_history
 
   validates :timezone, presence: true
 
