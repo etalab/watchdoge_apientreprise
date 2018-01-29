@@ -42,6 +42,7 @@ class EndpointsAvailabilityAdapter
       provider: current_provider,
       api_version: @current_avail_history.api_version,
       timezone: @current_avail_history.timezone,
+      provider_name: @current_avail_history.provider_name,
       sla: @current_avail_history.sla,
       availability_history: @current_avail_history.availability_history.to_a
     }

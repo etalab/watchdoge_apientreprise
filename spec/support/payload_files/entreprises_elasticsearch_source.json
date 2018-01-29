@@ -1,0 +1,57 @@
+{
+  "controller": "api/v2/entreprises",
+  "geoip": {
+    "city_name": "Gedera",
+    "timezone": "Asia/Jerusalem",
+    "ip": "84.108.77.169",
+    "latitude": 31.8146,
+    "country_name": "Israel",
+    "country_code2": "IL",
+    "continent_code": "AS",
+    "country_code3": "IL",
+    "region_name": "Central District",
+    "location": {
+      "lon": 34.78,
+      "lat": 31.8146
+    },
+    "region_code": "M",
+    "longitude": 34.78
+  },
+  "method": "GET",
+  "ip": "84.108.77.169",
+  "format": "*/*",
+  "source": "siade_sandbox_production1",
+  "api_version": "v2",
+  "type": "siade",
+  "tags": [
+    "request"
+  ],
+  "duration": 849.39,
+  "path": "/v2/entreprises/418166096",
+  "view": 2.86,
+  "route": "api/v2/entreprises#show",
+  "@timestamp": "2018-01-28T13:01:12.982Z",
+  "response": {
+    "fallback_used": false,
+    "provider_name": "insee"
+  },
+  "domain": "gouv.fr",
+  "user_access": {
+    "access": "allow",
+    "demarche": "",
+    "resource": "entreprises",
+    "user": "tech@apientreprise.fr"
+  },
+  "@version": "1",
+  "host": "production1",
+  "action": "show",
+  "request_id": "753777a9-698c-4726-a689-61629442a669",
+  "parameters": {
+    "siren": "418166096",
+    "context": "Ping",
+    "recipient": "SGMAP",
+    "token": "[FILTERED]"
+  },
+  "db": 0.57,
+  "status": 200
+}

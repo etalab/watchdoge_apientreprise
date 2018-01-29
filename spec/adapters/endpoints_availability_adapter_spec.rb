@@ -23,12 +23,12 @@ describe EndpointsAvailabilityAdapter do
   end
 
   before do
-    availability_history.aggregate(1, datetime1)
-    availability_history.aggregate(1, datetime2)
-    availability_history.aggregate(1, datetime3)
-    availability_history.aggregate(0, datetime4)
-    availability_history.aggregate(0, datetime5)
-    availability_history.aggregate(0, datetime6)
+    availability_history.aggregate(206, datetime1)
+    availability_history.aggregate(200, datetime2)
+    availability_history.aggregate(212, datetime3)
+    availability_history.aggregate(500, datetime4)
+    availability_history.aggregate(500, datetime5)
+    availability_history.aggregate(512, datetime6)
 
     endpoint_avail_history_1.availability_history = availability_history
     endpoint_avail_history_2.availability_history = availability_history

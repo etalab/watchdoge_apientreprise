@@ -40,12 +40,13 @@ class Tools::PingsAggregator
   def new_endpoint_avail_history
     EndpointAvailabilityHistory.new(
       endpoint: @current_elk_source.endpoint,
-      timezone: @timezone
+      timezone: @timezone,
+      provider_name: @current_elk_source.provider_name
     )
   end
 
   def aggregate_current_http_code
-    is_aggregated = current_endpoint_avail_history.aggregate(current_code, current_timestamp)
+    is_aggregated = current_endpoint_avail_history.aggregate(current_http_code, current_timestamp)
 
     Rails.logger.error "Fail to add ping data (#{@current_elk_source}) to availability_history" unless is_aggregated
   end
@@ -58,11 +59,31 @@ class Tools::PingsAggregator
     @endpoints_availability_history[@current_elk_source.uname]
   end
 
-  def current_code
-    @current_elk_source.code == 200 ? 1 : 0
-  end
-
   def current_timestamp
     @current_elk_source.timestamp
+  end
+
+  def current_http_code
+    if up? && fallback_used?
+      212
+    elsif down? && fallback_used?
+      512
+    elsif down?
+      500
+    else
+      @current_elk_source.code
+    end
+  end
+
+  def up?
+    [200, 206].include?(@current_elk_source.code)
+  end
+
+  def down?
+    !up?
+  end
+
+  def fallback_used?
+    @current_elk_source.fallback_used
   end
 end

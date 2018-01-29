@@ -42,6 +42,14 @@ class Dashboard::CurrentStatusService
 
   def json_from_raw_endpoint(raw_endpoint)
     source = raw_endpoint.dig('agg_by_endpoint', 'hits', 'hits').first['_source']
-    EndpointPingResult.new(source).to_json
+    endpoint_ping = EndpointPingResult.new(source)
+    {
+      uname: endpoint_ping.uname,
+      name: endpoint_ping.name,
+      provider: endpoint_ping.provider,
+      api_version: endpoint_ping.api_version,
+      code: endpoint_ping.code,
+      timestamp: endpoint_ping.timestamp
+    }
   end
 end
