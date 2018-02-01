@@ -13,7 +13,7 @@ describe PingMailer, type: :mailer do
     before { ping_report.notify_change(new_code) }
 
     its(:to)      { is_expected.to eq([Rails.application.config_for(:secrets)['ping_email_recipient']]) }
-    its(:from)    { is_expected.to eq(['ping.watchdoge@watchdoge.entreprise.api.gouv.fr']) }
+    its(:from)    { is_expected.to eq(['test@example.com']) }
 
     context 'when UP to DOWN' do
       let(:last_code) { 200 }

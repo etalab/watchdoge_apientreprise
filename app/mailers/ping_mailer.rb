@@ -1,5 +1,5 @@
 class PingMailer < ApplicationMailer
-  default from: 'ping.watchdoge@watchdoge.entreprise.api.gouv.fr'
+  default from: Rails.application.config_for(:secrets)['ping_email_sender']
   layout 'mailer'
 
   def ping(endpoint, ping_report)
