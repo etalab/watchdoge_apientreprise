@@ -7,7 +7,7 @@ describe PingReport, type: :model do
     subject(:report) { described_class.find_or_create_by(uname: uname) }
 
     context 'when it does not exists yet, it saves DOWN' do
-      before { report.notify_change(503) }
+      before { report.notify_changes(503) }
 
       it { is_expected.not_to be_nil }
       its(:status) { is_expected.to eq('DOWN') }
@@ -17,7 +17,7 @@ describe PingReport, type: :model do
     end
 
     context 'when it does not exists yet, it saves UP' do
-      before { report.notify_change(200) }
+      before { report.notify_changes(200) }
 
       it { is_expected.not_to be_nil }
       its(:status) { is_expected.to eq('UP') }
@@ -31,7 +31,7 @@ describe PingReport, type: :model do
 
     before do
       create(:ping_report, last_code: last_code)
-      report.notify_change(new_code)
+      report.notify_changes(new_code)
     end
 
     context 'when DOWN > UP' do
