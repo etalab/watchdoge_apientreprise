@@ -5,6 +5,7 @@ require: rubocop-rspec
 AllCops:
   TargetRubyVersion: 2.4
   Exclude:
+    - bin/**/*
     - db/**/*
     - vendor/**/*
     - log/**/*
@@ -36,11 +37,20 @@ Style/BlockComments:
   Exclude:
     - 'spec/spec_helper.rb'
 
+Style/BlockDelimiters:
+  Exclude:
+    - 'lib/tasks/watch.rake'
+    - 'lib/tasks/local_watch.rake'
+
 Style/ClassAndModuleChildren:
   Enabled: false
 
 # Do not force documentation at the top of classes
 Documentation:
+  Enabled: false
+
+# Buggy... empty lines are not accepted sometimes...
+Layout/EmptyLinesAroundArguments:
   Enabled: false
 
 Layout/MultilineOperationIndentation:
@@ -78,3 +88,4 @@ RSpec/InstanceVariable:
 RSpec/DescribeClass:
   Exclude:
     - 'spec/tasks/watch_spec.rb'
+    - 'spec/tasks/refill_database_spec.rb'

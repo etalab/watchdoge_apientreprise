@@ -26,3 +26,4 @@ describe 'Elk queries' do
     end
   end
 end
+# rubocop:enable RSpec/DescribeClass

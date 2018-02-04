@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-# rubocop:disable Rspec/MultipleDescribes
+# rubocop:disable RSpec/MultipleDescribes
 describe 'watch:period_1', vcr: { cassette_name: 'apie_all' } do
   include_context 'rake'
 
@@ -33,3 +33,4 @@ describe 'watch:period_60', vcr: { cassette_name: 'apie_all' } do
     end
   end
 end
+# rubocop:enable RSpec/MultipleDescribes

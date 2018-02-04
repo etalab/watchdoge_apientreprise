@@ -19,3 +19,4 @@ shared_context 'rake' do
     Rake::Task.define_task(:environment)
   end
 end
+# rubocop:enable RSpec/ContextWording

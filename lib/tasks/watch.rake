@@ -4,7 +4,6 @@ require 'colorize'
 namespace :watch do
   desc 'run watchdoge service on one specific endpoint into sidekiq'
   task one_sidekiq: :environment do
-    # rubocop:disable Style/BlockDelimiters
     ARGV.each { |a| task a.to_sym do; end } # it removes exit exception
 
     uname = ARGV[1]
@@ -27,7 +26,7 @@ namespace :watch do
   end
 
   def watch(period:)
-    puts "Period #{period}" if Rails.env == 'development'
+    puts "Period #{period}" if Rails.env.development?
     Endpoint.where(ping_period: period).each do |endpoint|
       perform_async endpoint
     end
@@ -40,6 +39,6 @@ namespace :watch do
 
   def print_sidekiq_infos(endpoint)
     url = ENV['DEBUG'] ? "(url: #{endpoint.uri})" : ''
-    puts "#{endpoint.uname.blue} added to sidekiq #{url}" if Rails.env == 'development'
+    puts "#{endpoint.uname.blue} added to sidekiq #{url}" if Rails.env.development?
   end
 end

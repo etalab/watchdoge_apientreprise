@@ -30,4 +30,5 @@ describe Tools::PingsAggregator, vcr: { cassette_name: 'availability_history_sho
       expect(eh.availability_history).to be_a(AvailabilityHistory)
     end
   end
+  # rubocop:enable RSpec/ExampleLength
 end

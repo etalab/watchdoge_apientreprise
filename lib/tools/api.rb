@@ -16,11 +16,8 @@ class Tools::API
   end
 
   def token
-    if @api_name == 'apie'
-      Rails.application.config_for(:secrets)['apie_token']
-    else
-      nil
-    end
+    # else returns nil (important!)
+    Rails.application.config_for(:secrets)['apie_token'] if @api_name == 'apie'
   end
 
   private

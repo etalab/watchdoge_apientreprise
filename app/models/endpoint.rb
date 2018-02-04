@@ -27,8 +27,8 @@ class Endpoint < ApplicationRecord
 
     find_by_http_path_regexp(url)
 
-    # TODO REFACTOR choisir entre self et find_by
-    #Endpoint.find_by(http_path: url) || find_by_http_path_regexp(url)
+    # TODO: REFACTOR choisir entre self et find_by
+    # Endpoint.find_by(http_path: url) || find_by_http_path_regexp(url)
   end
 
   private
@@ -44,10 +44,10 @@ class Endpoint < ApplicationRecord
     Rails.logger.error "fail to find Endpoint with url: #{url}"
   end
 
-  def fetch_with_redirection(location, redirection_follow_count=0)
+  def fetch_with_redirection(location, redirection_follow_count = 0)
     response = Net::HTTP.get_response(location)
 
-    if response.kind_of? Net::HTTPRedirection
+    if response.is_a? Net::HTTPRedirection
       return response if redirection_follow_count == REDIRECT_LIMIT
 
       redirect_location = URI(response['location'])

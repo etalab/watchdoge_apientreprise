@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Tools::API do
-  subject { described_class.new(api_name: api_name, api_version: api_version)}
+  subject { described_class.new(api_name: api_name, api_version: api_version) }
 
   describe 'sirene' do
     let(:api_name) { 'sirene' }

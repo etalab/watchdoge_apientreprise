@@ -52,7 +52,6 @@ describe DashboardController, type: :controller do
     end
   end
 
-
   describe 'Current status error path', vcr: { cassette_name: 'current_status' } do
     subject { get :current_status }
 

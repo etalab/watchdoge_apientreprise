@@ -12,7 +12,6 @@ namespace :watch do
 
   desc 'run a specific endpoint by uname'
   task 'one': :environment do
-    # rubocop:disable Style/BlockDelimiters
     ARGV.each { |a| task a.to_sym do; end } # it removes exit exception
 
     endpoint = Endpoint.find_by(uname: ARGV[1])
@@ -27,12 +26,12 @@ namespace :watch do
 
   def status(endpoint)
     case endpoint.http_response.code.to_i
-      when 200
-        'UP'.green
-      when 206
-        'INCOMPLETE'.yellow
-      else
-        'DOWN'.red
+    when 200
+      'UP'.green
+    when 206
+      'INCOMPLETE'.yellow
+    else
+      'DOWN'.red
     end
   end
 end

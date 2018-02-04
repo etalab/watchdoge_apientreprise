@@ -24,5 +24,4 @@ class DashboardController < ApplicationController
   expose_services Dashboard::CurrentStatusService,
                   Dashboard::AvailabilityHistoryService,
                   Dashboard::HomepageStatusService
-
 end

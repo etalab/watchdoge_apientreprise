@@ -1,4 +1,4 @@
-RSpec::Matchers.define  :be_a_valid_availabilities_history do
+RSpec::Matchers.define :be_a_valid_availabilities_history do
   match do |availability_history|
     availability_history.each do |provider|
       provider['endpoints_availability_history'].each do |endpoint|

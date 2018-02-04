@@ -25,7 +25,7 @@ describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_
 
     describe 'providers' do
       let(:providers) { results.map { |r| r['provider_name'] }.sort }
-      let(:expected_providers) { Endpoint.all.map { |ep| ep.provider }.uniq.sort }
+      let(:expected_providers) { Endpoint.all.map(&:provider).uniq.sort }
 
       it 'contains specifics providers' do
         expected_providers.delete('apientreprise')

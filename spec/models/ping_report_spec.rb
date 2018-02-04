@@ -106,6 +106,7 @@ describe PingReport, type: :model do
       it 'do not increase report count' do
         # rubocop:disable Lint/AmbiguousBlockAssociation
         expect { described_class.find_or_create_by(uname: uname) }.not_to change { PingReport.all.count }
+        # rubocop:enable Lint/AmbiguousBlockAssociation
       end
     end
   end
