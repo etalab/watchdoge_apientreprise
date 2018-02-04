@@ -2,6 +2,15 @@ require 'colorize'
 
 # /!\ Any change in the name MUST be impacted in schedule.rb
 namespace :watch do
+  desc 'run watchdoge service on one specific endpoint into sidekiq'
+  task one_sidekiq: :environment do
+    # rubocop:disable Style/BlockDelimiters
+    ARGV.each { |a| task a.to_sym do; end } # it removes exit exception
+
+    uname = ARGV[1]
+    perform_async uname
+  end
+
   desc 'run watchdoge service on all endpoints with a period of 1 minute'
   task 'period_1': :environment do
     watch(period: 1)

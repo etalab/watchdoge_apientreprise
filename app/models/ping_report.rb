@@ -3,7 +3,7 @@ class PingReport < ApplicationRecord
   validates :last_code, numericality: { only_integer: true }, inclusion: { in: 200..599 }, allow_nil: true
   validate :first_downtime_class
 
-  def notify_change(code)
+  def notify_changes(code)
     @new_code = code
     update_state
     save

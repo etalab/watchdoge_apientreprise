@@ -28,6 +28,7 @@ describe PingWorker, type: :worker do
   describe 'email functionnality' do
     let(:up_response) { Net::HTTPResponse.new(1.0, 200, 'OK') }
     let(:down_response) { Net::HTTPResponse.new(1.0, 404, 'KO') }
+    let(:message_delivery) { instance_double(ActionMailer::MessageDelivery) }
 
     before { create(:ping_report, uname: 'apie_2_certificats_qualibat', last_code: last_code) }
 
@@ -36,13 +37,15 @@ describe PingWorker, type: :worker do
 
       it 'is going DOWN' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(down_response)
-        expect(PingMailer).to receive(:ping).exactly(:once)
+        expect(PingMailer).to receive(:ping).exactly(:once).and_return(message_delivery)
+        expect(message_delivery).to receive(:deliver_now)
         described_class.new.perform(uname)
       end
 
       it 'is still UP' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(up_response)
         expect(PingMailer).not_to receive(:ping)
+        expect(message_delivery).not_to receive(:deliver_now)
         described_class.new.perform(uname)
       end
     end
@@ -53,12 +56,14 @@ describe PingWorker, type: :worker do
       it 'is still DOWN' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(down_response)
         expect(PingMailer).not_to receive(:ping)
+        expect(message_delivery).not_to receive(:deliver_now)
         described_class.new.perform(uname)
       end
 
       it 'is going UP' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(up_response)
-        expect(PingMailer).to receive(:ping).exactly(:once)
+        expect(PingMailer).to receive(:ping).exactly(:once).and_return(message_delivery)
+        expect(message_delivery).to receive(:deliver_now)
         described_class.new.perform(uname)
       end
     end
