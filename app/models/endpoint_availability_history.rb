@@ -15,7 +15,7 @@ class EndpointAvailabilityHistory
   end
 
   def aggregate(code, timestamp)
-    timestamp = Time.parse(timestamp).in_time_zone(@timezone).strftime('%F %T')
+    timestamp = Time.zone.parse(timestamp).in_time_zone(@timezone).strftime('%F %T')
     @availability_history.aggregate(code, timestamp)
   end
 

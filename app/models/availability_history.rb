@@ -71,8 +71,8 @@ class AvailabilityHistory
   end
 
   def full_range_duration
-    from = Time.parse(@availability_history.first.first)
-    to = Time.parse(@availability_history.last.last)
+    from = Time.zone.parse(@availability_history.first.first)
+    to = Time.zone.parse(@availability_history.last.last)
 
     interval_to_seconds(to - from)
   end
@@ -81,8 +81,8 @@ class AvailabilityHistory
     down_time = @availability_history.map do |history|
       http_code = history[1]
       next if http_code < 300 # means it's UP
-      from = Time.parse(history[0])
-      to = Time.parse(history[2])
+      from = Time.zone.parse(history[0])
+      to = Time.zone.parse(history[2])
       interval_to_seconds(to - from)
     end
 

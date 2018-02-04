@@ -12,7 +12,7 @@ describe PingReport, type: :model do
       it { is_expected.not_to be_nil }
       its(:status) { is_expected.to eq('DOWN') }
       its(:last_code) { is_expected.to eq(503) }
-      its(:first_downtime) { is_expected.to be_within(1.second).of Time.now }
+      its(:first_downtime) { is_expected.to be_within(1.second).of Time.zone.now }
       its(:changed?) { is_expected.to be_truthy }
     end
 
@@ -51,7 +51,7 @@ describe PingReport, type: :model do
       it { is_expected.not_to be_nil }
       its(:status) { is_expected.to eq('DOWN') }
       its(:last_code) { is_expected.to eq(422) }
-      its(:first_downtime) { is_expected.to be_within(1.second).of Time.now }
+      its(:first_downtime) { is_expected.to be_within(1.second).of Time.zone.now }
       its(:changed?) { is_expected.to be_truthy }
     end
 
@@ -62,7 +62,7 @@ describe PingReport, type: :model do
       it { is_expected.not_to be_nil }
       its(:status) { is_expected.to eq('DOWN') }
       its(:last_code) { is_expected.to eq(404) }
-      its(:first_downtime) { is_expected.not_to be_within(1.second).of Time.now }
+      its(:first_downtime) { is_expected.not_to be_within(1.second).of Time.zone.now }
       its(:changed?) { is_expected.to be_falsy }
     end
 

@@ -29,7 +29,7 @@ class PingReport < ApplicationRecord
 
   def update_state
     @changed = going_down? || going_up?
-    self.first_downtime = Time.now if going_down?
+    self.first_downtime = Time.zone.now if going_down?
     self.last_code = @new_code
   end
 

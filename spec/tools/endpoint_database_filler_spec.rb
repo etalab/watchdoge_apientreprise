@@ -30,7 +30,9 @@ describe Tools::EndpointDatabaseFiller do
 
     it 'empties the database' do
       expect(Endpoint.all.count).to eq(1)
+      # rubocop:disable RSpec/SubjectStub
       allow(filler).to receive(:fill_database).and_return(nil)
+      # rubocop:enable RSpec/SubjectStub
       filler.refill_database
       expect(Endpoint.all.count).to eq(0)
     end

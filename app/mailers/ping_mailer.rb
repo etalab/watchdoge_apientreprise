@@ -15,6 +15,6 @@ class PingMailer < ApplicationMailer
   end
 
   def subject
-    "[Watchdoge] V#{@endpoint.api_version} #{@endpoint.name} #{@ping_report.status.upcase} à #{Time.now.strftime('%kh%M')}"
+    "[Watchdoge] V#{@endpoint.api_version} #{@endpoint.name} #{@ping_report.status.upcase} à #{Time.zone.now.strftime('%kh%M')}"
   end
 end

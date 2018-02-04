@@ -13,15 +13,6 @@ AllCops:
 Rails:
   Enabled: true
 
-# only used in console no need to log
-Rails/Output:
-  Exclude:
-    - 'lib/tasks/project_init.rake'
-    - 'config/deploy.rb'
-
-Rails/TimeZone:
-  Enabled: false
-
 Rails/DynamicFindBy:
   Enabled: false
 
@@ -29,9 +20,6 @@ Rails/DynamicFindBy:
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 
-# Do not force use of fail or raise only both have their use
-Style/SignalException:
-  Enabled: false
 
 Style/BlockComments:
   Exclude:
@@ -51,7 +39,8 @@ Documentation:
 
 # Buggy... empty lines are not accepted sometimes...
 Layout/EmptyLinesAroundArguments:
-  Enabled: false
+  Exclude:
+    - 'app/models/endpoint.rb'
 
 Layout/MultilineOperationIndentation:
   Exclude:
@@ -67,23 +56,15 @@ Metrics/LineLength:
 Metrics/BlockLength:
   Enabled: false
 
-Naming/HeredocDelimiterNaming:
-  Enabled: false
-
 RSpec/MultipleExpectations:
      Max: 5
 
 RSpec/AnyInstance:
   Enabled: false
 
+# We don't use spies
 RSpec/MessageSpies:
   EnforcedStyle: receive
-
-RSpec/SubjectStub:
-  Enabled: false
-
-RSpec/InstanceVariable:
-  Enabled: false
 
 RSpec/DescribeClass:
   Exclude:

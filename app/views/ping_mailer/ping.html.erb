@@ -1,4 +1,4 @@
-<p>Le <%= Time.now %></p>
+<p>Le <%= Time.zone.now %></p>
 <p>
 Le service V<%= @endpoint.api_version %> <%= @endpoint.name %>
 <% if @ping_report.status.upcase == 'DOWN' %>

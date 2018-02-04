@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rubocop:disable RSpec/InstanceVariable
 describe DashboardController, type: :controller do
   describe 'Current status happy path', vcr: { cassette_name: 'current_status' } do
     subject { get :current_status }
@@ -79,3 +80,4 @@ describe DashboardController, type: :controller do
     its(:status) { is_expected.to eq(500) }
   end
 end
+# rubocop:enable RSpec/InstanceVariable

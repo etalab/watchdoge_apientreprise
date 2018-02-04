@@ -24,7 +24,7 @@ namespace :dev do
 end
 
 def secrets
-  <<EOF
+  <<-YML
     defaults: &DEFAULTS
       apie_token: such_token
       apie_base_uri_new: 'https://staging.entreprise.api.gouv.fr'
@@ -41,5 +41,5 @@ def secrets
     test:
       ping_email_sender: 'test@example.com'
       <<: *DEFAULTS
-EOF
+YML
 end

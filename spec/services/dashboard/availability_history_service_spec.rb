@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_name: 'availability_history_shortened' } do
+  # rubocop:disable RSpec/InstanceVariable
   let(:service) { @availability_results_perform }
+
+  # rubocop:enable RSpec/InstanceVariable
 
   before do
     allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:query_name).and_return('availability_history_shortened')
