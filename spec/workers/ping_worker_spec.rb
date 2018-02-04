@@ -38,14 +38,14 @@ describe PingWorker, type: :worker do
       it 'is going DOWN' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(down_response)
         expect(PingMailer).to receive(:ping).exactly(:once).and_return(message_delivery)
-        expect(message_delivery).to receive(:deliver_now)
+        expect(message_delivery).to receive(:deliver_later)
         described_class.new.perform(uname)
       end
 
       it 'is still UP' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(up_response)
         expect(PingMailer).not_to receive(:ping)
-        expect(message_delivery).not_to receive(:deliver_now)
+        expect(message_delivery).not_to receive(:deliver_later)
         described_class.new.perform(uname)
       end
     end
@@ -56,14 +56,14 @@ describe PingWorker, type: :worker do
       it 'is still DOWN' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(down_response)
         expect(PingMailer).not_to receive(:ping)
-        expect(message_delivery).not_to receive(:deliver_now)
+        expect(message_delivery).not_to receive(:deliver_later)
         described_class.new.perform(uname)
       end
 
       it 'is going UP' do
         allow_any_instance_of(Endpoint).to receive(:http_response).and_return(up_response)
         expect(PingMailer).to receive(:ping).exactly(:once).and_return(message_delivery)
-        expect(message_delivery).to receive(:deliver_now)
+        expect(message_delivery).to receive(:deliver_later)
         described_class.new.perform(uname)
       end
     end

@@ -11,7 +11,7 @@ class PingWorker
   private
 
   def send_notification
-    PingMailer.ping(@endpoint, ping_report).deliver_now
+    PingMailer.ping(@endpoint, ping_report).deliver_later
   end
 
   def ping_report
