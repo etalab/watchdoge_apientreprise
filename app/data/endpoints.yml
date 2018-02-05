@@ -17,6 +17,15 @@
   ping_period: 1
   http_path: '/'
 
+- uname: apie_2_documentation
+  name: "Documentation v2"
+  provider: apientreprise
+  api_name: apie
+  api_version: 2
+  ping_period: 5
+  http_path: '/documentation'
+
+
 - uname: apie_2_etablissements_predecesseur
   name: Etablissements Prédécesseur
   provider: insee

@@ -16,9 +16,9 @@ describe 'watch:period_5', vcr: { cassette_name: 'apie_all' } do
   include_context 'rake'
 
   context 'with all endpoints' do
-    it 'exactly send 5 workers to sidekiq' do
+    it 'exactly send 6 workers to sidekiq' do
       task.invoke
-      expect { PingWorker.drain }.to change { PingWorker.jobs.size }.from(5).to(0)
+      expect { PingWorker.drain }.to change { PingWorker.jobs.size }.from(6).to(0)
     end
   end
 end
