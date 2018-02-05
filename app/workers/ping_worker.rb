@@ -1,6 +1,6 @@
 class PingWorker
   include Sidekiq::Worker
-  sidekiq_options retry: 5
+  sidekiq_options retry: 3
 
   def perform(uname)
     @endpoint = Endpoint.find_by(uname: uname)
