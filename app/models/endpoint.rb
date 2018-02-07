@@ -34,8 +34,9 @@ class Endpoint < ApplicationRecord
   private
 
   private_class_method def self.find_by_http_path_regexp(url)
-    # replace siren/siret (2+ digits or RNA id W000000000) with regexp /.+/ : siret/siren parameters in ELK can be different from those in YAML file
-    regexp_url = url.gsub(/[A-Z]?\d{2,}/, '.+')
+    # replace siren/siret (2+ digits or RNA id W000000000 - caledonia also like W9N1004065)
+    # with regexp /.+/ : siret/siren parameters in ELK can be different from those in YAML file
+    regexp_url = url.gsub(/[A-Z]?[0-9A-Z]{2,}/, '.+')
     # Warning '~' is specific to PGSQL !
     endpoint = Endpoint.find_by('http_path ~ ?', regexp_url)
     return endpoint unless endpoint.nil?

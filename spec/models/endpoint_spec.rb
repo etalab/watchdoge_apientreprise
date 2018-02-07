@@ -14,6 +14,10 @@ describe Endpoint, type: :model do
       expect(described_class.find_by_http_path('/v2/documents_associations/W262001597').uname).to eq('apie_2_documents_associations_rna')
     end
 
+    it 'finds Asso Endpoint with Caledonian parameter' do
+      expect(described_class.find_by_http_path('/v2/associations/W9N1004065').uname).to eq('apie_2_associations_rna')
+    end
+
     it 'finds Endpoint without parameter' do
       expect(described_class.find_by_http_path('/v2/liasses_fiscales_dgfip/2013/dictionnaire').uname).to eq('apie_2_liasses_fiscales_dgfip_dictionnaire')
     end
