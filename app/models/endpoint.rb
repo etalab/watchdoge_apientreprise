@@ -18,6 +18,8 @@ class Endpoint < ApplicationRecord
 
   def http_response
     @http_response ||= fetch_with_redirection(uri)
+  rescue StandardError
+    Rails.logger.error "Something wrong happened when make the http request (#{$ERROR_INFO.class})"
   end
 
   def uri

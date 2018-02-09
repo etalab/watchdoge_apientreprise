@@ -77,6 +77,17 @@ describe Endpoint, type: :model do
     end
   end
 
+  describe 'when Net::HTTP raise an unexpected error' do
+    subject(:ep) { Endpoint.find_by(uname: 'apie_2_certificats_qualibat') }
+
+    before { allow(Net::HTTP).to receive(:get_response).and_raise(TypeError) }
+
+    it 'log an error' do
+      expect(Rails.logger).to receive(:error).with('Something wrong happened when make the http request (TypeError)')
+      ep.http_response
+    end
+  end
+
   # Begin: ActiveRecord tests
   context 'when creating new endpoint with empty or invalid parameters' do
     describe 'invalid and unsavable object' do
