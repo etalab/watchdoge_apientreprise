@@ -33,7 +33,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/etablissements/41816609600069/predecesseur'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_etablissements_successeur
   name: Etablissements successeur
@@ -42,7 +42,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/etablissements/78414518700133/successeur'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_liasses_fiscales_dgfip_complete
   name: Liasses fiscales (complete)
@@ -51,7 +51,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/liasses_fiscales_dgfip/2016/complete/301028346'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_liasses_fiscales_dgfip_declaration
   name: Liasses fiscales (déclaration)
@@ -60,7 +60,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/liasses_fiscales_dgfip/2016/declarations/301028346'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_liasses_fiscales_dgfip_dictionnaire
   name: Liasses fiscales (dictionnaire)
@@ -69,7 +69,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/liasses_fiscales_dgfip/2016/dictionnaire'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_cotisations_msa
   name: Cotisations MSA
@@ -78,7 +78,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/cotisations_msa/81104725700019'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_eligibilites_cotisation_retraite_probtp
   name: Eligibilité cotisation retraite ProBTP
@@ -87,7 +87,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/eligibilites_cotisation_retraite_probtp/73582032600040'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_attestations_cotisation_retraite_probtp
   name: Attestations cotisations retraite ProBTP
@@ -96,7 +96,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/attestations_cotisation_retraite_probtp/73582032600040'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_entreprises
   name: Entreprise
@@ -105,7 +105,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/entreprises/418166096'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_extraits_rcs_infogreffe
   name: Extraits RCS (Infogreffe)
@@ -114,7 +114,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/extraits_rcs_infogreffe/418166096'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_etablissements
   name: Etablissements
@@ -123,7 +123,7 @@
   api_version: 2
   ping_period: 5
   http_path: '/v2/etablissements/41816609600069'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_exercices_dgfip
   name: Exercices
@@ -132,7 +132,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/exercices/55203253400646'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_attestations_agefiph
   name: Attestations agefiph
@@ -141,7 +141,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/attestations_agefiph/30247504101933'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_attestations_fiscales_dgfip
   name: Attestations fiscales
@@ -150,7 +150,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/attestations_fiscales_dgfip/552032534'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP", "siren_is": "552032534", "siren_tva": "552032534" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge", "siren_is": "552032534", "siren_tva": "552032534" }'
 
 - uname: apie_2_attestations_sociales_acoss
   name: Attestations sociales
@@ -159,7 +159,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/attestations_sociales_acoss/356000000'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_certificats_qualibat
   name: Certificats Qualibat
@@ -168,7 +168,7 @@
   api_version: 2
   ping_period: 5
   http_path: '/v2/certificats_qualibat/33592022900036'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_certificats_cnetp
   name: Certificats CNETP
@@ -177,7 +177,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/certificats_cnetp/632049128'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_certificats_opqibi
   name: Certificats OPQIBI
@@ -186,7 +186,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/certificats_opqibi/395301641'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_associations_rna
   name: Associations
@@ -195,7 +195,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/associations/W604004799'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_documents_associations_rna
   name: Documents associations
@@ -204,7 +204,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/documents_associations/77571979202585'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_extraits_courts_inpi
   name: Extraits courts INPI
@@ -213,7 +213,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/extraits_courts_inpi/542065479'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_cartes_professionnelles_fntp
   name: Cartes professionnelles FNTP
@@ -222,7 +222,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/cartes_professionnelles_fntp/562077503'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_entreprises_legacy
   name: Entreprises (legacy)
@@ -231,7 +231,7 @@
   api_version: 2
   ping_period: 60
   http_path: '/v2/entreprises_legacy/418166096'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_etablissements_legacy
   name: Etablissements (legacy)
@@ -240,7 +240,7 @@
   api_version: 2
   ping_period: 5
   http_path: '/v2/etablissements_legacy/41816609600069'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 ####################
 # v1
@@ -252,7 +252,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/associations/W604004799'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_eligibilite_cotisation_retraite_probtp
   name: Eligilité cotisation retraite ProBTP
@@ -261,7 +261,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/probtp/eligibilite_cotisation_retraite/73582032600040'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_attestations_cotisation_retraite_probtp
   name: Attestations cotisation retraite ProBTP
@@ -270,7 +270,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/probtp/attestations_cotisation_retraite/73582032600040'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_attestations_fiscales_dgfip
   name: Attestations fiscales
@@ -279,7 +279,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/attestations_fiscales/552032534'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP", "siren_is": "552032534", "siren_tva": "552032534" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge", "siren_is": "552032534", "siren_tva": "552032534" }'
 
 - uname: apie_1_attestations_sociales_acoss
   name: Attestations sociales
@@ -288,7 +288,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/attestations_sociales/356000000'
-  http_query: '{ "type_attestation": "AVG_UR", "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "type_attestation": "AVG_UR", "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_certificat_cnetp
   name: Certificats CNETP
@@ -297,7 +297,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/cnetp/certificat/632049128'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_certificats_qualibat
   name: Certificats Qualibat
@@ -306,7 +306,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/v1/certificats_qualibat/33592022900036'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_entreprises
   name: Entreprises
@@ -315,7 +315,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/entreprises/418166096'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_etablissements
   name: Etablissements
@@ -324,7 +324,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/v1/etablissements/41816609600069'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_exercices_dgfip
   name: Exercices
@@ -333,7 +333,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/etablissements/exercices/55203253400646'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_cartes_professionnelles_fntp
   name: Cartes professionnelles FNTP
@@ -342,7 +342,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/fntp/cartes_professionnelles/562077503'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_extraits_rcs_infogreffe
   name: Extraits RCS (Infogreffe)
@@ -351,7 +351,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/infogreffe/extraits_rcs/418166096'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_cotisations_msa
   name: Cotisations MSA
@@ -360,7 +360,7 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/msa/cotisations/81104725700019'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_1_certificat_opqibi
   name: Certificats OPQIBI
@@ -369,4 +369,4 @@
   api_version: 1
   ping_period: 60
   http_path: '/v1/opqibi/certificat/395301641'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP" }'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'

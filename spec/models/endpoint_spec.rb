@@ -100,7 +100,7 @@ describe Endpoint, type: :model do
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
       expect(ep.uri.path).to eq('/v2/certificats_qualibat/33592022900036')
-      expect(ep.uri.query).to match(/context=Ping&recipient=SGMAP&token=.+/)
+      expect(ep.uri.query).to match(/context=Ping&object=Watchdoge&recipient=SGMAP&token=.+/)
     end
   end
 
