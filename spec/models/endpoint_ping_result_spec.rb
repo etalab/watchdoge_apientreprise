@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe EndpointPingResult do
-  subject { described_class.new(source_example) }
+  subject { described_class.new(endpoint_factory, source_example) }
 
+  let(:endpoint_factory) { EndpointFactory.new }
   let(:source_example) { JSON.parse(File.read(filename)) }
 
   describe 'parsing Etablissements Legacy v2' do

@@ -1,33 +1,6 @@
 require 'rails_helper'
 
 describe Endpoint, type: :model do
-  describe 'class methods' do
-    it 'finds Endpoint with perfect url' do
-      expect(described_class.find_by_http_path('/v2/cotisations_msa/81104725700019').uname).to eq('apie_2_cotisations_msa')
-    end
-
-    it 'finds Endpoint with wrong parameter' do
-      expect(described_class.find_by_http_path('v2/liasses_fiscales_dgfip/2016/declarations/811047257').uname).to eq('apie_2_liasses_fiscales_dgfip_declaration')
-    end
-
-    it 'finds Doc Asso Endpoint with wrong parameter' do
-      expect(described_class.find_by_http_path('/v2/documents_associations/W262001597').uname).to eq('apie_2_documents_associations_rna')
-    end
-
-    it 'finds Asso Endpoint with Caledonian parameter' do
-      expect(described_class.find_by_http_path('/v2/associations/W9N1004065').uname).to eq('apie_2_associations_rna')
-    end
-
-    it 'finds Endpoint without parameter' do
-      expect(described_class.find_by_http_path('/v2/liasses_fiscales_dgfip/2013/dictionnaire').uname).to eq('apie_2_liasses_fiscales_dgfip_dictionnaire')
-    end
-
-    it 'logs an error when not found' do
-      expect(Rails.logger).to receive(:error)
-      described_class.find_by_http_path('v2/plop/wrong/url')
-    end
-  end
-
   # Begin: real testing
   context 'with one redirection' do
     let(:uname) { 'apie_2_homepage_test' }

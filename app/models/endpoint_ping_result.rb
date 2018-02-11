@@ -5,8 +5,10 @@ class EndpointPingResult
   delegate %i[uname name api_version http_path provider] => :endpoint
   attr_reader :endpoint, :code, :timestamp, :provider_name, :fallback_used
 
-  def initialize(source)
-    @endpoint = Endpoint.find_by_http_path source['path']
+  API_NAME = 'apie'.freeze
+
+  def initialize(endpoint_factory, source)
+    @endpoint = endpoint_factory.find_endpoint_by_http_path(http_path: source['path'], api_name: API_NAME)
     @code = source['status']
     @timestamp = source['@timestamp']
     @provider_name = source.dig('response', 'provider_name')

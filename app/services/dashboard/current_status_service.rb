@@ -7,6 +7,7 @@ class Dashboard::CurrentStatusService
   def initialize
     @client = Dashboard::ElasticClient.new
     @client.establish_connection
+    @endpoint_factory = EndpointFactory.new
     @raw_results = []
   end
 
@@ -42,7 +43,7 @@ class Dashboard::CurrentStatusService
 
   def json_from_raw_endpoint(raw_endpoint)
     source = raw_endpoint.dig('agg_by_endpoint', 'hits', 'hits').first['_source']
-    endpoint_ping = EndpointPingResult.new(source)
+    endpoint_ping = EndpointPingResult.new(@endpoint_factory, source)
     {
       uname: endpoint_ping.uname,
       name: endpoint_ping.name,

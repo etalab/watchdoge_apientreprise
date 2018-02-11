@@ -21,30 +21,6 @@ class Endpoint < ApplicationRecord
     URI(tool_api.base_url + http_path + http_params)
   end
 
-  def self.find_by_http_path(url)
-    perfect_match_endpoint = Endpoint.find_by(http_path: url)
-    return perfect_match_endpoint unless perfect_match_endpoint.nil?
-
-    find_by_http_path_regexp(url)
-
-    # TODO: REFACTOR choisir entre self et find_by
-    # Endpoint.find_by(http_path: url) || find_by_http_path_regexp(url)
-  end
-
-  private
-
-  private_class_method def self.find_by_http_path_regexp(url)
-    # replace siren/siret (2+ digits or RNA id W000000000 - caledonia also like W9N1004065)
-    # with regexp /.+/ : siret/siren parameters in ELK can be different from those in YAML file
-    regexp_url = url.gsub(/[A-Z]?[0-9A-Z]{2,}/, '.+')
-    # Warning '~' is specific to PGSQL !
-    endpoint = Endpoint.find_by('http_path ~ ?', regexp_url)
-    return endpoint unless endpoint.nil?
-
-    # TODO: Sentry /Raven
-    Rails.logger.error "fail to find Endpoint with url: #{url}"
-  end
-
   def fetch_with_redirection(location, redirection_follow_count = 0)
     response = Net::HTTP.get_response(location)
 
