@@ -1,6 +1,7 @@
 require 'net/http'
 
 class Endpoint < ApplicationRecord
+  extend Forwardable
   REDIRECT_LIMIT = 3
 
   validates :uname, presence: true, uniqueness: true
@@ -12,6 +13,8 @@ class Endpoint < ApplicationRecord
   validates :http_path, presence: true
 
   validate :http_query_nil_or_json_string
+
+  delegate %i[token] => :tool_api
 
   def http_response
     @http_response ||= fetch_with_redirection(uri)
@@ -40,10 +43,6 @@ class Endpoint < ApplicationRecord
 
   def http_params
     '?' + { token: token }.merge(hash_options).compact.to_param
-  end
-
-  def token
-    tool_api.token
   end
 
   def hash_options
