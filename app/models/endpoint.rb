@@ -17,14 +17,26 @@ class Endpoint < ApplicationRecord
   delegate %i[token] => :tool_api
 
   def http_response
-    @http_response ||= fetch_with_redirection(uri)
-  rescue StandardError
-    Rails.logger.error "Something wrong happened when make the http request (#{$ERROR_INFO.class})"
+    attempt_to_catch_net_http_errors do
+      @http_response ||= fetch_with_redirection(uri)
+    end
   end
 
   def uri
     URI(tool_api.base_url + http_path + http_params)
   end
+
+  private
+
+  # rubocop:disable Lint/ShadowedException
+  def attempt_to_catch_net_http_errors
+    # https://stackoverflow.com/questions/5370697/what-s-the-best-way-to-handle-exceptions-from-nethttp
+    yield
+  rescue Net::HTTPError, StandardError
+    # TODO: Sentry/Raven
+    Rails.logger.error "Something wrong happened when make the http request (#{$ERROR_INFO})"
+  end
+  # rubocop:enable Lint/ShadowedException
 
   def fetch_with_redirection(location, redirection_follow_count = 0)
     response = Net::HTTP.get_response(location)

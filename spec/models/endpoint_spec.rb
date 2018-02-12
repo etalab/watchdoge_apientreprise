@@ -77,14 +77,27 @@ describe Endpoint, type: :model do
     end
   end
 
-  describe 'when Net::HTTP raise an unexpected error' do
-    subject(:ep) { Endpoint.find_by(uname: 'apie_2_certificats_qualibat') }
+  context 'when Net::HTTP request raises' do
+    describe 'a Net::HTTPError' do
+      subject(:ep) { Endpoint.find_by(uname: 'apie_2_certificats_qualibat') }
 
-    before { allow(Net::HTTP).to receive(:get_response).and_raise(TypeError) }
+      before { allow(Net::HTTP).to receive(:get_response).and_raise(Net::HTTPError) }
 
-    it 'log an error' do
-      expect(Rails.logger).to receive(:error).with('Something wrong happened when make the http request (TypeError)')
-      ep.http_response
+      it 'log an error' do
+        expect(Rails.logger).to receive(:error).with('Something wrong happened when make the http request (wrong number of arguments (given 0, expected 2))')
+        ep.http_response
+      end
+    end
+
+    describe 'a Net::HTTPBadResponse' do
+      subject(:ep) { Endpoint.find_by(uname: 'apie_2_certificats_qualibat') }
+
+      before { allow(Net::HTTP).to receive(:get_response).and_raise(Net::HTTPBadResponse) }
+
+      it 'log an error' do
+        expect(Rails.logger).to receive(:error).with('Something wrong happened when make the http request (Net::HTTPBadResponse)')
+        ep.http_response
+      end
     end
   end
 
