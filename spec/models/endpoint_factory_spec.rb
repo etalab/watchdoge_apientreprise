@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe EndpointFactory do
+  describe 'endpoints returned are immutable (frozen)' do
+    subject { described_class.new.find_endpoint_by_http_path(http_path: '/', api_name: 'apie') }
+
+    it { is_expected.to be_frozen }
+  end
+
   describe 'find by uname' do
     subject { described_class.new.find_endpoint_by_uname(uname) }
 

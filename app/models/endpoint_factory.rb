@@ -1,7 +1,9 @@
 # Flyweight factory
 class EndpointFactory
   def initialize
-    @endpoints = Endpoint.all
+    # rubocop:disable Rails/FindEach
+    @endpoints = Endpoint.all.each(&:freeze)
+    # rubocop:enable Rails/FindEach
   end
 
   def find_endpoint_by_uname(uname)
