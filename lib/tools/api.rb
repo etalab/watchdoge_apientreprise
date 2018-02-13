@@ -17,7 +17,13 @@ class Tools::API
 
   def token
     # else returns nil (important!)
-    Rails.application.config_for(:secrets)['apie_token'] if @api_name == 'apie'
+    return nil unless @api_name == 'apie'
+
+    if @api_version == 2
+      Rails.application.config_for(:secrets)['apie_jwt_token']
+    elsif @api_version == 1
+      Rails.application.config_for(:secrets)['apie_bdd_token']
+    end
   end
 
   private

@@ -26,7 +26,8 @@ end
 def secrets
   <<-YML
     defaults: &DEFAULTS
-      apie_token: such_token
+      apie_jwt_token: such.jwt.token
+      apie_bdd_token: such_token
       apie_base_uri_new: 'https://staging.entreprise.api.gouv.fr'
       apie_base_uri_old: 'https://api-dev.apientreprise.fr'
       sirene_base_uri: 'https://sirene.entreprise.api.gouv.fr'
