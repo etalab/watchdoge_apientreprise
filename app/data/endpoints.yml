@@ -148,7 +148,7 @@
   provider: dgfip
   api_name: apie
   api_version: 2
-  ping_period: 60
+  ping_period: 15
   http_path: '/v2/attestations_fiscales_dgfip/552032534'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge", "siren_is": "552032534", "siren_tva": "552032534" }'
 
@@ -277,7 +277,7 @@
   provider: dgfip
   api_name: apie
   api_version: 1
-  ping_period: 60
+  ping_period: 15
   http_path: '/v1/attestations_fiscales/552032534'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge", "siren_is": "552032534", "siren_tva": "552032534" }'
 

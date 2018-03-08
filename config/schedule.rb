@@ -17,6 +17,10 @@ every 5.minutes do
   rake 'watch:period_5'
 end
 
+every 15.minutes do
+  rake 'watch:period_15'
+end
+
 every 60.minutes do
   rake 'watch:period_60'
 end
