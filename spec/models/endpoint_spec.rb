@@ -58,7 +58,7 @@ describe Endpoint, type: :model do
     it 'is an sirene endpoint' do
       ep = create(:endpoint, api_name: 'sirene', http_path: '/', http_query: nil)
       expect(ep.uri.scheme).to eq('https')
-      expect(ep.uri.host).to eq('sirene.entreprise.api.gouv.fr')
+      expect(ep.uri.host).to eq('entreprise.data.gouv.fr')
       expect(ep.uri.path).to eq('/')
       expect(ep.uri.query).to be_empty
     end
