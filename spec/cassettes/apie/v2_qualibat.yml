@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: "<APIE_BASE_URI_NEW>/v2/certificats_qualibat/33592022900036?context=Ping&recipient=SGMAP&token=<APIE_TOKEN>"
+    uri: "<APIE_BASE_URI_NEW>/v2/certificats_qualibat/33592022900036?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
     body:
       encoding: US-ASCII
       string: ''
@@ -14,7 +14,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - entreprise.api.gouv.fr
+      - sandbox.entreprise.api.gouv.fr
   response:
     status:
       code: 200
@@ -31,20 +31,20 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       Etag:
-      - W/"08ff77f3f67a2b54883362455578f0db"
+      - W/"e113e7b449e2f27e9c9af9dba2dcba1e"
       X-Runtime:
-      - '0.698710'
+      - '0.446343'
       X-Request-Id:
-      - 0b9c4b18-36b8-4b6f-bfc8-dfb416bf1c9d
+      - 932ce789-0123-4998-a209-16e3bcb4a266
       Date:
-      - Sun, 17 Dec 2017 14:57:02 GMT
+      - Tue, 13 Feb 2018 18:55:12 GMT
       X-Powered-By:
       - Phusion Passenger 5.1.11
       Server:
       - nginx + Phusion Passenger 5.1.11
     body:
       encoding: ASCII-8BIT
-      string: '{"url":"https://storage.entreprise.api.gouv.fr/siade/1513522622-c54d6b28123230771869eed3cc61ea42813d7dde-certificat_qualibat.pdf"}'
-    http_version: 
-  recorded_at: Sun, 17 Dec 2017 14:57:02 GMT
+      string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1518548112-7110e0e43d4490575e362f300146f036e3a59d82-certificat_qualibat.pdf"}'
+    http_version:
+  recorded_at: Tue, 13 Feb 2018 18:55:12 GMT
 recorded_with: VCR 3.0.3

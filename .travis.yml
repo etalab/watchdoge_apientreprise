@@ -17,6 +17,5 @@ before_script:
 script:
   - bundle exec rubocop -D
   - bundle exec rspec spec --format documentation --color
-  - bundle exec rspec spec --format documentation --color --tag very_long_test
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

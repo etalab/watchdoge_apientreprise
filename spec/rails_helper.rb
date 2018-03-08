@@ -15,7 +15,7 @@ SimpleCov.start
 
 Sidekiq::Testing.fake!
 
-Tools::EndpointDatabaseFiller.instance.refill_database
+Tools::EndpointDatabaseFiller.new.refill_database
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

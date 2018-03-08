@@ -1,33 +1,6 @@
 require 'rails_helper'
 
 describe Endpoint, type: :model do
-  describe 'class methods' do
-    it 'finds Endpoint with perfect url' do
-      expect(described_class.find_by_http_path('/v2/cotisations_msa/81104725700019').uname).to eq('apie_2_cotisations_msa')
-    end
-
-    it 'finds Endpoint with wrong parameter' do
-      expect(described_class.find_by_http_path('v2/liasses_fiscales_dgfip/2016/declarations/811047257').uname).to eq('apie_2_liasses_fiscales_dgfip_declaration')
-    end
-
-    it 'finds Doc Asso Endpoint with wrong parameter' do
-      expect(described_class.find_by_http_path('/v2/documents_associations/W262001597').uname).to eq('apie_2_documents_associations_rna')
-    end
-
-    it 'finds Asso Endpoint with Caledonian parameter' do
-      expect(described_class.find_by_http_path('/v2/associations/W9N1004065').uname).to eq('apie_2_associations_rna')
-    end
-
-    it 'finds Endpoint without parameter' do
-      expect(described_class.find_by_http_path('/v2/liasses_fiscales_dgfip/2013/dictionnaire').uname).to eq('apie_2_liasses_fiscales_dgfip_dictionnaire')
-    end
-
-    it 'logs an error when not found' do
-      expect(Rails.logger).to receive(:error)
-      described_class.find_by_http_path('v2/plop/wrong/url')
-    end
-  end
-
   # Begin: real testing
   context 'with one redirection' do
     let(:uname) { 'apie_2_homepage_test' }
@@ -85,7 +58,7 @@ describe Endpoint, type: :model do
     it 'is an sirene endpoint' do
       ep = create(:endpoint, api_name: 'sirene', http_path: '/', http_query: nil)
       expect(ep.uri.scheme).to eq('https')
-      expect(ep.uri.host).to eq('sirene.entreprise.api.gouv.fr')
+      expect(ep.uri.host).to eq('entreprise.data.gouv.fr')
       expect(ep.uri.path).to eq('/')
       expect(ep.uri.query).to be_empty
     end
@@ -100,7 +73,31 @@ describe Endpoint, type: :model do
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
       expect(ep.uri.path).to eq('/v2/certificats_qualibat/33592022900036')
-      expect(ep.uri.query).to match(/context=Ping&recipient=SGMAP&token=.+/)
+      expect(ep.uri.query).to match(/context=Ping&object=Watchdoge&recipient=SGMAP&token=.+/)
+    end
+  end
+
+  context 'when Net::HTTP request raises' do
+    describe 'a Net::HTTPError' do
+      subject(:ep) { Endpoint.find_by(uname: 'apie_2_certificats_qualibat') }
+
+      before { allow(Net::HTTP).to receive(:get_response).and_raise(Net::HTTPError) }
+
+      it 'log an error' do
+        expect(Rails.logger).to receive(:error).with('Something wrong happened when make the http request (wrong number of arguments (given 0, expected 2))')
+        ep.http_response
+      end
+    end
+
+    describe 'a Net::HTTPBadResponse' do
+      subject(:ep) { Endpoint.find_by(uname: 'apie_2_certificats_qualibat') }
+
+      before { allow(Net::HTTP).to receive(:get_response).and_raise(Net::HTTPBadResponse) }
+
+      it 'log an error' do
+        expect(Rails.logger).to receive(:error).with('Something wrong happened when make the http request (Net::HTTPBadResponse)')
+        ep.http_response
+      end
     end
   end
 

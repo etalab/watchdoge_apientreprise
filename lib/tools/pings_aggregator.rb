@@ -4,6 +4,7 @@ class Tools::PingsAggregator
     @timezone = timezone
     @elk_sources = []
     @endpoints_availability_history = {}
+    @endpoint_factory = EndpointFactory.new
   end
 
   def endpoints_availability_history
@@ -18,7 +19,7 @@ class Tools::PingsAggregator
 
   def parse_raw_data_into_sources
     @raw_data.each do |data|
-      elk_source = EndpointPingResult.new(data['_source'])
+      elk_source = EndpointPingResult.new(@endpoint_factory, data['_source'])
       @elk_sources << elk_source
     end
 

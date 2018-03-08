@@ -20,6 +20,11 @@ namespace :watch do
     watch(period: 5)
   end
 
+  desc 'run watchdoge service on all endpoints with a period of 5 minute'
+  task 'period_15': :environment do
+    watch(period: 15)
+  end
+
   desc 'run watchdoge service on all endpoints with a period of 60 minutes'
   task 'period_60': :environment do
     watch(period: 60)

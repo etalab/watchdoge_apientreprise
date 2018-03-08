@@ -1,6 +1,4 @@
 class Tools::EndpointDatabaseFiller
-  include Singleton
-
   def refill_database
     ActiveRecord::Base.transaction do
       # WARN: this is specific to Postgres

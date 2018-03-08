@@ -7,7 +7,7 @@ describe Tools::API do
     let(:api_name) { 'sirene' }
     let(:api_version) { 1 }
 
-    its(:base_url) { is_expected.to match(/sirene.entreprise.api.gouv.fr/) }
+    its(:base_url) { is_expected.to match(/entreprise.data.gouv.fr/) }
     its(:token) { is_expected.to be_nil }
   end
 

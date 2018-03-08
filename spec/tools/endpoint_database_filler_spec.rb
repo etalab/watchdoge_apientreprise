@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Tools::EndpointDatabaseFiller do
-  subject(:filler) { described_class.instance }
+  subject(:filler) { described_class.new }
 
   it { is_expected.to be_a(described_class) }
 
