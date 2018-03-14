@@ -5,7 +5,7 @@ class Dashboard::CurrentStatusService
   delegate %i[success? errors] => :@client
 
   def initialize
-    @client = Dashboard::ElasticClient.new
+    @client = ElasticClient.new
     @client.establish_connection
     @endpoint_factory = EndpointFactory.new
     @raw_results = []

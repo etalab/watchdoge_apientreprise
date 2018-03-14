@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Dashboard::ElasticClient, type: :service do
+describe ElasticClient, type: :service do
   subject(:client) { described_class.new }
 
   before do

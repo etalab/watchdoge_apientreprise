@@ -11,7 +11,7 @@ class Dashboard::AvailabilityHistoryService
 
   def initialize
     @hits = []
-    @client = Dashboard::ElasticClient.new
+    @client = ElasticClient.new
     @client.establish_connection
   end
 
