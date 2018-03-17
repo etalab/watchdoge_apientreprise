@@ -1,13 +1,13 @@
 require 'forwardable'
 
-class EndpointPingResult
+class CallCharacteristics
   extend Forwardable
   delegate %i[uname name api_version http_path provider] => :endpoint
   attr_reader :endpoint, :code, :timestamp, :provider_name, :fallback_used
 
   API_NAME = 'apie'.freeze
 
-  def initialize(endpoint_factory, source)
+  def initialize(source, endpoint_factory = EndpointFactory.new)
     @endpoint = endpoint_factory.find_endpoint_by_http_path(http_path: source['path'], api_name: API_NAME)
     @code = source['status']
     @timestamp = source['@timestamp']

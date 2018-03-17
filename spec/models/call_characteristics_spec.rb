@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe EndpointPingResult do
+describe CallCharacteristics do
   subject { described_class.new(endpoint_factory, source_example) }
 
   let(:endpoint_factory) { EndpointFactory.new }
