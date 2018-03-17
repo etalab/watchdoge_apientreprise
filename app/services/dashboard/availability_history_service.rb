@@ -44,7 +44,7 @@ class Dashboard::AvailabilityHistoryService
   end
 
   def process_raw_response
-    aggregator = Tools::PingsAggregator.new(@hits, TIMEZONE)
+    aggregator = Aggregators::PingsAggregator.new(@hits, TIMEZONE)
     endpoints_availability_history = aggregator.endpoints_availability_history
 
     adapter = EndpointsAvailabilityAdapter.new(endpoints_availability_history)

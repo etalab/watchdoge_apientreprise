@@ -7,7 +7,7 @@ describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_
   # rubocop:enable RSpec/InstanceVariable
 
   before do
-    allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:query_name).and_return('availability_history_shortened')
+    allow_any_instance_of(described_class).to receive(:query_name).and_return('availability_history_shortened')
     remember_through_tests('availability_results_perform') do
       described_class.new.perform
     end
@@ -54,5 +54,6 @@ describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_
     end
 
     its(:success?) { is_expected.to be_falsey }
+    its(:errors) { is_expected.not_to be_empty }
   end
 end
