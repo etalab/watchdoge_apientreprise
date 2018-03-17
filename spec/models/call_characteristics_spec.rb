@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe CallCharacteristics do
-  subject { described_class.new(endpoint_factory, source_example) }
+  subject { described_class.new(source_example, endpoint_factory) }
 
   let(:endpoint_factory) { EndpointFactory.new }
   let(:source_example) { JSON.parse(File.read(filename)) }
