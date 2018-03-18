@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 describe Stats::CallCounter do
-  subject(:counter) { described_class.new(duration: 15.minutes, beginning_timestamp: Time.zone.at(3.hours.ago)) }
+  subject(:counter) { described_class.new(duration: duration, beginning_timestamp: beginning) }
 
   context 'with only one add' do
+    let(:duration) { 3.hours }
+    let(:beginning) { Time.zone.at(3.hours.ago) }
+
     before do
-      fake_calls(size: 1) do |e|
+      fake_calls(size: 1, oldest_timestamp: duration).sort(&:timestamp).each do |e|
         counter.add(e)
       end
     end
@@ -16,8 +19,11 @@ describe Stats::CallCounter do
   end
 
   context 'with many adds' do
+    let(:duration) { 14.minutes }
+    let(:beginning) { 15.minutes.ago}
+
     before do
-      fake_calls(size: 100) do |e|
+      fake_calls(size: 100, oldest_timestamp: duration).sort(&:timestamp).each do |e|
         counter.add(e)
       end
     end

@@ -6,18 +6,21 @@ def valid_jti
   'b5be66cc-d182-420c-b0a7-a763b02c9e13'
 end
 
-def fake_calls(size: 10)
+def fake_calls(size: 10, oldest_timestamp: 8.days)
   endpoint_factory = EndpointFactory.new
+  fake_calls = []
   size.times do
-    yield CallCharacteristics.new fake_elk_source(endpoint_factory.endpoints.sample), endpoint_factory
+    fake_calls << CallCharacteristics.new(fake_elk_source(endpoint_factory.endpoints.sample, oldest_timestamp), endpoint_factory)
   end
+
+  fake_calls
 end
 
-def fake_elk_source(endpoint)
+def fake_elk_source(endpoint, oldtest_timestamp)
   {
     'path': endpoint.http_path,
     'status': %w[200 206 400 404 500 501].sample,
-    '@timestamp': time_rand(Time.zone.now - 8.days),
+    '@timestamp': time_rand(Time.zone.now - oldtest_timestamp),
     'response': {
       'provider_name': endpoint.provider,
       'fallback_used': [true, false].sample

@@ -21,12 +21,19 @@ class Stats::CallCounter
     @endpoints = []
   end
 
+  def can_add?(call_characteristics)
+    (call_characteristics.timestamp - @beginning_timestamp) <= @duration
+  end
+
   def add(call_characteristics)
-    endpoint = @endpoints.find { |e| e.endpoint.uname == call_characteristics.uname }
-    if endpoint.nil?
+    # binding.pry
+    return false unless can_add?(call_characteristics)
+
+    endpoint_counter = @endpoints.find { |e| e.endpoint.uname == call_characteristics.uname }
+    if endpoint_counter.nil?
       @endpoints << EndpointCallCounter.new(call_characteristics, 1)
     else
-      endpoint.count += 1
+      endpoint_counter.count += 1
     end
   end
 
