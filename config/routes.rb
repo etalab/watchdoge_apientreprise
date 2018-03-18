@@ -1,9 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  get 'dashboard/current_status'
-  get 'dashboard/availability_history'
-  get 'dashboard/homepage_status'
+  get 'api/watchdoge/dashboard/current_status'
+  get 'api/watchdoge/dashboard/availability_history'
+  get 'api/watchdoge/dashboard/homepage_status'
 
   mount Sidekiq::Web => '/sidekiq'
 end
