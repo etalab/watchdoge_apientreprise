@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "http_code_percentages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "last_30_hours",
+        "last_8_days"
+      ],
+      "properties": {
+        "last_30_hours": {
+          "type": "array",
+          "patternProperties": {
+            "^[2-5][0-9]{2}$": {
+              "type": "number",
+              "title": "The percentage of 200 HTTP response",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        },
+        "last_8_days": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "patternProperties": {
+              "^[2-5][0-9]{2}$": {
+                "type": "number",
+                "title": "The percentage of 200 HTTP response",
+                "minimum": 0,
+                "maximum": 100
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

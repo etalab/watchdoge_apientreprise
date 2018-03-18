@@ -1,0 +1,79 @@
+{
+  "number_of_calls": {
+    "last_10_minutes": {
+      "total": 51185095,
+      "by_endpoints": [
+        {
+          "uname": "commodo reprehenderit adipisicing",
+          "name": "mollit tempor",
+          "total": 45332945
+        },
+        {
+          "uname": "minim anim dolore pariatur",
+          "name": "do Lorem",
+          "total": 46863770
+        },
+        {
+          "uname": "amet sunt est",
+          "name": "laboris ad",
+          "total": 56609061
+        },
+        {
+          "uname": "commodo fugiat magna",
+          "name": "eu mollit proident",
+          "total": 27811051
+        }
+      ]
+    },
+    "last_30_hours": {
+      "total": 90321996,
+      "by_endpoints": [
+        {
+          "uname": "aute consectetur ess",
+          "name": "in cupidatat tempo",
+          "total": 15836067
+        },
+        {
+          "uname": "Lorem in aliqua qui aute",
+          "name": "ut",
+          "total": 92897441
+        },
+        {
+          "uname": "cillum dolor",
+          "name": "sunt co",
+          "total": 55836538
+        },
+        {
+          "uname": "ea sint dolore Excepteur",
+          "name": "eius",
+          "total": 90397787
+        }
+      ]
+    },
+    "last_8_days": {
+      "total": 16930170,
+      "by_endpoints": [
+        {
+          "uname": "amet velit qui",
+          "name": "cupidatat anim pariatur",
+          "total": 74275023
+        },
+        {
+          "uname": "mollit quis voluptate occaecat",
+          "name": "do aliquip Duis tempor",
+          "total": 94881381
+        },
+        {
+          "uname": "consectet",
+          "name": "consequat tempor ipsum quis",
+          "total": 6055018
+        },
+        {
+          "uname": "ipsum sed voluptate",
+          "name": "proident cul",
+          "total": 78983572
+        }
+      ]
+    }
+  }
+}

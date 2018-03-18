@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   get 'dashboard/availability_history'
   get 'dashboard/homepage_status'
 
+  get 'stats/jwt_usage/:jti', to: 'stats#jwt_usage'
+
   mount Sidekiq::Web => '/sidekiq'
 end
