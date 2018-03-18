@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-describe EndpointPingResult do
-  subject { described_class.new(endpoint_factory, source_example) }
+describe CallCharacteristics do
+  subject { described_class.new(source_example, endpoint_factory) }
 
   let(:endpoint_factory) { EndpointFactory.new }
   let(:source_example) { JSON.parse(File.read(filename)) }
 
   describe 'parsing Etablissements Legacy v2' do
-    let(:filename) { 'spec/support/payload_files/legacy_elasticsearch_source.json' }
+    let(:filename) { 'spec/support/payload_files/elk_sources/legacy_elasticsearch_source.json' }
 
     its(:uname) { is_expected.to eq('apie_2_etablissements_legacy') }
     its(:name) { is_expected.to eq('Etablissements (legacy)') }
@@ -22,7 +22,7 @@ describe EndpointPingResult do
   end
 
   describe 'parsing Entreprises v2' do
-    let(:filename) { 'spec/support/payload_files/entreprises_elasticsearch_source.json' }
+    let(:filename) { 'spec/support/payload_files/elk_sources/entreprises_elasticsearch_source.json' }
 
     its(:uname) { is_expected.to eq('apie_2_entreprises') }
     its(:name) { is_expected.to eq('Entreprise') }
@@ -37,7 +37,7 @@ describe EndpointPingResult do
   end
 
   describe 'parsing Infogreffe v1' do
-    let(:filename) { 'spec/support/payload_files/extraits_rcs_infogreffe_source.json' }
+    let(:filename) { 'spec/support/payload_files/elk_sources/extraits_rcs_infogreffe_source.json' }
 
     its(:uname) { is_expected.to eq('apie_1_extraits_rcs_infogreffe') }
     its(:name) { is_expected.to eq('Extraits RCS (Infogreffe)') }
@@ -50,7 +50,7 @@ describe EndpointPingResult do
   end
 
   describe 'parsing msa v1' do
-    let(:filename) { 'spec/support/payload_files/msa_elasticsearch_source.json' }
+    let(:filename) { 'spec/support/payload_files/elk_sources/msa_elasticsearch_source.json' }
 
     its(:uname) { is_expected.to eq('apie_1_cotisations_msa') }
     its(:name) { is_expected.to eq('Cotisations MSA') }
@@ -63,7 +63,7 @@ describe EndpointPingResult do
   end
 
   describe 'parsing liasse fiscale v2' do
-    let(:filename) { 'spec/support/payload_files/liasses_fiscales_elasticsearch_source.json' }
+    let(:filename) { 'spec/support/payload_files/elk_sources/liasses_fiscales_elasticsearch_source.json' }
 
     its(:uname) { is_expected.to eq('apie_2_liasses_fiscales_dgfip_declaration') }
     its(:name) { is_expected.to eq('Liasses fiscales (déclaration)') }

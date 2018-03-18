@@ -5,7 +5,7 @@ class Dashboard::HomepageStatusService
   delegate %i[success? errors] => :@client
 
   def initialize
-    @client = Dashboard::ElasticClient.new
+    @client = ElasticClient.new
     @client.establish_connection
     @raw_results = []
   end

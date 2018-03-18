@@ -1,4 +1,4 @@
-class Dashboard::ElasticClient
+class ElasticClient
   attr_reader :connected, :success, :raw_response, :errors
   alias success? success
   alias connected? connected

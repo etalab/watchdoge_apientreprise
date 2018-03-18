@@ -5,7 +5,7 @@ class Dashboard::CurrentStatusService
   delegate %i[success? errors] => :@client
 
   def initialize
-    @client = Dashboard::ElasticClient.new
+    @client = ElasticClient.new
     @client.establish_connection
     @endpoint_factory = EndpointFactory.new
     @raw_results = []
@@ -43,7 +43,7 @@ class Dashboard::CurrentStatusService
 
   def json_from_raw_endpoint(raw_endpoint)
     source = raw_endpoint.dig('agg_by_endpoint', 'hits', 'hits').first['_source']
-    endpoint_ping = EndpointPingResult.new(@endpoint_factory, source)
+    endpoint_ping = CallCharacteristics.new(source, @endpoint_factory)
     {
       uname: endpoint_ping.uname,
       name: endpoint_ping.name,
