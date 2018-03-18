@@ -149,8 +149,8 @@
   api_name: apie
   api_version: 2
   ping_period: 15
-  http_path: '/v2/attestations_fiscales_dgfip/552032534'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge", "siren_is": "552032534", "siren_tva": "552032534" }'
+  http_path: '/v2/attestations_fiscales_dgfip/552045999'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge", "siren_is": "552045999", "siren_tva": "552045999" }'
 
 - uname: apie_2_attestations_sociales_acoss
   name: Attestations sociales
