@@ -6,19 +6,30 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["url", "params", "code"],
+        "required": ["uname", "name", "url", "params", "code"],
         "properties": {
+          "uname": {
+            "type": "string",
+            "title": "The unique name of the http request"
+          },
+          "name": {
+            "type": "string",
+            "title": "The common name of the http request"
+          },
           "url": {
             "type": "string",
             "title": "The Url of the http request"
           },
           "params": {
-            "type": "object",
+            "type": "array",
             "title": "The Params of the http request",
-            "properties": {
-              "siren": {
-                "type": "string",
-                "title": "The Siren in the params"
+            "items": {
+              "type": "object",
+              "patternProperties": {
+                "": {
+                  "type": "string",
+                  "title": "value of the param"
+                }
               }
             }
           },

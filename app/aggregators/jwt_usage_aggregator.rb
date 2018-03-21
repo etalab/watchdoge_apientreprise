@@ -3,18 +3,18 @@ class Aggregators::JwtUsageAggregator
 
   def initialize(raw_data:)
     @raw_data = raw_data
-    @number_of_calls = Stats::NumberOfCalls.new
-    @last_calls = Stats::LastCalls.new
-    @http_code_percentages = Stats::HttpCodePercentages.new
+    @call_counter_aggregator = CallCounterAggregator.new
+    # @last_calls = Stats::LastCalls.new
+    # @http_code_percentages = Stats::HttpCodePercentages.new
     @endpoint_factory = EndpointFactory.new
   end
 
   def aggregate
     @raw_data.each do |data|
-      ping_result = CallCharacteristics.new(data['_source'], @endpoint_factory)
-      @number_of_calls.aggregate(ping_result)
-      @last_calls.aggregate(ping_result)
-      @http_code_percentages.aggregate(ping_result)
+      call = CallCharacteristics.new(data['_source'], @endpoint_factory)
+      @call_counter_aggregator.aggregate(call)
+      # @last_calls.add(call)
+      # @http_code_percentages.aggregate(call)
     end
 
     @raw_data.clear

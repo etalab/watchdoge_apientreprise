@@ -3,7 +3,8 @@ require 'action_view'
 class Stats::CallCounter
   include ActionView::Helpers::DateHelper
 
-  attr_reader :duration, :beginning_timestamp, :endpoints
+  attr_reader :beginning_time, :endpoints
+  attr_accessor :duration
 
   EndpointCallCounter = Struct.new(:endpoint, :count) do
     def as_json
@@ -15,19 +16,24 @@ class Stats::CallCounter
     end
   end
 
-  def initialize(duration:, beginning_timestamp:)
+  def initialize(duration:, beginning_time:)
     @duration = duration
-    @beginning_timestamp = beginning_timestamp
+    @beginning_time = beginning_time
     @endpoints = []
   end
 
-  def can_add?(call_characteristics)
-    (call_characteristics.timestamp - @beginning_timestamp) <= @duration
+  def initialize_copy(original)
+    @duration = original.duration.dup
+    @beginning_time = original.beginning_time.dup
+    @endpoints = original.endpoints.deep_dup
+  end
+
+  def in_scope?(time)
+    time >= (@beginning_time - @duration)
   end
 
   def add(call_characteristics)
-    # binding.pry
-    return false unless can_add?(call_characteristics)
+    return false unless in_scope?(call_characteristics.timestamp)
 
     endpoint_counter = @endpoints.find { |e| e.endpoint.uname == call_characteristics.uname }
     if endpoint_counter.nil?
@@ -53,6 +59,21 @@ class Stats::CallCounter
   private
 
   def duration_name
-    distance_of_time_in_words(@duration).parameterize.underscore
+    distance_of_time_in_words(
+      @beginning_time - @duration,
+      @beginning_time,
+      true,
+      accumulate_on: duration_name_accumulator
+    ).parameterize.underscore
+  end
+
+  def duration_name_accumulator
+    if @duration < 1.hour
+      :minutes
+    elsif @duration < 2.days
+      :hours
+    elsif @duration < 10.days
+      :days
+    end
   end
 end
