@@ -2,7 +2,7 @@
   "number_of_calls": {
     "last_10_minutes": {
       "total": 51185095,
-      "by_endpoints": [
+      "by_endpoint": [
         {
           "uname": "commodo reprehenderit adipisicing",
           "name": "mollit tempor",
@@ -27,7 +27,7 @@
     },
     "last_30_hours": {
       "total": 90321996,
-      "by_endpoints": [
+      "by_endpoint": [
         {
           "uname": "aute consectetur ess",
           "name": "in cupidatat tempo",
@@ -52,7 +52,7 @@
     },
     "last_8_days": {
       "total": 16930170,
-      "by_endpoints": [
+      "by_endpoint": [
         {
           "uname": "amet velit qui",
           "name": "cupidatat anim pariatur",

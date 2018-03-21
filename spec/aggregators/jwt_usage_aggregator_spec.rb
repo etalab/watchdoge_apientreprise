@@ -18,6 +18,6 @@ describe JwtUsageAggregator, vcr: { cassette_name: 'jwt_usage'} do
   # it does not mock the sub-aggregator... quite hard to do...
   its(:number_of_calls) { is_expected.to match_json_schema('stats/number_of_calls') }
   its(:last_calls) { is_expected.to match_json_schema('stats/last_calls') }
-  its(:http_code_percentages) { is_expected.to match_json_schema('stats/http_code_percentages') }
+  # its(:http_code_percentages) { is_expected.to match_json_schema('stats/http_code_percentages') }
 end
 

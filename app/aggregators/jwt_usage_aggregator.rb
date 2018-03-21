@@ -1,6 +1,4 @@
 class JwtUsageAggregator
-  attr_reader :number_of_calls, :last_calls, :http_code_percentages
-
   def initialize(raw_data:)
     @raw_data = raw_data
     @call_counter_aggregator = CallCounterAggregator.new
@@ -19,4 +17,16 @@ class JwtUsageAggregator
 
     @raw_data.clear
   end
+
+  def number_of_calls
+    @call_counter_aggregator.as_json
+  end
+
+  def last_calls
+    @last_calls.as_json
+  end
+
+  # def http_code_percentages
+  #   @http_code_percentages.as_json
+  # end
 end

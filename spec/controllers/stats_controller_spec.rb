@@ -8,7 +8,7 @@ describe StatsController, type: :controller do
     its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
   end
 
-  describe 'happy path', vcr: { cassette_name: 'jwt_usage' } do
+  describe 'when having an error', vcr: { cassette_name: 'jwt_usage' } do
     subject { get :jwt_usage, params: { jti: valid_jti } }
 
     before { allow_any_instance_of(Stats::JwtUsageService).to receive(:success?).and_return(false) }

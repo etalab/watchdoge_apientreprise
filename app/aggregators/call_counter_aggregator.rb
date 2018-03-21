@@ -1,5 +1,4 @@
 class CallCounterAggregator
-
   attr_reader :validated_call_counters
 
   def initialize

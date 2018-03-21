@@ -4,7 +4,7 @@ class StatsController < ApplicationController
     service.perform
 
     if service.success?
-      render json: { results: service.results }, status: 200
+      render json: service.results, status: 200
     else
       render json: { message: service.errors.join(',') }, status: 500
     end
