@@ -1,4 +1,4 @@
-class Aggregators::PingHistory
+class PingHistoryAggregator
   def initialize(raw_data, timezone)
     @raw_data = raw_data
     @timezone = timezone

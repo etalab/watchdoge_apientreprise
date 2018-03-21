@@ -1,0 +1,184 @@
+//{
+//  "type": "object",
+//  "additionalProperties": false,
+//  "required": ["last_calls", "http_code_percentages", "number_of_calls"],
+//  "properties": {
+//    "last_calls": {
+//      "type": "array",
+//      "items": {
+//        "type": "object",
+//        "additionalProperties": false,
+//        "required": ["url", "params", "code"],
+//        "properties": {
+//          "url": {
+//            "type": "string",
+//            "title": "The Url of the http request"
+//          },
+//          "params": {
+//            "type": "object",
+//            "title": "The Params of the http request",
+//            "properties": {
+//              "siren": {
+//                "type": "string",
+//                "title": "The Siren in the params"
+//              }
+//            }
+//          },
+//          "code": {
+//            "type": "number",
+//            "title": "The HTTP Code of the http request",
+//            "minimum": 0,
+//            "maximum": 100
+//          }
+//        }
+//      }
+//    },
+//    "http_code_percentages": {
+//      "type": "object",
+//      "additionalProperties": false,
+//      "required": [
+//        "last_30_hours",
+//        "last_8_days"
+//      ],
+//      "properties": {
+//        "last_30_hours": {
+//          "type": "array",
+//          "patternProperties": {
+//            "^[2-5][0-9]{2}$": {
+//              "type": "number",
+//              "title": "The percentage of 200 HTTP response",
+//              "minimum": 0,
+//              "maximum": 100
+//            }
+//          }
+//        },
+//        "last_8_days": {
+//          "type": "array",
+//          "items": {
+//            "type": "object",
+//            "patternProperties": {
+//              "^[2-5][0-9]{2}$": {
+//                "type": "number",
+//                "title": "The percentage of 200 HTTP response",
+//                "minimum": 0,
+//                "maximum": 100
+//              }
+//            }
+//          }
+//        }
+//      }
+//    },
+//    "number_of_calls": {
+//      "type": "object",
+//      "additionalProperties": false,
+//      "required": ["last_10_minutes", "last_30_hours", "last_8_days"],
+//      "properties": {
+//        "last_10_minutes": {
+//          "type": "object",
+//          "additionalProperties": false,
+//          "required": ["total", "by_endpoints"],
+//          "properties": {
+//            "total": {
+//              "type": "integer",
+//              "title": "The Total number of calls during the period",
+//              "minimum": 0
+//            },
+//            "by_endpoints": {
+//              "type": "array",
+//              "items": {
+//                "type": "object",
+//                "additionalProperties": false,
+//                "required": ["uname", "name", "total"],
+//                "properties": {
+//                  "uname": {
+//                    "type": "string",
+//                    "title": "The Uname of the endpoint"
+//                  },
+//                  "name": {
+//                    "type": "string",
+//                    "title": "The displayed name of the endpoint"
+//                  },
+//                  "total": {
+//                    "type": "integer",
+//                    "title": "The Total of call of the endpoint during the period",
+//                    "minimum": 0
+//                  }
+//                }
+//              }
+//            }
+//          }
+//        },
+//        "last_30_hours": {
+//          "type": "object",
+//          "additionalProperties": false,
+//          "required": ["total", "by_endpoints"],
+//          "properties": {
+//            "total": {
+//              "type": "integer",
+//              "title": "The Total number of calls during the period",
+//              "minimum": 0
+//            },
+//            "by_endpoints": {
+//              "type": "array",
+//              "items": {
+//                "type": "object",
+//                "additionalProperties": false,
+//                "required": ["uname", "name", "total"],
+//                "properties": {
+//                  "uname": {
+//                    "type": "string",
+//                    "title": "The Uname of the endpoint"
+//                  },
+//                  "name": {
+//                    "type": "string",
+//                    "title": "The displayed name of the endpoint"
+//                  },
+//                  "total": {
+//                    "type": "integer",
+//                    "title": "The Total of call of the endpoint during the period",
+//                    "minimum": 0
+//                  }
+//                }
+//              }
+//            }
+//          }
+//        },
+//        "last_8_days": {
+//          "type": "object",
+//          "additionalProperties": false,
+//          "required": ["total", "by_endpoints"],
+//          "properties": {
+//            "total": {
+//              "type": "integer",
+//              "title": "The Total number of calls during the period",
+//              "minimum": 0
+//            },
+//            "by_endpoints": {
+//              "type": "array",
+//              "items": {
+//                "type": "object",
+//                "additionalProperties": false,
+//                "required": ["uname", "name", "total"],
+//                "properties": {
+//                  "uname": {
+//                    "type": "string",
+//                    "title": "The Uname of the endpoint"
+//                  },
+//                  "name": {
+//                    "type": "string",
+//                    "title": "The displayed name of the endpoint"
+//                  },
+//                  "total": {
+//                    "type": "integer",
+//                    "title": "The Total of call of the endpoint during the period",
+//                    "minimum": 0
+//                  }
+//                }
+//              }
+//            }
+//          }
+//        }
+//      }
+//    }
+//  }
+//}

@@ -6,6 +6,16 @@ describe CallCharacteristics do
   let(:endpoint_factory) { EndpointFactory.new }
   let(:source_example) { JSON.parse(File.read(filename)) }
 
+  describe 'parsing source without parameters' do
+    before do
+      source_example.delete_if { |k| k == 'parameters' }
+    end
+    let(:filename) { 'spec/support/payload_files/elk_sources/legacy_elasticsearch_source.json' }
+
+    its(:params) { is_expected.to be_nil }
+    its(:uname) { is_expected.to eq('apie_2_etablissements_legacy') }
+  end
+
   describe 'parsing Etablissements Legacy v2' do
     let(:filename) { 'spec/support/payload_files/elk_sources/legacy_elasticsearch_source.json' }
 

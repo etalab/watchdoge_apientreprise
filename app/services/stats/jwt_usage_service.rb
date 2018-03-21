@@ -25,7 +25,7 @@ class Stats::JwtUsageService
   private
 
   def process_raw_response
-    @aggregator ||= Aggregators::JwtUsageAggregator.new(raw_data: @hits)
+    @aggregator ||= JwtUsageAggregator.new(raw_data: @hits)
     @aggregator.aggregate
     @results = number_of_calls.merge(last_calls).merge(http_code_percentages)
   end

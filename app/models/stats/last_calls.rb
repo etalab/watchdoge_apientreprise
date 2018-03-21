@@ -6,8 +6,9 @@ class Stats::LastCalls
       {
         uname: call.uname,
         name: call.name,
-        path: call.http_path,
+        url: call.http_path,
         params: call.params,
+        code: call.code.to_i,
         timestamp: call.timestamp
       }
     end
@@ -25,9 +26,8 @@ class Stats::LastCalls
   end
 
   def as_json
-    binding.pry
     {
-      last_calls: @last_calls.as_json
+      last_calls: @last_calls.map { |e| CallAdapter.new(e).as_json }
     }
   end
 end

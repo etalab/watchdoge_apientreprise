@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Aggregators::PingHistory, vcr: { cassette_name: 'availability_history_shortened' } do
+describe PingHistoryAggregator, vcr: { cassette_name: 'availability_history_shortened' } do
   # rubocop:disable RSpec/InstanceVariable
   subject(:endpoints_availability_history) { @endpoints_history_subject.endpoints_availability_history }
 

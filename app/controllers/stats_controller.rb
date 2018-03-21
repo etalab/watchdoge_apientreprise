@@ -1,6 +1,6 @@
 class StatsController < ApplicationController
   def jwt_usage
-    service = JwtUsageService.new(jti: jti)
+    service = Stats::JwtUsageService.new(jti: jti)
     service.perform
 
     if service.success?

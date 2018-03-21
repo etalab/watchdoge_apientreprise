@@ -6,7 +6,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["uname", "name", "url", "params", "code"],
+        "required": ["uname", "name", "url", "params", "code", "timestamp"],
         "properties": {
           "uname": {
             "type": "string",
@@ -34,10 +34,14 @@
             }
           },
           "code": {
-            "type": "number",
+            "type": "integer",
             "title": "The HTTP Code of the http request",
-            "minimum": 0,
-            "maximum": 100
+            "minimum": 200,
+            "maximum": 599
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "the time of the call"
           }
         }
       }

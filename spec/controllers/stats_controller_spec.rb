@@ -5,7 +5,7 @@ describe StatsController, type: :controller do
     subject { get :jwt_usage, params: { jti: valid_jti } }
 
     its(:status) { is_expected.to eq(200) }
-    its(:body) { is_expected.to match_json_schema('jwt_usage') }
+    its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
   end
 
   describe 'happy path', vcr: { cassette_name: 'jwt_usage' } do
