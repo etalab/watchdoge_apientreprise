@@ -4,7 +4,7 @@ class Stats::CallCounter
   include ActionView::Helpers::DateHelper
 
   attr_reader :beginning_time, :endpoints
-  attr_accessor :duration
+  attr_accessor :scope_duration
 
   EndpointCallCounter = Struct.new(:endpoint, :count) do
     def as_json
@@ -16,20 +16,20 @@ class Stats::CallCounter
     end
   end
 
-  def initialize(duration:, beginning_time:)
-    @duration = duration
+  def initialize(scope_duration:, beginning_time:)
+    @scope_duration = scope_duration
     @beginning_time = beginning_time
     @endpoints = []
   end
 
   def initialize_copy(original)
-    @duration = original.duration.dup
+    @scope_duration = original.scope_duration.dup
     @beginning_time = original.beginning_time.dup
     @endpoints = original.endpoints.deep_dup
   end
 
   def in_scope?(time)
-    time >= (@beginning_time - @duration)
+    time >= (@beginning_time - @scope_duration)
   end
 
   def add(call_characteristics)
@@ -49,7 +49,7 @@ class Stats::CallCounter
 
   def as_json
     {
-      "last_#{duration_name}": {
+      "last_#{scope_to_words}": {
         total: total,
         by_endpoint: @endpoints.as_json
       }
@@ -58,21 +58,21 @@ class Stats::CallCounter
 
   private
 
-  def duration_name
+  def scope_to_words
     distance_of_time_in_words(
-      @beginning_time - @duration,
+      @beginning_time - @scope_duration,
       @beginning_time,
       true,
-      accumulate_on: duration_name_accumulator
+      accumulate_on: scope_name_accumulator
     ).parameterize.underscore
   end
 
-  def duration_name_accumulator
-    if @duration < 1.hour
+  def scope_name_accumulator
+    if @scope_duration < 1.hour
       :minutes
-    elsif @duration < 2.days
+    elsif @scope_duration < 2.days
       :hours
-    elsif @duration < 10.days
+    elsif @scope_duration < 10.days
       :days
     end
   end

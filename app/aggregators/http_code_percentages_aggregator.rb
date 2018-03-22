@@ -33,14 +33,14 @@ class HttpCodePercentagesAggregator
 
   def initialize_first_code_percentages
     @validated_code_percentages << Stats::HttpCodePercentages.new(
-      duration: @code_percentages_durations.shift,
+      scope_duration: @code_percentages_durations.shift,
       beginning_time: @now
     )
   end
 
   def move_to_next_http_code_percentage
     next_code_percentage = current_code_percentage.dup
-    next_code_percentage.duration = @code_percentages_durations.shift
+    next_code_percentage.scope_duration = @code_percentages_durations.shift
     @validated_code_percentages << next_code_percentage
   end
 

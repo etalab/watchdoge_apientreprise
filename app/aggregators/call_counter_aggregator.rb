@@ -33,14 +33,14 @@ class CallCounterAggregator
 
   def initialize_first_call_counter
     @validated_call_counters << Stats::CallCounter.new(
-      duration: @counter_durations.shift,
+      scope_duration: @counter_durations.shift,
       beginning_time: @now
     )
   end
 
   def move_to_next_call_counter
     next_call_counter = current_call_counter.dup
-    next_call_counter.duration = @counter_durations.shift
+    next_call_counter.scope_duration = @counter_durations.shift
     @validated_call_counters << next_call_counter
   end
 

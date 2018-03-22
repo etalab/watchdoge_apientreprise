@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 describe Stats::CallCounter do
-  subject(:counter) { described_class.new(duration: duration, beginning_time: Time.zone.now) }
+  subject(:counter) { described_class.new(scope_duration: scope_duration, beginning_time: Time.zone.now) }
 
   describe 'only one add' do
-    let(:duration) { 3.hours }
+    let(:scope_duration) { 3.hours }
     let(:endpoint) { Endpoint.all.sample }
     let(:call) { CallCharacteristics.new(source) }
 
     before { counter.add(call) }
 
-    context 'when in the duration' do
+    context 'when inside the scope' do
       let(:source) { fake_elk_source(endpoint, 2.hours.ago) }
 
       its(:total) { is_expected.to eq(1) }
@@ -18,7 +18,7 @@ describe Stats::CallCounter do
       its(:as_json) { is_expected.to match_json_schema('stats/call_counter') }
     end
 
-    context 'when outside the duration' do
+    context 'when outside the scope' do
       let(:source) { fake_elk_source(endpoint, 5.hours.ago) }
 
       its(:total) { is_expected.to eq(0) }
@@ -39,8 +39,8 @@ describe Stats::CallCounter do
       end
     end
 
-    context 'with many adds within the duration' do
-      let(:duration) { 15.minutes }
+    context 'with many adds within scope' do
+      let(:scope_duration) { 15.minutes }
       let(:oldest_timestamp) { 14.minutes }
 
       its(:total) { is_expected.to eq(100) }
@@ -48,8 +48,8 @@ describe Stats::CallCounter do
       its(:as_json) { is_expected.to match_json_schema('stats/call_counter') }
     end
 
-    context 'with many adds and some outside the duration' do
-      let(:duration) { 2.hours }
+    context 'with many adds and some outside the scope' do
+      let(:scope_duration) { 2.hours }
       let(:oldest_timestamp) { 3.hours }
 
       its(:total) { is_expected.to be < 100 }
@@ -58,28 +58,28 @@ describe Stats::CallCounter do
     end
   end
 
-  describe 'duration to words' do
+  describe 'scope to words' do
     context 'when duration is 10 minutes' do
-      let(:duration) { 10.minutes }
+      let(:scope_duration) { 10.minutes }
 
       its(:as_json) { is_expected.to include_json(last_10_minutes: {}) }
     end
 
-    context 'when duration is 30 hours' do
-      let(:duration) { 30.hours }
+    context 'when scope is 30 hours' do
+      let(:scope_duration) { 30.hours }
 
       its(:as_json) { is_expected.to include_json(last_30_hours: {}) }
     end
 
-    context 'when duration is 8 days' do
-      let(:duration) { 8.days }
+    context 'when scope is 8 days' do
+      let(:scope_duration) { 8.days }
 
       its(:as_json) { is_expected.to include_json(last_8_days: {}) }
     end
   end
 
   context 'when making a dup / copy' do
-    let(:duration) { 2.hours }
+    let(:scope_duration) { 2.hours }
     let(:endpoint) { Endpoint.all.sample }
     let(:source) { fake_elk_source(endpoint, 1.hour.ago) }
     let(:call) { CallCharacteristics.new(source) }
