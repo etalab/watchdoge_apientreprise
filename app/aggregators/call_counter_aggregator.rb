@@ -1,14 +1,15 @@
 class CallCounterAggregator
-  attr_reader :validated_call_counters
-
   def initialize
     @counter_durations = [10.minutes, 30.hours, 8.days]
+    @max_duration = 8.days
+    @now = Time.zone.now
     @validated_call_counters = []
     initialize_first_call_counter
   end
 
   def aggregate(call_characteristics)
     @current_call = call_characteristics
+    return if outside_full_scope?
     move_to_next_call_counter until in_scope?
     compute_aggregation
   end
@@ -22,6 +23,10 @@ class CallCounterAggregator
 
   private
 
+  def outside_full_scope?
+    @current_call.timestamp < (@now - @max_duration)
+  end
+
   def in_scope?
     current_call_counter.in_scope?(@current_call.timestamp)
   end
@@ -29,7 +34,7 @@ class CallCounterAggregator
   def initialize_first_call_counter
     @validated_call_counters << Stats::CallCounter.new(
       duration: @counter_durations.shift,
-      beginning_time: Time.zone.now
+      beginning_time: @now
     )
   end
 

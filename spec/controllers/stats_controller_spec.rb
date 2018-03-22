@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe StatsController, type: :controller do
-  describe 'happy path', vcr: { cassette_name: 'jwt_usage' } do
+  describe 'happy path (e2e spec)', vcr: { cassette_name: 'jwt_usage' } do
     subject { get :jwt_usage, params: { jti: valid_jti } }
 
     its(:status) { is_expected.to eq(200) }

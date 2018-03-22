@@ -1,41 +1,41 @@
 require 'rails_helper'
 
-describe Stats::CallCounter do
-  subject(:counter) { described_class.new(duration: duration, beginning_time: Time.zone.now) }
+describe Stats::HttpCodePercentages do
+  subject(:code_percentages) { described_class.new(duration: duration, beginning_time: Time.zone.now) }
 
   describe 'only one add' do
     let(:duration) { 3.hours }
     let(:endpoint) { Endpoint.all.sample }
     let(:call) { CallCharacteristics.new(source) }
 
-    before { counter.add(call) }
+    before { code_percentages.add(call) }
 
     context 'when in the duration' do
       let(:source) { fake_elk_source(endpoint, 2.hours.ago) }
 
-      its(:total) { is_expected.to eq(1) }
-      its('endpoints.size') { is_expected.to eq(1) }
-      its(:as_json) { is_expected.to match_json_schema('stats/call_counter') }
+      its(:http_code_counters) { is_expected.to eq("#{call.code}" => 1) }
+      its(:number_of_calls) { is_expected.to eq(1) }
+      its(:as_json) { is_expected.to match_json_schema('stats/http_code_percentages') }
     end
 
     context 'when outside the duration' do
       let(:source) { fake_elk_source(endpoint, 5.hours.ago) }
 
-      its(:total) { is_expected.to eq(0) }
-      its('endpoints.size') { is_expected.to eq(0) }
-      its(:as_json) { is_expected.to match_json_schema('stats/call_counter') }
+      its(:http_code_counters) { is_expected.to be_empty }
+      its(:number_of_calls) { is_expected.to eq(0) }
+      its(:as_json) { is_expected.to match_json_schema('stats/http_code_percentages') }
 
       it 'is not in scope' do
         # rubocop:disable RSpec/PredicateMatcher
-        expect(counter.in_scope?(5.hours.ago)).to be_falsey
+        expect(code_percentages.in_scope?(5.hours.ago)).to be_falsey
       end
     end
   end
 
-  describe 'many add are made' do
+  describe 'many adds are made' do
     before do
       sorted_fake_calls(size: 100, oldest_timestamp: oldest_timestamp).each do |e|
-        counter.add(e)
+        code_percentages.add(e)
       end
     end
 
@@ -43,18 +43,17 @@ describe Stats::CallCounter do
       let(:duration) { 15.minutes }
       let(:oldest_timestamp) { 14.minutes }
 
-      its(:total) { is_expected.to eq(100) }
-      its('endpoints.size') { is_expected.to be_positive }
-      its(:as_json) { is_expected.to match_json_schema('stats/call_counter') }
+      its('http_code_counters.size') { is_expected.to be > 1 }
+      its(:number_of_calls) { is_expected.to eq(100) }
+      its(:as_json) { is_expected.to match_json_schema('stats/http_code_percentages') }
     end
 
-    context 'with many adds and some outside the duration' do
+    context 'with many adds and some outisde the duration' do
       let(:duration) { 2.hours }
       let(:oldest_timestamp) { 3.hours }
 
-      its(:total) { is_expected.to be < 100 }
-      its('endpoints.size') { is_expected.to be_positive }
-      its(:as_json) { is_expected.to match_json_schema('stats/call_counter') }
+      its(:number_of_calls) { is_expected.to be < 100 }
+      its(:as_json) { is_expected.to match_json_schema('stats/http_code_percentages') }
     end
   end
 
@@ -85,11 +84,11 @@ describe Stats::CallCounter do
     let(:call) { CallCharacteristics.new(source) }
 
     it 'makes a full copy' do
-      counter.add(call)
-      copy = counter.dup
-      counter.add(call)
-      expect(counter.total).to eq(2)
-      expect(copy.total).to eq(1)
+      code_percentages.add(call)
+      copy = code_percentages.dup
+      code_percentages.add(call)
+      expect(code_percentages.number_of_calls).to eq(2)
+      expect(copy.number_of_calls).to eq(1)
     end
   end
 end

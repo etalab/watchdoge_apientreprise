@@ -67,6 +67,24 @@ describe CallCounterAggregator do
         expect(json.dig(:number_of_calls, :last_8_days, :total)).to eq(1)
       end
     end
+
+    context 'when it is before 8 days' do
+      let(:source) { fake_elk_source(endpoint, 10.days.ago) }
+
+      it { is_expected.to match_json_schema('stats/number_of_calls') }
+
+      it 'has empty last_10_minutes json key' do
+        expect(json.dig(:number_of_calls, :last_10_minutes)).to include_json(total: 0, by_endpoint: [])
+      end
+
+      it 'has empty last_30_hours json key' do
+        expect(json.dig(:number_of_calls, :last_30_hours)).to include_json(total: 0, by_endpoint: [])
+      end
+
+      it 'has empty last_8_days json key' do
+        expect(json.dig(:number_of_calls, :last_8_days)).to include_json(total: 0, by_endpoint: [])
+      end
+    end
   end
 
 
