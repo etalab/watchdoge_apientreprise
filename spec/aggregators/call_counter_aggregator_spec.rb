@@ -21,12 +21,12 @@ describe CallCounterAggregator do
         expect(json.dig(:number_of_calls, :last_10_minutes, :total)).to eq(1)
       end
 
-      it 'has not last_30_hours json key' do
-        expect(json.dig(:number_of_calls, :last_30_hours)).to be_nil
+      it 'has same last_30_hours json key as 10_minutes' do
+        expect(json.dig(:number_of_calls, :last_30_hours)).to eq(json.dig(:number_of_calls, :last_10_minutes))
       end
 
-      it 'has not last_8_days json key' do
-        expect(json.dig(:number_of_calls, :last_8_days)).to be_nil
+      it 'has same last_8_days json key as 30_hours' do
+        expect(json.dig(:number_of_calls, :last_8_days)).to eq(json.dig(:number_of_calls, :last_30_hours))
       end
     end
 
@@ -35,7 +35,7 @@ describe CallCounterAggregator do
 
       it { is_expected.to match_json_schema('stats/number_of_calls') }
 
-      it 'has not last_10_minutes json key' do
+      it 'has empty last_10_minutes json key' do
         expect(json.dig(:number_of_calls, :last_10_minutes)).to include_json(total: 0, by_endpoint: [])
       end
 
@@ -44,8 +44,8 @@ describe CallCounterAggregator do
         expect(json.dig(:number_of_calls, :last_30_hours, :total)).to eq(1)
       end
 
-      it 'has not last_8_days json key' do
-        expect(json.dig(:number_of_calls, :last_8_days)).to be_nil
+      it 'has same last_8_days json key as 30_hours' do
+        expect(json.dig(:number_of_calls, :last_8_days)).to eq(json.dig(:number_of_calls, :last_30_hours))
       end
     end
 
@@ -54,11 +54,11 @@ describe CallCounterAggregator do
 
       it { is_expected.to match_json_schema('stats/number_of_calls') }
 
-      it 'has not last_10_minutes json key' do
+      it 'has empty last_10_minutes json key' do
         expect(json.dig(:number_of_calls, :last_10_minutes)).to include_json(total: 0, by_endpoint: [])
       end
 
-      it 'has not last_30_hours json key' do
+      it 'has empty last_30_hours json key' do
         expect(json.dig(:number_of_calls, :last_30_hours)).to include_json(total: 0, by_endpoint: [])
       end
 
@@ -72,8 +72,6 @@ describe CallCounterAggregator do
 
   describe 'when having multiple elements' do
     let(:endpoint) { Endpoint.all.sample }
-    let(:call) { CallCharacteristics.new(source) }
-    let(:source) { fake_elk_source(endpoint, 5.minutes.ago) }
 
     before do
       sorted_fake_calls(size: 100, oldest_timestamp: 9.minutes).each { |call| call_counter_aggregator.aggregate(call) }

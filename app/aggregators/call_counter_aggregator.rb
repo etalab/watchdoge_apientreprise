@@ -14,6 +14,7 @@ class CallCounterAggregator
   end
 
   def as_json
+    move_to_next_call_counter until @counter_durations.empty?
     {
       number_of_calls: @validated_call_counters.as_json.reduce({}, :merge)
     }
