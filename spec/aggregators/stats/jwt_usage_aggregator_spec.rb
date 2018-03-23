@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe JwtUsageAggregator, vcr: { cassette_name: 'jwt_usage'} do
+describe Stats::JwtUsageAggregator, vcr: { cassette_name: 'jwt_usage'} do
   # rubocop:disable RSpec/InstanceVariable
   subject(:jwt_usage_aggregator) { @jwt_usage_aggregator }
 
