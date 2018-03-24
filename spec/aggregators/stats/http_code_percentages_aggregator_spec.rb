@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe HttpCodePercentagesAggregator do
+describe Stats::HttpCodePercentagesAggregator do
   subject(:json) { code_percentage_aggregator.as_json }
 
   let(:code_percentage_aggregator) { described_class.new }

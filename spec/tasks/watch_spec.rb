@@ -8,10 +8,10 @@ describe 'watch:period_1', vcr: { cassette_name: 'apie_all' } do
 
   context 'with all endpoints' do
     pending('Pb: Certificate Sirene')
-    # it 'exactly send 2 workers to sidekiq' do
-    #   task.invoke
-    #   expect { PingWorker.drain }.to change { PingWorker.jobs.size }.from(2).to(0)
-    # end
+    it 'exactly send 2 workers to sidekiq' do
+      task.invoke
+      expect { PingWorker.drain }.to change { PingWorker.jobs.size }.from(2).to(0)
+    end
   end
 end
 

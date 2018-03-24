@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CallCounterAggregator do
+describe Stats::CallCounterAggregator do
   subject(:json) { call_counter_aggregator.as_json }
 
   let(:call_counter_aggregator) { described_class.new }

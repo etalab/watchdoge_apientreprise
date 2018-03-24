@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe Dashboard::CurrentStatusService, type: :service do
-  describe 'response', vcr: { cassette_name: 'current_status' } do
+  describe 'response', vcr: { cassette_name: 'dashboard/current_status' } do
     subject { described_class.new.perform }
 
     its(:success?) { is_expected.to be_truthy }
   end
 
-  describe 'results', vcr: { cassette_name: 'current_status' } do
+  describe 'results', vcr: { cassette_name: 'dashboard/current_status' } do
     subject(:results) { service.results }
 
     let(:service) { described_class.new.perform }
@@ -20,7 +20,7 @@ describe Dashboard::CurrentStatusService, type: :service do
     its(:size) { is_expected.to equal(36) }
 
     it 'matches json-schema' do
-      expect(json).to match_json_schema('current_status')
+      expect(json).to match_json_schema('dashboard/current_status')
     end
 
     it 'contains specifics endpoints names and sub_names' do

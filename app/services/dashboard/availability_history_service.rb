@@ -44,10 +44,10 @@ class Dashboard::AvailabilityHistoryService
   end
 
   def process_raw_response
-    aggregator = PingHistoryAggregator.new(@hits, TIMEZONE)
+    aggregator = Dashboard::PingHistoryAggregator.new(@hits, TIMEZONE)
     endpoints_availability_history = aggregator.endpoints_availability_history
 
-    adapter = EndpointsAvailabilityAdapter.new(endpoints_availability_history)
+    adapter = Dashboard::EndpointsAvailabilityAdapter.new(endpoints_availability_history)
     @raw_results = adapter.to_json_provider_list
   end
 

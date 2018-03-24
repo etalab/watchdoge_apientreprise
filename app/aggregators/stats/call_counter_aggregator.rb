@@ -1,4 +1,4 @@
-class CallCounterAggregator
+class Stats::CallCounterAggregator
   def initialize
     @counter_durations = [10.minutes, 30.hours, 8.days]
     @max_duration = 8.days
