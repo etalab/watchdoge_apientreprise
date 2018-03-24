@@ -11,6 +11,7 @@ gem 'rails', '~> 5.1.1'
 gem 'puma', '~> 3.7'
 
 gem 'colorize'
+gem 'dotiw'
 gem 'elasticsearch'
 gem 'haml'
 gem 'listen', '>= 3.0.5', '< 3.2'

@@ -1,0 +1,74 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://watchdoge.entreprise.api.gouv.fr:9200/_nodes/http
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.13.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
+    http_version: 
+  recorded_at: Thu, 15 Mar 2018 08:07:32 GMT
+- request:
+    method: get
+    uri: http://217.182.164.215:9200/_search
+    body:
+      encoding: UTF-8
+      string: '{"size":10000,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d/d","lte":"now/d"}}},{"term":{"user_access.jti.keyword":{"value":"b5be66cc-d182-420c-b0a7-a763b02c9e13"}}}]}},"sort":[{"@timestamp":{"order":"desc"}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.13.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"took":10,"timed_out":false,"num_reduce_phases":2,"_shards":{"total":916,"successful":910,"failed":6,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"3tDGuNozQ5iYSmmUqklytw","index":".kibana"}},{"shard":0,"index":"my_index","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}}]},"hits":{"total":11,"max_score":null,"hits":[{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIkldBMBuIW8lZJNOgO","_score":null,"_source":{"controller":"api/v2/attestations_fiscales_dgfip","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":1.79,"path":"/v2/attestations_fiscales_dgfip/552032534","view":0.13,"route":"api/v2/attestations_fiscales_dgfip#show","@timestamp":"2018-03-14T12:56:59.897Z","domain":"gouv.fr","user_access":{"access":"deny","resource":"attestations_fiscales","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"1f259371-d42f-4b5b-8ce3-4950553cf804","parameters":{"siren":"552032534"},"db":0.0,"status":403},"sort":[1521032219897]},{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIklbEJBuIW8lZJNOgM","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":1.2,"path":"/v2/attestations_agefiph/30247504101933","view":0.1,"route":"api/v2/attestations_agefiph#show","@timestamp":"2018-03-14T12:56:52.151Z","domain":"gouv.fr","user_access":{"access":"allow","resource":"attestations_agefiph","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"37633cb8-bc3e-49b3-88e4-44130413b2e7","parameters":{"siret":"30247504101933"},"db":0.0,"status":200},"sort":[1521032212151]},{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIkla0rBuIW8lZJNOgL","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":1.23,"path":"/v2/attestations_agefiph/30247504101933","view":0.09,"route":"api/v2/attestations_agefiph#show","@timestamp":"2018-03-14T12:56:51.521Z","domain":"gouv.fr","user_access":{"access":"allow","resource":"attestations_agefiph","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"79b17686-3b95-4cc7-97b2-c1ddadb1daa6","parameters":{"siret":"30247504101933"},"db":0.0,"status":200},"sort":[1521032211521]},{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIkla0fBuIW8lZJNOgK","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":3.28,"path":"/v2/attestations_agefiph/30247504101933","view":0.09,"route":"api/v2/attestations_agefiph#show","@timestamp":"2018-03-14T12:56:50.814Z","domain":"gouv.fr","user_access":{"access":"allow","resource":"attestations_agefiph","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"d7c94106-1f05-4420-a17b-57fdec8a881c","parameters":{"siret":"30247504101933"},"db":0.0,"status":200},"sort":[1521032210814]},{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIklZmTBuIW8lZJNOgI","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":1.24,"path":"/v2/attestations_agefiph/30247504101933","view":0.09,"route":"api/v2/attestations_agefiph#show","@timestamp":"2018-03-14T12:56:46.295Z","domain":"gouv.fr","user_access":{"access":"allow","resource":"attestations_agefiph","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"12f14f48-c32a-4c11-91ba-4dbc38788a2d","parameters":{"siret":"30247504101933"},"db":0.0,"status":200},"sort":[1521032206295]},{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIklZW3BuIW8lZJNOgH","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":1.24,"path":"/v2/attestations_agefiph/30247504101933","view":0.09,"route":"api/v2/attestations_agefiph#show","@timestamp":"2018-03-14T12:56:45.682Z","domain":"gouv.fr","user_access":{"access":"allow","resource":"attestations_agefiph","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"334e6dda-f503-4a5d-a17a-71d485a56dbe","parameters":{"siret":"30247504101933"},"db":0.0,"status":200},"sort":[1521032205682]},{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIklZWrBuIW8lZJNOgG","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":1.29,"path":"/v2/attestations_agefiph/30247504101933","view":0.1,"route":"api/v2/attestations_agefiph#show","@timestamp":"2018-03-14T12:56:45.093Z","domain":"gouv.fr","user_access":{"access":"allow","resource":"attestations_agefiph","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"613c52ae-5820-4824-8b1b-b21b7c30d02c","parameters":{"siret":"30247504101933"},"db":0.0,"status":200},"sort":[1521032205093]},{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIklZHABuIW8lZJNOgF","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":1.22,"path":"/v2/attestations_agefiph/30247504101933","view":0.09,"route":"api/v2/attestations_agefiph#show","@timestamp":"2018-03-14T12:56:44.396Z","domain":"gouv.fr","user_access":{"access":"allow","resource":"attestations_agefiph","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"e34ab269-9c2b-4601-8eea-ad1459f6caa0","parameters":{"siret":"30247504101933"},"db":0.0,"status":200},"sort":[1521032204396]},{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIklY3YBuIW8lZJNOgE","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":1.25,"path":"/v2/attestations_agefiph/30247504101933","view":0.09,"route":"api/v2/attestations_agefiph#show","@timestamp":"2018-03-14T12:56:43.606Z","domain":"gouv.fr","user_access":{"access":"allow","resource":"attestations_agefiph","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"03e50016-04ab-4bc9-a41e-da10c66a70a7","parameters":{"siret":"30247504101933"},"db":0.0,"status":200},"sort":[1521032203606]},{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIki_PQBuIW8lZJNOcx","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":39.71,"path":"/v2/attestations_agefiph/30247504101933","view":0.24,"route":"api/v2/attestations_agefiph#show","@timestamp":"2018-03-14T12:46:14.427Z","domain":"gouv.fr","user_access":{"access":"allow","resource":"attestations_agefiph","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"0cbd591e-edd2-4175-8fc4-9a4cd7eb2752","parameters":{"siret":"30247504101933"},"status":200},"sort":[1521031574427]},{"_index":"logstash-2018.03.14","_type":"siade","_id":"AWIkclqPBuIW8lZJNOUX","_score":null,"_source":{"controller":"api/v2/attestations_agefiph","geoip":{"city_name":"Rehovot","timezone":"Asia/Jerusalem","ip":"132.76.10.42","latitude":31.8969,"country_name":"Israel","country_code2":"IL","continent_code":"AS","country_code3":"IL","region_name":"Central
+        District","location":{"lon":34.8186,"lat":31.8969},"region_code":"M","longitude":34.8186},"method":"GET","ip":"132.76.10.42","format":"*/*","source":"siade_sandbox_production1","api_version":"v2","type":"siade","tags":["request"],"duration":69.49,"path":"/v2/attestations_agefiph/30247504101933","view":0.12,"route":"api/v2/attestations_agefiph#show","@timestamp":"2018-03-14T12:18:16.822Z","domain":"gouv.fr","user_access":{"access":"allow","resource":"attestations_agefiph","user":"0e143efd-2402-460c-9c07-4748407f0656","jti":"b5be66cc-d182-420c-b0a7-a763b02c9e13"},"@version":"1","host":"production1","action":"show","request_id":"4b06427e-ba0d-412f-82ba-9b965db9a256","parameters":{"siret":"30247504101933"},"db":0.0,"status":200},"sort":[1521029896822]}]}}'
+    http_version: 
+  recorded_at: Thu, 15 Mar 2018 08:07:32 GMT
+recorded_with: VCR 3.0.3

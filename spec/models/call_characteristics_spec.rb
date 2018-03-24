@@ -6,6 +6,16 @@ describe CallCharacteristics do
   let(:endpoint_factory) { EndpointFactory.new }
   let(:source_example) { JSON.parse(File.read(filename)) }
 
+  describe 'parsing source without parameters' do
+    before do
+      source_example.delete_if { |k| k == 'parameters' }
+    end
+    let(:filename) { 'spec/support/payload_files/elk_sources/legacy_elasticsearch_source.json' }
+
+    its(:params) { is_expected.to be_nil }
+    its(:uname) { is_expected.to eq('apie_2_etablissements_legacy') }
+  end
+
   describe 'parsing Etablissements Legacy v2' do
     let(:filename) { 'spec/support/payload_files/elk_sources/legacy_elasticsearch_source.json' }
 
@@ -15,6 +25,7 @@ describe CallCharacteristics do
     its(:api_version) { is_expected.to eq(2) }
     its(:code) { is_expected.to eq(503) }
     its(:timestamp) { is_expected.to eq('2017-12-03T17:50:03.760Z') }
+    its(:params) { is_expected.to contain_exactly({ context: 'Ping' }, { recipient: 'SGMAP' }, { siret: '41816609600069' }) }
     its(:provider_name) { is_expected.to be_nil }
     its(:fallback_used) { is_expected.to be_nil }
     its(:http_path) { is_expected.to eq('/v2/etablissements_legacy/41816609600069') }
@@ -30,6 +41,7 @@ describe CallCharacteristics do
     its(:api_version) { is_expected.to eq(2) }
     its(:code) { is_expected.to eq(200) }
     its(:timestamp) { is_expected.to eq('2018-01-28T13:01:12.982Z') }
+    its(:params) { is_expected.to contain_exactly({ context: 'Ping' }, { recipient: 'SGMAP' }, { siren: '418166096' }) }
     its(:provider_name) { is_expected.to eq('insee') }
     its(:fallback_used) { is_expected.to be_falsey }
     its(:http_path) { is_expected.to eq('/v2/entreprises/418166096') }
@@ -45,6 +57,7 @@ describe CallCharacteristics do
     its(:api_version) { is_expected.to eq(1) }
     its(:code) { is_expected.to eq(200) }
     its(:timestamp) { is_expected.to eq('2018-01-03T00:01:15.418Z') }
+    its(:params) { is_expected.to contain_exactly({ context: 'Ping' }, { recipient: 'SGMAP' }, { siren: '418166096' }) }
     its(:provider_name) { is_expected.to be_nil }
     its(:http_path) { is_expected.to eq('/v1/infogreffe/extraits_rcs/418166096') }
   end
@@ -58,6 +71,7 @@ describe CallCharacteristics do
     its(:api_version) { is_expected.to eq(1) }
     its(:code) { is_expected.to eq(200) }
     its(:timestamp) { is_expected.to eq('2017-12-03T18:00:02.962Z') }
+    its(:params) { is_expected.to contain_exactly({ context: 'Ping' }, { recipient: 'SGMAP' }, { siret: '81104725700019' }) }
     its(:provider_name) { is_expected.to be_nil }
     its(:http_path) { is_expected.to eq('/v1/msa/cotisations/81104725700019') }
   end
@@ -71,6 +85,7 @@ describe CallCharacteristics do
     its(:api_version) { is_expected.to eq(2) }
     its(:code) { is_expected.to eq(200) }
     its(:timestamp) { is_expected.to eq('2017-12-03T18:00:35.011Z') }
+    its(:params) { is_expected.to contain_exactly({ siren: '301028346' }, { context: 'Ping' }, { recipient: 'SGMAP' }, { annee: '2016' }) }
     its(:provider_name) { is_expected.to be_nil }
     its(:http_path) { is_expected.to eq('/v2/liasses_fiscales_dgfip/2016/declarations/301028346') }
   end

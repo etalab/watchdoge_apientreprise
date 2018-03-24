@@ -3,7 +3,7 @@ require 'forwardable'
 class CallCharacteristics
   extend Forwardable
   delegate %i[uname name api_version http_path provider] => :endpoint
-  attr_reader :endpoint, :code, :timestamp, :provider_name, :fallback_used
+  attr_reader :endpoint, :code, :timestamp, :params, :provider_name, :fallback_used
 
   API_NAME = 'apie'.freeze
 
@@ -11,6 +11,7 @@ class CallCharacteristics
     @endpoint = endpoint_factory.find_endpoint_by_http_path(http_path: source['path'], api_name: API_NAME)
     @code = source['status']
     @timestamp = source['@timestamp']
+    @params = extract_parameters source['parameters']
     @provider_name = source.dig('response', 'provider_name')
     @fallback_used = source.dig('response', 'fallback_used')
   end
@@ -26,5 +27,14 @@ class CallCharacteristics
       provider_name: provider_name,
       fallback_used: fallback_used
     }
+  end
+
+  def extract_parameters(parameters)
+    parameters
+      .symbolize_keys
+      .delete_if { |key| key == :token }
+      .map { |k, v| { "#{k}": v } }
+  rescue NoMethodError
+    nil
   end
 end
