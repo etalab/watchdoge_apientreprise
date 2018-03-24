@@ -1,4 +1,4 @@
-class HttpCodePercentagesAggregator
+class Stats::HttpCodePercentagesAggregator
   def initialize
     @code_percentages_durations = [30.hours, 8.days]
     @max_duration = 8.days

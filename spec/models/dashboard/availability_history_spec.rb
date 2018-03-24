@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AvailabilityHistory, type: :model do
+describe Dashboard::AvailabilityHistory, type: :model do
   subject(:avail) { described_class.new }
 
   context 'when happy path' do
@@ -27,7 +27,7 @@ describe AvailabilityHistory, type: :model do
       end
 
       it 'matches json schema' do
-        expect(avail.to_a).to match_json_schema('availability_history_model')
+        expect(avail.to_a).to match_json_schema('dashboard/availability_history_model')
       end
 
       it 'has no gap and from < to' do

@@ -1,4 +1,4 @@
-class EndpointsAvailabilityAdapter
+class Dashboard::EndpointsAvailabilityAdapter
   def initialize(avail_history)
     @providers = {}
     @endpoints_avail_history = avail_history

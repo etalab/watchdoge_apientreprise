@@ -1,6 +1,6 @@
 require 'forwardable'
 
-class EndpointAvailabilityHistory
+class Dashboard::EndpointAvailabilityHistory
   include ActiveModel::Model
   extend Forwardable
 
@@ -11,7 +11,7 @@ class EndpointAvailabilityHistory
 
   def initialize(hash)
     super
-    @availability_history = AvailabilityHistory.new
+    @availability_history = Dashboard::AvailabilityHistory.new
   end
 
   def aggregate(code, timestamp)

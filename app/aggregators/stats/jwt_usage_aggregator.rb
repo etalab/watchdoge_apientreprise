@@ -1,4 +1,4 @@
-class JwtUsageAggregator
+class Stats::JwtUsageAggregator
   def initialize(raw_data:)
     @raw_data = raw_data
     @call_counter_aggregator = CallCounterAggregator.new
