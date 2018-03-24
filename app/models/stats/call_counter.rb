@@ -22,12 +22,6 @@ class Stats::CallCounter
     @endpoints = []
   end
 
-  def initialize_copy(original)
-    @scope_duration = original.scope_duration.dup
-    @beginning_time = original.beginning_time.dup
-    @endpoints = original.endpoints.deep_dup
-  end
-
   def in_scope?(time)
     time >= (@beginning_time - @scope_duration)
   end
@@ -57,6 +51,12 @@ class Stats::CallCounter
   end
 
   private
+
+  def initialize_copy(original)
+    @scope_duration = original.scope_duration.dup
+    @beginning_time = original.beginning_time.dup
+    @endpoints = original.endpoints.deep_dup
+  end
 
   def scope_to_words
     distance_of_time_in_words(
