@@ -16,6 +16,10 @@ Rails:
 Rails/DynamicFindBy:
   Enabled: false
 
+# I don't understand it
+Style/ExpandPathArguments:
+  Enabled: false
+
 # Ruby 3.0 feature related stuff, will see later
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
