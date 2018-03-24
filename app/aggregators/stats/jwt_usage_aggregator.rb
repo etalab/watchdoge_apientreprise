@@ -1,8 +1,8 @@
 class Stats::JwtUsageAggregator
   def initialize(raw_data:)
     @raw_data = raw_data
-    @call_counter_aggregator = CallCounterAggregator.new
-    @http_code_percentages_aggregator = HttpCodePercentagesAggregator.new
+    @call_counter_aggregator = Stats::CallCounterAggregator.new
+    @http_code_percentages_aggregator = Stats::HttpCodePercentagesAggregator.new
     @last_calls = Stats::LastCalls.new
     @endpoint_factory = EndpointFactory.new
   end

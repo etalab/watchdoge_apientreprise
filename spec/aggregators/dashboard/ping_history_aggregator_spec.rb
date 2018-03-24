@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Dashoard::PingHistoryAggregator, vcr: { cassette_name: 'dashboard/availability_history_shortened' } do
+describe Dashboard::PingHistoryAggregator, vcr: { cassette_name: 'dashboard/availability_history_shortened' } do
   # rubocop:disable RSpec/InstanceVariable
   subject(:endpoints_availability_history) { @endpoints_history_subject.endpoints_availability_history }
 
