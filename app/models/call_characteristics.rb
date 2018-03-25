@@ -2,13 +2,14 @@ require 'forwardable'
 
 class CallCharacteristics
   extend Forwardable
-  delegate %i[uname name api_version http_path provider] => :endpoint
-  attr_reader :endpoint, :code, :timestamp, :params, :provider_name, :fallback_used
+  delegate %i[uname name api_version provider] => :endpoint
+  attr_reader :endpoint, :http_path, :code, :timestamp, :params, :provider_name, :fallback_used
 
   API_NAME = 'apie'.freeze
 
   def initialize(source, endpoint_factory = EndpointFactory.new)
     @endpoint = endpoint_factory.find_endpoint_by_http_path(http_path: source['path'], api_name: API_NAME)
+    @http_path = source['path']
     @code = source['status']
     @timestamp = source['@timestamp']
     @params = extract_parameters source['parameters']

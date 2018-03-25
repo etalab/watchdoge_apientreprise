@@ -6,6 +6,20 @@ describe CallCharacteristics do
   let(:endpoint_factory) { EndpointFactory.new }
   let(:source_example) { JSON.parse(File.read(filename)) }
 
+  describe 'parsing an element with a different parameter than in the database' do
+    let(:filename) { 'spec/support/payload_files/elk_sources/legacy_elasticsearch_source.json' }
+    let(:new_siret) { '82525962500010' }
+    let(:new_path) { "/v2/etablissements_legacy/#{new_siret}" }
+
+    before do
+      source_example['path'] = new_path
+      source_example['parameters']['siret'] = new_siret
+    end
+
+    its(:params) { is_expected.to include({siret: new_siret}) }
+    its(:http_path) { is_expected.to match(/^\/v2\/etablissements_legacy\/#{new_siret}$/) }
+  end
+
   describe 'parsing source without parameters' do
     before do
       source_example.delete_if { |k| k == 'parameters' }
