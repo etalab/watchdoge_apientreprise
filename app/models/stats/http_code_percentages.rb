@@ -47,10 +47,8 @@ class Stats::HttpCodePercentages
   end
 
   def scope_to_words
-    distance_of_time_in_words(
-      @beginning_time - @scope_duration,
-      @beginning_time,
-      true,
+    distance_of_time(
+      @scope_duration,
       accumulate_on: scope_name_accumulator
     ).parameterize.underscore
   end
