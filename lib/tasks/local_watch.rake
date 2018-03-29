@@ -5,7 +5,6 @@ namespace :watch do
   desc 'run watchdoge service on all endpoints'
   task 'all': :environment do
     Endpoint.all.each do |endpoint|
-      next if endpoint.uname == 'sirene_1_homepage'
       endpoint.http_response
       print_console_infos endpoint
     end
