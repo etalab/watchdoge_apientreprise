@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PingHistoryAggregator, vcr: { cassette_name: 'availability_history_shortened' } do
+describe Dashboard::PingHistoryAggregator, vcr: { cassette_name: 'dashboard/availability_history_shortened' } do
   # rubocop:disable RSpec/InstanceVariable
   subject(:endpoints_availability_history) { @endpoints_history_subject.endpoints_availability_history }
 
@@ -27,10 +27,10 @@ describe PingHistoryAggregator, vcr: { cassette_name: 'availability_history_shor
   # rubocop:disable RSpec/ExampleLength
   it 'is an array of EndpointAvailabilityHistory' do
     endpoints_availability_history.each do |eh|
-      expect(eh).to be_a(EndpointAvailabilityHistory)
+      expect(eh).to be_a(Dashboard::EndpointAvailabilityHistory)
       expect(eh).to be_valid
       expect(eh.timezone).to eq(timezone)
-      expect(eh.availability_history).to be_a(AvailabilityHistory)
+      expect(eh.availability_history).to be_a(Dashboard::AvailabilityHistory)
     end
   end
   # rubocop:enable RSpec/ExampleLength

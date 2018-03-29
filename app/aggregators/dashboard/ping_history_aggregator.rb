@@ -1,4 +1,4 @@
-class PingHistoryAggregator
+class Dashboard::PingHistoryAggregator
   def initialize(raw_data, timezone)
     @raw_data = raw_data
     @timezone = timezone
@@ -39,7 +39,7 @@ class PingHistoryAggregator
   end
 
   def new_endpoint_avail_history
-    EndpointAvailabilityHistory.new(
+    Dashboard::EndpointAvailabilityHistory.new(
       endpoint: @current_elk_source.endpoint,
       timezone: @timezone,
       provider_name: @current_elk_source.provider_name

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe EndpointAvailabilityHistory, type: :model do
+describe Dashboard::EndpointAvailabilityHistory, type: :model do
   subject(:endpoint_history) do
     described_class.new(
       endpoint: endpoint,
@@ -29,7 +29,7 @@ describe EndpointAvailabilityHistory, type: :model do
 
   # TODO: not a very good test...
   it 'converts timestamp to timezone before calling aggregate' do
-    expect_any_instance_of(AvailabilityHistory).to receive(:aggregate).with(1, '2017-11-28 02:00:02').and_return(true)
+    expect_any_instance_of(Dashboard::AvailabilityHistory).to receive(:aggregate).with(1, '2017-11-28 02:00:02').and_return(true)
     endpoint_history.aggregate(1, '2017-11-28T00:00:02.355Z')
   end
 end

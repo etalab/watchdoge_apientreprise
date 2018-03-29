@@ -1,37 +1,48 @@
 require 'forwardable'
 
-class Dashboard::AvailabilityHistoryService
+class Stats::JwtUsageService
   extend Forwardable
   delegate %i[success? errors] => :@client
 
-  TIMEZONE = 'Europe/Paris'.freeze
+  attr_reader :jti, :results, :hits
 
-  # for spec
-  attr_reader :hits
-
-  def initialize
+  def initialize(jti:)
     @hits = []
+    @jti = jti
     @client = ElasticClient.new
     @client.establish_connection
   end
 
   def perform
     if @client.connected?
-      retrieve_all_availabilities
+      retrieve_all_jwt_usage
       process_raw_response if @client.success?
     end
 
     self
   end
 
-  # cf json_api_schemas: availability_history.json
-  def results
-    @raw_results.as_json
-  end
-
   private
 
-  def retrieve_all_availabilities
+  def process_raw_response
+    @aggregator = Stats::JwtUsageAggregator.new(raw_data: @hits)
+    @aggregator.aggregate
+    @results = number_of_calls.merge(last_calls).merge(http_code_percentages)
+  end
+
+  def number_of_calls
+    @aggregator.number_of_calls
+  end
+
+  def last_calls
+    @aggregator.last_calls
+  end
+
+  def http_code_percentages
+    @aggregator.http_code_percentages
+  end
+
+  def retrieve_all_jwt_usage
     loop do
       @client.perform json_query
       break unless @client.success?
@@ -41,14 +52,6 @@ class Dashboard::AvailabilityHistoryService
     end
   rescue Elasticsearch::Transport::Transport::Errors::BadRequest
     @success = false
-  end
-
-  def process_raw_response
-    aggregator = Dashboard::PingHistoryAggregator.new(@hits, TIMEZONE)
-    endpoints_availability_history = aggregator.endpoints_availability_history
-
-    adapter = Dashboard::EndpointsAvailabilityAdapter.new(endpoints_availability_history)
-    @raw_results = adapter.to_json_provider_list
   end
 
   def retrieved_hits
@@ -64,11 +67,15 @@ class Dashboard::AvailabilityHistoryService
   end
 
   def load_query
-    File.read('app/data/queries/' + query_name + '.json')
+    ERB.new(query_template).result(binding)
+  end
+
+  def query_template
+    File.read('app/data/queries/' + query_name + '.json.erb')
   end
 
   # for specs
   def query_name
-    'availability_history'
+    'jwt_usage'
   end
 end

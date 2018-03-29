@@ -1,0 +1,31 @@
+{
+  "size": 10000,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-8d/d",
+              "lte": "now/d"
+            }
+          }
+        },
+        {
+          "term": {
+            "user_access.jti.keyword": {
+              "value": "<%= jti %>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc"
+      }
+    }
+  ]
+}

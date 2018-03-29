@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "properties": {
+    "last_calls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["uname", "name", "url", "params", "code", "timestamp"],
+        "properties": {
+          "uname": {
+            "type": "string",
+            "title": "The unique name of the http request"
+          },
+          "name": {
+            "type": "string",
+            "title": "The common name of the http request"
+          },
+          "url": {
+            "type": "string",
+            "title": "The Url of the http request"
+          },
+          "params": {
+            "type": "array",
+            "title": "The Params of the http request",
+            "items": {
+              "type": "object",
+              "patternProperties": {
+                "": {
+                  "type": "string",
+                  "title": "value of the param"
+                }
+              }
+            }
+          },
+          "code": {
+            "type": "integer",
+            "title": "The HTTP Code of the http request",
+            "minimum": 200,
+            "maximum": 599
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "the time of the call"
+          }
+        }
+      }
+    }
+  }
+}

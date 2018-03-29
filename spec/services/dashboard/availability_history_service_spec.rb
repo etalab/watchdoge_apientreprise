@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_name: 'availability_history_shortened' } do
+describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_name: 'dashboard/availability_history_shortened' } do
   # rubocop:disable RSpec/InstanceVariable
   let(:service) { @availability_results_perform }
 
@@ -38,7 +38,7 @@ describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_
     end
 
     it 'matches json-schema' do
-      expect(json).to match_json_schema('availability_history')
+      expect(json).to match_json_schema('dashboard/availability_history')
     end
 
     it 'has no gap and from < to' do

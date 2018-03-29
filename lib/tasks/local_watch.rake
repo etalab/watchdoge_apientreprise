@@ -21,7 +21,7 @@ namespace :watch do
 
   def print_console_infos(endpoint)
     url = ENV['DEBUG'] ? "(url: #{endpoint.uri})" : ''
-    puts "#{endpoint.uname.blue} is #{status(endpoint)} #{url}" if %w[development sandbox].include? Rails.env
+    puts "#{endpoint.uname.blue} is #{status(endpoint)} #{url}" if %w[development sandbox staging production].include? Rails.env
   end
 
   def status(endpoint)

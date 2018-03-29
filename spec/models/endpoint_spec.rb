@@ -14,11 +14,10 @@ describe Endpoint, type: :model do
   end
 
   describe 'all endpoints must be valids' do
-    pending('Pb: Certificate Sirene / Attestations Fiscales / Liasses Fiscales / RNA / MSA')
+    pending('Pb: Certificate')
     # it 'return 200 for all endpoints', vcr: { cassette_name: 'apie_all' } do
     #   Endpoint.all.each do |ep|
     #     response = described_class.find_by(uname: ep.uname).http_response
-    #     binding.pry if response.code != '200'
     #     expect(response).to be_a(Net::HTTPResponse)
     #     expect(response.code).to eq('200')
     #   end

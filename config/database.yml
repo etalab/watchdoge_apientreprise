@@ -21,3 +21,7 @@ production:
 sandbox:
   database: watchdoge_sandbox
   <<: *defaults
+
+staging:
+  database: watchdoge_staging
+  <<: *defaults

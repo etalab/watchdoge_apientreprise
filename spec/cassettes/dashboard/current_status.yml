@@ -1,0 +1,136 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://watchdoge.entreprise.api.gouv.fr:9200/_nodes/http
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.14.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
+    http_version: 
+  recorded_at: Mon, 26 Mar 2018 07:40:18 GMT
+- request:
+    method: get
+    uri: http://217.182.164.215:9200/_search
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "size": 0,
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "range": {
+                    "@timestamp": {
+                      "gte": "now-1d/d",
+                      "lte": "now/d"
+                    }
+                  }
+                },
+                {
+                  "wildcard": {
+                    "source": "siade_production*"
+                  }
+                },
+                {
+                  "term": {
+                    "parameters.context.keyword": {
+                      "value": "Ping"
+                    }
+                  }
+                }
+              ],
+              "must_not": [
+                {
+                  "terms": {
+                    "controller.keyword": [
+                      "api/v1/ping",
+                      "api/v2/ping"
+                    ]
+                  }
+                }
+              ],
+              "filter": {
+                "exists": {
+                  "field": "user_access.resource"
+                }
+              }
+            }
+          },
+          "aggs": {
+            "group_by_controller": {
+              "terms": {
+                "field": "path.keyword",
+                "size": 100
+              },
+              "aggs": {
+                "agg_by_endpoint": {
+                  "top_hits": {
+                    "_source": {
+                      "includes": [
+                        "path",
+                        "status",
+                        "@timestamp"
+                      ]
+                    },
+                    "size": 1,
+                    "sort": [
+                      {
+                        "@timestamp": {
+                          "order": "desc"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.14.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"took":75,"timed_out":false,"num_reduce_phases":2,"_shards":{"total":971,"successful":965,"failed":6,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"3tDGuNozQ5iYSmmUqklytw","index":".kibana"}},{"shard":0,"index":"my_index","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}}]},"hits":{"total":3147,"max_score":0.0,"hits":[]},"aggregations":{"group_by_controller":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":"/v1/certificats_qualibat/33592022900036","doc_count":381,"agg_by_endpoint":{"hits":{"total":381,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhQBGscoVOlXyqTkYX","_score":null,"_source":{"path":"/v1/certificats_qualibat/33592022900036","@timestamp":"2018-03-26T07:40:10.605Z","status":200},"sort":[1522050010605]}]}}},{"key":"/v1/etablissements/41816609600069","doc_count":381,"agg_by_endpoint":{"hits":{"total":381,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhP_XYcoVOlXyqTkYP","_score":null,"_source":{"path":"/v1/etablissements/41816609600069","@timestamp":"2018-03-26T07:40:02.817Z","status":200},"sort":[1522050002817]}]}}},{"key":"/v2/certificats_qualibat/33592022900036","doc_count":381,"agg_by_endpoint":{"hits":{"total":381,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhP_DfcoVOlXyqTkYO","_score":null,"_source":{"path":"/v2/certificats_qualibat/33592022900036","@timestamp":"2018-03-26T07:40:02.872Z","status":200},"sort":[1522050002872]}]}}},{"key":"/v2/etablissements/41816609600069","doc_count":381,"agg_by_endpoint":{"hits":{"total":381,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhP_C_coVOlXyqTkYL","_score":null,"_source":{"path":"/v2/etablissements/41816609600069","@timestamp":"2018-03-26T07:40:02.454Z","status":200},"sort":[1522050002454]}]}}},{"key":"/v2/etablissements_legacy/41816609600069","doc_count":381,"agg_by_endpoint":{"hits":{"total":381,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhP_DTcoVOlXyqTkYN","_score":null,"_source":{"path":"/v2/etablissements_legacy/41816609600069","@timestamp":"2018-03-26T07:40:02.803Z","status":200},"sort":[1522050002803]}]}}},{"key":"/v1/attestations_fiscales/552032534","doc_count":127,"agg_by_endpoint":{"hits":{"total":127,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhNuHUcoVOlXyqTkQO","_score":null,"_source":{"path":"/v1/attestations_fiscales/552032534","@timestamp":"2018-03-26T07:30:08.224Z","status":200},"sort":[1522049408224]}]}}},{"key":"/v2/attestations_fiscales_dgfip/552045999","doc_count":127,"agg_by_endpoint":{"hits":{"total":127,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhNuJjcoVOlXyqTkQP","_score":null,"_source":{"path":"/v2/attestations_fiscales_dgfip/552045999","@timestamp":"2018-03-26T07:30:08.741Z","status":200},"sort":[1522049408741]}]}}},{"key":"/v2/cartes_professionnelles_fntp/562077503","doc_count":39,"agg_by_endpoint":{"hits":{"total":39,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG2HEcoVOlXyqTj2q","_score":null,"_source":{"path":"/v2/cartes_professionnelles_fntp/562077503","@timestamp":"2018-03-26T07:00:06.998Z","status":200},"sort":[1522047606998]}]}}},{"key":"/v2/associations/W604004799","doc_count":37,"agg_by_endpoint":{"hits":{"total":37,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1YncoVOlXyqTj2Y","_score":null,"_source":{"path":"/v2/associations/W604004799","@timestamp":"2018-03-26T07:00:03.596Z","status":200},"sort":[1522047603596]}]}}},{"key":"/v2/certificats_cnetp/632049128","doc_count":35,"agg_by_endpoint":{"hits":{"total":35,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1YzcoVOlXyqTj2Z","_score":null,"_source":{"path":"/v2/certificats_cnetp/632049128","@timestamp":"2018-03-26T07:00:03.911Z","status":200},"sort":[1522047603911]}]}}},{"key":"/v2/documents_associations/77571979202585","doc_count":33,"agg_by_endpoint":{"hits":{"total":33,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG2GjcoVOlXyqTj2n","_score":null,"_source":{"path":"/v2/documents_associations/77571979202585","@timestamp":"2018-03-26T07:00:06.747Z","status":200},"sort":[1522047606747]}]}}},{"key":"/v2/exercices/48995245700039","doc_count":33,"agg_by_endpoint":{"hits":{"total":33,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1nccoVOlXyqTj2c","_score":null,"_source":{"path":"/v2/exercices/48995245700039","@timestamp":"2018-03-26T07:00:04.591Z","status":200},"sort":[1522047604591]}]}}},{"key":"/v1/attestations_sociales/489952457","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG2GFcoVOlXyqTj2l","_score":null,"_source":{"path":"/v1/attestations_sociales/489952457","@timestamp":"2018-03-26T07:00:05.951Z","status":503},"sort":[1522047605951]}]}}},{"key":"/v1/entreprises/418166096","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG2OOcoVOlXyqTj2u","_score":null,"_source":{"path":"/v1/entreprises/418166096","@timestamp":"2018-03-26T07:00:07.045Z","status":200},"sort":[1522047607045]}]}}},{"key":"/v1/etablissements/exercices/48995245700039","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1U2coVOlXyqTj2P","_score":null,"_source":{"path":"/v1/etablissements/exercices/48995245700039","@timestamp":"2018-03-26T07:00:02.977Z","status":200},"sort":[1522047602977]}]}}},{"key":"/v1/infogreffe/extraits_rcs/418166096","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1VMcoVOlXyqTj2R","_score":null,"_source":{"path":"/v1/infogreffe/extraits_rcs/418166096","@timestamp":"2018-03-26T07:00:03.086Z","status":200},"sort":[1522047603086]}]}}},{"key":"/v1/msa/cotisations/81104725700019","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1UrcoVOlXyqTj2O","_score":null,"_source":{"path":"/v1/msa/cotisations/81104725700019","@timestamp":"2018-03-26T07:00:02.841Z","status":200},"sort":[1522047602841]}]}}},{"key":"/v1/opqibi/certificat/395301641","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1VCcoVOlXyqTj2Q","_score":null,"_source":{"path":"/v1/opqibi/certificat/395301641","@timestamp":"2018-03-26T07:00:02.996Z","status":200},"sort":[1522047602996]}]}}},{"key":"/v1/probtp/attestations_cotisation_retraite/73582032600040","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG2OZcoVOlXyqTj2v","_score":null,"_source":{"path":"/v1/probtp/attestations_cotisation_retraite/73582032600040","@timestamp":"2018-03-26T07:00:07.262Z","status":200},"sort":[1522047607262]}]}}},{"key":"/v1/probtp/eligibilite_cotisation_retraite/73582032600040","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG2FucoVOlXyqTj2j","_score":null,"_source":{"path":"/v1/probtp/eligibilite_cotisation_retraite/73582032600040","@timestamp":"2018-03-26T07:00:05.427Z","status":200},"sort":[1522047605427]}]}}},{"key":"/v2/attestations_agefiph/30247504101933","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1YdcoVOlXyqTj2X","_score":null,"_source":{"path":"/v2/attestations_agefiph/30247504101933","@timestamp":"2018-03-26T07:00:03.484Z","status":200},"sort":[1522047603484]}]}}},{"key":"/v2/attestations_cotisation_retraite_probtp/73582032600040","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG2GucoVOlXyqTj2o","_score":null,"_source":{"path":"/v2/attestations_cotisation_retraite_probtp/73582032600040","@timestamp":"2018-03-26T07:00:06.913Z","status":200},"sort":[1522047606913]}]}}},{"key":"/v2/attestations_sociales_acoss/489952457","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG2HPcoVOlXyqTj2r","_score":null,"_source":{"path":"/v2/attestations_sociales_acoss/489952457","@timestamp":"2018-03-26T07:00:07.145Z","status":200},"sort":[1522047607145]}]}}},{"key":"/v2/certificats_opqibi/395301641","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1nmcoVOlXyqTj2d","_score":null,"_source":{"path":"/v2/certificats_opqibi/395301641","@timestamp":"2018-03-26T07:00:04.798Z","status":200},"sort":[1522047604798]}]}}},{"key":"/v2/cotisations_msa/81104725700019","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1nwcoVOlXyqTj2e","_score":null,"_source":{"path":"/v2/cotisations_msa/81104725700019","@timestamp":"2018-03-26T07:00:04.956Z","status":200},"sort":[1522047604956]}]}}},{"key":"/v2/eligibilites_cotisation_retraite_probtp/73582032600040","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1XxcoVOlXyqTj2T","_score":null,"_source":{"path":"/v2/eligibilites_cotisation_retraite_probtp/73582032600040","@timestamp":"2018-03-26T07:00:03.407Z","status":200},"sort":[1522047603407]}]}}},{"key":"/v2/entreprises/418166096","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1YHcoVOlXyqTj2V","_score":null,"_source":{"path":"/v2/entreprises/418166096","@timestamp":"2018-03-26T07:00:03.428Z","status":200},"sort":[1522047603428]}]}}},{"key":"/v2/entreprises_legacy/418166096","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG13FcoVOlXyqTj2h","_score":null,"_source":{"path":"/v2/entreprises_legacy/418166096","@timestamp":"2018-03-26T07:00:06.175Z","status":200},"sort":[1522047606175]}]}}},{"key":"/v2/etablissements/41816609600069/predecesseur","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1X8coVOlXyqTj2U","_score":null,"_source":{"path":"/v2/etablissements/41816609600069/predecesseur","@timestamp":"2018-03-26T07:00:03.422Z","status":200},"sort":[1522047603422]}]}}},{"key":"/v2/etablissements/78414518700133/successeur","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1YScoVOlXyqTj2W","_score":null,"_source":{"path":"/v2/etablissements/78414518700133/successeur","@timestamp":"2018-03-26T07:00:03.466Z","status":200},"sort":[1522047603466]}]}}},{"key":"/v2/extraits_courts_inpi/542065479","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1nRcoVOlXyqTj2b","_score":null,"_source":{"path":"/v2/extraits_courts_inpi/542065479","@timestamp":"2018-03-26T07:00:04.459Z","status":200},"sort":[1522047604459]}]}}},{"key":"/v2/extraits_rcs_infogreffe/418166096","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1XncoVOlXyqTj2S","_score":null,"_source":{"path":"/v2/extraits_rcs_infogreffe/418166096","@timestamp":"2018-03-26T07:00:03.280Z","status":200},"sort":[1522047603280]}]}}},{"key":"/v2/liasses_fiscales_dgfip/2016/complete/301028346","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1n7coVOlXyqTj2f","_score":null,"_source":{"path":"/v2/liasses_fiscales_dgfip/2016/complete/301028346","@timestamp":"2018-03-26T07:00:05.057Z","status":404},"sort":[1522047605057]}]}}},{"key":"/v2/liasses_fiscales_dgfip/2016/declarations/301028346","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG1H9coVOlXyqTj2L","_score":null,"_source":{"path":"/v2/liasses_fiscales_dgfip/2016/declarations/301028346","@timestamp":"2018-03-26T07:00:02.947Z","status":404},"sort":[1522047602947]}]}}},{"key":"/v2/liasses_fiscales_dgfip/2016/dictionnaire","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG126coVOlXyqTj2g","_score":null,"_source":{"path":"/v2/liasses_fiscales_dgfip/2016/dictionnaire","@timestamp":"2018-03-26T07:00:05.409Z","status":200},"sort":[1522047605409]}]}}},{"key":"/v1/associations/W604004799","doc_count":29,"agg_by_endpoint":{"hits":{"total":29,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG2OFcoVOlXyqTj2t","_score":null,"_source":{"path":"/v1/associations/W604004799","@timestamp":"2018-03-26T07:00:06.770Z","status":500},"sort":[1522047606770]}]}}},{"key":"/v1/cnetp/certificat/632049128","doc_count":28,"agg_by_endpoint":{"hits":{"total":28,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG2N5coVOlXyqTj2s","_score":null,"_source":{"path":"/v1/cnetp/certificat/632049128","@timestamp":"2018-03-26T07:00:06.381Z","status":200},"sort":[1522047606381]}]}}},{"key":"/v1/fntp/cartes_professionnelles/562077503","doc_count":18,"agg_by_endpoint":{"hits":{"total":18,"max_score":null,"hits":[{"_index":"logstash-2018.03.26","_type":"siade","_id":"AWJhG14HcoVOlXyqTj2i","_score":null,"_source":{"path":"/v1/fntp/cartes_professionnelles/562077503","@timestamp":"2018-03-26T07:00:04.318Z","status":200},"sort":[1522047604318]}]}}}]}}}'
+    http_version: 
+  recorded_at: Mon, 26 Mar 2018 07:40:18 GMT
+recorded_with: VCR 4.0.0

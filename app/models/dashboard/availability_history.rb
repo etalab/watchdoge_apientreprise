@@ -1,4 +1,4 @@
-class AvailabilityHistory
+class Dashboard::AvailabilityHistory
   def initialize
     @availability_history = []
   end

@@ -1,5 +1,8 @@
 # Flyweight factory
 class EndpointFactory
+
+  attr_reader :endpoints
+
   def initialize
     # rubocop:disable Rails/FindEach
     @endpoints = Endpoint.all.each(&:freeze)
