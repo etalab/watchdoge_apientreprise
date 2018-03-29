@@ -44,7 +44,7 @@
   "aggs": {
     "group_by_controller": {
       "terms": {
-        "field": "controller.keyword",
+        "field": "path.keyword",
         "size": 100
       },
       "aggs": {
