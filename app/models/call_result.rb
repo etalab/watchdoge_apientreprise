@@ -1,6 +1,6 @@
 require 'forwardable'
 
-class CallCharacteristics
+class CallResult
   extend Forwardable
   delegate %i[uname name api_version provider] => :endpoint
   attr_reader :endpoint, :http_path, :code, :timestamp, :params, :provider_name, :fallback_used
@@ -12,12 +12,12 @@ class CallCharacteristics
     @http_path = source['path']
     @code = source['status']
     @timestamp = source['@timestamp']
-    @params = extract_parameters source['parameters']
+    @params = sanitize_parameters source['parameters']
     @provider_name = source.dig('response', 'provider_name')
     @fallback_used = source.dig('response', 'fallback_used')
   end
 
-  def to_json
+  def as_json
     {
       uname: endpoint.uname,
       name: endpoint.name,
@@ -30,7 +30,7 @@ class CallCharacteristics
     }
   end
 
-  def extract_parameters(parameters)
+  def sanitize_parameters(parameters)
     parameters
       .symbolize_keys
       .delete_if { |key| key == :token }

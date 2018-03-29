@@ -9,7 +9,7 @@ describe Stats::CallCounterAggregator do
     before { call_counter_aggregator.aggregate(call) }
 
     let(:endpoint) { Endpoint.all.sample }
-    let(:call) { CallCharacteristics.new(source) }
+    let(:call) { CallResult.new(source) }
 
     context 'when it is in the first 10 minutes' do
       let(:source) { fake_elk_source(endpoint, 5.minutes.ago) }

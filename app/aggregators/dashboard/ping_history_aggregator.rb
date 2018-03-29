@@ -19,7 +19,7 @@ class Dashboard::PingHistoryAggregator
 
   def parse_raw_data_into_sources
     @raw_data.each do |data|
-      elk_source = CallCharacteristics.new(data['_source'], @endpoint_factory)
+      elk_source = CallResult.new(data['_source'], @endpoint_factory)
       @elk_sources << elk_source
     end
 

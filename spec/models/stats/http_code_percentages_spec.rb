@@ -6,7 +6,7 @@ describe Stats::HttpCodePercentages do
   describe 'only one add' do
     let(:scope_duration) { 3.hours }
     let(:endpoint) { Endpoint.all.sample }
-    let(:call) { CallCharacteristics.new(source) }
+    let(:call) { CallResult.new(source) }
 
     before { code_percentages.add(call) }
 
@@ -81,7 +81,7 @@ describe Stats::HttpCodePercentages do
     let(:scope_duration) { 2.hours }
     let(:endpoint) { Endpoint.all.sample }
     let(:source) { fake_elk_source(endpoint, 1.hour.ago) }
-    let(:call) { CallCharacteristics.new(source) }
+    let(:call) { CallResult.new(source) }
 
     it 'makes a full copy' do
       code_percentages.add(call)

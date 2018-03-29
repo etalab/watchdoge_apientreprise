@@ -9,7 +9,7 @@ describe Stats::HttpCodePercentagesAggregator do
     before { code_percentage_aggregator.aggregate(call) }
 
     let(:endpoint) { Endpoint.all.sample }
-    let(:call) { CallCharacteristics.new(source) }
+    let(:call) { CallResult.new(source) }
 
     context 'when it is in the first 30 hours' do
       let(:source) { fake_elk_source(endpoint, 5.hours.ago) }

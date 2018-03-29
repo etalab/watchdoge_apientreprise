@@ -56,7 +56,7 @@ class Dashboard::AvailabilityHistoryService
   end
 
   def json_query
-    query_hash.merge(search_after: @search_after).compact.to_json
+    query_hash.merge(search_after: @search_after).compact.as_json
   end
 
   def query_hash

@@ -15,13 +15,13 @@ class Stats::HttpCodePercentages
     time >= (@beginning_time - @scope_duration)
   end
 
-  def add(call_characteristics)
-    return false unless in_scope?(call_characteristics.timestamp)
+  def add(call_result)
+    return false unless in_scope?(call_result.timestamp)
 
-    if @http_code_counters.key?(call_characteristics.code)
-      @http_code_counters[call_characteristics.code] += 1
+    if @http_code_counters.key?(call_result.code)
+      @http_code_counters[call_result.code] += 1
     else
-      @http_code_counters[call_characteristics.code] = 1
+      @http_code_counters[call_result.code] = 1
     end
 
     @number_of_calls += 1

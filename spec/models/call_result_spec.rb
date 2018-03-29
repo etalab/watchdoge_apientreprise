@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CallCharacteristics do
+describe CallResult do
   subject { described_class.new(source_example, endpoint_factory) }
 
   let(:endpoint_factory) { EndpointFactory.new }
@@ -43,7 +43,7 @@ describe CallCharacteristics do
     its(:provider_name) { is_expected.to be_nil }
     its(:fallback_used) { is_expected.to be_nil }
     its(:http_path) { is_expected.to eq('/v2/etablissements_legacy/41816609600069') }
-    its(:to_json) { is_expected.to include_json(uname: 'apie_2_etablissements_legacy', name: 'Etablissements (legacy)', api_version: 2, provider: 'insee', code: 503, timestamp: '2017-12-03T17:50:03.760Z', provider_name: nil, fallback_used: nil) }
+    its(:as_json) { is_expected.to include_json(uname: 'apie_2_etablissements_legacy', name: 'Etablissements (legacy)', api_version: 2, provider: 'insee', code: 503, timestamp: '2017-12-03T17:50:03.760Z', provider_name: nil, fallback_used: nil) }
   end
 
   describe 'parsing Entreprises v2' do
@@ -59,7 +59,7 @@ describe CallCharacteristics do
     its(:provider_name) { is_expected.to eq('insee') }
     its(:fallback_used) { is_expected.to be_falsey }
     its(:http_path) { is_expected.to eq('/v2/entreprises/418166096') }
-    its(:to_json) { is_expected.to include_json(uname: 'apie_2_entreprises', name: 'Entreprise', api_version: 2, provider: 'insee', code: 200, timestamp: '2018-01-28T13:01:12.982Z', provider_name: 'insee', fallback_used: false) }
+    its(:as_json) { is_expected.to include_json(uname: 'apie_2_entreprises', name: 'Entreprise', api_version: 2, provider: 'insee', code: 200, timestamp: '2018-01-28T13:01:12.982Z', provider_name: 'insee', fallback_used: false) }
   end
 
   describe 'parsing Infogreffe v1' do

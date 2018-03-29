@@ -7,8 +7,8 @@ class Stats::CallCounterAggregator
     initialize_first_call_counter
   end
 
-  def aggregate(call_characteristics)
-    @current_call = call_characteristics
+  def aggregate(call_result)
+    @current_call = call_result
     return if outside_full_scope?
     move_to_next_call_counter until in_scope?
     compute_aggregation

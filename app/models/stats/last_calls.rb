@@ -19,9 +19,9 @@ class Stats::LastCalls
     @count = 0
   end
 
-  def add(call_characteristics)
+  def add(call_result)
     return if @count >= LIMIT
-    @last_calls << call_characteristics
+    @last_calls << call_result
     @count += 1
   end
 
