@@ -1,6 +1,5 @@
 # Flyweight factory
 class EndpointFactory
-
   attr_reader :endpoints
 
   def initialize

@@ -62,8 +62,9 @@ class Stats::CallCounter
     distance_of_time(
       @scope_duration,
       accumulate_on: scope_name_accumulator
-    ).parameterize
-     .underscore
+    )
+      .parameterize
+      .underscore
   end
 
   def scope_name_accumulator

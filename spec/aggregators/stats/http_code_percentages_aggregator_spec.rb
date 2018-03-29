@@ -60,7 +60,6 @@ describe Stats::HttpCodePercentagesAggregator do
     end
   end
 
-
   describe 'when having multiple elements' do
     let(:endpoint) { Endpoint.all.sample }
 

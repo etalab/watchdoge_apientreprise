@@ -28,6 +28,7 @@ describe Stats::CallCounter do
       it 'is not in scope' do
         # rubocop:disable RSpec/PredicateMatcher
         expect(counter.in_scope?(5.hours.ago)).to be_falsey
+        # rubocop:enable RSpec/PredicateMatcher
       end
     end
   end

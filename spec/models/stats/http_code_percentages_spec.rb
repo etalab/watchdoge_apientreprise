@@ -13,7 +13,7 @@ describe Stats::HttpCodePercentages do
     context 'when inside the scope' do
       let(:source) { fake_elk_source(endpoint, 2.hours.ago) }
 
-      its(:http_code_counters) { is_expected.to eq("#{call.code}" => 1) }
+      its(:http_code_counters) { is_expected.to eq(call.code.to_s => 1) }
       its(:number_of_calls) { is_expected.to eq(1) }
       its(:as_json) { is_expected.to match_json_schema('stats/http_code_percentages') }
     end
@@ -28,6 +28,7 @@ describe Stats::HttpCodePercentages do
       it 'is not in scope' do
         # rubocop:disable RSpec/PredicateMatcher
         expect(code_percentages.in_scope?(5.hours.ago)).to be_falsey
+        # rubocop:enable RSpec/PredicateMatcher
       end
     end
   end

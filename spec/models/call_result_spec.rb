@@ -16,8 +16,8 @@ describe CallResult do
       source_example['parameters']['siret'] = new_siret
     end
 
-    its(:params) { is_expected.to include({siret: new_siret}) }
-    its(:http_path) { is_expected.to match(/^\/v2\/etablissements_legacy\/#{new_siret}$/) }
+    its(:params) { is_expected.to include({ siret: new_siret }) }
+    its(:http_path) { is_expected.to match(%r{^\/v2\/etablissements_legacy\/#{new_siret}$}) }
   end
 
   describe 'parsing source without parameters' do
