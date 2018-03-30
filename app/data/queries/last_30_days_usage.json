@@ -1,0 +1,51 @@
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-1M",
+              "lte": "now/d"
+            }
+          }
+        },
+        {
+          "wildcard": {
+            "source": "siade_production*"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "terms": {
+            "controller.keyword": [
+              "api/v1/ping",
+              "api/v2/ping"
+            ]
+          }
+        },
+        {
+          "term": {
+            "parameters.context.keyword": {
+              "value": "Ping"
+            }
+          }
+        },
+        {
+          "terms": {
+            "status": [
+              "401",
+              "403"
+            ]
+          }
+        }
+      ],
+      "filter": {
+        "exists": {
+          "field": "user_access.resource"
+        }
+      }
+    }
+  }
+}

@@ -26,12 +26,12 @@ class Stats::CallCounter
     time >= (@beginning_time - @scope_duration)
   end
 
-  def add(call_characteristics)
-    return false unless in_scope?(call_characteristics.timestamp)
+  def add(call_result)
+    return false unless in_scope?(call_result.timestamp)
 
-    endpoint_counter = @endpoints.find { |e| e.endpoint.uname == call_characteristics.uname }
+    endpoint_counter = @endpoints.find { |e| e.endpoint.uname == call_result.uname }
     if endpoint_counter.nil?
-      @endpoints << EndpointCallCounter.new(call_characteristics, 1)
+      @endpoints << EndpointCallCounter.new(call_result, 1)
     else
       endpoint_counter.count += 1
     end
@@ -62,8 +62,9 @@ class Stats::CallCounter
     distance_of_time(
       @scope_duration,
       accumulate_on: scope_name_accumulator
-    ).parameterize
-     .underscore
+    )
+      .parameterize
+      .underscore
   end
 
   def scope_name_accumulator

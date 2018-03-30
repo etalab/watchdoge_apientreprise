@@ -7,8 +7,8 @@ class Stats::HttpCodePercentagesAggregator
     initialize_first_code_percentages
   end
 
-  def aggregate(call_characteristics)
-    @current_call = call_characteristics
+  def aggregate(call_result)
+    @current_call = call_result
     return if outside_full_scope?
     move_to_next_http_code_percentage until in_scope?
     compute_aggregation

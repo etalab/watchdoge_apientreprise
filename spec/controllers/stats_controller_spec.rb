@@ -1,18 +1,45 @@
 require 'rails_helper'
 
 describe StatsController, type: :controller do
-  describe 'happy path (e2e spec)', vcr: { cassette_name: 'stats/jwt_usage' } do
-    subject { get :jwt_usage, params: { jti: valid_jti } }
+  context 'with jwt_usage action' do
+    describe 'happy path (e2e spec)', vcr: { cassette_name: 'stats/jwt_usage' } do
+      subject { get :jwt_usage, params: { jti: valid_jti } }
 
-    its(:status) { is_expected.to eq(200) }
-    its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
+      its(:status) { is_expected.to eq(200) }
+      its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
+    end
+
+    describe 'when having an error', vcr: { cassette_name: 'stats/jwt_usage' } do
+      subject { get :jwt_usage, params: { jti: valid_jti } }
+
+      before { allow_any_instance_of(Stats::JwtUsageService).to receive(:success?).and_return(false) }
+
+      its(:status) { is_expected.to eq(500) }
+    end
   end
 
-  describe 'when having an error', vcr: { cassette_name: 'stats/jwt_usage' } do
-    subject { get :jwt_usage, params: { jti: valid_jti } }
+  context 'with last_30_days_usage action', vcr: { cassette_name: 'stats/last_30_days_usage' } do
+    subject(:response) { get :last_30_days_usage }
 
-    before { allow_any_instance_of(Stats::JwtUsageService).to receive(:success?).and_return(false) }
+    describe 'happy path (e2e)', vcr: { cassette_name: 'stats/last_30_days_usage' } do
+      its(:status) { is_expected.to eq(200) }
+      its('body.to_i') { is_expected.to be > 1_000_000 }
+    end
 
-    its(:status) { is_expected.to eq(500) }
+    describe 'happy path (mocked)' do
+      before do
+        allow_any_instance_of(Stats::Last30DaysUsageService).to receive(:success?).and_return(true)
+        allow_any_instance_of(Stats::Last30DaysUsageService).to receive(:results).and_return(1_000_001)
+      end
+
+      its(:status) { is_expected.to eq(200) }
+      its('body.to_i') { is_expected.to be > 1_000_000 }
+    end
+
+    context 'when having an error' do
+      before { allow_any_instance_of(Stats::Last30DaysUsageService).to receive(:success?).and_return(false) }
+
+      its(:status) { is_expected.to eq(500) }
+    end
   end
 end

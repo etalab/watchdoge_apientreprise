@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Stats::JwtUsageAggregator, vcr: { cassette_name: 'stats/jwt_usage'} do
+describe Stats::JwtUsageAggregator, vcr: { cassette_name: 'stats/jwt_usage' } do
   # rubocop:disable RSpec/InstanceVariable
   subject(:jwt_usage_aggregator) { @jwt_usage_aggregator }
 
@@ -8,7 +8,7 @@ describe Stats::JwtUsageAggregator, vcr: { cassette_name: 'stats/jwt_usage'} do
 
   before do
     # CANT USE VCR WITHOUT MOCKING THE START DATE EVERYWHERE !!!!!
-    allow(Time.zone).to receive(:now).and_return(Time.parse('2018-03-14 15:15:49 +0100'))
+    allow(Time.zone).to receive(:now).and_return(Time.zone.parse('2018-03-14 15:15:49 +0100'))
 
     remember_through_tests('jwt_usage_aggregator') do
       service = Stats::JwtUsageService.new(jti: valid_jti)
@@ -34,4 +34,3 @@ describe Stats::JwtUsageAggregator, vcr: { cassette_name: 'stats/jwt_usage'} do
     expect(jwt_usage_aggregator.http_code_percentages.dig(:http_code_percentages, :last_8_days).size).to be > 1
   end
 end
-

@@ -16,7 +16,7 @@ describe DashboardController, type: :controller do
     its(:body) { is_expected.to match_json_schema('dashboard/homepage_status') }
   end
 
-  describe 'Availability history status happy path', vcr: { cassette_name: 'dashboard/availability_history' } do
+  describe 'Availability history status happy path LONG', very_long_test: true, vcr: { cassette_name: 'dashboard/availability_history' } do
     subject(:service_response) { @availability_results_controller }
 
     before do
@@ -34,7 +34,7 @@ describe DashboardController, type: :controller do
     end
   end
 
-  describe 'Availability history status happy path', vcr: { cassette_name: 'dashboard/availability_history_shortened' } do
+  describe 'Availability history status happy path SHORT', vcr: { cassette_name: 'dashboard/availability_history_shortened' } do
     subject(:service_response) { @availability_results_controller }
 
     before do

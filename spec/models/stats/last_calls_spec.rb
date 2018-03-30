@@ -9,7 +9,7 @@ describe Stats::LastCalls do
     random_endpoint = Endpoint.all.sample
     timestamp = 3.hours.ago
     source = fake_elk_source(random_endpoint, timestamp)
-    CallCharacteristics.new(source)
+    CallResult.new(source)
   end
 
   describe 'without any call' do

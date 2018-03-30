@@ -33,7 +33,7 @@ class Dashboard::AvailabilityHistoryService
 
   def retrieve_all_availabilities
     loop do
-      @client.perform json_query
+      @client.search json_query
       break unless @client.success?
       @hits.concat retrieved_hits
       @search_after = retrieved_hits.last['sort']
@@ -56,7 +56,7 @@ class Dashboard::AvailabilityHistoryService
   end
 
   def json_query
-    query_hash.merge(search_after: @search_after).compact.to_json
+    query_hash.merge(search_after: @search_after).compact.as_json
   end
 
   def query_hash
