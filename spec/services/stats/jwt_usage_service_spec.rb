@@ -24,12 +24,5 @@ describe Stats::JwtUsageService, type: :service, vcr: { cassette_name: 'stats/jw
     its(:results) { is_expected.to match_json_schema('stats/jwt_usage') }
   end
 
-  describe 'invalid query', vcr: { cassette_name: 'invalid_query' } do
-    before do
-      allow_any_instance_of(described_class).to receive(:load_query).and_return({ query: { match_allllll: {} } }.to_json)
-    end
-
-    its(:success?) { is_expected.to be_falsey }
-    its(:errors) { is_expected.not_to be_empty }
-  end
+  it_behaves_like 'elk invalid query', jti: valid_jti
 end

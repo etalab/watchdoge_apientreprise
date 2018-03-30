@@ -44,7 +44,7 @@ class Stats::JwtUsageService
 
   def retrieve_all_jwt_usage
     loop do
-      @client.perform json_query
+      @client.search json_query
       break unless @client.success?
       @hits.concat retrieved_hits
       @search_after = retrieved_hits.last['sort']

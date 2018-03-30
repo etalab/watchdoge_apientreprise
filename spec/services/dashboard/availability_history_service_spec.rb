@@ -1,59 +1,49 @@
 require 'rails_helper'
 
 describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_name: 'dashboard/availability_history_shortened' } do
-  # rubocop:disable RSpec/InstanceVariable
-  let(:service) { @availability_results_perform }
+  describe 'valid query' do
+    # rubocop:disable RSpec/InstanceVariable
+    let(:service) { @availability_results_perform }
 
-  # rubocop:enable RSpec/InstanceVariable
+    # rubocop:enable RSpec/InstanceVariable
 
-  before do
-    allow_any_instance_of(described_class).to receive(:query_name).and_return('availability_history_shortened')
-    remember_through_tests('availability_results_perform') do
-      described_class.new.perform
+    before do
+      allow_any_instance_of(described_class).to receive(:query_name).and_return('availability_history_shortened')
+      remember_through_tests('availability_results_perform') do
+        described_class.new.perform
+      end
     end
-  end
 
-  describe 'service' do
-    subject { service }
+    describe 'service' do
+      subject { service }
 
-    its(:success?) { is_expected.to be_truthy }
-  end
+      its(:success?) { is_expected.to be_truthy }
+    end
 
-  describe 'results' do
-    subject(:results) { service.results }
+    describe 'results' do
+      subject(:results) { service.results }
 
-    let(:json) { { results: results } }
-
-    its(:size) { is_expected.to equal(13) }
-
-    describe 'providers' do
+      let(:json) { { results: results } }
       let(:providers) { results.map { |r| r['provider_name'] }.sort }
       let(:expected_providers) { Endpoint.all.map(&:provider).uniq.sort }
+
+      its(:size) { is_expected.to equal(13) }
 
       it 'contains specifics providers' do
         expected_providers.delete('apientreprise')
         expected_providers.delete('sirene')
         expect(providers).to eq(expected_providers)
       end
-    end
 
-    it 'matches json-schema' do
-      expect(json).to match_json_schema('dashboard/availability_history')
-    end
+      it 'matches json-schema' do
+        expect(json).to match_json_schema('dashboard/availability_history')
+      end
 
-    it 'has no gap and from < to' do
-      expect(results).to be_a_valid_availabilities_history
+      it 'has no gap and from < to' do
+        expect(results).to be_a_valid_availabilities_history
+      end
     end
   end
 
-  describe 'invalid query', vcr: { cassette_name: 'invalid_query' } do
-    subject { described_class.new.perform }
-
-    before do
-      allow_any_instance_of(described_class).to receive(:load_query).and_return({ query: { match_allllll: {} } }.to_json)
-    end
-
-    its(:success?) { is_expected.to be_falsey }
-    its(:errors) { is_expected.not_to be_empty }
-  end
+  it_behaves_like 'elk invalid query'
 end
