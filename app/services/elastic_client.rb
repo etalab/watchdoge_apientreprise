@@ -19,14 +19,24 @@ class ElasticClient
     @errors << 'Connection to Watchdoge server failed'
   end
 
-  def perform(json_query)
-    try_to_perform(json_query) if connected?
+  def search(json_query)
+    return unless connected?
+    try_to_perform do
+      @client.search body: json_query
+    end
+  end
+
+  def count(json_query)
+    return unless connected?
+    try_to_perform do
+      @client.count body: json_query
+    end
   end
 
   private
 
-  def try_to_perform(json_query)
-    @raw_response = @client.search body: json_query
+  def try_to_perform
+    @raw_response = yield
     @success = true
   rescue Elasticsearch::Transport::Transport::Errors::BadRequest
     @errors << 'Elasticsearch BadRequest'

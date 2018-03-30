@@ -13,7 +13,7 @@ class Dashboard::CurrentStatusService
 
   def perform
     if @client.connected?
-      @client.perform json_query
+      @client.search json_query
       process_raw_response if @client.success?
     end
 

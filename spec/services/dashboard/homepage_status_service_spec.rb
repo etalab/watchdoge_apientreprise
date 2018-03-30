@@ -20,13 +20,5 @@ describe Dashboard::HomepageStatusService, type: :service do
     end
   end
 
-  describe 'invalid query', vcr: { cassette_name: 'invalid_query' } do
-    subject { described_class.new.perform }
-
-    before do
-      allow_any_instance_of(described_class).to receive(:json_query).and_return(query: { match_allllll: {} })
-    end
-
-    its(:success?) { is_expected.to be_falsey }
-  end
+  it_behaves_like 'elk invalid query'
 end
