@@ -38,7 +38,8 @@ describe ElasticClient, type: :service do
                       "lte": 'now/d'
                     }
                   }
-                }]
+                }
+              ]
             }
           }
         }
