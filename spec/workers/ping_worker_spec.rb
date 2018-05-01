@@ -68,4 +68,18 @@ describe PingWorker, type: :worker do
       end
     end
   end
+
+  context 'when it is an API v1' do
+    let(:uname) { 'apie_1_fake_api' }
+
+    before do
+      create(:endpoint, uname: uname, api_version: 1)
+      allow_any_instance_of(Endpoint).to receive(:http_response).and_return(Net::HTTPResponse.new(1.0, 200, 'OK'))
+    end
+
+    it 'do not send an email' do
+      expect(PingMailer).not_to receive(:ping)
+      described_class.perform_async(uname)
+    end
+  end
 end
