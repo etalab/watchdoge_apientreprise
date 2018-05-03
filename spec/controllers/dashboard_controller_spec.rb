@@ -53,6 +53,22 @@ describe DashboardController, type: :controller do
     end
   end
 
+  describe 'Availability History returns empty response' do
+    subject { get :availability_history }
+
+    before do
+      # All this is because I cannot easly generate and stub response for this situation (that should never happened btw)
+      allow_any_instance_of(ElasticClient).to receive(:establish_connection)
+      allow_any_instance_of(ElasticClient).to receive(:connected?).and_return(true)
+      allow_any_instance_of(ElasticClient).to receive(:search)
+      allow_any_instance_of(ElasticClient).to receive(:success?).and_return(true)
+      allow_any_instance_of(Dashboard::AvailabilityHistoryService).to receive(:retrieved_hits).and_return([]) # empty elk response
+    end
+
+    its(:status) { is_expected.to eq(200) }
+    its(:body) { is_expected.to match_json_schema('dashboard/availability_history') }
+  end
+
   describe 'Current status error path', vcr: { cassette_name: 'dashboard/current_status' } do
     subject { get :current_status }
 
