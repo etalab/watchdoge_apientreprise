@@ -69,17 +69,30 @@ describe PingWorker, type: :worker do
     end
   end
 
-  context 'when it is an API v1' do
-    let(:uname) { 'apie_1_fake_api' }
-
+  describe 'API v1' do
     before do
-      create(:endpoint, uname: uname, api_version: 1)
-      allow_any_instance_of(Endpoint).to receive(:http_response).and_return(Net::HTTPResponse.new(1.0, 200, 'OK'))
+      create(:endpoint, uname: uname, api_name: api_name, api_version: 1)
+      allow_any_instance_of(Endpoint).to receive(:http_response).and_return(Net::HTTPResponse.new(1.0, 404, 'OK'))
     end
 
-    it 'do not send an email' do
-      expect(PingMailer).not_to receive(:ping)
-      described_class.perform_async(uname)
+    context 'when API Entreprise' do
+      let(:uname) { 'apie_1_fake_api' }
+      let(:api_name) { 'apie' }
+
+      it 'do not send an email' do
+        expect(PingMailer).not_to receive(:ping)
+        described_class.new.perform(uname)
+      end
+    end
+
+    context 'when Sirene as API' do
+      let(:uname) { 'sirene_1_fake_api' }
+      let(:api_name) { 'sirene' }
+
+      it 'sends an email' do
+        expect(PingMailer).to receive(:ping).and_call_original
+        described_class.new.perform(uname)
+      end
     end
   end
 end
