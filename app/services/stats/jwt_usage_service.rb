@@ -47,8 +47,8 @@ class Stats::JwtUsageService
       @client.search json_query
       break unless @client.success?
       @hits.concat retrieved_hits
-      @search_after = retrieved_hits.last['sort']
       break if retrieved_hits.count < 10_000
+      @search_after = retrieved_hits.last['sort']
     end
   rescue Elasticsearch::Transport::Transport::Errors::BadRequest
     @success = false

@@ -5,10 +5,14 @@ class PingWorker
   def perform(uname)
     @endpoint = Endpoint.find_by(uname: uname)
     ping_report.notify_changes(code_http)
-    send_notification if ping_report.changed?
+    send_notification if ping_report.changed? && !v1?
   end
 
   private
+
+  def v1?
+    @endpoint.api_version == 1 && @endpoint.api_name == 'apie'
+  end
 
   def send_notification
     PingMailer.ping(@endpoint, ping_report).deliver_later
