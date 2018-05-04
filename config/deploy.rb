@@ -122,16 +122,8 @@ task mono_ping: :remote_environment do
 end
 
 task :sidekiq do
-  comment 'Checking Sidekiq status:'.green
-  command %{
-    if [ -z $(sudo systemctl status sidekiq_watchdoge_#{ENV['to']} | grep running) ]
-    then
-      echo 'Restarting sidekiq...'
-      sudo systemctl restart sidekiq_watchdoge_#{ENV['to']}
-    else
-      echo 'Sidekiq is UP and running !'
-    fi
-  }
+  comment 'Restarting Sidekiq (reloads code)'.green
+  command %{sudo systemctl restart sidekiq_watchdoge_#{ENV['to']}}
 end
 
 task :passenger do
