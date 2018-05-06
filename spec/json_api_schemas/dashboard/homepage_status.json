@@ -9,18 +9,21 @@
         "properties": {
           "name": {
             "type": "string",
-            "pattern": "APIE Homepage"
+            "pattern": "APIE Homepage",
+            "example": "APIE Homepage"
           },
           "code": {
             "type": "integer",
             "title": "The HTTP Code.",
             "minimum": 200,
-            "maximum": 550
+            "maximum": 550,
+            "example": 200
           },
           "timestamp": {
             "type": "string",
             "title": "The Ping Timestamp",
-            "pattern": "^\\d{4}-\\d{2}-\\d{2}.\\d{2}:\\d{2}:\\d{2}"
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}.\\d{2}:\\d{2}:\\d{2}",
+            "example": "2018-05-06T05:37:16.368Z"
           }
         }
       }
