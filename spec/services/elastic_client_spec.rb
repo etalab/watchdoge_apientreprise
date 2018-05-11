@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe ElasticClient, type: :service do
-  subject(:client) { described_class.new }
-
-  before { client.establish_connection }
-
   context 'when API access is allowed' do
+    subject(:client) { described_class.new }
+
+    before { client.establish_connection }
+
     context 'with a search query', vcr: { cassette_name: 'basic_search_json_query_allowed' } do
       before { client.search basic_search_json_query }
 
@@ -53,6 +53,17 @@ describe ElasticClient, type: :service do
 
   # VCR cassette is not generated but it is mandatory a HTTP request is performed
   describe 'when API access is forbidden', vcr: { cassette_name: 'basic_json_query_denied_TO_DELETE' } do
+    # better perf
+    subject { @access_denied }
+
+    before do
+      remember_through_tests('access_denied') do
+        client = described_class.new
+        client.establish_connection
+        client
+      end
+    end
+
     its(:success?) { is_expected.to be_falsey }
     its(:raw_response) { is_expected.to be_nil }
     its(:errors) { is_expected.not_to be_empty }
