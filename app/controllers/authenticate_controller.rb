@@ -10,6 +10,10 @@ class AuthenticateController < ApplicationController
 
   private
 
+  def user
+    pundit_user
+  end
+
   def pundit_user
     @raw_jwt = retrieve_jwt_from_headers
     raise UnauthorizedError unless allowed?

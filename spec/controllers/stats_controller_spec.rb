@@ -1,8 +1,29 @@
 require 'rails_helper'
 
 describe StatsController, type: :controller do
+  context 'with admin_jwt_usage action' do
+    subject { get :admin_jwt_usage, params: { jti: jti } }
+
+    before { request.headers['Authorization'] = "Bearer #{JwtHelper.jwt(:valid)}" }
+
+    describe 'happy path (e2e spec)', vcr: { cassette_name: 'stats/jwt_usage' } do
+      let(:jti) { valid_jti }
+
+      its(:status) { is_expected.to eq(200) }
+      its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
+    end
+
+    describe 'when having an error', vcr: { cassette_name: 'stats/jwt_usage' } do
+      let(:jti) { valid_jti }
+
+      before { allow_any_instance_of(Stats::JwtUsageService).to receive(:success?).and_return(false) }
+
+      its(:status) { is_expected.to eq(500) }
+    end
+  end
+
   context 'with jwt_usage action' do
-    subject { get :jwt_usage, params: { jti: jti } }
+    subject { get :jwt_usage }
 
     before { request.headers['Authorization'] = "Bearer #{JwtHelper.jwt(:valid)}" }
 

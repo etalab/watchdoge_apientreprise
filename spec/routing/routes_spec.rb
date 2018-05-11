@@ -13,8 +13,12 @@ describe 'routes', type: :routing do
     expect(get('api/watchdoge/dashboard/homepage_status')).to route_to(controller: 'dashboard', action: 'homepage_status')
   end
 
+  it 'route to admin_jwt_usage stats' do
+    expect(get("api/watchdoge/stats/admin_jwt_usage/#{valid_jti}")).to route_to(controller: 'stats', action: 'admin_jwt_usage', jti: valid_jti)
+  end
+
   it 'route to jwt_usage stats' do
-    expect(get("api/watchdoge/stats/jwt_usage/#{valid_jti}")).to route_to(controller: 'stats', action: 'jwt_usage', jti: valid_jti)
+    expect(get("api/watchdoge/stats/jwt_usage")).to route_to(controller: 'stats', action: 'jwt_usage')
   end
 
   it 'route to last_30_days_usage' do
