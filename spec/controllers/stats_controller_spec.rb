@@ -6,6 +6,9 @@ describe StatsController, type: :controller do
 
     before { request.headers['Authorization'] = "Bearer #{JwtHelper.jwt(:valid)}" }
 
+    # TODO: remove. Update watchdoge jwt to add jwt_statistics role
+    before { allow_any_instance_of(JwtUser).to receive(:jti).and_return jti }
+
     describe 'happy path (e2e spec)', vcr: { cassette_name: 'stats/jwt_usage' } do
       let(:jti) { valid_jti }
 

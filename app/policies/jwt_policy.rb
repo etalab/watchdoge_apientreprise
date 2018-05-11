@@ -1,9 +1,8 @@
 class JwtPolicy
   attr_reader :user
 
-  def initialize(user, jwt)
+  def initialize(user, policy)
     @user = user
-    @jwt = jwt
   end
 
   protected

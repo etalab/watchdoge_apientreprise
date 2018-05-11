@@ -2,6 +2,8 @@ class StatsController < AuthenticateController
   def jwt_usage
     authorize :stats
 
+    raise UnauthorizedError if pundit_user.jti != jti
+
     service = Stats::JwtUsageService.new(jti: jti)
     service.perform
 
@@ -14,6 +16,7 @@ class StatsController < AuthenticateController
 
   def last_30_days_usage
     skip_authorization
+
     service = Stats::Last30DaysUsageService.new.tap(&:perform)
 
     if service.success?
