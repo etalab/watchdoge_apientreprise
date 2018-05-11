@@ -11,15 +11,15 @@ describe AuthenticateController do
     end
   end
 
-  controller(AuthenticateController) do
+  controller(described_class) do
     def index
       authorize :fake
       render json: {}, status: 200
     end
   end
 
-  context "without valid token" do
-    it "returns 401 when token is missing" do
+  context 'without valid token' do
+    it 'returns 401 when token is missing' do
       get :index
       assert_response 401
     end
@@ -81,4 +81,3 @@ describe AuthenticateController do
     end
   end
 end
-

@@ -7,7 +7,7 @@ class JwtUser
     @jti = jti
   end
 
-  def has_access?(role)
+  def access?(role)
     @roles.include?(role)
   end
 end

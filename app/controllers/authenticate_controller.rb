@@ -39,9 +39,9 @@ class AuthenticateController < ApplicationController
 
   def retrieve_jwt_from_headers
     auth = request.headers['Authorization']
-    if auth
-      matchs = auth.match(/\ABearer (.+)\z/)
-      matchs[1] if matchs
-    end
+    return unless auth
+
+    matchs = auth.match(/\ABearer (.+)\z/)
+    matchs[1] if matchs
   end
 end
