@@ -4,6 +4,8 @@ describe StatsController, type: :controller do
   context 'with jwt_usage action' do
     subject { get :jwt_usage, params: { jti: jti } }
 
+    before { request.headers['Authorization'] = "Bearer #{JwtHelper.jwt(:valid)}" }
+
     describe 'happy path (e2e spec)', vcr: { cassette_name: 'stats/jwt_usage' } do
       let(:jti) { valid_jti }
 

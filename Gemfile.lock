@@ -103,6 +103,9 @@ GEM
     json (2.1.0)
     json-schema (2.8.0)
       addressable (>= 2.4)
+    jwt (2.1.0)
+    jwtf (0.1.1)
+      jwt (~> 2.1.0, >= 2.1.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -145,6 +148,8 @@ GEM
       pry (~> 0.10)
     public_suffix (3.0.2)
     puma (3.11.3)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (2.0.4)
     rack-cors (1.0.2)
     rack-protection (2.0.1)
@@ -277,6 +282,7 @@ DEPENDENCIES
   guard-rspec
   haml
   json-schema
+  jwtf
   listen (>= 3.0.5, < 3.2)
   mina
   mina-whenever
@@ -284,6 +290,7 @@ DEPENDENCIES
   pry
   pry-byebug
   puma (~> 3.7)
+  pundit (~> 1.1)
   rack-cors
   rails (~> 5.1.1)
   rspec-its
