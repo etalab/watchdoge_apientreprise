@@ -54,10 +54,12 @@ describe ElasticClient, type: :service do
   # VCR cassette is not generated but it is mandatory a HTTP request is performed
   describe 'when API access is forbidden', vcr: { cassette_name: 'basic_json_query_denied_TO_DELETE' } do
     # better perf
-    subject { @access_denied }
+    subject { access_denied }
+
+    let(:access_denied) { saved_access_denied }
 
     before do
-      remember_through_tests('access_denied') do
+      remember_through_tests(:saved_access_denied) do
         client = described_class.new
         client.establish_connection
         client
