@@ -103,4 +103,10 @@ describe CallResult do
     its(:provider_name) { is_expected.to be_nil }
     its(:http_path) { is_expected.to eq('/v2/liasses_fiscales_dgfip/2016/declarations/301028346') }
   end
+
+  describe 'parsing unknown payload' do
+    let(:filename) { 'spec/support/payload_files/elk_sources/unknown_elasticsearch_source.json' }
+
+    its(:valid?) { is_expected.to be_falsey }
+  end
 end
