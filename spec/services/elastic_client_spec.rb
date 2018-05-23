@@ -56,7 +56,7 @@ describe ElasticClient, type: :service do
     # better perf
     subject { access_denied }
 
-    let(:access_denied) { saved_access_denied }
+    let(:access_denied) { @saved_access_denied }
 
     before do
       remember_through_tests(:saved_access_denied) do
