@@ -29,4 +29,46 @@ describe Dashboard::CurrentStatusService, type: :service do
   end
 
   it_behaves_like 'elk invalid query'
+
+  context 'with unknwon element' do
+    subject(:service) { described_class.new.perform }
+
+    let(:results) { service.results }
+    let(:unknwon_endpoint) do
+      {
+        key: 'bli/blou/unknwon',
+        agg_by_endpoint:  {
+          hits:  {
+            hits: [{
+              _index: 'logstash-2018.05.22',
+              _type: 'siade',
+              _id: 'AWOIvWf6y-__1jNGzSfE',
+              _score: nil,
+              _source: {
+                path: 'bli/blou/unknwon',
+                '@timestamp': '2018-05-22T16 : 45 : 03.543Z',
+                status: 500
+              },
+              sort: [1527007503543]
+            }]
+          }
+        }
+      }.deep_stringify_keys
+    end
+
+    before do
+      allow_any_instance_of(ElasticClient).to receive(:connected?).and_return(true)
+      allow_any_instance_of(ElasticClient).to receive(:establish_connection)
+      allow_any_instance_of(ElasticClient).to receive(:search).and_return(nil)
+      allow_any_instance_of(ElasticClient).to receive(:success?).and_return(true)
+
+      allow_any_instance_of(described_class).to receive(:raw_endpoints).and_return([unknwon_endpoint])
+    end
+
+    its(:success?) { is_expected.to be_truthy }
+
+    it 'size' do
+      expect(results.size).to equal(0)
+    end
+  end
 end

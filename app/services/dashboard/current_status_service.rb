@@ -33,7 +33,9 @@ class Dashboard::CurrentStatusService
 
   def process_raw_response
     raw_endpoints.each do |raw_endpoint|
-      @raw_results << json_from_raw_endpoint(raw_endpoint)
+      source = raw_endpoint.dig('agg_by_endpoint', 'hits', 'hits').first['_source']
+      call_result = CallResult.new(source, @endpoint_factory)
+      @raw_results << json_from_raw_endpoint(call_result) if call_result.valid?
     end
   end
 
@@ -41,16 +43,14 @@ class Dashboard::CurrentStatusService
     @client.raw_response.dig('aggregations', 'group_by_controller', 'buckets')
   end
 
-  def json_from_raw_endpoint(raw_endpoint)
-    source = raw_endpoint.dig('agg_by_endpoint', 'hits', 'hits').first['_source']
-    endpoint_ping = CallResult.new(source, @endpoint_factory)
+  def json_from_raw_endpoint(call_result)
     {
-      uname: endpoint_ping.uname,
-      name: endpoint_ping.name,
-      provider: endpoint_ping.provider,
-      api_version: endpoint_ping.api_version,
-      code: endpoint_ping.code,
-      timestamp: endpoint_ping.timestamp
+      uname: call_result.uname,
+      name: call_result.name,
+      provider: call_result.provider,
+      api_version: call_result.api_version,
+      code: call_result.code,
+      timestamp: call_result.timestamp
     }
   end
 end
