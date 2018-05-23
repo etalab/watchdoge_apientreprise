@@ -19,8 +19,8 @@ class Dashboard::PingHistoryAggregator
 
   def parse_raw_data_into_sources
     @raw_data.each do |data|
-      elk_source = CallResult.new(data['_source'], @endpoint_factory)
-      @elk_sources << elk_source
+      call_result = CallResult.new(data['_source'], @endpoint_factory)
+      @elk_sources << call_result if call_result.valid?
     end
 
     @raw_data.clear # 15Mo here...

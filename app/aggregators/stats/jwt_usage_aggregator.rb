@@ -10,6 +10,7 @@ class Stats::JwtUsageAggregator
   def aggregate
     @raw_data.each do |data|
       call = CallResult.new(data['_source'], @endpoint_factory)
+      next unless call.valid?
       @call_counter_aggregator.aggregate(call)
       @http_code_percentages_aggregator.aggregate(call)
       @last_calls.add(call)

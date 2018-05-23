@@ -17,6 +17,10 @@ class CallResult
     @fallback_used = source.dig('response', 'fallback_used')
   end
 
+  def valid?
+    !endpoint.nil?
+  end
+
   def as_json
     {
       uname: endpoint.uname,
