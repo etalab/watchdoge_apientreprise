@@ -49,7 +49,7 @@ describe Dashboard::CurrentStatusService, type: :service do
                 '@timestamp': '2018-05-22T16 : 45 : 03.543Z',
                 status: 500
               },
-              sort: [1527007503543]
+              sort: [1_527_007_503_543]
             }]
           }
         }
