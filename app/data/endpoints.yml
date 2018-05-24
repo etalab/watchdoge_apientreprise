@@ -25,6 +25,14 @@
   ping_period: 5
   http_path: '/documentation'
 
+- uname: apie_2_bilans_entreprises_bdf
+  name: Bilans Entreprises Banque de France
+  provider: bdf
+  api_name: apie
+  api_version: 2
+  ping_period: 60
+  http_path: '/v2/bilans_entreprises_bdf/552032534'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_etablissements_predecesseur
   name: Etablissements Prédécesseur
