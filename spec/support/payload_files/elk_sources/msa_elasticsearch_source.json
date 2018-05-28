@@ -1,5 +1,5 @@
 {
-  "controller": "api/v1/msa/cotisations",
+  "controller": "api/v2/cotisations_msa",
   "geoip": {
     "timezone": "Europe/Paris",
     "ip": "217.182.164.215",
@@ -17,32 +17,35 @@
   "method": "GET",
   "ip": "217.182.164.215",
   "format": "*/*",
-  "source": "siade_production1",
+  "source": "siade_production_production2.entreprise.api.gouv.fr",
+  "api_version": "v2",
   "type": "siade",
   "tags": [
     "request"
   ],
-  "duration": 19.66,
-  "path": "/v1/msa/cotisations/81104725700019",
-  "view": 0.33,
-  "route": "api/v1/msa/cotisations#show",
-  "@timestamp": "2017-12-03T18:00:02.962Z",
+  "duration": 1677.95,
+  "path": "/v2/cotisations_msa/81104725700019",
+  "view": 0.11,
+  "route": "api/v2/cotisations_msa#show",
+  "@timestamp": "2018-05-27T16:00:05.771Z",
+  "domain": "gouv.fr",
   "user_access": {
     "access": "allow",
-    "demarche": "MPS",
     "resource": "msa_cotisations",
-    "user": "tech@apientreprise.fr"
+    "user": "f5d5cb02-185a-426f-b3f4-99a25ce6cdf4",
+    "jti": "47260a7e-9918-464e-b7da-36c5c6847d8a"
   },
   "@version": "1",
-  "host": "production1",
+  "host": "production2",
   "action": "show",
-  "request_id": "91af1cf4-ce38-4d97-aaa2-008f92411db7",
+  "request_id": "35818a93-e865-4b58-9d1c-b9a8850f698d",
   "parameters": {
     "context": "Ping",
     "recipient": "SGMAP",
     "siret": "81104725700019",
+    "object": "Watchdoge",
     "token": "[FILTERED]"
   },
-  "db": 5.93,
+  "db": 0,
   "status": 200
 }

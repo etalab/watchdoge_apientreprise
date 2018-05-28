@@ -69,13 +69,13 @@ describe Tools::EndpointDatabaseFiller do
       subject(:probtp) { endpoints.second }
 
       it { is_expected.to be_valid }
-      its(:uname) { is_expected.to eq('apie_1_eligibilites_cotisation_retraite_probtp') }
+      its(:uname) { is_expected.to eq('apie_2_eligibilites_cotisation_retraite_probtp') }
       its(:name) { is_expected.to eq('Eligibilité cotisations retraite ProBTP') }
       its(:api_name) { is_expected.to eq('apie') }
-      its(:api_version) { is_expected.to eq(1) }
+      its(:api_version) { is_expected.to eq(2) }
       its(:provider) { is_expected.to eq('probtp') }
       its(:ping_period) { is_expected.to eq(5) }
-      its(:http_path) { is_expected.to eq('/v1/eligibilites_cotisation_retraite_probtp/73582032600040') }
+      its(:http_path) { is_expected.to eq('/v2/eligibilites_cotisation_retraite_probtp/73582032600040') }
 
       it 'has a correct http_query' do
         expect(JSON.parse(probtp.http_query)).to include_json(context: 'Ping', recipient: 'SGMAP')
