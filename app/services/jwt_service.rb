@@ -1,4 +1,4 @@
-class JwtTokenService
+class JwtService
   include ActiveModel::Model
 
   attr_accessor :jwt

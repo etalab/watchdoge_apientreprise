@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe JwtTokenService do
+describe JwtService do
   subject(:helper) { described_class.new(jwt: jwt) }
 
   context 'when created with a valid jwt' do

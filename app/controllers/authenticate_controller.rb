@@ -34,7 +34,7 @@ class AuthenticateController < ApplicationController
   end
 
   def jwt
-    @jwt ||= JwtTokenService.new(jwt: @raw_jwt)
+    @jwt ||= JwtService.new(jwt: @raw_jwt)
   end
 
   def retrieve_jwt_from_headers

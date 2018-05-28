@@ -60,7 +60,7 @@ describe AuthenticateController do
 
     context 'with a invalid jwt' do
       let(:forged_jwt) { JwtHelper.jwt(:forged) }
-      let(:user) { JwtTokenService.new(jwt: forged_jwt).jwt_user }
+      let(:user) { JwtService.new(jwt: forged_jwt).jwt_user }
       let(:token) { forged_jwt }
 
       it 'reutrns 401' do
@@ -71,7 +71,7 @@ describe AuthenticateController do
 
     context 'with a incorrect jwt' do
       let(:corrupted_jwt) { JwtHelper.jwt(:corrupted) }
-      let(:user) { JwtTokenService.new(jwt: corrupted_jwt).jwt_user }
+      let(:user) { JwtService.new(jwt: corrupted_jwt).jwt_user }
       let(:token) { corrupted_jwt }
 
       it 'returns 401' do
