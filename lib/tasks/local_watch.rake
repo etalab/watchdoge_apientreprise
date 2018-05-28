@@ -27,7 +27,9 @@ namespace :watch do
   def print_console_infos(endpoint)
     url = ENV['DEBUG'] ? "(url: #{endpoint.uri})" : ''
     puts "#{endpoint.uname.blue} is #{status(endpoint)} (#{endpoint.http_response.code}) #{url}" if %w[development sandbox staging production].include? Rails.env
+  # rubocop:disable Style/RescueStandardError
   rescue
+    # rubocop:enable Style/RescueStandardError
     puts "#{endpoint.uname.red} failed"
   end
 
