@@ -8,6 +8,7 @@ namespace :watch do
     puts "URLs: #{Rails.application.config_for(:secrets)['apie_base_uri_new']} & #{Rails.application.config_for(:secrets)['apie_base_uri_old']}"
     Endpoint.all.each do |endpoint|
       # TODO: REMOVE THIS !!!
+      next if endpoint.api_version == 1
       next if endpoint.uname == 'sirene_1_homepage'
       endpoint.http_response
       print_console_infos endpoint
@@ -25,7 +26,9 @@ namespace :watch do
 
   def print_console_infos(endpoint)
     url = ENV['DEBUG'] ? "(url: #{endpoint.uri})" : ''
-    puts "#{endpoint.uname.blue} is #{status(endpoint)} #{url}" if %w[development sandbox staging production].include? Rails.env
+    puts "#{endpoint.uname.blue} is #{status(endpoint)} (#{endpoint.http_response.code}) #{url}" if %w[development sandbox staging production].include? Rails.env
+  rescue
+    puts "#{endpoint.uname.red} failed"
   end
 
   def status(endpoint)
