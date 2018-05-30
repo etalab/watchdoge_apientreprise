@@ -66,7 +66,10 @@ Metrics/BlockLength:
   Enabled: false
 
 RSpec/MultipleExpectations:
-     Max: 5
+  Max: 5
+
+RSpec/NestedGroups:
+  Max: 4
 
 RSpec/AnyInstance:
   Enabled: false
