@@ -2,10 +2,6 @@ def endpoints_count
   YAML.load_file('app/data/endpoints.yml').count
 end
 
-def valid_jti
-  '47260a7e-9918-464e-b7da-36c5c6847d8a' # watchdoge JTI
-end
-
 def sorted_fake_calls(size: 10, oldest_timestamp: 8.days)
   endpoint_factory = EndpointFactory.new
   fake_calls = []

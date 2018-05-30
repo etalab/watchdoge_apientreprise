@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Stats::JwtUsageService, type: :service, vcr: { cassette_name: 'stats/jwt_usage' } do
-  subject(:service) { described_class.new(jti: valid_jti).perform }
+describe Stats::JwtUsageService, type: :service, vcr: { cassette_name: 'non_regenerable/jwt_usage' } do
+  subject(:service) { described_class.new(jti: JwtHelper.valid_jti).perform }
 
   describe 'e2e service' do
     its(:success?) { is_expected.to be_truthy }
@@ -24,5 +24,5 @@ describe Stats::JwtUsageService, type: :service, vcr: { cassette_name: 'stats/jw
     its(:results) { is_expected.to match_json_schema('stats/jwt_usage') }
   end
 
-  it_behaves_like 'elk invalid query', jti: valid_jti
+  it_behaves_like 'elk invalid query', jti: JwtHelper.valid_jti
 end

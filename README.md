@@ -62,3 +62,14 @@ Watchdoge use `whenever` to perform periodic pings. Mina updates cronotab on dep
 Run:
 
 `rspec`
+
+### Regenerate VCR cassettes
+`jwt_usage` cassettes are quite hard to regen.
+
+*TL;DR*
+
+1. go to `spec/support/jwt_helper.rb` and replace valid jwt with production watchdoge value
+2. delete `spec/cassettes/non_regenerable/jwt_usage.yml`
+3. run `rspec spec/controllers/jwt_usage_controller_spec.rb`
+4. revert changes in `spec/support/jwt_helper.rb`
+5. re-run the tests it should work.

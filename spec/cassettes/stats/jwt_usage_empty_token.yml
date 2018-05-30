@@ -27,14 +27,14 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
-    http_version: 
+    http_version:
   recorded_at: Sun, 29 Apr 2018 18:09:48 GMT
 - request:
     method: get
     uri: http://217.182.164.215:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":10000,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d/d","lte":"now/d"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"sort":[{"@timestamp":{"order":"desc"}}]}'
+      string: '{"size":10000,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d/d","lte":"now/d"}}},{"term":{"user_access.jti.keyword":{"value":"a40b2c1f-19aa-48df-8bb3-c5a316cae2f8"}}}]}},"sort":[{"@timestamp":{"order":"desc"}}]}'
     headers:
       Content-Type:
       - application/json
@@ -58,6 +58,6 @@ http_interactions:
       string: '{"took":1552,"timed_out":false,"num_reduce_phases":3,"_shards":{"total":1141,"successful":1135,"failed":6,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
         mapping found for [@timestamp] in order to sort on","index_uuid":"3tDGuNozQ5iYSmmUqklytw","index":".kibana"}},{"shard":0,"index":"my_index","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
         mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}}]},"hits":{"total":0,"max_score":null,"hits":[]}}'
-    http_version: 
+    http_version:
   recorded_at: Sun, 29 Apr 2018 18:09:50 GMT
 recorded_with: VCR 4.0.0

@@ -1,57 +1,86 @@
 require 'rails_helper'
 
 describe StatsController, type: :controller do
-  context 'with admin_jwt_usage action' do
-    subject { get :admin_jwt_usage, params: { jti: jti } }
-
-    before { request.headers['Authorization'] = "Bearer #{JwtHelper.jwt(:valid)}" }
-
-    describe 'happy path (e2e spec)', vcr: { cassette_name: 'stats/jwt_usage' } do
-      let(:jti) { valid_jti }
-
-      its(:status) { is_expected.to eq(200) }
-      its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
-    end
-
-    describe 'when having an error', vcr: { cassette_name: 'stats/jwt_usage' } do
-      let(:jti) { valid_jti }
-
-      before { allow_any_instance_of(Stats::JwtUsageService).to receive(:success?).and_return(false) }
-
-      its(:status) { is_expected.to eq(500) }
-    end
-  end
-
   context 'with jwt_usage action' do
-    subject { get :jwt_usage }
+    subject { get :jwt_usage, params: { jwt: jwt_api } }
 
-    before do
-      request.headers['Authorization'] = "Bearer #{JwtHelper.jwt(:valid)}"
+    before { request.headers['Authorization'] = "Bearer #{jwt_session}" }
 
-      # TODO: remove. Update watchdoge jwt to add jwt_statistics role
-      allow_any_instance_of(JwtUser).to receive(:jti).and_return jti
-    end
+    context 'when jwt API & session are from the same user/UID' do
+      # same UID
+      let(:jwt_api)     { JwtHelper.api(:valid) }
+      let(:jwt_session) { JwtHelper.session(:valid) }
 
-    describe 'happy path (e2e spec)', vcr: { cassette_name: 'stats/jwt_usage' } do
-      let(:jti) { valid_jti }
+      describe 'happy path (e2e spec)', vcr: { cassette_name: 'non_regenerable/jwt_usage' } do
+        its(:status) { is_expected.to eq(200) }
+        its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
+      end
 
-      its(:status) { is_expected.to eq(200) }
-      its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
-    end
+      describe 'when having an error', vcr: { cassette_name: 'non_regenerable/jwt_usage' } do
+        before { allow_any_instance_of(Stats::JwtUsageService).to receive(:success?).and_return(false) }
 
-    describe 'when having an error', vcr: { cassette_name: 'stats/jwt_usage' } do
-      let(:jti) { valid_jti }
-
-      before { allow_any_instance_of(Stats::JwtUsageService).to receive(:success?).and_return(false) }
-
-      its(:status) { is_expected.to eq(500) }
+        its(:status) { is_expected.to eq(500) }
+      end
     end
 
     describe 'when token returns 0 results', vcr: { cassette_name: 'stats/jwt_usage_empty_token' } do
-      let(:jti) { 'it_has_0_data' }
+      let(:jwt_api)     { JwtHelper.api(:valid) }
+      let(:jwt_session) { JwtHelper.session(:valid) }
+
+      before do
+        allow_any_instance_of(described_class).to receive(:valid_jwt?).and_return(true)
+        allow_any_instance_of(described_class).to receive(:jwt_of_user?).and_return(true)
+      end
 
       its(:status) { is_expected.to eq(200) }
       its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
+    end
+
+    context 'when JWT API & session are from a different user/UID' do
+      describe 'when jwt_session is admin', vcr: { cassette_name: 'non_regenerable/jwt_usage' } do
+        let(:jwt_api)     { JwtHelper.api(:valid) }
+        let(:jwt_session) { JwtHelper.session(:admin) }
+
+        its(:status) { is_expected.to eq(200) }
+        its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
+      end
+
+      describe 'when jwt_session is NOT admin', vcr: { cassette_name: 'non_regenerable/jwt_usage' } do
+        let(:jwt_api)     { JwtHelper.api(:another_valid) }
+        let(:jwt_session) { JwtHelper.session(:valid) }
+
+        its(:status) { is_expected.to eq(403) }
+        its(:body) { is_expected.to include_json(message: 'Cannot display someone else jwt usage without being an admin') }
+      end
+    end
+
+    context 'when jwt param is BAD' do
+      let(:jwt_session) { JwtHelper.session(:valid) }
+
+      shared_examples 'invalid jwt param' do |jwt|
+        let(:jwt_api) { jwt }
+
+        its(:status) { is_expected.to eq(422) }
+        its(:body)   { is_expected.to include_json(message: 'invalid jwt param') }
+      end
+
+      it_behaves_like 'invalid jwt param', 'invalid.jwt.param'
+      it_behaves_like 'invalid jwt param', JwtHelper.api(:corrupted)
+      it_behaves_like 'invalid jwt param', JwtHelper.api(:forged)
+
+      describe 'when it is corrupted' do
+        let(:jwt_api) { JwtHelper.api(:corrupted) }
+
+        its(:status) { is_expected.to eq(422) }
+        its(:body) { is_expected.to include_json(message: 'invalid jwt param') }
+      end
+
+      describe 'when it is forged' do
+        let(:jwt_api) { JwtHelper.api(:forged) }
+
+        its(:status) { is_expected.to eq(422) }
+        its(:body) { is_expected.to include_json(message: 'invalid jwt param') }
+      end
     end
   end
 

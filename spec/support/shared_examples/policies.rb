@@ -1,23 +1,27 @@
-shared_examples 'jwt policy' do |role, action = :show?|
+shared_examples 'jwt policy' do |action = :show?|
   subject(:policy) { described_class }
 
-  let(:jwt_user) { JwtUser.new(payload) }
+  let(:jwt_user) { JwtSessionUser.new(payload) }
   let(:payload) do
     {
-      uid: 'db398baf-80c1-4d70-a2ce-87f5a097d636',
-      jti: '96b35b36-38f3-436a-99a7-20dc6a88ab4d',
-      roles: %w[rol1 rol2]
+      uid: '1e0f21cf-0d47-4594-89ae-172d0ac4001e',
+      grants: [],
+      iat: 1_527_501_306,
+      exp: 1_527_515_706
     }
   end
 
+  let(:wrong_jwt_user) { JwtSessionUser.new(wrong_payload: 'nope') }
+
   permissions action do
     it 'authorizes a user with granted access' do
-      payload.fetch(:roles).push(role.to_s)
+      payload[:admin] = true
       expect(policy).to permit(jwt_user)
     end
 
-    it 'denies an unauthorized user' do
-      expect(policy).not_to permit(jwt_user)
-    end
+# There is no right for the momoent, pundit is overkill here
+#    it 'denies an unauthorized user' do
+#      expect(policy).not_to permit(wrong_jwt_user)
+#    end
   end
 end

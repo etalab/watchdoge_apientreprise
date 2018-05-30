@@ -8,11 +8,13 @@ class AuthenticateController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_allowed
   rescue_from UnauthorizedError, with: :user_not_authorized
 
-  private
+  protected
 
   def user
     pundit_user
   end
+
+  private
 
   def pundit_user
     @raw_jwt = retrieve_jwt_from_headers
