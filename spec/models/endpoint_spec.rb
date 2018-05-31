@@ -32,14 +32,6 @@ describe Endpoint, type: :model do
   # End: real testing
 
   describe 'url is always good' do
-    it 'is an apie v1 endpoint' do
-      ep = create(:endpoint, api_name: 'apie', api_version: 1, http_path: '/v1/toto/SIREN')
-      expect(ep.uri.scheme).to eq('https')
-      expect(ep.uri.host).to match(/apientreprise.fr/)
-      expect(ep.uri.path).to eq('/v1/toto/SIREN')
-      expect(ep.uri.query).to match(/token=.+/)
-    end
-
     it 'is an apie v2 endpoint' do
       ep = create(:endpoint, api_name: 'apie', api_version: 2, http_path: '/v2/toto/SIREN')
       expect(ep.uri.scheme).to eq('https')
