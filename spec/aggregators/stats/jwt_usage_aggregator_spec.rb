@@ -22,13 +22,14 @@ describe Stats::JwtUsageAggregator do
     end
   end
 
-  context 'with valid data', vcr: { cassette_name: 'non_regenerable/jwt_usage' } do
+  context 'with valid data', vcr: { cassette_name: 'stats/jwt_usage' } do
     # rubocop:disable RSpec/InstanceVariable
     subject(:jwt_usage_aggregator) { @jwt_usage_aggregator }
 
     # rubocop:enable RSpec/InstanceVariable
 
     before do
+      stub_jwt_usage_request
       # CANT USE VCR WITHOUT MOCKING THE START DATE EVERYWHERE !!!!!
       allow(Time.zone).to receive(:now).and_return(Time.zone.parse('2018-03-14 15:15:49 +0100'))
 

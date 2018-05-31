@@ -64,12 +64,9 @@ Run:
 `rspec`
 
 ### Regenerate VCR cassettes
-`jwt_usage` cassettes are quite hard to regen.
+`jwt_usage` cassettes are quite hard to regen because we need real jwt and production jwt_secret... You should open the payload of watchdoge securly *WITHOUT* an online tool. Or remove the last part of the jwt which is *our* signature !
 
-*TL;DR*
+So workaround :
 
-1. go to `spec/support/jwt_helper.rb` and replace valid jwt with production watchdoge value
-2. delete `spec/cassettes/non_regenerable/jwt_usage.yml`
-3. run `rspec spec/controllers/jwt_usage_controller_spec.rb`
-4. revert changes in `spec/support/jwt_helper.rb`
-5. re-run the tests it should work.
+1. Run in Kibana dev env the request located in `app/data/queries/jwt_usage.json.erb` (while replacing  `<%= jti %>` with Watchdoge *JTI* of the JWT)
+2. c/p the result in the file `spec/support/payload_files/jwt_usage_elk_response.json`

@@ -11,13 +11,18 @@ describe StatsController, type: :controller do
       let(:jwt_api)     { JwtHelper.api(:valid) }
       let(:jwt_session) { JwtHelper.session(:valid) }
 
-      describe 'happy path (e2e spec)', vcr: { cassette_name: 'non_regenerable/jwt_usage' } do
+      describe 'happy path (e2e spec)', vcr: { cassette_name: 'stats/jwt_usage' } do
+        before { stub_jwt_usage_request }
+
         its(:status) { is_expected.to eq(200) }
         its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
       end
 
-      describe 'when having an error', vcr: { cassette_name: 'non_regenerable/jwt_usage' } do
-        before { allow_any_instance_of(Stats::JwtUsageService).to receive(:success?).and_return(false) }
+      describe 'when having an error', vcr: { cassette_name: 'stats/jwt_usage' } do
+        before do
+          stub_jwt_usage_request
+          allow_any_instance_of(Stats::JwtUsageService).to receive(:success?).and_return(false)
+        end
 
         its(:status) { is_expected.to eq(500) }
       end
@@ -37,15 +42,17 @@ describe StatsController, type: :controller do
     end
 
     context 'when JWT API & session are from a different user/UID' do
-      describe 'when jwt_session is admin', vcr: { cassette_name: 'non_regenerable/jwt_usage' } do
+      describe 'when jwt_session is admin', vcr: { cassette_name: 'stats/jwt_usage' } do
         let(:jwt_api)     { JwtHelper.api(:valid) }
         let(:jwt_session) { JwtHelper.session(:admin) }
+
+        before { stub_jwt_usage_request }
 
         its(:status) { is_expected.to eq(200) }
         its(:body) { is_expected.to match_json_schema('stats/jwt_usage') }
       end
 
-      describe 'when jwt_session is NOT admin', vcr: { cassette_name: 'non_regenerable/jwt_usage' } do
+      describe 'when jwt_session is NOT admin', vcr: { cassette_name: 'stats/jwt_usage' } do
         let(:jwt_api)     { JwtHelper.api(:another_valid) }
         let(:jwt_session) { JwtHelper.session(:valid) }
 
