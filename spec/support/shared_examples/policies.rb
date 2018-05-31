@@ -19,9 +19,9 @@ shared_examples 'jwt policy' do |action = :show?|
       expect(policy).to permit(jwt_user)
     end
 
-# There is no right for the momoent, pundit is overkill here
-#    it 'denies an unauthorized user' do
-#      expect(policy).not_to permit(wrong_jwt_user)
-#    end
+    # There is no right for the momoent, pundit is overkill here
+    # it 'denies an unauthorized user' do
+    #  expect(policy).not_to permit(wrong_jwt_user)
+    # end
   end
 end
