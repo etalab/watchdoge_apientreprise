@@ -28,7 +28,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Fri, 30 Mar 2018 13:27:28 GMT
+  recorded_at: Thu, 31 May 2018 12:26:10 GMT
 - request:
     method: get
     uri: http://217.182.164.215:9200/_count
@@ -106,7 +106,11 @@ http_interactions:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"count":1613113,"_shards":{"total":991,"successful":991,"failed":0}}'
+      string: '{"count":1772780,"_shards":{"total":1301,"successful":1300,"failed":1,"failures":[{"shard":4,"index":"logstash-2018.04.26","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@6c1bb2ab on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@61f7434e[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 1030509]]"}}]}}'
     http_version: 
-  recorded_at: Fri, 30 Mar 2018 13:27:28 GMT
+  recorded_at: Thu, 31 May 2018 12:26:13 GMT
 recorded_with: VCR 4.0.0
