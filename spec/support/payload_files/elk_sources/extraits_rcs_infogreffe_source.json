@@ -1,5 +1,5 @@
 {
-  "controller": "api/v1/infogreffe/extraits_rcs",
+  "controller": "api/v2/extraits_rcs_infogreffe",
   "geoip": {
     "timezone": "Europe/Paris",
     "ip": "217.182.164.215",
@@ -17,34 +17,35 @@
   "method": "GET",
   "ip": "217.182.164.215",
   "format": "*/*",
-  "source": "siade_production1",
+  "source": "siade_production_production2.entreprise.api.gouv.fr",
+  "api_version": "v2",
   "type": "siade",
-  "api_version": "v1",
   "tags": [
     "request"
   ],
-  "duration": 726.42,
-  "path": "/v1/infogreffe/extraits_rcs/418166096",
-  "view": 0.54,
-  "route": "api/v1/infogreffe/extraits_rcs#show",
-  "@timestamp": "2018-01-03T00:01:15.418Z",
-  "domain": "apientreprise.fr",
+  "duration": 4377.88,
+  "path": "/v2/extraits_rcs_infogreffe/418166096",
+  "view": 0.57,
+  "route": "api/v2/extraits_rcs_infogreffe#show",
+  "@timestamp": "2018-05-27T16:00:08.830Z",
+  "domain": "gouv.fr",
   "user_access": {
     "access": "allow",
-    "demarche": "MPS",
     "resource": "extraits_rcs",
-    "user": "tech@apientreprise.fr"
+    "user": "f5d5cb02-185a-426f-b3f4-99a25ce6cdf4",
+    "jti": "47260a7e-9918-464e-b7da-36c5c6847d8a"
   },
   "@version": "1",
-  "host": "production1",
+  "host": "production2",
   "action": "show",
-  "request_id": "af9bb37b-48eb-40fc-96df-9274f3e64d43",
+  "request_id": "c3526805-3d90-4ebb-bcaf-9742e4c0366e",
   "parameters": {
     "siren": "418166096",
     "context": "Ping",
     "recipient": "SGMAP",
+    "object": "Watchdoge",
     "token": "[FILTERED]"
   },
-  "db": 2.02,
+  "db": 0,
   "status": 200
 }
