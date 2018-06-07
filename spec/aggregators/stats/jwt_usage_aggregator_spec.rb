@@ -29,11 +29,12 @@ describe Stats::JwtUsageAggregator do
     # rubocop:enable RSpec/InstanceVariable
 
     before do
+      stub_jwt_usage_request
       # CANT USE VCR WITHOUT MOCKING THE START DATE EVERYWHERE !!!!!
       allow(Time.zone).to receive(:now).and_return(Time.zone.parse('2018-03-14 15:15:49 +0100'))
 
       remember_through_tests('jwt_usage_aggregator') do
-        service = Stats::JwtUsageService.new(jti: valid_jti)
+        service = Stats::JwtUsageService.new(jti: JwtHelper.valid_jti)
         service.send(:retrieve_all_jwt_usage)
         raw_data = service.send(:hits)
         described_class.new(raw_data: raw_data).tap(&:aggregate)

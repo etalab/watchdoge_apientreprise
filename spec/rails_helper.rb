@@ -10,6 +10,7 @@ require 'support/factory_bot'
 require 'vcr_helper'
 require 'sidekiq/testing'
 require 'simplecov'
+require 'webmock/rspec'
 
 SimpleCov.start
 

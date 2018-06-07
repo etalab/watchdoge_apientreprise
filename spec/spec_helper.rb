@@ -14,6 +14,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+require 'pundit/rspec'
+
 RSpec.configure do |config|
   # Include support functions
   Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }

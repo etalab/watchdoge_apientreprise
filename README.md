@@ -62,3 +62,11 @@ Watchdoge use `whenever` to perform periodic pings. Mina updates cronotab on dep
 Run:
 
 `rspec`
+
+### Regenerate VCR cassettes
+`jwt_usage` cassettes are quite hard to regen because we need real jwt and production jwt_secret... You should open the payload of watchdoge securly *WITHOUT* an online tool. Or remove the last part of the jwt which is *our* signature !
+
+So workaround :
+
+1. Run in Kibana dev env the request located in `app/data/queries/jwt_usage.json.erb` (while replacing  `<%= jti %>` with Watchdoge *JTI* of the JWT)
+2. c/p the result in the file `spec/support/payload_files/jwt_usage_elk_response.json`

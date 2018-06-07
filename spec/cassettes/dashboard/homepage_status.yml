@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v0.13.1
+      - Faraday v0.14.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -28,7 +28,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Tue, 05 Dec 2017 16:10:20 GMT
+  recorded_at: Thu, 31 May 2018 12:26:07 GMT
 - request:
     method: get
     uri: http://217.182.164.215:9200/_search
@@ -67,7 +67,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v0.13.1
+      - Faraday v0.14.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -83,10 +83,22 @@ http_interactions:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"took":11,"timed_out":false,"_shards":{"total":416,"successful":410,"failed":6,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+      string: '{"took":49,"timed_out":false,"num_reduce_phases":3,"_shards":{"total":1301,"successful":1292,"failed":9,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
         mapping found for [@timestamp] in order to sort on","index_uuid":"3tDGuNozQ5iYSmmUqklytw","index":".kibana"}},{"shard":0,"index":"my_index","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
-        mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}}]},"hits":{"total":23620,"max_score":null,"hits":[{"_index":"logstash-2017.12.05","_type":"siade","_id":"AWAnbcv6z_-J--ddy-uy","_score":null,"_source":{"controller":"www","geoip":{"timezone":"America/Chicago","ip":"69.162.124.237","latitude":32.7791,"continent_code":"NA","city_name":"Dallas","country_name":"United
-        States","country_code2":"US","dma_code":623,"country_code3":"US","region_name":"Texas","location":{"lon":-96.8028,"lat":32.7791},"postal_code":"75202","region_code":"TX","longitude":-96.8028},"method":"HEAD","ip":"69.162.124.237","format":"html","source":"siade_production1","type":"siade","tags":["request"],"duration":6.06,"path":"/","view":5.32,"route":"www#index","@timestamp":"2017-12-05T16:06:33.659Z","@version":"1","host":"production1","action":"index","request_id":"c1183389-86c2-4c73-8a5c-b2b373f7c2d7","parameters":{},"db":0.0,"status":200},"sort":[1512489993659]}]}}'
+        mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}},{"shard":3,"index":"logstash-2018.05.07","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@31e36fbd on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@61f7434e[Running,
+        pool size = 13, active threads = 5, queued tasks = 1000, completed tasks =
+        1027665]]"}},{"shard":4,"index":"logstash-2017.10.01","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@731b5165 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@61f7434e[Running,
+        pool size = 13, active threads = 5, queued tasks = 999, completed tasks =
+        1027707]]"}},{"shard":4,"index":"logstash-2017.11.06","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5c4aadb5 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@61f7434e[Running,
+        pool size = 13, active threads = 5, queued tasks = 1000, completed tasks =
+        1027741]]"}}]},"hits":{"total":62304,"max_score":null,"hits":[{"_index":"logstash-2018.05.31","_type":"siade","_id":"AWO2I66Wv_fVFVJ-xfxU","_score":null,"_source":{"controller":"www","geoip":{"timezone":"America/Chicago","ip":"69.162.124.237","latitude":32.7791,"continent_code":"NA","city_name":"Dallas","country_name":"United
+        States","country_code2":"US","dma_code":623,"country_code3":"US","region_name":"Texas","location":{"lon":-96.8028,"lat":32.7791},"postal_code":"75202","region_code":"TX","longitude":-96.8028},"method":"HEAD","ip":"69.162.124.237","format":"html","source":"siade_production2","type":"siade","tags":["request"],"duration":5.21,"path":"/","view":4.43,"route":"www#index","@timestamp":"2018-05-31T12:19:41.004Z","domain":"apientreprise.fr","@version":"1","host":"production2","action":"index","request_id":"0fe1aa01-c770-4961-ae47-9c42d5bf3fe8","parameters":{},"db":0.0,"status":200},"sort":[1527769181004]}]}}'
     http_version: 
-  recorded_at: Tue, 05 Dec 2017 16:10:20 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 31 May 2018 12:26:07 GMT
+recorded_with: VCR 4.0.0
