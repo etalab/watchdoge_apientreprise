@@ -28,7 +28,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Tue, 22 May 2018 17:34:27 GMT
+  recorded_at: Fri, 08 Jun 2018 11:07:41 GMT
 - request:
     method: get
     uri: http://217.182.164.215:9200/_search
@@ -65,7 +65,6 @@ http_interactions:
                 {
                   "terms": {
                     "controller.keyword": [
-                      "api/v1/ping",
                       "api/v2/ping"
                     ]
                   }
@@ -81,7 +80,7 @@ http_interactions:
           "aggs": {
             "group_by_controller": {
               "terms": {
-                "field": "path.keyword",
+                "field": "route.keyword",
                 "size": 100
               },
               "aggs": {
@@ -128,13 +127,681 @@ http_interactions:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"took":48,"timed_out":false,"num_reduce_phases":3,"_shards":{"total":1256,"successful":1249,"failed":7,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+      string: '{"took":3382,"timed_out":false,"num_reduce_phases":3,"_shards":{"total":1341,"successful":1167,"failed":174,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
         mapping found for [@timestamp] in order to sort on","index_uuid":"3tDGuNozQ5iYSmmUqklytw","index":".kibana"}},{"shard":0,"index":"my_index","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
-        mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}},{"shard":4,"index":"logstash-2017.09.20","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
-        execution of org.elasticsearch.transport.TransportService$7@7d484b79 on EsThreadPoolExecutor[search,
-        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@5cb9c7b6[Running,
-        pool size = 13, active threads = 4, queued tasks = 1000, completed tasks =
-        3088285]]"}}]},"hits":{"total":4214,"max_score":0.0,"hits":[]},"aggregations":{"group_by_controller":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":"/v2/etablissements_legacy/41816609600069","doc_count":508,"agg_by_endpoint":{"hits":{"total":508,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOI5pi_y-__1jNGzTF-","_score":null,"_source":{"path":"/v2/etablissements_legacy/41816609600069","@timestamp":"2018-05-22T17:30:03.750Z","status":200},"sort":[1527010203750]}]}}},{"key":"/v2/etablissements/41816609600069","doc_count":506,"agg_by_endpoint":{"hits":{"total":506,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOI5pi1y-__1jNGzTF9","_score":null,"_source":{"path":"/v2/etablissements/41816609600069","@timestamp":"2018-05-22T17:30:03.425Z","status":200},"sort":[1527010203425]}]}}},{"key":"/v2/certificats_qualibat/33592022900036","doc_count":501,"agg_by_endpoint":{"hits":{"total":501,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOI5wBoy-__1jNGzTGZ","_score":null,"_source":{"path":"/v2/certificats_qualibat/33592022900036","@timestamp":"2018-05-22T17:30:29.718Z","status":200},"sort":[1527010229718]}]}}},{"key":"/v1/certificats_qualibat/33592022900036","doc_count":497,"agg_by_endpoint":{"hits":{"total":497,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOI5t9Ey-__1jNGzTGR","_score":null,"_source":{"path":"/v1/certificats_qualibat/33592022900036","@timestamp":"2018-05-22T17:30:20.298Z","status":200},"sort":[1527010220298]}]}}},{"key":"/v1/etablissements/41816609600069","doc_count":482,"agg_by_endpoint":{"hits":{"total":482,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOI5pyqy-__1jNGzTF_","_score":null,"_source":{"path":"/v1/etablissements/41816609600069","@timestamp":"2018-05-22T17:30:03.777Z","status":200},"sort":[1527010203777]}]}}},{"key":"/v2/attestations_fiscales_dgfip/552045999","doc_count":201,"agg_by_endpoint":{"hits":{"total":201,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOI5rgXy-__1jNGzTGH","_score":null,"_source":{"path":"/v2/attestations_fiscales_dgfip/552045999","@timestamp":"2018-05-22T17:30:10.827Z","status":200},"sort":[1527010210827]}]}}},{"key":"/v1/attestations_fiscales/552032534","doc_count":166,"agg_by_endpoint":{"hits":{"total":166,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOI5re6y-__1jNGzTGG","_score":null,"_source":{"path":"/v1/attestations_fiscales/552032534","@timestamp":"2018-05-22T17:30:10.410Z","status":200},"sort":[1527010210410]}]}}},{"key":"/v2/cartes_professionnelles_fntp/562077503","doc_count":54,"agg_by_endpoint":{"hits":{"total":54,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy0i5y-__1jNGzSrm","_score":null,"_source":{"path":"/v2/cartes_professionnelles_fntp/562077503","@timestamp":"2018-05-22T17:00:13.770Z","status":200},"sort":[1527008413770]}]}}},{"key":"/v2/entreprises/418166096","doc_count":48,"agg_by_endpoint":{"hits":{"total":48,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyzcUy-__1jNGzSrS","_score":null,"_source":{"path":"/v2/entreprises/418166096","@timestamp":"2018-05-22T17:00:08.763Z","status":200},"sort":[1527008408763]}]}}},{"key":"/v2/entreprises_legacy/418166096","doc_count":45,"agg_by_endpoint":{"hits":{"total":45,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyyWKy-__1jNGzSrQ","_score":null,"_source":{"path":"/v2/entreprises_legacy/418166096","@timestamp":"2018-05-22T17:00:04.435Z","status":200},"sort":[1527008404435]}]}}},{"key":"/v2/etablissements/78414518700133/successeur","doc_count":45,"agg_by_endpoint":{"hits":{"total":45,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyyGzy-__1jNGzSrE","_score":null,"_source":{"path":"/v2/etablissements/78414518700133/successeur","@timestamp":"2018-05-22T17:00:03.106Z","status":200},"sort":[1527008403106]}]}}},{"key":"/v2/associations/W604004799","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy6pvy-__1jNGzSr9","_score":null,"_source":{"path":"/v2/associations/W604004799","@timestamp":"2018-05-22T17:00:38.784Z","status":200},"sort":[1527008438784]}]}}},{"key":"/v2/attestations_agefiph/30247504101933","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyzkgy-__1jNGzSra","_score":null,"_source":{"path":"/v2/attestations_agefiph/30247504101933","@timestamp":"2018-05-22T17:00:09.038Z","status":200},"sort":[1527008409038]}]}}},{"key":"/v2/attestations_cotisation_retraite_probtp/73582032600040","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyzcUy-__1jNGzSrW","_score":null,"_source":{"path":"/v2/attestations_cotisation_retraite_probtp/73582032600040","@timestamp":"2018-05-22T17:00:07.142Z","status":200},"sort":[1527008407142]}]}}},{"key":"/v2/attestations_sociales_acoss/489952457","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy0TQy-__1jNGzSrl","_score":null,"_source":{"path":"/v2/attestations_sociales_acoss/489952457","@timestamp":"2018-05-22T17:00:12.603Z","status":200},"sort":[1527008412603]}]}}},{"key":"/v2/certificats_cnetp/632049128","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyzcUy-__1jNGzSrY","_score":null,"_source":{"path":"/v2/certificats_cnetp/632049128","@timestamp":"2018-05-22T17:00:08.198Z","status":200},"sort":[1527008408198]}]}}},{"key":"/v2/certificats_opqibi/395301641","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyyG8y-__1jNGzSrI","_score":null,"_source":{"path":"/v2/certificats_opqibi/395301641","@timestamp":"2018-05-22T17:00:03.203Z","status":200},"sort":[1527008403203]}]}}},{"key":"/v2/cotisations_msa/81104725700019","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyyHxy-__1jNGzSrK","_score":null,"_source":{"path":"/v2/cotisations_msa/81104725700019","@timestamp":"2018-05-22T17:00:03.606Z","status":500},"sort":[1527008403606]}]}}},{"key":"/v2/documents_associations/77571979202585","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyzcUy-__1jNGzSrX","_score":null,"_source":{"path":"/v2/documents_associations/77571979202585","@timestamp":"2018-05-22T17:00:08.516Z","status":200},"sort":[1527008408516]}]}}},{"key":"/v2/eligibilites_cotisation_retraite_probtp/73582032600040","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyyHxy-__1jNGzSrL","_score":null,"_source":{"path":"/v2/eligibilites_cotisation_retraite_probtp/73582032600040","@timestamp":"2018-05-22T17:00:03.636Z","status":200},"sort":[1527008403636]}]}}},{"key":"/v2/etablissements/41816609600069/predecesseur","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyyGzy-__1jNGzSrG","_score":null,"_source":{"path":"/v2/etablissements/41816609600069/predecesseur","@timestamp":"2018-05-22T17:00:03.112Z","status":200},"sort":[1527008403112]}]}}},{"key":"/v2/exercices/48995245700039","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy65Zy-__1jNGzSr-","_score":null,"_source":{"path":"/v2/exercices/48995245700039","@timestamp":"2018-05-22T17:00:39.037Z","status":200},"sort":[1527008439037]}]}}},{"key":"/v2/extraits_courts_inpi/542065479","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyzk0y-__1jNGzSrc","_score":null,"_source":{"path":"/v2/extraits_courts_inpi/542065479","@timestamp":"2018-05-22T17:00:09.786Z","status":200},"sort":[1527008409786]}]}}},{"key":"/v2/extraits_rcs_infogreffe/418166096","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy90_y-__1jNGzSsH","_score":null,"_source":{"path":"/v2/extraits_rcs_infogreffe/418166096","@timestamp":"2018-05-22T17:00:51.280Z","status":200},"sort":[1527008451280]}]}}},{"key":"/v2/liasses_fiscales_dgfip/2016/complete/301028346","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyyHxy-__1jNGzSrM","_score":null,"_source":{"path":"/v2/liasses_fiscales_dgfip/2016/complete/301028346","@timestamp":"2018-05-22T17:00:03.388Z","status":404},"sort":[1527008403388]}]}}},{"key":"/v2/liasses_fiscales_dgfip/2016/declarations/301028346","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyyHxy-__1jNGzSrO","_score":null,"_source":{"path":"/v2/liasses_fiscales_dgfip/2016/declarations/301028346","@timestamp":"2018-05-22T17:00:03.223Z","status":404},"sort":[1527008403223]}]}}},{"key":"/v2/liasses_fiscales_dgfip/2016/dictionnaire","doc_count":44,"agg_by_endpoint":{"hits":{"total":44,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyyGgy-__1jNGzSrD","_score":null,"_source":{"path":"/v2/liasses_fiscales_dgfip/2016/dictionnaire","@timestamp":"2018-05-22T17:00:03.047Z","status":200},"sort":[1527008403047]}]}}},{"key":"/v1/associations/W604004799","doc_count":42,"agg_by_endpoint":{"hits":{"total":42,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy38qy-__1jNGzSry","_score":null,"_source":{"path":"/v1/associations/W604004799","@timestamp":"2018-05-22T17:00:26.879Z","status":500},"sort":[1527008426879]}]}}},{"key":"/v1/attestations_sociales/489952457","doc_count":42,"agg_by_endpoint":{"hits":{"total":42,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy6Y4y-__1jNGzSr6","_score":null,"_source":{"path":"/v1/attestations_sociales/489952457","@timestamp":"2018-05-22T17:00:36.542Z","status":200},"sort":[1527008436542]}]}}},{"key":"/v1/cnetp/certificat/632049128","doc_count":42,"agg_by_endpoint":{"hits":{"total":42,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy7nmy-__1jNGzSsA","_score":null,"_source":{"path":"/v1/cnetp/certificat/632049128","@timestamp":"2018-05-22T17:00:42.004Z","status":200},"sort":[1527008442004]}]}}},{"key":"/v1/etablissements/exercices/48995245700039","doc_count":42,"agg_by_endpoint":{"hits":{"total":42,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyzlSy-__1jNGzSrd","_score":null,"_source":{"path":"/v1/etablissements/exercices/48995245700039","@timestamp":"2018-05-22T17:00:08.402Z","status":200},"sort":[1527008408402]}]}}},{"key":"/v1/infogreffe/extraits_rcs/418166096","doc_count":42,"agg_by_endpoint":{"hits":{"total":42,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy936y-__1jNGzSsJ","_score":null,"_source":{"path":"/v1/infogreffe/extraits_rcs/418166096","@timestamp":"2018-05-22T17:00:51.311Z","status":200},"sort":[1527008451311]}]}}},{"key":"/v1/msa/cotisations/81104725700019","doc_count":42,"agg_by_endpoint":{"hits":{"total":42,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyzldy-__1jNGzSre","_score":null,"_source":{"path":"/v1/msa/cotisations/81104725700019","@timestamp":"2018-05-22T17:00:08.478Z","status":200},"sort":[1527008408478]}]}}},{"key":"/v1/opqibi/certificat/395301641","doc_count":42,"agg_by_endpoint":{"hits":{"total":42,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIyzloy-__1jNGzSrf","_score":null,"_source":{"path":"/v1/opqibi/certificat/395301641","@timestamp":"2018-05-22T17:00:08.660Z","status":200},"sort":[1527008408660]}]}}},{"key":"/v1/probtp/attestations_cotisation_retraite/73582032600040","doc_count":42,"agg_by_endpoint":{"hits":{"total":42,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy6Mfy-__1jNGzSr5","_score":null,"_source":{"path":"/v1/probtp/attestations_cotisation_retraite/73582032600040","@timestamp":"2018-05-22T17:00:36.070Z","status":200},"sort":[1527008436070]}]}}},{"key":"/v1/entreprises/418166096","doc_count":40,"agg_by_endpoint":{"hits":{"total":40,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy5sxy-__1jNGzSr4","_score":null,"_source":{"path":"/v1/entreprises/418166096","@timestamp":"2018-05-22T17:00:33.982Z","status":200},"sort":[1527008433982]}]}}},{"key":"/v1/probtp/eligibilite_cotisation_retraite/73582032600040","doc_count":40,"agg_by_endpoint":{"hits":{"total":40,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy1yAy-__1jNGzSrp","_score":null,"_source":{"path":"/v1/probtp/eligibilite_cotisation_retraite/73582032600040","@timestamp":"2018-05-22T17:00:17.916Z","status":200},"sort":[1527008417916]}]}}},{"key":"/v1/fntp/cartes_professionnelles/562077503","doc_count":39,"agg_by_endpoint":{"hits":{"total":39,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOIy9X7y-__1jNGzSsE","_score":null,"_source":{"path":"/v1/fntp/cartes_professionnelles/562077503","@timestamp":"2018-05-22T17:00:48.592Z","status":200},"sort":[1527008448592]}]}}},{"key":"/v2/bilans_entreprises_bdf/552032534","doc_count":2,"agg_by_endpoint":{"hits":{"total":2,"max_score":null,"hits":[{"_index":"logstash-2018.05.22","_type":"siade","_id":"AWOHhmfry-__1jNGzLgs","_score":null,"_source":{"path":"/v2/bilans_entreprises_bdf/552032534","@timestamp":"2018-05-22T11:05:21.765Z","status":200},"sort":[1526987121765]}]}}}]}}}'
+        mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}},{"shard":3,"index":"logstash-2018.04.17","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1366473d on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 7, queued tasks = 1000, completed tasks =
+        267886]]"}},{"shard":4,"index":"logstash-2017.10.02","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@76513b4e on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267950]]"}},{"shard":4,"index":"logstash-2017.10.03","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4e657233 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267950]]"}},{"shard":4,"index":"logstash-2017.10.04","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@24e3671d on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267950]]"}},{"shard":4,"index":"logstash-2017.10.05","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1b249afb on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267950]]"}},{"shard":4,"index":"logstash-2017.10.06","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@df68dbe on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267950]]"}},{"shard":4,"index":"logstash-2017.10.07","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@31f8a15c on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 999, completed tasks =
+        267951]]"}},{"shard":4,"index":"logstash-2017.10.09","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7ef96bda on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267951]]"}},{"shard":4,"index":"logstash-2017.10.10","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@48136985 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267951]]"}},{"shard":4,"index":"logstash-2017.10.11","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4f03b539 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267951]]"}},{"shard":4,"index":"logstash-2017.10.12","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@722f5557 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267951]]"}},{"shard":4,"index":"logstash-2017.10.13","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@537d2823 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267951]]"}},{"shard":4,"index":"logstash-2017.10.16","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@48970417 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267953]]"}},{"shard":4,"index":"logstash-2017.10.17","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@267c019f on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267953]]"}},{"shard":4,"index":"logstash-2017.10.18","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7d74d6da on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267953]]"}},{"shard":4,"index":"logstash-2017.10.19","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5c559318 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267953]]"}},{"shard":4,"index":"logstash-2017.10.20","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1d7ec413 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267953]]"}},{"shard":4,"index":"logstash-2017.10.22","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@18ccf53f on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267954]]"}},{"shard":4,"index":"logstash-2017.10.23","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4a750093 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267954]]"}},{"shard":4,"index":"logstash-2017.10.24","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@19a33db1 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267954]]"}},{"shard":4,"index":"logstash-2017.10.25","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@705e8b03 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267954]]"}},{"shard":4,"index":"logstash-2017.10.28","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@49b39d54 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267956]]"}},{"shard":4,"index":"logstash-2017.10.29","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@391daac6 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267956]]"}},{"shard":4,"index":"logstash-2017.10.30","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4572850 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267956]]"}},{"shard":4,"index":"logstash-2017.11.01","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@48bc231a on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267957]]"}},{"shard":4,"index":"logstash-2017.11.02","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@6c43c5b5 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267957]]"}},{"shard":4,"index":"logstash-2017.11.04","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4c4b22bd on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267958]]"}},{"shard":4,"index":"logstash-2017.11.05","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3b4b233b on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267958]]"}},{"shard":4,"index":"logstash-2017.11.06","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@13fde066 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267958]]"}},{"shard":4,"index":"logstash-2017.11.07","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4808df35 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267958]]"}},{"shard":4,"index":"logstash-2017.11.09","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4be34ac0 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267959]]"}},{"shard":4,"index":"logstash-2017.11.10","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1ef9298e on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267959]]"}},{"shard":4,"index":"logstash-2017.11.11","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4148ec96 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267959]]"}},{"shard":4,"index":"logstash-2017.11.12","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@35e0ba2d on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267959]]"}},{"shard":4,"index":"logstash-2017.11.13","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3089239 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267959]]"}},{"shard":4,"index":"logstash-2017.11.14","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@8a79728 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267959]]"}},{"shard":4,"index":"logstash-2017.11.15","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@43e90c24 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267959]]"}},{"shard":4,"index":"logstash-2017.11.18","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@6981ddc1 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267961]]"}},{"shard":4,"index":"logstash-2017.11.19","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@54e20ffb on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267961]]"}},{"shard":4,"index":"logstash-2017.11.20","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@64028955 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267961]]"}},{"shard":4,"index":"logstash-2017.11.21","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@75a33140 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267961]]"}},{"shard":4,"index":"logstash-2017.11.22","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5e2566ce on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 999, completed tasks =
+        267962]]"}},{"shard":4,"index":"logstash-2017.11.24","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1d8ff593 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267962]]"}},{"shard":4,"index":"logstash-2017.11.26","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@303d5660 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267963]]"}},{"shard":4,"index":"logstash-2017.11.28","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@303a0d9b on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267964]]"}},{"shard":4,"index":"logstash-2017.11.29","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@476e0784 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267964]]"}},{"shard":4,"index":"logstash-2017.11.30","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@479a7eeb on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267964]]"}},{"shard":4,"index":"logstash-2017.12.01","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1751a2e6 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267964]]"}},{"shard":4,"index":"logstash-2017.12.04","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3459cfa3 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267966]]"}},{"shard":4,"index":"logstash-2017.12.05","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@777e265e on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267966]]"}},{"shard":4,"index":"logstash-2017.12.06","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5d45eefa on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267966]]"}},{"shard":4,"index":"logstash-2017.12.07","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1530a40a on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267966]]"}},{"shard":4,"index":"logstash-2017.12.08","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4494570b on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267966]]"}},{"shard":4,"index":"logstash-2017.12.10","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7a7f68be on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267967]]"}},{"shard":4,"index":"logstash-2017.12.12","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@70004001 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267968]]"}},{"shard":4,"index":"logstash-2017.12.13","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@727df05e on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267968]]"}},{"shard":4,"index":"logstash-2017.12.14","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@15bf06b8 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267968]]"}},{"shard":4,"index":"logstash-2017.12.15","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@254f915 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267968]]"}},{"shard":4,"index":"logstash-2017.12.16","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@10ddda1a on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267968]]"}},{"shard":4,"index":"logstash-2017.12.18","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@51aeec85 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267969]]"}},{"shard":4,"index":"logstash-2017.12.19","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1c0fb30a on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267969]]"}},{"shard":4,"index":"logstash-2017.12.20","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@70c63725 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267969]]"}},{"shard":4,"index":"logstash-2017.12.21","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@54553761 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267969]]"}},{"shard":4,"index":"logstash-2017.12.23","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@21a5ccc3 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267970]]"}},{"shard":4,"index":"logstash-2017.12.26","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@268dc055 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267972]]"}},{"shard":4,"index":"logstash-2017.12.27","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@34ca8358 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267972]]"}},{"shard":4,"index":"logstash-2017.12.29","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@29b1306c on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267973]]"}},{"shard":4,"index":"logstash-2017.12.30","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3e46c538 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267973]]"}},{"shard":4,"index":"logstash-2017.12.31","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@6528de6d on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267973]]"}},{"shard":4,"index":"logstash-2018.01.01","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@15b18f9b on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267973]]"}},{"shard":4,"index":"logstash-2018.01.03","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@41aa51f7 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267974]]"}},{"shard":4,"index":"logstash-2018.01.04","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@c43dbea on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267974]]"}},{"shard":4,"index":"logstash-2018.01.05","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5a2a4451 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267974]]"}},{"shard":4,"index":"logstash-2018.01.06","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@2036ea96 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267974]]"}},{"shard":4,"index":"logstash-2018.01.08","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1231538b on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267975]]"}},{"shard":4,"index":"logstash-2018.01.09","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@35be927 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267975]]"}},{"shard":4,"index":"logstash-2018.01.11","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7b560f62 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267976]]"}},{"shard":4,"index":"logstash-2018.01.12","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@56b3124a on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267976]]"}},{"shard":4,"index":"logstash-2018.01.13","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3dd4bc76 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267976]]"}},{"shard":4,"index":"logstash-2018.01.14","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@27b28cba on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267976]]"}},{"shard":4,"index":"logstash-2018.01.15","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3edffbb6 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267976]]"}},{"shard":4,"index":"logstash-2018.01.16","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@205051f4 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267976]]"}},{"shard":4,"index":"logstash-2018.01.17","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@393724d on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267976]]"}},{"shard":4,"index":"logstash-2018.01.19","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7a402299 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267977]]"}},{"shard":4,"index":"logstash-2018.01.21","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4c641cf4 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267978]]"}},{"shard":4,"index":"logstash-2018.01.22","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4dbfaf9 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267978]]"}},{"shard":4,"index":"logstash-2018.01.23","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7001d029 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267978]]"}},{"shard":4,"index":"logstash-2018.01.26","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@e6562cb on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267980]]"}},{"shard":4,"index":"logstash-2018.01.27","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@2670e0cf on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267980]]"}},{"shard":4,"index":"logstash-2018.01.28","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@76e63aab on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267980]]"}},{"shard":4,"index":"logstash-2018.01.29","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@14f79c33 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267980]]"}},{"shard":4,"index":"logstash-2018.01.31","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1ec0fcce on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267981]]"}},{"shard":4,"index":"logstash-2018.02.01","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@26d3396d on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267981]]"}},{"shard":4,"index":"logstash-2018.02.02","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5e32813a on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267981]]"}},{"shard":4,"index":"logstash-2018.02.03","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@13181a35 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267981]]"}},{"shard":4,"index":"logstash-2018.02.04","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@45fa441d on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267981]]"}},{"shard":4,"index":"logstash-2018.02.05","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7bd04bf5 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267981]]"}},{"shard":4,"index":"logstash-2018.02.06","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@29317194 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267981]]"}},{"shard":4,"index":"logstash-2018.02.07","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3135983f on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267981]]"}},{"shard":4,"index":"logstash-2018.02.08","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@58cf25d1 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267981]]"}},{"shard":4,"index":"logstash-2018.02.10","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@78366f91 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267982]]"}},{"shard":4,"index":"logstash-2018.02.12","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7cb83be3 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267983]]"}},{"shard":4,"index":"logstash-2018.02.13","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5001f815 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267983]]"}},{"shard":4,"index":"logstash-2018.02.14","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4e9af86f on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267983]]"}},{"shard":4,"index":"logstash-2018.02.15","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3d0ba0a7 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267983]]"}},{"shard":4,"index":"logstash-2018.02.16","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7fc2936d on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267983]]"}},{"shard":4,"index":"logstash-2018.02.18","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@20dcb575 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267984]]"}},{"shard":4,"index":"logstash-2018.02.19","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@2807cfeb on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267984]]"}},{"shard":4,"index":"logstash-2018.02.22","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@272d27b5 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267986]]"}},{"shard":4,"index":"logstash-2018.02.23","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5f9b35f8 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267986]]"}},{"shard":4,"index":"logstash-2018.02.25","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5d003ad4 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267987]]"}},{"shard":4,"index":"logstash-2018.02.26","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1899d313 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267987]]"}},{"shard":4,"index":"logstash-2018.02.27","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7fab0821 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267987]]"}},{"shard":4,"index":"logstash-2018.02.28","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@dabbc43 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267987]]"}},{"shard":4,"index":"logstash-2018.03.01","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3e1fd3d1 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267987]]"}},{"shard":4,"index":"logstash-2018.03.02","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@788ce6c0 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267987]]"}},{"shard":4,"index":"logstash-2018.03.03","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@2547c53b on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267987]]"}},{"shard":4,"index":"logstash-2018.03.05","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@57e2cd5f on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267988]]"}},{"shard":4,"index":"logstash-2018.03.06","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@2cae33e6 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267988]]"}},{"shard":4,"index":"logstash-2018.03.07","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4e7d0f10 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267988]]"}},{"shard":4,"index":"logstash-2018.03.09","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@73a6e338 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267989]]"}},{"shard":4,"index":"logstash-2018.03.10","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@733cd590 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267989]]"}},{"shard":4,"index":"logstash-2018.03.11","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7bd2af64 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267989]]"}},{"shard":4,"index":"logstash-2018.03.13","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3a50c543 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267990]]"}},{"shard":4,"index":"logstash-2018.03.14","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7751510c on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267990]]"}},{"shard":4,"index":"logstash-2018.03.15","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@787f5009 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267990]]"}},{"shard":4,"index":"logstash-2018.03.16","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@305ef426 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267990]]"}},{"shard":4,"index":"logstash-2018.03.17","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4593fde4 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267990]]"}},{"shard":4,"index":"logstash-2018.03.20","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@e45b2fb on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267992]]"}},{"shard":4,"index":"logstash-2018.03.21","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7d164a89 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267992]]"}},{"shard":4,"index":"logstash-2018.03.22","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@13fa3e61 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267992]]"}},{"shard":4,"index":"logstash-2018.03.23","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@692981b6 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267992]]"}},{"shard":4,"index":"logstash-2018.03.24","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@17d5c047 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267992]]"}},{"shard":4,"index":"logstash-2018.03.25","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@73f09fe5 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267992]]"}},{"shard":4,"index":"logstash-2018.03.29","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@6739b7a7 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267995]]"}},{"shard":4,"index":"logstash-2018.04.03","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@4b786505 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 267999]]"}},{"shard":4,"index":"logstash-2018.04.07","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@59a35a0b on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268002]]"}},{"shard":4,"index":"logstash-2018.04.12","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@431dbc95 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268006]]"}},{"shard":4,"index":"logstash-2018.04.17","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@263d33c6 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268010]]"}},{"shard":4,"index":"logstash-2018.04.20","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@180d6c87 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268012]]"}},{"shard":4,"index":"logstash-2018.04.26","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@58748816 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268017]]"}},{"shard":4,"index":"logstash-2018.05.02","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@72a26e0b on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268022]]"}},{"shard":4,"index":"logstash-2018.05.04","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@41287b41 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268023]]"}},{"shard":4,"index":"logstash-2018.05.05","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@49cb4afc on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268023]]"}},{"shard":4,"index":"logstash-2018.05.06","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@31d98c33 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268023]]"}},{"shard":4,"index":"logstash-2018.05.07","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@31a33777 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268023]]"}},{"shard":4,"index":"logstash-2018.05.08","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1396da2d on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268023]]"}},{"shard":4,"index":"logstash-2018.05.10","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@33016eb6 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268024]]"}},{"shard":4,"index":"logstash-2018.05.12","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@477a9b81 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268025]]"}},{"shard":4,"index":"logstash-2018.05.13","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@670c5404 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268025]]"}},{"shard":4,"index":"logstash-2018.05.14","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@60b56f48 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268025]]"}},{"shard":4,"index":"logstash-2018.05.17","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@2c2969e2 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268027]]"}},{"shard":4,"index":"logstash-2018.05.19","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@144b0e0e on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268028]]"}},{"shard":4,"index":"logstash-2018.05.20","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5b37d576 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268028]]"}},{"shard":4,"index":"logstash-2018.05.21","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@2a44410c on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268028]]"}},{"shard":4,"index":"logstash-2018.05.22","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@61faddba on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268028]]"}},{"shard":4,"index":"logstash-2018.05.23","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3e299193 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268028]]"}},{"shard":4,"index":"logstash-2018.05.24","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@50be6fb on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268028]]"}},{"shard":4,"index":"logstash-2018.05.27","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@528d381e on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268030]]"}},{"shard":4,"index":"logstash-2018.05.28","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@12fea9b3 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268030]]"}},{"shard":4,"index":"logstash-2018.05.29","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@46745e63 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268030]]"}},{"shard":4,"index":"logstash-2018.05.30","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@e97334 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268030]]"}},{"shard":4,"index":"logstash-2018.06.01","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@e03b9b on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268031]]"}},{"shard":4,"index":"logstash-2018.06.02","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@5de391e6 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268031]]"}},{"shard":4,"index":"logstash-2018.06.03","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@3397988f on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268031]]"}},{"shard":4,"index":"logstash-2018.06.04","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@1d019101 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268031]]"}},{"shard":4,"index":"logstash-2018.06.05","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@750221d2 on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268031]]"}},{"shard":4,"index":"logstash-2018.06.08","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"es_rejected_execution_exception","reason":"rejected
+        execution of org.elasticsearch.transport.TransportService$7@7933a25b on EsThreadPoolExecutor[search,
+        queue capacity = 1000, org.elasticsearch.common.util.concurrent.EsThreadPoolExecutor@320bb5cd[Running,
+        pool size = 13, active threads = 13, queued tasks = 1000, completed tasks
+        = 268033]]"}}]},"hits":{"total":2044,"max_score":0.0,"hits":[]},"aggregations":{"group_by_controller":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":"api/v2/etablissements_legacy#show","doc_count":402,"agg_by_endpoint":{"hits":{"total":402,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfEj9zNebmjNULlH15","_score":null,"_source":{"path":"/v2/etablissements_legacy/41816609600069","@timestamp":"2018-06-08T11:05:03.464Z","status":200},"sort":[1528455903464]}]}}},{"key":"api/v2/certificats_qualibat#show","doc_count":397,"agg_by_endpoint":{"hits":{"total":397,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfEj9zNebmjNULlH14","_score":null,"_source":{"path":"/v2/certificats_qualibat/48787244200024","@timestamp":"2018-06-08T11:05:03.980Z","status":200},"sort":[1528455903980]}]}}},{"key":"api/v2/etablissements#show","doc_count":395,"agg_by_endpoint":{"hits":{"total":395,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfEjfBNebmjNULlH13","_score":null,"_source":{"path":"/v2/etablissements/41816609600069","@timestamp":"2018-06-08T11:05:03.098Z","status":200},"sort":[1528455903098]}]}}},{"key":"api/v2/attestations_fiscales_dgfip#show","doc_count":133,"agg_by_endpoint":{"hits":{"total":133,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDcaGNebmjNULlHwf","_score":null,"_source":{"path":"/v2/attestations_fiscales_dgfip/552045999","@timestamp":"2018-06-08T11:00:11.419Z","status":200},"sort":[1528455611419]}]}}},{"key":"api/v2/cartes_professionnelles_fntp#show","doc_count":38,"agg_by_endpoint":{"hits":{"total":38,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDb61NebmjNULlHwe","_score":null,"_source":{"path":"/v2/cartes_professionnelles_fntp/562077503","@timestamp":"2018-06-08T11:00:09.588Z","status":200},"sort":[1528455609588]}]}}},{"key":"api/v2/bilans_entreprises_bdf#show","doc_count":36,"agg_by_endpoint":{"hits":{"total":36,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDa8uNebmjNULlHwP","_score":null,"_source":{"path":"/v2/bilans_entreprises_bdf/552032534","@timestamp":"2018-06-08T11:00:05.781Z","status":200},"sort":[1528455605781]}]}}},{"key":"api/v2/eligibilites_cotisation_retraite_probtp#show","doc_count":36,"agg_by_endpoint":{"hits":{"total":36,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDasyNebmjNULlHwF","_score":null,"_source":{"path":"/v2/eligibilites_cotisation_retraite_probtp/73582032600040","@timestamp":"2018-06-08T11:00:04.279Z","status":200},"sort":[1528455604279]}]}}},{"key":"api/v2/liasses_fiscales_dgfip#dictionnaire","doc_count":36,"agg_by_endpoint":{"hits":{"total":36,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDaeSNebmjNULlHv-","_score":null,"_source":{"path":"/v2/liasses_fiscales_dgfip/2016/dictionnaire","@timestamp":"2018-06-08T11:00:03.735Z","status":200},"sort":[1528455603735]}]}}},{"key":"api/v2/associations#show","doc_count":35,"agg_by_endpoint":{"hits":{"total":35,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPe1rxSNebmjNULlEd8","_score":null,"_source":{"path":"/v2/associations/W604004799","@timestamp":"2018-06-08T10:00:04.563Z","status":200},"sort":[1528452004563]}]}}},{"key":"api/v2/attestations_cotisation_retraite_probtp#show","doc_count":35,"agg_by_endpoint":{"hits":{"total":35,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDbrLNebmjNULlHwa","_score":null,"_source":{"path":"/v2/attestations_cotisation_retraite_probtp/73582032600040","@timestamp":"2018-06-08T11:00:08.665Z","status":200},"sort":[1528455608665]}]}}},{"key":"api/v2/certificats_opqibi#show","doc_count":35,"agg_by_endpoint":{"hits":{"total":35,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDaspNebmjNULlHwE","_score":null,"_source":{"path":"/v2/certificats_opqibi/395301641","@timestamp":"2018-06-08T11:00:04.064Z","status":200},"sort":[1528455604064]}]}}},{"key":"api/v2/exercices#show","doc_count":35,"agg_by_endpoint":{"hits":{"total":35,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDaeSNebmjNULlHwB","_score":null,"_source":{"path":"/v2/exercices/48995245700039","@timestamp":"2018-06-08T11:00:03.875Z","status":200},"sort":[1528455603875]}]}}},{"key":"api/v2/extraits_rcs_infogreffe#show","doc_count":35,"agg_by_endpoint":{"hits":{"total":35,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDaeSNebmjNULlHv9","_score":null,"_source":{"path":"/v2/extraits_rcs_infogreffe/418166096","@timestamp":"2018-06-08T11:00:03.697Z","status":200},"sort":[1528455603697]}]}}},{"key":"api/v2/attestations_agefiph#show","doc_count":34,"agg_by_endpoint":{"hits":{"total":34,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDa8bNebmjNULlHwN","_score":null,"_source":{"path":"/v2/attestations_agefiph/30247504101933","@timestamp":"2018-06-08T11:00:05.603Z","status":200},"sort":[1528455605603]}]}}},{"key":"api/v2/certificats_cnetp#show","doc_count":34,"agg_by_endpoint":{"hits":{"total":34,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDatGNebmjNULlHwH","_score":null,"_source":{"path":"/v2/certificats_cnetp/632049128","@timestamp":"2018-06-08T11:00:04.820Z","status":200},"sort":[1528455604820]}]}}},{"key":"api/v2/documents_associations#show","doc_count":34,"agg_by_endpoint":{"hits":{"total":34,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPe1tOnNebmjNULlEew","_score":null,"_source":{"path":"/v2/documents_associations/77571979202585","@timestamp":"2018-06-08T10:00:10.252Z","status":200},"sort":[1528452010252]}]}}},{"key":"api/v2/etablissements/successeur#show","doc_count":34,"agg_by_endpoint":{"hits":{"total":34,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDaeSNebmjNULlHv_","_score":null,"_source":{"path":"/v2/etablissements/78414518700133/successeur","@timestamp":"2018-06-08T11:00:03.828Z","status":200},"sort":[1528455603828]}]}}},{"key":"api/v2/extraits_courts_inpi#show","doc_count":34,"agg_by_endpoint":{"hits":{"total":34,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDbYeNebmjNULlHwR","_score":null,"_source":{"path":"/v2/extraits_courts_inpi/542065479","@timestamp":"2018-06-08T11:00:06.299Z","status":200},"sort":[1528455606299]}]}}},{"key":"api/v2/attestations_sociales_acoss#show","doc_count":33,"agg_by_endpoint":{"hits":{"total":33,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDeXLNebmjNULlHws","_score":null,"_source":{"path":"/v2/attestations_sociales_acoss/489952457","@timestamp":"2018-06-08T11:00:19.239Z","status":200},"sort":[1528455619239]}]}}},{"key":"api/v2/entreprises#show","doc_count":33,"agg_by_endpoint":{"hits":{"total":33,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPe1rw3NebmjNULlEd5","_score":null,"_source":{"path":"/v2/entreprises/418166096","@timestamp":"2018-06-08T10:00:04.307Z","status":200},"sort":[1528452004307]}]}}},{"key":"api/v2/liasses_fiscales_dgfip#show","doc_count":33,"agg_by_endpoint":{"hits":{"total":33,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDaeSNebmjNULlHv8","_score":null,"_source":{"path":"/v2/liasses_fiscales_dgfip/2016/complete/301028346","@timestamp":"2018-06-08T11:00:03.665Z","status":404},"sort":[1528455603665]}]}}},{"key":"api/v2/cotisations_msa#show","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDatYNebmjNULlHwJ","_score":null,"_source":{"path":"/v2/cotisations_msa/81104725700019","@timestamp":"2018-06-08T11:00:04.988Z","status":200},"sort":[1528455604988]}]}}},{"key":"api/v2/entreprises_legacy#show","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDas8NebmjNULlHwG","_score":null,"_source":{"path":"/v2/entreprises_legacy/418166096","@timestamp":"2018-06-08T11:00:04.661Z","status":200},"sort":[1528455604661]}]}}},{"key":"api/v2/etablissements/predecesseur#show","doc_count":32,"agg_by_endpoint":{"hits":{"total":32,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPen8pNNebmjNULlAlB","_score":null,"_source":{"path":"/v2/etablissements/41816609600069/predecesseur","@timestamp":"2018-06-08T09:00:03.589Z","status":200},"sort":[1528448403589]}]}}},{"key":"api/v2/liasses_fiscales_dgfip#declaration","doc_count":31,"agg_by_endpoint":{"hits":{"total":31,"max_score":null,"hits":[{"_index":"logstash-2018.06.08","_type":"siade","_id":"AWPfDaeSNebmjNULlHv7","_score":null,"_source":{"path":"/v2/liasses_fiscales_dgfip/2016/declarations/301028346","@timestamp":"2018-06-08T11:00:03.481Z","status":404},"sort":[1528455603481]}]}}}]}}}'
     http_version: 
-  recorded_at: Tue, 22 May 2018 17:34:27 GMT
+  recorded_at: Fri, 08 Jun 2018 11:07:45 GMT
 recorded_with: VCR 4.0.0

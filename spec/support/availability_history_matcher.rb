@@ -10,7 +10,7 @@ RSpec::Matchers.define :be_a_valid_availabilities_history do
         endpoint['availability_history'].each do |avail|
           if index < max_index
             # from < to (except for last one)
-            expect(Time.zone.parse(avail[0])).to be < Time.zone.parse(avail[2])
+            expect(Time.zone.parse(avail[0])).to be <= Time.zone.parse(avail[2])
             index += 1
           end
 
