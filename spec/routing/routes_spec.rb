@@ -14,7 +14,7 @@ describe 'routes', type: :routing do
   end
 
   it 'route to jwt_usage stats' do
-    expect(get("api/watchdoge/stats/jwt_usage/#{JwtHelper.api(:valid)}")).to route_to(controller: 'stats', action: 'jwt_usage', jwt: JwtHelper.api(:valid))
+    expect(get("api/watchdoge/stats/jwt_usage/#{valid_jti}")).to route_to(controller: 'stats', action: 'jwt_usage', jti: valid_jti)
   end
 
   it 'route to last_30_days_usage' do

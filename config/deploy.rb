@@ -49,8 +49,7 @@ set :shared_dirs, fetch(:shared_dirs, []).push(
 
 set :shared_files, fetch(:shared_files, []).push(
   'config/database.yml',
-  'config/secrets.yml',
-  'config/initializers/cors.rb'
+  'config/secrets.yml'
 )
 
 # This task is the environment that is loaded for all remote run commands, such as

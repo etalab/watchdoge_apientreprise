@@ -5,7 +5,7 @@ describe Stats::Last30DaysUsageService, type: :service, vcr: { cassette_name: 's
 
   describe 'service (e2e)' do
     its(:success?) { is_expected.to be_truthy }
-    its(:results) { is_expected.to eq(1_772_780) }
+    its(:results) { is_expected.to eq(1_613_113) }
   end
 
   describe 'service (mocked)' do
