@@ -175,7 +175,7 @@
   api_name: apie
   api_version: 2
   ping_period: 5
-  http_path: '/v2/certificats_qualibat/33592022900036'
+  http_path: '/v2/certificats_qualibat/48787244200024'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_certificats_cnetp

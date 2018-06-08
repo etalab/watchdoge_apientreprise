@@ -385,53 +385,6 @@ http_interactions:
   recorded_at: Tue, 13 Feb 2018 18:55:17 GMT
 - request:
     method: get
-    uri: "<APIE_BASE_URI_NEW>/v2/certificats_qualibat/33592022900036?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - sandbox.entreprise.api.gouv.fr
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Status:
-      - 200 OK
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Etag:
-      - W/"ca54b9bbf46965db47ee423fbf0ffef9"
-      X-Runtime:
-      - '0.442059'
-      X-Request-Id:
-      - ad7f92f6-4d86-4408-8626-960e34e55235
-      Date:
-      - Tue, 13 Feb 2018 18:55:18 GMT
-      X-Powered-By:
-      - Phusion Passenger 5.1.11
-      Server:
-      - nginx + Phusion Passenger 5.1.11
-    body:
-      encoding: ASCII-8BIT
-      string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1518548118-c34d0fb9c6a554c854cafede2545ffe9cfeb3515-certificat_qualibat.pdf"}'
-    http_version: 
-  recorded_at: Tue, 13 Feb 2018 18:55:18 GMT
-- request:
-    method: get
     uri: "<APIE_BASE_URI_NEW>/v2/etablissements_legacy/41816609600069?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
     body:
       encoding: US-ASCII
@@ -478,49 +431,6 @@ http_interactions:
         eyJldGFibGlzc2VtZW50Ijp7InNpZWdlX3NvY2lhbCI6dHJ1ZSwic2lyZXQiOiI0MTgxNjYwOTYwMDA2OSIsIm5hZiI6IjYyMDJBIiwibGliZWxsZV9uYWYiOiJDb25zZWlsIGVuIHN5c3TDqG1lcyBldCBsb2dpY2llbHMgaW5mb3JtYXRpcXVlcyIsImRhdGVfbWlzZV9hX2pvdXIiOjE1MDU3NzIwMDAsImV0YXRfYWRtaW5pc3RyYXRpZl9ldGFibGlzc2VtZW50Ijp7InZhbHVlIjoiQWN0aWYiLCJkYXRlX21pc2VfYV9qb3VyIjoxNDgwMjg3NjAwfSwiYWRyZXNzZSI6eyJsMSI6Ik9DVE8tVEVDSE5PTE9HWSIsImwyIjoiMzQgQVYgREUgTCBPUEVSQSIsImwzIjoiNzUwMDIgUEFSSVMgMiIsImw0IjpudWxsLCJsNSI6bnVsbCwibDYiOm51bGwsImw3IjpudWxsLCJudW1lcm9fdm9pZSI6IjM0IiwidHlwZV92b2llIjoiQVYiLCJub21fdm9pZSI6IkRFIEwgT1BFUkEiLCJjb21wbGVtZW50X2FkcmVzc2UiOm51bGwsImNvZGVfcG9zdGFsIjoiNzUwMDIiLCJsb2NhbGl0ZSI6IlBBUklTIDIiLCJjb2RlX2luc2VlX2xvY2FsaXRlIjoiNzUxMDIifX0sImdhdGV3YXlfZXJyb3IiOmZhbHNlfQ==
     http_version: 
   recorded_at: Tue, 13 Feb 2018 18:55:19 GMT
-- request:
-    method: get
-    uri: "<APIE_BASE_URI_OLD>/v1/certificats_qualibat/33592022900036?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_BDD_TOKEN>"
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - api-sandbox.apientreprise.fr
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Tue, 13 Feb 2018 18:55:21 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Etag:
-      - W/"c7d4444be31043058f3d466ad654d80f"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 5ff14fce-0747-49a8-af2c-24dadfebff7e
-      X-Runtime:
-      - '2.388189'
-    body:
-      encoding: ASCII-8BIT
-      string: '{"url":"https://storage.apientreprise.fr/siade_dev/1518548119-1a389329701bc4fe8d828052e65a6d497c6bf605-qualibat.pdf"}'
-    http_version: 
-  recorded_at: Tue, 13 Feb 2018 18:55:21 GMT
 - request:
     method: get
     uri: "<APIE_BASE_URI_OLD>/v1/etablissements/41816609600069?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_BDD_TOKEN>"
@@ -2098,4 +2008,53 @@ http_interactions:
       string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1521374059-bfbdf602375c0f9b7389322a8d3ca15c9abd00de-attestation_fiscale_dgfip.pdf"}'
     http_version: 
   recorded_at: Sun, 18 Mar 2018 11:54:20 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: get
+    uri: "<APIE_BASE_URI_NEW>/v2/certificats_qualibat/48787244200024?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - sandbox.entreprise.api.gouv.fr
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Strict-Transport-Security:
+      - max-age=15552000
+      Etag:
+      - W/"7bd4e464606793b7b11c5c1110329279"
+      X-Runtime:
+      - '7.463926'
+      X-Request-Id:
+      - 142971f0-7398-482e-a00f-3b954e5d6b92
+      Date:
+      - Fri, 08 Jun 2018 10:19:14 GMT
+      X-Powered-By:
+      - Phusion Passenger 5.2.3
+      Server:
+      - nginx + Phusion Passenger 5.2.3
+    body:
+      encoding: ASCII-8BIT
+      string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1528453147-659d9fc78c76b5aba75649e9b92bd7de4c47e654-certificat_qualibat.pdf"}'
+    http_version: 
+  recorded_at: Fri, 08 Jun 2018 10:19:14 GMT
+recorded_with: VCR 4.0.0
