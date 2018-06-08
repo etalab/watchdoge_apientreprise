@@ -7,7 +7,7 @@ describe Endpoint, type: :model do
 
     before { create(:endpoint, uname: uname, provider: 'apientreprise', http_path: '/') }
 
-    it 'follows redirection once', vcr: { cassette_name: 'non_regenerable/v2_homepage' } do # non regenerable because there is no more redirection
+    it 'follows redirection once', vcr: { cassette_name: 'apie/v2_homepage' } do
       expect_any_instance_of(described_class).to receive(:fetch_with_redirection).exactly(:twice).and_call_original
       described_class.find_by(uname: uname).http_response
     end
