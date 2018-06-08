@@ -25,7 +25,7 @@ describe Endpoint, type: :model do
 
     it 'return 200: qualibat v2', vcr: { cassette_name: 'apie/v2_qualibat' } do
       response = described_class.find_by(uname: 'apie_2_certificats_qualibat').http_response
-      expect(response).to be_a(Net::HTTPResponse)
+      expect(response).to be_a(Net::HTTPResponse), 'It could be a VCR::Errors::UnhandledHTTPRequestError'.red
       expect(response.code).to eq('200')
     end
   end
@@ -65,7 +65,7 @@ describe Endpoint, type: :model do
     it 'is a correct uri' do
       expect(ep.uri.scheme).to eq('https')
       expect(ep.uri.host).to match(/entreprise.api.gouv.fr/)
-      expect(ep.uri.path).to eq('/v2/certificats_qualibat/33592022900036')
+      expect(ep.uri.path).to eq('/v2/certificats_qualibat/48787244200024')
       expect(ep.uri.query).to match(/context=Ping&object=Watchdoge&recipient=SGMAP&token=.+/)
     end
   end
