@@ -28,7 +28,6 @@
         {
           "terms": {
             "controller.keyword": [
-              "api/v1/ping",
               "api/v2/ping"
             ]
           }
@@ -44,7 +43,7 @@
   "aggs": {
     "group_by_controller": {
       "terms": {
-        "field": "path.keyword",
+        "field": "route.keyword",
         "size": 100
       },
       "aggs": {

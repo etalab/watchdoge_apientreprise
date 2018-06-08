@@ -27,9 +27,9 @@ describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_
       let(:providers) { results.map { |r| r['provider_name'] }.sort }
       let(:expected_providers) { Endpoint.all.map(&:provider).uniq.sort }
 
-      its(:size) { is_expected.to equal(13) }
+      its(:size) { is_expected.to equal(14) }
 
-      pending 'contains specifics providers' do # No data yet for BDF
+      it 'contains specifics providers' do
         expected_providers.delete('apientreprise')
         expected_providers.delete('sirene')
         expect(providers).to eq(expected_providers)
