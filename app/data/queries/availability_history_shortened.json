@@ -23,7 +23,6 @@
         {
           "terms": {
             "controller.keyword": [
-              "api/v1/ping",
               "api/v2/ping"
             ]
           }
