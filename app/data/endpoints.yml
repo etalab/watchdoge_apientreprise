@@ -166,7 +166,7 @@
   provider: acoss
   api_version: 2
   ping_period: 60
-  http_path: '/v2/attestations_sociales_acoss/489952457'
+  http_path: '/v2/attestations_sociales_acoss/499760866'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_certificats_qualibat
