@@ -17,6 +17,7 @@ namespace :watch do
 
   desc 'run a specific endpoint by uname'
   task 'one': :environment do
+    Rake::Task['refill_database'].invoke
     ARGV.each { |a| task a.to_sym do; end } # it removes exit exception
 
     endpoint = Endpoint.find_by(uname: ARGV[1])
