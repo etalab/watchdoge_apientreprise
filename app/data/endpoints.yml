@@ -6,6 +6,14 @@
   ping_period: 1
   http_path: '/'
 
+- uname: sirene_full_text
+  name: "Recherche Sirene FullText"
+  provider: sirene
+  api_name: sirene
+  api_version: 1
+  ping_period: 1
+  http_path: '/v1/full_text/faure%20samuel'
+
 # ###############
 # v2
 # ###############
