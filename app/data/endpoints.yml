@@ -6,7 +6,7 @@
   ping_period: 1
   http_path: '/'
 
-- uname: sirene_full_text
+- uname: sirene_1_full_text
   name: "Recherche Sirene FullText"
   provider: sirene
   api_name: sirene
