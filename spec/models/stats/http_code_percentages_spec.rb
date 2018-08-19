@@ -5,7 +5,7 @@ describe Stats::HttpCodePercentages do
 
   describe 'only one add' do
     let(:scope_duration) { 3.hours }
-    let(:endpoint) { Endpoint.all.sample }
+    let(:endpoint) { Endpoint.where(api_name: 'apie').sample }
     let(:call) { CallResult.new(source) }
 
     before { code_percentages.add(call) }
@@ -80,7 +80,7 @@ describe Stats::HttpCodePercentages do
 
   context 'when making a dup / copy' do
     let(:scope_duration) { 2.hours }
-    let(:endpoint) { Endpoint.all.sample }
+    let(:endpoint) { Endpoint.where(api_name: 'apie').sample }
     let(:source) { fake_elk_source(endpoint, 1.hour.ago) }
     let(:call) { CallResult.new(source) }
 

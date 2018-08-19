@@ -8,7 +8,7 @@ describe Stats::HttpCodePercentagesAggregator do
   describe 'with one element' do
     before { code_percentage_aggregator.aggregate(call) }
 
-    let(:endpoint) { Endpoint.all.sample }
+    let(:endpoint) { Endpoint.where(api_name: 'apie').sample }
     let(:call) { CallResult.new(source) }
 
     context 'when it is in the first 30 hours' do
@@ -61,7 +61,7 @@ describe Stats::HttpCodePercentagesAggregator do
   end
 
   describe 'when having multiple elements' do
-    let(:endpoint) { Endpoint.all.sample }
+    let(:endpoint) { Endpoint.where(api_name: 'apie').sample }
 
     before do
       sorted_fake_calls(size: 100, oldest_timestamp: 9.minutes).each { |call| code_percentage_aggregator.aggregate(call) }

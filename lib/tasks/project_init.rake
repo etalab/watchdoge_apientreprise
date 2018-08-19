@@ -42,5 +42,5 @@ def secrets
     test:
       ping_email_sender: test@example.com
       <<: *DEFAULTS
-YML
+  YML
 end

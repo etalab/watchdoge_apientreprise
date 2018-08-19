@@ -24,6 +24,7 @@ describe CallResult do
     before do
       source_example.delete_if { |k| k == 'parameters' }
     end
+
     let(:filename) { 'spec/support/payload_files/elk_sources/legacy_elasticsearch_source.json' }
 
     its(:params) { is_expected.to be_nil }
