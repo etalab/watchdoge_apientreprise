@@ -7,9 +7,6 @@ namespace :watch do
     Rake::Task['refill_database'].invoke
     puts "URLs: #{Rails.application.config_for(:secrets)['apie_base_uri_new']} & #{Rails.application.config_for(:secrets)['apie_base_uri_old']}"
     Endpoint.all.each do |endpoint|
-      # TODO: REMOVE THIS !!!
-      next if endpoint.api_version == 1
-      next if endpoint.uname == 'sirene_1_homepage'
       endpoint.http_response
       print_console_infos endpoint
     end

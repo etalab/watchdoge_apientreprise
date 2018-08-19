@@ -8,10 +8,11 @@ end
 
 def sorted_fake_calls(size: 10, oldest_timestamp: 8.days)
   endpoint_factory = EndpointFactory.new
+  endpoints = endpoint_factory.endpoints.select { |e| e.api_name == 'apie' }
   fake_calls = []
   size.times do
     timestamp = time_rand(Time.zone.now - oldest_timestamp)
-    source = fake_elk_source(endpoint_factory.endpoints.sample, timestamp)
+    source = fake_elk_source(endpoints.sample, timestamp)
     fake_calls << CallResult.new(source, endpoint_factory)
   end
 
