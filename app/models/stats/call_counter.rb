@@ -30,6 +30,7 @@ class Stats::CallCounter
     return false unless in_scope?(call_result.timestamp)
 
     endpoint_counter = @endpoints.find { |e| e.endpoint.uname == call_result.uname }
+
     if endpoint_counter.nil?
       @endpoints << EndpointCallCounter.new(call_result, 1)
     else

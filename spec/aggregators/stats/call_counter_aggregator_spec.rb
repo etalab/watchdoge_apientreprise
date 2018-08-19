@@ -8,7 +8,7 @@ describe Stats::CallCounterAggregator do
   describe 'with one element' do
     before { call_counter_aggregator.aggregate(call) }
 
-    let(:endpoint) { Endpoint.all.sample }
+    let(:endpoint) { Endpoint.where(api_name: 'apie').sample }
     let(:call) { CallResult.new(source) }
 
     context 'when it is in the first 10 minutes' do
@@ -88,8 +88,6 @@ describe Stats::CallCounterAggregator do
   end
 
   describe 'when having multiple elements' do
-    let(:endpoint) { Endpoint.all.sample }
-
     before do
       sorted_fake_calls(size: 100, oldest_timestamp: 9.minutes).each { |call| call_counter_aggregator.aggregate(call) }
       sorted_fake_calls(size: 500, oldest_timestamp: 29.hours).each { |call| call_counter_aggregator.aggregate(call) }

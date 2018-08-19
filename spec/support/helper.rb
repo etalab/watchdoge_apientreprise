@@ -6,17 +6,20 @@ def valid_jti
   '47260a7e-9918-464e-b7da-36c5c6847d8a' # watchdoge JTI
 end
 
+# rubocop:disable Metrics/AbcSize
 def sorted_fake_calls(size: 10, oldest_timestamp: 8.days)
   endpoint_factory = EndpointFactory.new
+  endpoints = endpoint_factory.endpoints.select { |e| e.api_name == 'apie' }
   fake_calls = []
   size.times do
     timestamp = time_rand(Time.zone.now - oldest_timestamp)
-    source = fake_elk_source(endpoint_factory.endpoints.sample, timestamp)
+    source = fake_elk_source(endpoints.sample, timestamp)
     fake_calls << CallResult.new(source, endpoint_factory)
   end
 
   fake_calls.sort_by(&:timestamp)
 end
+# rubocop:enable Metrics/AbcSize
 
 def fake_elk_source(endpoint, timestamp)
   {

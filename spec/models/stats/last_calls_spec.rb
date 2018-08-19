@@ -6,7 +6,7 @@ describe Stats::LastCalls do
   let(:last_calls) { described_class.new }
 
   def random_call
-    random_endpoint = Endpoint.all.sample
+    random_endpoint = Endpoint.where(api_name: 'apie').sample
     timestamp = 3.hours.ago
     source = fake_elk_source(random_endpoint, timestamp)
     CallResult.new(source)
