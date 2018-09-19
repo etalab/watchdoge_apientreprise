@@ -15,7 +15,7 @@ describe Endpoint, type: :model do
 
   describe 'all endpoints must be valids' do
     pending('Pb: Certificate')
-    # it 'return 200 for all endpoints', vcr: { cassette_name: 'apie_all' } do
+    # it 'return 200 for all endpoints', vcr: { cassette_name: 'all_APIs' } do
     #   Endpoint.all.each do |ep|
     #     response = described_class.find_by(uname: ep.uname).http_response
     #     expect(response).to be_a(Net::HTTPResponse)
@@ -51,7 +51,7 @@ describe Endpoint, type: :model do
     it 'is an sirene endpoint' do
       ep = create(:endpoint, api_name: 'sirene', http_path: '/', http_query: nil)
       expect(ep.uri.scheme).to eq('https')
-      expect(ep.uri.host).to eq('entreprise.data.gouv.fr')
+      expect(ep.uri.host).to match(/entreprise.data.gouv.fr/)
       expect(ep.uri.path).to eq('/')
       expect(ep.uri.query).to be_empty
     end

@@ -17,6 +17,7 @@ gem 'haml'
 gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'pg'
 gem 'sidekiq'
+gem 'vcr'
 gem 'whenever'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
@@ -66,6 +67,5 @@ group :test do
   gem 'rspec-its'
   gem 'rspec-json_expectations'
   gem 'rspec-rails'
-  gem 'vcr'
   gem 'webmock'
 end

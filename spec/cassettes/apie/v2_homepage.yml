@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: "<APIE_BASE_URI_NEW>/?context=Ping&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
+    uri: "<APIE_BASE_URI>/?context=Ping&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
     body:
       encoding: US-ASCII
       string: ''
@@ -29,7 +29,7 @@ http_interactions:
       Status:
       - 301 Moved Permanently
       Location:
-      - "<APIE_BASE_URI_NEW>/website"
+      - "<APIE_BASE_URI>/website"
       Cache-Control:
       - no-cache
       X-Runtime:
@@ -44,12 +44,12 @@ http_interactions:
       - nginx + Phusion Passenger 5.1.11
     body:
       encoding: UTF-8
-      string: <html><body>You are being <a href="<APIE_BASE_URI_NEW>/website">redirected</a>.</body></html>
+      string: <html><body>You are being <a href="<APIE_BASE_URI>/website">redirected</a>.</body></html>
     http_version:
   recorded_at: Tue, 13 Feb 2018 18:55:07 GMT
 - request:
     method: get
-    uri: "<APIE_BASE_URI_NEW>/website"
+    uri: "<APIE_BASE_URI>/website"
     body:
       encoding: US-ASCII
       string: ''
