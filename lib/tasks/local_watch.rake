@@ -5,7 +5,7 @@ namespace :watch do
   desc 'run watchdoge service on all endpoints'
   task 'all': :environment do
     Rake::Task['refill_database'].invoke
-    puts "URLs: #{Rails.application.config_for(:secrets)['apie_base_uri_new']} & #{Rails.application.config_for(:secrets)['apie_base_uri_old']}"
+    puts "URLs: #{Rails.application.config_for(:secrets)['apie_base_uri']} & #{Rails.application.config_for(:secrets)['sirene_base_uri']}"
     Endpoint.all.each do |endpoint|
       endpoint.http_response
       print_console_infos endpoint
