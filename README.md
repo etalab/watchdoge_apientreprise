@@ -28,6 +28,13 @@ cd /path/to/watchdoge
 psql -f db/init.sql
 ```
 
+And
+
+```
+bundle exec rails db:create:all
+bundle exec rails db:migrate RAILS_ENV=<desired_env>
+```
+
 ### Development environment
 
 Run:
@@ -79,3 +86,7 @@ Watchdoge use `whenever` to perform periodic pings. Mina updates crontab on depl
 Run:
 
 `bundle exec rspec`
+
+Very long tests :
+
+`bundle exec rspec --tag very_long_test`

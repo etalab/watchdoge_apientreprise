@@ -107,14 +107,6 @@
   ping_period: 1
   http_path: '/'
 
-- uname: apie_2_documentation
-  name: "Documentation v2"
-  provider: apientreprise
-  api_name: apie
-  api_version: 2
-  ping_period: 5
-  http_path: '/documentation'
-
 - uname: apie_2_bilans_entreprises_bdf
   name: Bilans Entreprises Banque de France
   provider: bdf
@@ -229,7 +221,7 @@
   api_name: apie
   api_version: 2
   ping_period: 60
-  http_path: '/v2/exercices/48995245700039'
+  http_path: '/v2/exercices/53930425300013'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_attestations_agefiph
