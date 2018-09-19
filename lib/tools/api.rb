@@ -19,9 +19,7 @@ class Tools::API
     # else returns nil (important!)
     return nil unless @api_name == 'apie'
 
-    if [2, 3].include?(@api_version)
-      Rails.application.config_for(:secrets)['apie_jwt_token']
-    end
+    Rails.application.config_for(:secrets)['apie_jwt_token'] if [2, 3].include?(@api_version)
   end
 
   private
