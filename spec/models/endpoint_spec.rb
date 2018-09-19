@@ -14,14 +14,20 @@ describe Endpoint, type: :model do
   end
 
   describe 'all endpoints must be valids' do
-    pending('Pb: Certificate')
-    # it 'return 200 for all endpoints', vcr: { cassette_name: 'apie_all' } do
-    #   Endpoint.all.each do |ep|
-    #     response = described_class.find_by(uname: ep.uname).http_response
-    #     expect(response).to be_a(Net::HTTPResponse)
-    #     expect(response.code).to eq('200')
-    #   end
-    # end
+    # rubocop:disable RSpec/ExampleLength
+    it 'return 200 for all endpoints', vcr: { cassette_name: 'all_APIs' } do
+      Endpoint.all.each do |ep|
+        next if %w[apie_2_certificats_cnetp
+                   apie_2_liasses_fiscales_dgfip_complete
+                   apie_2_liasses_fiscales_dgfip_dictionnaire
+                   apie_2_liasses_fiscales_dgfip_declaration].include?(ep.uname)
+
+        response = described_class.find_by(uname: ep.uname).http_response
+        expect(response).to be_a(Net::HTTPResponse)
+        expect(response.code).to eq('200')
+      end
+    end
+    # rubocop:enable RSpec/ExampleLength
 
     it 'return 200: qualibat v2', vcr: { cassette_name: 'apie/v2_qualibat' } do
       response = described_class.find_by(uname: 'apie_2_certificats_qualibat').http_response
@@ -51,7 +57,7 @@ describe Endpoint, type: :model do
     it 'is an sirene endpoint' do
       ep = create(:endpoint, api_name: 'sirene', http_path: '/', http_query: nil)
       expect(ep.uri.scheme).to eq('https')
-      expect(ep.uri.host).to eq('entreprise.data.gouv.fr')
+      expect(ep.uri.host).to match(/entreprise.data.gouv.fr/)
       expect(ep.uri.path).to eq('/')
       expect(ep.uri.query).to be_empty
     end

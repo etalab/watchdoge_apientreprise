@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: "<APIE_BASE_URI_NEW>/v2/certificats_qualibat/48787244200024?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
+    uri: "<APIE_BASE_URI>/v2/certificats_qualibat/48787244200024?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
     body:
       encoding: US-ASCII
       string: ''
@@ -47,6 +47,6 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1528451667-faf5676796fb2eeb8047178a22a820008aa2fb77-certificat_qualibat.pdf"}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jun 2018 09:54:28 GMT
 recorded_with: VCR 4.0.0

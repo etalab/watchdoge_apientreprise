@@ -1,3 +1,6 @@
+# ###############
+# entreprise.data.gouv.fr
+# ###############
 - uname: sirene_1_homepage
   name: "Page d'accueil"
   provider: sirene
@@ -6,13 +9,92 @@
   ping_period: 1
   http_path: '/'
 
+# ###############
+# API SIRENE
+# ###############
 - uname: sirene_1_full_text
   name: "Recherche Sirene FullText"
   provider: sirene
   api_name: sirene
   api_version: 1
   ping_period: 1
-  http_path: '/v1/full_text/faure%20samuel'
+  http_path: '/api/sirene/v1/full_text/faure%20samuel'
+
+- uname: sirene_1_suggestions
+  name: "Recherche Sirene Suggestions"
+  provider: sirene
+  api_name: sirene
+  api_version: 1
+  ping_period: 1
+  http_path: '/api/sirene/v1/suggest/montp'
+
+- uname: sirene_1_siren
+  name: "Recherche Sirene SIREN"
+  provider: sirene
+  api_name: sirene
+  api_version: 1
+  ping_period: 1
+  http_path: '/api/siren/v1/siren/213105554'
+
+- uname: sirene_1_siret
+  name: "Recherche Sirene SIRET"
+  provider: sirene
+  api_name: sirene
+  api_version: 1
+  ping_period: 1
+  http_path: '/api/sirene/v1/siret/21340172201787'
+
+- uname: sirene_1_rna
+  name: "Recherche Sirene RNA"
+  provider: sirene
+  api_name: sirene
+  api_version: 1
+  ping_period: 1
+  http_path: '/api/sirene/v1/rna/W912007752'
+
+- uname: sirene_1_near_siret
+  name: "Recherche Sirene autour SIRET"
+  provider: sirene
+  api_name: sirene
+  api_version: 1
+  ping_period: 1
+  http_path: '/api/sirene/v1/near_etablissement/21340172201787'
+
+- uname: sirene_1_near_geo_json_siret
+  name: "Recherche Sirene autour SIRET (Geo JSON)"
+  provider: sirene
+  api_name: sirene
+  api_version: 1
+  ping_period: 1
+  http_path: '/api/sirene/v1/near_etablissement_geojson/21340172201787'
+
+
+# ###############
+# API RNA
+# ###############
+- uname: rna_1_full_text
+  name: "Recherche RNA FullText"
+  provider: rna
+  api_name: rna
+  api_version: 1
+  ping_period: 1
+  http_path: '/api/rna/v1/full_text/ever'
+
+- uname: rna_1_id
+  name: "Recherche RNA par ID"
+  provider: rna
+  api_name: rna
+  api_version: 1
+  ping_period: 1
+  http_path: '/api/rna/v1/id/W723009173'
+
+- uname: rna_1_SIRET
+  name: "Recherche RNA SIRET"
+  provider: rna
+  api_name: rna
+  api_version: 1
+  ping_period: 1
+  http_path: '/api/rna/v1/siret/81528975600018'
 
 # ###############
 # v2
@@ -24,14 +106,6 @@
   api_version: 2
   ping_period: 1
   http_path: '/'
-
-- uname: apie_2_documentation
-  name: "Documentation v2"
-  provider: apientreprise
-  api_name: apie
-  api_version: 2
-  ping_period: 5
-  http_path: '/documentation'
 
 - uname: apie_2_bilans_entreprises_bdf
   name: Bilans Entreprises Banque de France
@@ -147,7 +221,7 @@
   api_name: apie
   api_version: 2
   ping_period: 60
-  http_path: '/v2/exercices/48995245700039'
+  http_path: '/v2/exercices/53930425300013'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_attestations_agefiph
@@ -257,3 +331,25 @@
   ping_period: 5
   http_path: '/v2/etablissements_legacy/41816609600069'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+
+# ###############
+# v3
+# ###############
+- uname: apie_3_etablissements
+  name: Etablissements Restored
+  provider: insee
+  api_name: apie
+  api_version: 3
+  ping_period: 5
+  http_path: '/v3/etablissements_restored/41816609600069'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+
+- uname: apie_3_entreprises
+  name: Entreprise Restored
+  provider: insee
+  api_name: apie
+  api_version: 3
+  ping_period: 60
+  http_path: '/v3/entreprises_restored/418166096'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+

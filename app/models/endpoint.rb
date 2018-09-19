@@ -32,6 +32,8 @@ class Endpoint < ApplicationRecord
   def attempt_to_catch_net_http_errors
     # https://stackoverflow.com/questions/5370697/what-s-the-best-way-to-handle-exceptions-from-nethttp
     yield
+  rescue VCR::Errors::UnhandledHTTPRequestError # for developpement
+    raise $ERROR_INFO
   rescue Net::HTTPError, StandardError
     # TODO: Sentry/Raven
     Rails.logger.error "Something wrong happened when make the http request (#{$ERROR_INFO})"

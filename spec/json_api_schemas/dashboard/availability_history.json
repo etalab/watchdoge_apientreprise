@@ -33,8 +33,8 @@
                 "api_version": {
                   "type": "integer",
                   "title": "The api_version",
-                  "minimum": 1,
-                  "maximum": 2
+                  "minimum": 2,
+                  "maximum": 3
                 },
                 "sla": {
                   "type": "number",
