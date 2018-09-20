@@ -70,6 +70,15 @@ Can run only one endpoint (specify RAILS_ENV):
 
 `rake watch_v2:one apie_2_attestations_sociales_acoss`
 
+Can run only one API :
+
+```
+bundle exec rake watch:apie
+bundle exec rake watch:sirene
+bundle exec rake watch:rna
+bundle exec rake watch:data.gouv.fr
+```
+
 ## Deployment
 
 Run:
