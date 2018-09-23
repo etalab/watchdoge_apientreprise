@@ -4,8 +4,9 @@ class PingWorker
 
   def perform(uname)
     @endpoint = Endpoint.find_by(uname: uname)
-    ping_report.notify_changes(code_http)
-    send_notification if ping_report.changed?
+    @endpoint.http_response
+    # ping_report.notify_changes(code_http)
+    # send_notification if ping_report.changed?
   end
 
   private
