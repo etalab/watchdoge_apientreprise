@@ -13,11 +13,11 @@ describe Dashboard::CurrentStatusService, type: :service do
     let(:service) { described_class.new.perform }
     let(:json) { { results: service.results } }
     let(:endpoints_unames) { results.map { |e| e['uname'] }.sort }
-    let(:expected_endpoints_unames) do
-      %w[apie_2_bilans_entreprises_bdf apie_2_certificats_qualibat apie_2_etablissements apie_2_etablissements_legacy apie_2_liasses_fiscales_dgfip_complete apie_2_liasses_fiscales_dgfip_declaration apie_2_liasses_fiscales_dgfip_dictionnaire apie_2_documents_associations_rna apie_2_associations_rna apie_2_attestations_agefiph apie_2_attestations_cotisation_retraite_probtp apie_2_attestations_fiscales_dgfip apie_2_attestations_sociales_acoss apie_2_cartes_professionnelles_fntp apie_2_certificats_cnetp apie_2_certificats_opqibi apie_2_cotisations_msa apie_2_eligibilites_cotisation_retraite_probtp apie_2_entreprises apie_2_entreprises_legacy apie_2_etablissements_predecesseur apie_2_etablissements_successeur apie_2_exercices_dgfip apie_2_extraits_courts_inpi apie_2_extraits_rcs_infogreffe].sort
-    end
+    let(:elements) { Endpoint.where("api_name = 'apie' and provider != 'apientreprise'") }
+    let(:nb_elements) { elements.size }
+    let(:expected_endpoints_unames) { elements.map(&:uname).sort }
 
-    its(:size) { is_expected.to equal(25) }
+    its(:size) { is_expected.to equal(nb_elements) }
 
     it 'matches json-schema' do
       expect(json).to match_json_schema('dashboard/current_status')
