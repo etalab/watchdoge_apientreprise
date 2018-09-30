@@ -25,8 +25,8 @@
           "api_version": {
             "type": "integer",
             "title": "The api_version of the endpoint",
-            "minimun": 1,
-            "maximum": 2,
+            "minimun": 2,
+            "maximum": 3,
             "example": 2
           },
           "code": {
