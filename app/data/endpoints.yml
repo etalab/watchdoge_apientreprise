@@ -6,7 +6,7 @@
   provider: sirene
   api_name: sirene
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/'
 
 # ###############
@@ -17,7 +17,7 @@
   provider: sirene
   api_name: sirene
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/api/sirene/v1/full_text/faure%20samuel'
 
 - uname: sirene_1_suggestions
@@ -25,7 +25,7 @@
   provider: sirene
   api_name: sirene
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/api/sirene/v1/suggest/montp'
 
 - uname: sirene_1_siren
@@ -33,7 +33,7 @@
   provider: sirene
   api_name: sirene
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/api/siren/v1/siren/213105554'
 
 - uname: sirene_1_siret
@@ -41,7 +41,7 @@
   provider: sirene
   api_name: sirene
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/api/sirene/v1/siret/21340172201787'
 
 - uname: sirene_1_rna
@@ -49,7 +49,7 @@
   provider: sirene
   api_name: sirene
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/api/sirene/v1/rna/W912007752'
 
 - uname: sirene_1_near_siret
@@ -57,7 +57,7 @@
   provider: sirene
   api_name: sirene
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/api/sirene/v1/near_etablissement/21340172201787'
 
 - uname: sirene_1_near_geo_json_siret
@@ -65,7 +65,7 @@
   provider: sirene
   api_name: sirene
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/api/sirene/v1/near_etablissement_geojson/21340172201787'
 
 
@@ -77,7 +77,7 @@
   provider: rna
   api_name: rna
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/api/rna/v1/full_text/ever'
 
 - uname: rna_1_id
@@ -85,7 +85,7 @@
   provider: rna
   api_name: rna
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/api/rna/v1/id/W723009173'
 
 - uname: rna_1_SIRET
@@ -93,7 +93,7 @@
   provider: rna
   api_name: rna
   api_version: 1
-  ping_period: 1
+  ping_period: 5
   http_path: '/api/rna/v1/siret/81528975600018'
 
 # ###############
