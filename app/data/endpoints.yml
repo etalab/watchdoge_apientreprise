@@ -19,6 +19,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/api/sirene/v1/full_text/faure%20samuel'
+  http_query: '{ "ping": true }'
 
 - uname: sirene_1_suggestions
   name: "Recherche Sirene Suggestions"
@@ -27,6 +28,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/api/sirene/v1/suggest/montp'
+  http_query: '{ "ping": true }'
 
 - uname: sirene_1_siren
   name: "Recherche Sirene SIREN"
@@ -35,6 +37,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/api/siren/v1/siren/213105554'
+  http_query: '{ "ping": true }'
 
 - uname: sirene_1_siret
   name: "Recherche Sirene SIRET"
@@ -43,6 +46,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/api/sirene/v1/siret/21340172201787'
+  http_query: '{ "ping": true }'
 
 - uname: sirene_1_rna
   name: "Recherche Sirene RNA"
@@ -51,6 +55,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/api/sirene/v1/rna/W912007752'
+  http_query: '{ "ping": true }'
 
 - uname: sirene_1_near_siret
   name: "Recherche Sirene autour SIRET"
@@ -59,6 +64,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/api/sirene/v1/near_etablissement/21340172201787'
+  http_query: '{ "ping": true }'
 
 - uname: sirene_1_near_geo_json_siret
   name: "Recherche Sirene autour SIRET (Geo JSON)"
@@ -67,6 +73,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/api/sirene/v1/near_etablissement_geojson/21340172201787'
+  http_query: '{ "ping": true }'
 
 
 # ###############
@@ -79,6 +86,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/api/rna/v1/full_text/ever'
+  http_query: '{ "ping": true }'
 
 - uname: rna_1_id
   name: "Recherche RNA par ID"
@@ -87,6 +95,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/api/rna/v1/id/W723009173'
+  http_query: '{ "ping": true }'
 
 - uname: rna_1_SIRET
   name: "Recherche RNA SIRET"
@@ -95,6 +104,7 @@
   api_version: 1
   ping_period: 5
   http_path: '/api/rna/v1/siret/81528975600018'
+  http_query: '{ "ping": true }'
 
 # ###############
 # v2
