@@ -528,101 +528,6 @@ http_interactions:
   recorded_at: Tue, 13 Feb 2018 18:55:25 GMT
 - request:
     method: get
-    uri: "<APIE_BASE_URI>/v2/eligibilites_cotisation_retraite_probtp/73582032600040?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - sandbox.entreprise.api.gouv.fr
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Status:
-      - 200 OK
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Etag:
-      - W/"a7dfc71d7ce21b87f5651fc29378a868"
-      X-Runtime:
-      - '0.400013'
-      X-Request-Id:
-      - 66d938b8-3068-4251-93f5-e02a56df52f9
-      Date:
-      - Tue, 13 Feb 2018 18:55:25 GMT
-      X-Powered-By:
-      - Phusion Passenger 5.1.11
-      Server:
-      - nginx + Phusion Passenger 5.1.11
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        eyJlbGlnaWJsZSI6dHJ1ZSwibWVzc2FnZSI6IjAwIENvbXB0ZSDDqWxpZ2libGUgcG91ciBhdHRlc3RhdGlvbiBkZSBjb3Rpc2F0aW9uIn0=
-    http_version: 
-  recorded_at: Tue, 13 Feb 2018 18:55:25 GMT
-- request:
-    method: get
-    uri: "<APIE_BASE_URI>/v2/attestations_cotisation_retraite_probtp/73582032600040?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - sandbox.entreprise.api.gouv.fr
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Status:
-      - 200 OK
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      Etag:
-      - W/"1df765c9bc0c42722f227407633f84b7"
-      X-Runtime:
-      - '2.062849'
-      X-Request-Id:
-      - ff9d5c4f-312b-47fa-8f47-6bd20e5179df
-      Date:
-      - Tue, 13 Feb 2018 18:55:27 GMT
-      X-Powered-By:
-      - Phusion Passenger 5.1.11
-      Server:
-      - nginx + Phusion Passenger 5.1.11
-    body:
-      encoding: ASCII-8BIT
-      string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1518548127-f9bdae3e19fff5e657bfffbad441a822c6a8e464-attestation_cotisation_retraite_probtp.pdf"}'
-    http_version: 
-  recorded_at: Tue, 13 Feb 2018 18:55:28 GMT
-- request:
-    method: get
     uri: "<APIE_BASE_URI>/v2/entreprises/418166096?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
     body:
       encoding: US-ASCII
@@ -2140,4 +2045,153 @@ http_interactions:
       string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1538557255-054625acc0439ad7c5dc57977709e428076ef2f1-attestation_vigilance_acoss.pdf"}'
     http_version: 
   recorded_at: Wed, 03 Oct 2018 09:00:56 GMT
+- request:
+    method: get
+    uri: "<APIE_BASE_URI>/v2/eligibilites_cotisation_retraite_probtp/39330144500010?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - sandbox.entreprise.api.gouv.fr
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Strict-Transport-Security:
+      - max-age=15552000
+      Etag:
+      - W/"a7dfc71d7ce21b87f5651fc29378a868"
+      X-Runtime:
+      - '1.059717'
+      X-Request-Id:
+      - 4572c971-bfa3-45a0-bf48-07247177a5d5
+      Date:
+      - Wed, 03 Oct 2018 09:41:47 GMT
+      X-Powered-By:
+      - Phusion Passenger 5.2.3
+      Server:
+      - nginx + Phusion Passenger 5.2.3
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbGlnaWJsZSI6dHJ1ZSwibWVzc2FnZSI6IjAwIENvbXB0ZSDDqWxpZ2libGUgcG91ciBhdHRlc3RhdGlvbiBkZSBjb3Rpc2F0aW9uIn0=
+    http_version: 
+  recorded_at: Wed, 03 Oct 2018 09:41:47 GMT
+- request:
+    method: get
+    uri: "<APIE_BASE_URI>/v2/eligibilites_cotisation_retraite_probtp/43841606700017?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - sandbox.entreprise.api.gouv.fr
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Strict-Transport-Security:
+      - max-age=15552000
+      Etag:
+      - W/"a7dfc71d7ce21b87f5651fc29378a868"
+      X-Runtime:
+      - '0.428853'
+      X-Request-Id:
+      - d4826ba6-6637-40aa-8857-d705f6a717af
+      Date:
+      - Wed, 03 Oct 2018 09:49:02 GMT
+      X-Powered-By:
+      - Phusion Passenger 5.2.3
+      Server:
+      - nginx + Phusion Passenger 5.2.3
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbGlnaWJsZSI6dHJ1ZSwibWVzc2FnZSI6IjAwIENvbXB0ZSDDqWxpZ2libGUgcG91ciBhdHRlc3RhdGlvbiBkZSBjb3Rpc2F0aW9uIn0=
+    http_version: 
+  recorded_at: Wed, 03 Oct 2018 09:49:02 GMT
+- request:
+    method: get
+    uri: "<APIE_BASE_URI>/v2/attestations_cotisation_retraite_probtp/43841606700017?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - sandbox.entreprise.api.gouv.fr
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Strict-Transport-Security:
+      - max-age=15552000
+      Etag:
+      - W/"2d88d8201737ac5204cfe8cc99f4313a"
+      X-Runtime:
+      - '1.490619'
+      X-Request-Id:
+      - 46654dd7-a8c1-46d1-baca-81d6564572e3
+      Date:
+      - Wed, 03 Oct 2018 09:49:04 GMT
+      X-Powered-By:
+      - Phusion Passenger 5.2.3
+      Server:
+      - nginx + Phusion Passenger 5.2.3
+    body:
+      encoding: ASCII-8BIT
+      string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1538560144-1c5b11c052f8799aecbe5a0944d51509d0290143-attestation_cotisation_retraite_probtp.pdf"}'
+    http_version: 
+  recorded_at: Wed, 03 Oct 2018 09:49:04 GMT
 recorded_with: VCR 4.0.0
