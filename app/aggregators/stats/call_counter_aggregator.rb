@@ -10,6 +10,7 @@ class Stats::CallCounterAggregator
   def aggregate(call_result)
     @current_call = call_result
     return if outside_full_scope?
+
     move_to_next_call_counter until in_scope?
     compute_aggregation
   end
