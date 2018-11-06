@@ -13,6 +13,7 @@ class Stats::Last30DaysUsageService
 
   def perform
     return unless @client.connected?
+
     @client.count json_query
     process_raw_response if @client.success?
   end

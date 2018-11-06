@@ -81,6 +81,7 @@ class Dashboard::AvailabilityHistory
     down_time = @availability_history.map do |history|
       http_code = history[1]
       next if http_code < 300 # means it's UP
+
       from = Time.zone.parse(history[0])
       to = Time.zone.parse(history[2])
       interval_to_seconds(to - from)

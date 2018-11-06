@@ -37,8 +37,8 @@ describe Dashboard::CurrentStatusService, type: :service do
     let(:unknwon_endpoint) do
       {
         key: 'bli/blou/unknwon',
-        agg_by_endpoint:  {
-          hits:  {
+        agg_by_endpoint: {
+          hits: {
             hits: [{
               _index: 'logstash-2018.05.22',
               _type: 'siade',

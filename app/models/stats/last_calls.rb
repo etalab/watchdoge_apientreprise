@@ -21,6 +21,7 @@ class Stats::LastCalls
 
   def add(call_result)
     return if @count >= LIMIT
+
     @last_calls << call_result
     @count += 1
   end

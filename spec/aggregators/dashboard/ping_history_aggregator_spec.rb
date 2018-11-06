@@ -19,9 +19,7 @@ describe Dashboard::PingHistoryAggregator do
       end
     end
 
-    it 'is an array' do
-      is_expected.to be_a(Array)
-    end
+    it { is_expected.to be_a(Array) }
 
     its(:size) { is_expected.to eq(Endpoint.where("api_name= 'apie' and provider != 'apientreprise'").size) }
 

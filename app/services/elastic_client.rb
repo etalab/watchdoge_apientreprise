@@ -21,6 +21,7 @@ class ElasticClient
 
   def search(json_query)
     return unless connected?
+
     try_to_perform do
       @client.search body: json_query
     end
@@ -28,6 +29,7 @@ class ElasticClient
 
   def count(json_query)
     return unless connected?
+
     try_to_perform do
       @client.count body: json_query
     end
