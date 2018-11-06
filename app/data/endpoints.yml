@@ -342,24 +342,21 @@
   http_path: '/v2/etablissements_legacy/41816609600069'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
-# ###############
-# v3
-# ###############
-- uname: apie_3_etablissements
-  name: Etablissements Restored
+- uname: apie_2_etablissements_v3
+  name: Etablissements (INSEE v3)
   provider: insee
   api_name: apie
-  api_version: 3
+  api_version: 2
   ping_period: 5
-  http_path: '/v3/etablissements_restored/41816609600069'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+  http_path: '/v2/etablissements/41816609600069'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge", "with_insee_v3": "true" }'
 
-- uname: apie_3_entreprises
-  name: Entreprise Restored
+- uname: apie_2_entreprises_v3
+  name: Entreprise (INSEE v3)
   provider: insee
   api_name: apie
-  api_version: 3
+  api_version: 2
   ping_period: 60
-  http_path: '/v3/entreprises_restored/418166096'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+  http_path: '/v2/entreprises/418166096'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge", "with_insee_v3": "true" }'
 
