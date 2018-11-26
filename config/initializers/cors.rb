@@ -15,7 +15,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
-    origins 'api.gouv.fr'
+    origins '*api.gouv.fr'
 
     resource '/api/watchdoge/stats/last_30_days_usage',
              headers: :any,
