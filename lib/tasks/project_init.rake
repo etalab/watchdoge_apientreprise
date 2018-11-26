@@ -27,7 +27,7 @@ def secrets
   <<-YML
     defaults: &DEFAULTS
       apie_jwt_token: such.jwt.token
-      apie_base_uri: https://staging.entreprise.api.gouv.fr
+      apie_base_uri: https://sandbox.entreprise.api.gouv.fr
       sirene_base_uri: https://sandbox.entreprise.data.gouv.fr
       ping_email_recipient: test@example.com
       ping_email_sender: test@example.com
