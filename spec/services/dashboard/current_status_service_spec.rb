@@ -13,7 +13,7 @@ describe Dashboard::CurrentStatusService, type: :service do
     let(:service) { described_class.new.perform }
     let(:json) { { results: service.results } }
     let(:endpoints_unames) { results.map { |e| e['uname'] }.sort }
-    let(:elements) { Endpoint.where("api_name = 'apie' and provider != 'apientreprise'") }
+    let(:elements) { Endpoint.where("api_name = 'apie' and provider != 'apientreprise' and api_version = 2") }
     let(:nb_elements) { elements.size }
     let(:expected_endpoints_unames) { elements.map(&:uname).sort }
 

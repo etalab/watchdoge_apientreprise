@@ -21,7 +21,7 @@ describe Dashboard::PingHistoryAggregator do
 
     it { is_expected.to be_a(Array) }
 
-    its(:size) { is_expected.to eq(Endpoint.where("api_name= 'apie' and provider != 'apientreprise'").size) }
+    its(:size) { is_expected.to eq(Endpoint.where("api_name= 'apie' and provider != 'apientreprise' and api_version = 2").size) }
 
     # rubocop:disable RSpec/ExampleLength
     it 'is an array of EndpointAvailabilityHistory' do
