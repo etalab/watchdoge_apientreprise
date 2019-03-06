@@ -195,7 +195,7 @@
   api_name: apie
   api_version: 2
   ping_period: 60
-  http_path: '/v2/attestations_cotisation_retraite_probtp/43841606700017'
+  http_path: '/v2/attestations_cotisation_retraite_probtp/53123615600018'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_entreprises
@@ -258,7 +258,7 @@
   provider: acoss
   api_version: 2
   ping_period: 60
-  http_path: '/v2/attestations_sociales_acoss/499760866'
+  http_path: '/v2/attestations_sociales_acoss/799238639'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_certificats_qualibat
