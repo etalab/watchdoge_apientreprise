@@ -1,12 +1,13 @@
 require 'forwardable'
 
-class Stats::Last30DaysUsageService
+class Stats::LastApiUsageService
   extend Forwardable
   delegate %i[success? errors] => :@client
 
-  attr_reader :results, :hits
+  attr_reader :results, :hits, :elk_time_range
 
-  def initialize
+  def initialize(elk_time_range: '1M')
+    @elk_time_range = elk_time_range
     @client = ElasticClient.new
     @client.establish_connection
   end
@@ -21,7 +22,15 @@ class Stats::Last30DaysUsageService
   private
 
   def json_query
-    File.read('app/data/queries/last_30_days_usage.json')
+    JSON.parse erb_query
+  end
+
+  def erb_query
+    ERB.new(query_template).result(binding)
+  end
+
+  def query_template
+    File.read('app/data/queries/last_api_usage.json.erb')
   end
 
   def process_raw_response
