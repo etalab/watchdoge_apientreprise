@@ -28,7 +28,7 @@ describe 'Elk queries' do
 
   context 'with last 30 days usage' do
     it 'is a JSON file' do
-      data = File.read('app/data/queries/last_30_days_usage.json')
+      data = File.read('app/data/queries/last_api_usage.json.erb')
       json = JSON.parse(data)
       expect(json.class).to be(Hash)
     end

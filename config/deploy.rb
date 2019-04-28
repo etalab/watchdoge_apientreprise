@@ -99,7 +99,7 @@ task deploy: :remote_environment do
           comment 'Updating cronotab'.green
           invoke :'whenever:update'
         else
-          invoke :mono_ping
+#          invoke :mono_ping
         end
 
         invoke :passenger

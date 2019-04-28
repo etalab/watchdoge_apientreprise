@@ -5,7 +5,7 @@
         {
           "range": {
             "@timestamp": {
-              "gte": "now-1M",
+              "gte": "now-<%= elk_time_range %>",
               "lte": "now/d"
             }
           }
