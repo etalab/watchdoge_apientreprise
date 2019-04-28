@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe Stats::LastApiUsageService, type: :service, vcr: { cassette_name: 'stats/last_30_days_usage' } do
-  subject(:service) { described_class.new.tap(&:perform) }
+  subject(:service) { described_class.new(elk_time_range: '1M').tap(&:perform) }
 
   describe 'service (e2e)' do
     its(:success?) { is_expected.to be_truthy }
-    its(:results) { is_expected.to eq(1_613_113) }
+    its(:results) { is_expected.to eq(3_231_910) }
   end
 
   describe 'service (mocked)' do
