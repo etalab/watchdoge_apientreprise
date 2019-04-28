@@ -37,8 +37,8 @@ describe StatsController, type: :controller do
 
     describe 'happy path (mocked)' do
       before do
-        allow_any_instance_of(Stats::Last30DaysUsageService).to receive(:success?).and_return(true)
-        allow_any_instance_of(Stats::Last30DaysUsageService).to receive(:results).and_return(1_000_001)
+        allow_any_instance_of(Stats::LastApiUsageService).to receive(:success?).and_return(true)
+        allow_any_instance_of(Stats::LastApiUsageService).to receive(:results).and_return(1_000_001)
       end
 
       its(:status) { is_expected.to eq(200) }
@@ -46,7 +46,7 @@ describe StatsController, type: :controller do
     end
 
     context 'when having an error' do
-      before { allow_any_instance_of(Stats::Last30DaysUsageService).to receive(:success?).and_return(false) }
+      before { allow_any_instance_of(Stats::LastApiUsageService).to receive(:success?).and_return(false) }
 
       its(:status) { is_expected.to eq(500) }
     end

@@ -1,6 +1,6 @@
 require 'forwardable'
 
-class Stats::Last30DaysUsageService
+class Stats::LastApiUsageService
   extend Forwardable
   delegate %i[success? errors] => :@client
 

@@ -11,7 +11,7 @@ class StatsController < ApplicationController
   end
 
   def last_30_days_usage
-    service = Stats::Last30DaysUsageService.new.tap(&:perform)
+    service = Stats::LastApiUsageService.new.tap(&:perform)
 
     if service.success?
       render json: service.results, status: 200

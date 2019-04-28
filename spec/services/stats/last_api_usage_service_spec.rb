@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Stats::Last30DaysUsageService, type: :service, vcr: { cassette_name: 'stats/last_30_days_usage' } do
+describe Stats::LastApiUsageService, type: :service, vcr: { cassette_name: 'stats/last_30_days_usage' } do
   subject(:service) { described_class.new.tap(&:perform) }
 
   describe 'service (e2e)' do
