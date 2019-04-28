@@ -51,4 +51,29 @@ describe StatsController, type: :controller do
       its(:status) { is_expected.to eq(500) }
     end
   end
+
+  describe '#last_year_usage', vcr: { cassette_name: 'stats/last_year_usage' } do
+    subject(:response) { get :last_year_usage }
+
+    describe 'happy path (e2e)', vcr: { cassette_name: 'stats/last_year_usage' } do
+      its(:status) { is_expected.to eq 200 }
+      its('body.to_i') { is_expected.to be > 20_000_000 }
+    end
+
+    describe 'happy path (mocked)' do
+      before do
+        allow_any_instance_of(Stats::LastApiUsageService).to receive(:success?).and_return(true)
+        allow_any_instance_of(Stats::LastApiUsageService).to receive(:results).and_return(20_000_001)
+      end
+
+      its(:status) { is_expected.to eq(200) }
+      its('body.to_i') { is_expected.to be > 20_000_000 }
+    end
+
+    context 'when having an error' do
+      before { allow_any_instance_of(Stats::LastApiUsageService).to receive(:success?).and_return(false) }
+
+      its(:status) { is_expected.to eq(500) }
+    end
+  end
 end

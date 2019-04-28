@@ -20,4 +20,8 @@ describe 'routes', type: :routing do
   it 'route to last_30_days_usage' do
     expect(get('api/watchdoge/stats/last_30_days_usage/')).to route_to(controller: 'stats', action: 'last_30_days_usage')
   end
+
+  it 'route to last_year_usage' do
+    expect(get('api/watchdoge/stats/last_year_usage/')).to route_to(controller: 'stats', action: 'last_year_usage')
+  end
 end
