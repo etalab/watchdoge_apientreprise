@@ -98,8 +98,6 @@ task deploy: :remote_environment do
           invoke :sidekiq
           comment 'Updating cronotab'.green
           invoke :'whenever:update'
-        else
-#          invoke :mono_ping
         end
 
         invoke :passenger
@@ -114,11 +112,6 @@ end
 task refill_database: :remote_environment do
   comment 'Refill Endpoints table'.yellow
   command "/usr/local/rbenv/shims/bundle exec rake refill_database RAILS_ENV=#{ENV['to']}"
-end
-
-task mono_ping: :remote_environment do
-  comment 'One Ping Attempt'.yellow
-  command "/usr/local/rbenv/shims/bundle exec rake watch:all RAILS_ENV=#{ENV['to']}"
 end
 
 task :sidekiq do

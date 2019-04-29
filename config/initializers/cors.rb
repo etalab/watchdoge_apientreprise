@@ -19,7 +19,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins '*'
 
-    resource '/api/watchdoge/stats/last_30_days_usage',
+    resource '/api/watchdoge/stats/*',
              headers: :any,
              methods: %i[get head]
   end
