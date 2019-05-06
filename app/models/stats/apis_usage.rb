@@ -65,9 +65,9 @@ class Stats::ApisUsage
 
   def increase_counter(call_result)
     @api_usage_counter.count += 1
-    @api_usage_counter.success_count += 1 if call_result.code =~ /2\d+/
-    @api_usage_counter.client_errors_count += 1 if call_result.code =~ /4\d+/
-    @api_usage_counter.server_errors_count += 1 if call_result.code =~ /5\d+/
+    @api_usage_counter.success_count += 1 if call_result.code.to_s =~ /^2\d+$/
+    @api_usage_counter.client_errors_count += 1 if call_result.code.to_s =~ /^4\d+$/
+    @api_usage_counter.server_errors_count += 1 if call_result.code.to_s =~ /^5\d+$/
   end
 
   def initialize_copy(original)
