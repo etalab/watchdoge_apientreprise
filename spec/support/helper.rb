@@ -21,10 +21,10 @@ def sorted_fake_calls(size: 10, oldest_timestamp: 8.days)
 end
 # rubocop:enable Metrics/AbcSize
 
-def fake_elk_source(endpoint, timestamp)
+def fake_elk_source(endpoint, timestamp, status = nil)
   {
     'path': endpoint.http_path,
-    'status': %w[200 206 400 404 500 501].sample,
+    'status': status.nil? ? %w[200 206 400 404 500 501].sample : status,
     '@timestamp': timestamp.to_s,
     'parameters': { context: 'Ping', recipient: 'SGMAP', siret: '41816609600069', token: '[FILTERED]' },
     'response': {
