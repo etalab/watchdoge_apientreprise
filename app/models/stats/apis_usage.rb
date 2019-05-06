@@ -7,8 +7,8 @@ class Stats::ApisUsage
   attr_accessor :scope_duration
 
   EndpointUsageCounter = Struct.new(:endpoint, :count, :success_count, :client_errors_count, :server_errors_count) do
-    def initialize(ep)
-      self.endpoint = ep
+    def initialize(ept)
+      self.endpoint = ept
       self.count = 0
       self.success_count = self.client_errors_count = self.server_errors_count = 0.0
     end
@@ -18,9 +18,9 @@ class Stats::ApisUsage
         uname: endpoint.uname,
         name: endpoint.name,
         total: count,
-        percent_success: (success_count/count*100).round(1),
-        percent_client_errors: (client_errors_count/count*100).round(1),
-        percent_server_errors: (server_errors_count/count*100).round(1)
+        percent_success: (success_count / count * 100).round(1),
+        percent_client_errors: (client_errors_count / count * 100).round(1),
+        percent_server_errors: (server_errors_count / count * 100).round(1)
       }
     end
   end

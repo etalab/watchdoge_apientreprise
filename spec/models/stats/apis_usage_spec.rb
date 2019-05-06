@@ -18,7 +18,7 @@ describe Stats::ApisUsage do
       its(:as_json) { is_expected.to match_json_schema('stats/apis_usage') }
 
       it 'has correct percentages' do
-        endpoint_usage = subject.endpoints.first
+        endpoint_usage = counter.endpoints.first
         expect(endpoint_usage.success_count).to eq 0.0
         expect(endpoint_usage.client_errors_count).to eq 0.0
         expect(endpoint_usage.server_errors_count).to eq 1.0
