@@ -9,16 +9,13 @@ describe Stats::JwtUsageAggregator do
 
     before { agg.aggregate }
 
-    it 'has empty number of calls' do
-      expect(agg.number_of_calls.dig(:number_of_calls, :last_10_minutes, :total)).to eq 0
-    end
-
     it 'has empty last_calls' do
       expect(agg.last_calls.dig(:last_calls)).to be_empty
     end
 
-    it 'has empty code percentages' do
-      expect(agg.http_code_percentages.dig(:http_code_percentages, :last_30_hours)).to be_empty
+    it 'has empty APIs usage' do
+      expect(agg.apis_usage.dig(:apis_usage, :last_30_hours, :by_endpoint)).to be_empty
+      expect(agg.apis_usage.dig(:apis_usage, :last_30_hours, :total)).to eq 0
     end
   end
 
@@ -40,20 +37,14 @@ describe Stats::JwtUsageAggregator do
       end
     end
 
-    # it does not mock the sub-aggregator... quite hard to do...
-    its(:number_of_calls) { is_expected.to match_json_schema('stats/number_of_calls') }
-    it 'has at least few calls in 8 days ' do
-      expect(jwt_usage_aggregator.number_of_calls.dig(:number_of_calls, :last_8_days, :total)).to be > 2
-    end
-
     its(:last_calls) { is_expected.to match_json_schema('stats/last_calls') }
     it 'has at least 20 last calls in the last 8 days' do
       expect(jwt_usage_aggregator.last_calls.dig(:last_calls).size).to be_between(20, Stats::LastCalls::LIMIT)
     end
 
-    its(:http_code_percentages) { is_expected.to match_json_schema('stats/http_code_percentages') }
+    its(:apis_usage) { is_expected.to match_json_schema('stats/apis_usage') }
     it 'has at least few http code stats in 8 days ' do
-      expect(jwt_usage_aggregator.http_code_percentages.dig(:http_code_percentages, :last_8_days).size).to be > 1
+      expect(jwt_usage_aggregator.apis_usage.dig(:apis_usage, :last_8_days).size).to be > 1
     end
   end
 end
