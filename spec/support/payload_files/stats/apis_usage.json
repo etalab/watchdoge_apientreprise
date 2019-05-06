@@ -1,0 +1,62 @@
+{
+  "apis_usage": {
+    "last_30_hours": {
+      "total": 56891041,
+      "by_endpoint": [
+        {
+          "uname": "anim ullamco aliquip aliqua",
+          "name": "laboris ex",
+          "total": 23017487,
+          "percent_success": 36.15,
+          "percent_client_errors": 88.42,
+          "percent_server_errors": 56.02
+        },
+        {
+          "uname": "tempor magna",
+          "name": "consequat dolor",
+          "total": 23951363,
+          "percent_success": 7.38,
+          "percent_client_errors": 76.86,
+          "percent_server_errors": 3.54
+        },
+        {
+          "uname": "labore proident mollit veniam",
+          "name": "nisi laborum",
+          "total": 59361674,
+          "percent_success": 78.38,
+          "percent_client_errors": 83.16,
+          "percent_server_errors": 64.05
+        }
+      ]
+    },
+    "last_8_days": {
+      "total": 56891041,
+      "by_endpoint": [
+        {
+          "uname": "anim ullamco aliquip aliqua",
+          "name": "laboris ex",
+          "total": 23017487,
+          "percent_success": 36.15,
+          "percent_client_errors": 88.42,
+          "percent_server_errors": 56.02
+        },
+        {
+          "uname": "tempor magna",
+          "name": "consequat dolor",
+          "total": 23951363,
+          "percent_success": 7.38,
+          "percent_client_errors": 76.86,
+          "percent_server_errors": 3.54
+        },
+        {
+          "uname": "labore proident mollit veniam",
+          "name": "nisi laborum",
+          "total": 59361674,
+          "percent_success": 78.38,
+          "percent_client_errors": 83.16,
+          "percent_server_errors": 64.05
+        }
+      ]
+    }
+  }
+}
