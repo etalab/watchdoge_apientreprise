@@ -61,14 +61,6 @@ class Stats::ApisUsageService
     get_percent_with /^2\d{2}$/
   end
 
-  def get_percent_with(regexp)
-    total = @current_api['status-code']['buckets']
-      .select    { |item|      item['key'].to_s =~ regexp }
-      .inject(0) { |sum, item| sum + item['doc_count'] }
-
-    (total.to_f / @current_api['doc_count'].to_f * 100).round(1)
-  end
-
   def current_percent_not_found
     get_percent_with /^404$/
   end
@@ -79,6 +71,28 @@ class Stats::ApisUsageService
 
   def current_percent_server_errors
     get_percent_with /^5\d{2}$/
+  end
+
+  def get_percent_with(regexp)
+    count_http_codes = count_http_codes_with regexp
+
+    (count_http_codes / total_for_current_api * 100).round(1)
+  end
+
+  def count_http_codes_with(regexp)
+    current_elements
+      .select { |i| i['key'].to_s =~ regexp }
+      .map    { |i| i['doc_count'] }
+      .sum
+      .to_f
+  end
+
+  def total_for_current_api
+    @current_api['doc_count'].to_f
+  end
+
+  def current_elements
+    @current_api['status-code']['buckets']
   end
 
   def retrieved_aggregations
