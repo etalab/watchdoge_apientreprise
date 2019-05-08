@@ -14,7 +14,7 @@ describe StatsController, type: :controller do
     describe 'when having an error', vcr: { cassette_name: 'stats/jwt_usage' } do
       let(:jti) { valid_jti }
 
-      before { allow_any_instance_of(Stats::JwtUsageService).to receive(:success?).and_return(false) }
+      before { allow_any_instance_of(Stats::ApisUsageService).to receive(:success?).and_return(false) }
 
       its(:status) { is_expected.to eq(500) }
     end
