@@ -1,0 +1,39 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-<%= elk_time_range %>",
+              "lte": "now"
+            }
+          }
+        },
+        {
+          "term": {
+            "user_access.jti.keyword": {
+              "value": "<%= jti %>"
+            }
+          }
+        }
+      ]
+    }
+  },
+      "aggs" : {
+        "endpoints" : {
+            "terms" : {
+                "field" : "path.keyword",
+                "size" : 100
+            },
+            "aggs" : {
+              "status-code" : {
+                "terms": {
+                  "field": "status"
+                }
+              }
+            }
+        }
+    }
+}
