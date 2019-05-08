@@ -42,7 +42,7 @@ class StatsController < ApplicationController
   end
 
   def apis_usage_service(elk_time_range)
-    service  = Stats::ApisUsageService.new jti: jti, elk_time_range: elk_time_range
+    service = Stats::ApisUsageService.new jti: jti, elk_time_range: elk_time_range
     service.perform
     @success &&= service.success?
 

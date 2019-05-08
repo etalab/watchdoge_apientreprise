@@ -41,7 +41,8 @@ class Stats::ApisUsageService
   def current_endpoint
     @endpoint_factory.find_endpoint_by_http_path(
       http_path: @current_api['key'],
-      api_name: 'apie')
+      api_name: 'apie'
+    )
   end
 
   def current_api_usage
@@ -54,23 +55,24 @@ class Stats::ApisUsageService
       current_percent_success,
       current_percent_not_found,
       current_percent_other_client_errors,
-      current_percent_server_errors)
+      current_percent_server_errors
+    )
   end
 
   def current_percent_success
-    get_percent_with /^2\d{2}$/
+    get_percent_with(/^2\d{2}$/)
   end
 
   def current_percent_not_found
-    get_percent_with /^404$/
+    get_percent_with(/^404$/)
   end
 
   def current_percent_other_client_errors
-    get_percent_with /^(?!404)4\d{2}$/
+    get_percent_with(/^(?!404)4\d{2}$/)
   end
 
   def current_percent_server_errors
-    get_percent_with /^5\d{2}$/
+    get_percent_with(/^5\d{2}$/)
   end
 
   def get_percent_with(regexp)
