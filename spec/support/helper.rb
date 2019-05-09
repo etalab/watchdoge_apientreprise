@@ -3,10 +3,9 @@ def endpoints_count
 end
 
 def valid_jti
-  '47260a7e-9918-464e-b7da-36c5c6847d8a' # watchdoge JTI
+  'c35a539b-5608-4dba-9ed1-12883e580232' # watchdoge JTI
 end
 
-# rubocop:disable Metrics/AbcSize
 def sorted_fake_calls(size: 10, oldest_timestamp: 8.days)
   endpoint_factory = EndpointFactory.new
   endpoints = endpoint_factory.endpoints.select { |e| e.api_name == 'apie' }
@@ -19,12 +18,11 @@ def sorted_fake_calls(size: 10, oldest_timestamp: 8.days)
 
   fake_calls.sort_by(&:timestamp)
 end
-# rubocop:enable Metrics/AbcSize
 
-def fake_elk_source(endpoint, timestamp)
+def fake_elk_source(endpoint, timestamp, status = nil)
   {
     'path': endpoint.http_path,
-    'status': %w[200 206 400 404 500 501].sample,
+    'status': status.nil? ? %w[200 206 400 404 500 501].sample : status,
     '@timestamp': timestamp.to_s,
     'parameters': { context: 'Ping', recipient: 'SGMAP', siret: '41816609600069', token: '[FILTERED]' },
     'response': {

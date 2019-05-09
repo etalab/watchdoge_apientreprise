@@ -55,6 +55,9 @@ Layout/MultilineOperationIndentation:
   Exclude:
     - 'config/deploy.rb'
 
+Metrics/AbcSize:
+ Max: 25
+
 Metrics/BlockLength:
   Exclude:
     - 'Guardfile' # mono bloc inside...

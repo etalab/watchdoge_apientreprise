@@ -1,12 +1,17 @@
 class StatsController < ApplicationController
   def jwt_usage
-    service = Stats::JwtUsageService.new(jti: jti)
-    service.perform
+    @success = true
 
-    if service.success?
-      render json: service.results, status: 200
+    last_calls_service = Stats::LastCallsService.new jti: jti
+    last_calls_service.perform
+    @success &&= last_calls_service.success?
+
+    usages = apis_usages
+
+    if @success
+      render json: { apis_usage: usages, last_calls: last_calls_service.results }, status: 200
     else
-      render json: { message: service.errors.join(',') }, status: 500
+      render json: { message: 'an error occured' }, status: 500
     end
   end
 
@@ -34,5 +39,21 @@ class StatsController < ApplicationController
 
   def jti
     params.permit(:jti)['jti']
+  end
+
+  def apis_usage_service(elk_time_range)
+    service = Stats::ApisUsageService.new jti: jti, elk_time_range: elk_time_range
+    service.perform
+    @success &&= service.success?
+
+    service
+  end
+
+  def apis_usages
+    {
+      "last_10_minutes": apis_usage_service('10m').results,
+      "last_30_hours": apis_usage_service('30h').results,
+      "last_8_days": apis_usage_service('8d').results
+    }
   end
 end

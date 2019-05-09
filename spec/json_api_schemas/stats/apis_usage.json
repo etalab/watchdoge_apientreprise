@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "patternProperties": {
+    "^last_[0-9]+_(minutes|hours|days)$": {
+      "$ref": "apis_usage_item.json"
+    }
+  }
+}
