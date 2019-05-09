@@ -4,7 +4,7 @@ class Stats::ApisUsageService
   extend Forwardable
   delegate %i[success? errors] => :@client
 
-  attr_reader :jti, :elk_time_range, :results
+  attr_reader :jti, :elk_time_range
 
   ApiUsage = Struct.new(:name, :uname, :total, :percent_success, :percent_not_found, :percent_other_client_errors, :percent_server_errors)
 
@@ -14,7 +14,7 @@ class Stats::ApisUsageService
     @client = ElasticClient.new
     @client.establish_connection
     @endpoint_factory = EndpointFactory.new
-    @results = []
+    @endpoints_usage = []
   end
 
   def perform
@@ -27,12 +27,19 @@ class Stats::ApisUsageService
     self
   end
 
+  def results
+    {
+      total: total_hits,
+      by_endpoint: @endpoints_usage
+    }
+  end
+
   private
 
   def process_raw_response
     retrieved_aggregations.each do |item|
       @current_api = item
-      @results << current_api_usage.as_json
+      @endpoints_usage << current_api_usage.to_h
     end
   rescue Elasticsearch::Transport::Transport::Errors::BadRequest
     @success = false
@@ -99,6 +106,10 @@ class Stats::ApisUsageService
 
   def retrieved_aggregations
     @client.raw_response['aggregations']['endpoints']['buckets']
+  end
+
+  def total_hits
+    @client.raw_response['hits']['total'].to_i
   end
 
   def json_query

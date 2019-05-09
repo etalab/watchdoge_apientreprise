@@ -8,10 +8,10 @@ describe Stats::ApisUsageService, type: :service, vcr: { cassette_name: 'stats/a
     its(:results) { is_expected.to match_json_schema('stats/apis_usage_item') }
 
     it 'has expected percentages' do
-      expect(service.results.first['percent_success']).to eq 97.6
-      expect(service.results.first['percent_not_found']).to eq 0.0
-      expect(service.results.first['percent_other_client_errors']).to eq 0.0
-      expect(service.results.first['percent_server_errors']).to eq 2.4
+      expect(service.results[:by_endpoint].first[:percent_success]).to eq 97.6
+      expect(service.results[:by_endpoint].first[:percent_not_found]).to eq 0.0
+      expect(service.results[:by_endpoint].first[:percent_other_client_errors]).to eq 0.0
+      expect(service.results[:by_endpoint].first[:percent_server_errors]).to eq 2.4
     end
   end
 end
