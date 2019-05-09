@@ -24,7 +24,7 @@
       "aggs" : {
         "endpoints" : {
             "terms" : {
-                "field" : "path.keyword",
+                "field" : "user_access.resource.keyword",
                 "size" : 100
             },
             "aggs" : {

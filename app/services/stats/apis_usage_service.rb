@@ -6,7 +6,7 @@ class Stats::ApisUsageService
 
   attr_reader :jti, :elk_time_range
 
-  ApiUsage = Struct.new(:name, :uname, :total, :percent_success, :percent_not_found, :percent_other_client_errors, :percent_server_errors)
+  ApiUsage = Struct.new(:name, :total, :percent_success, :percent_not_found, :percent_other_client_errors, :percent_server_errors)
 
   def initialize(jti:, elk_time_range:)
     @jti = jti
@@ -45,19 +45,9 @@ class Stats::ApisUsageService
     @success = false
   end
 
-  def current_endpoint
-    @endpoint_factory.find_endpoint_by_http_path(
-      http_path: @current_api['key'],
-      api_name: 'apie'
-    )
-  end
-
   def current_api_usage
-    endpoint = current_endpoint
-
     ApiUsage.new(
-      endpoint.name,
-      endpoint.uname,
+      current_api_name,
       @current_api['doc_count'],
       current_percent_success,
       current_percent_not_found,
@@ -104,8 +94,12 @@ class Stats::ApisUsageService
     @current_api['status-code']['buckets']
   end
 
+  def current_api_name
+    @current_api['key'].gsub('_', ' ').capitalize
+  end
+
   def retrieved_aggregations
-    @client.raw_response['aggregations']['endpoints']['buckets']
+    aggs = @client.raw_response['aggregations']['endpoints']['buckets']
   end
 
   def total_hits

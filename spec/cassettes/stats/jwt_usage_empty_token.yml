@@ -28,13 +28,13 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Wed, 08 May 2019 14:07:32 GMT
+  recorded_at: Thu, 09 May 2019 09:47:28 GMT
 - request:
     method: get
     uri: http://217.182.164.215:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d/d","lte":"now/d"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"path.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      string: '{"size":50,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d/d","lte":"now/d"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"sort":[{"@timestamp":{"order":"desc"}}]}'
     headers:
       Content-Type:
       - application/json
@@ -55,9 +55,12 @@ http_interactions:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"took":23,"timed_out":false,"_shards":{"total":156,"successful":156,"failed":0},"hits":{"total":0,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+      string: '{"took":3,"timed_out":false,"_shards":{"total":161,"successful":150,"failed":11,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"3tDGuNozQ5iYSmmUqklytw","index":".kibana"}},{"shard":0,"index":"ind","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"-3kYofKHS4OpgIjGJ-dCLQ","index":"ind"}},{"shard":0,"index":"my_index","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}}]},"hits":{"total":0,"max_score":null,"hits":[]}}'
     http_version: 
-  recorded_at: Wed, 08 May 2019 14:07:32 GMT
+  recorded_at: Thu, 09 May 2019 09:47:28 GMT
 - request:
     method: get
     uri: http://watchdoge.entreprise.api.gouv.fr:9200/_nodes/http
@@ -86,13 +89,13 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Wed, 08 May 2019 14:07:32 GMT
+  recorded_at: Thu, 09 May 2019 09:47:28 GMT
 - request:
     method: get
     uri: http://217.182.164.215:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":50,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d/d","lte":"now/d"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"sort":[{"@timestamp":{"order":"desc"}}]}'
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-10m","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"resource.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
     headers:
       Content-Type:
       - application/json
@@ -113,18 +116,15 @@ http_interactions:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"took":4,"timed_out":false,"_shards":{"total":156,"successful":145,"failed":11,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
-        mapping found for [@timestamp] in order to sort on","index_uuid":"3tDGuNozQ5iYSmmUqklytw","index":".kibana"}},{"shard":0,"index":"ind","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
-        mapping found for [@timestamp] in order to sort on","index_uuid":"-3kYofKHS4OpgIjGJ-dCLQ","index":"ind"}},{"shard":0,"index":"my_index","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
-        mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}}]},"hits":{"total":0,"max_score":null,"hits":[]}}'
+      string: '{"took":2,"timed_out":false,"_shards":{"total":161,"successful":161,"failed":0},"hits":{"total":0,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
     http_version: 
-  recorded_at: Wed, 08 May 2019 14:07:32 GMT
+  recorded_at: Thu, 09 May 2019 09:47:28 GMT
 - request:
     method: get
-    uri: http://217.182.164.215:9200/_search
+    uri: http://watchdoge.entreprise.api.gouv.fr:9200/_nodes/http
     body:
-      encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-10m","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"path.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      encoding: US-ASCII
+      string: ''
     headers:
       Content-Type:
       - application/json
@@ -145,15 +145,15 @@ http_interactions:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"took":4,"timed_out":false,"_shards":{"total":156,"successful":156,"failed":0},"hits":{"total":0,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Wed, 08 May 2019 14:25:47 GMT
+  recorded_at: Thu, 09 May 2019 09:47:29 GMT
 - request:
     method: get
     uri: http://217.182.164.215:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-30h","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"path.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-30h","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"resource.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
     headers:
       Content-Type:
       - application/json
@@ -174,15 +174,15 @@ http_interactions:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"took":2,"timed_out":false,"_shards":{"total":156,"successful":156,"failed":0},"hits":{"total":0,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+      string: '{"took":2,"timed_out":false,"_shards":{"total":161,"successful":161,"failed":0},"hits":{"total":0,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
     http_version: 
-  recorded_at: Wed, 08 May 2019 14:25:47 GMT
+  recorded_at: Thu, 09 May 2019 09:47:29 GMT
 - request:
     method: get
-    uri: http://217.182.164.215:9200/_search
+    uri: http://watchdoge.entreprise.api.gouv.fr:9200/_nodes/http
     body:
-      encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"path.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      encoding: US-ASCII
+      string: ''
     headers:
       Content-Type:
       - application/json
@@ -203,7 +203,123 @@ http_interactions:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"took":3,"timed_out":false,"_shards":{"total":156,"successful":156,"failed":0},"hits":{"total":0,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Wed, 08 May 2019 14:25:47 GMT
+  recorded_at: Thu, 09 May 2019 09:47:29 GMT
+- request:
+    method: get
+    uri: http://217.182.164.215:9200/_search
+    body:
+      encoding: UTF-8
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"resource.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.15.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"took":2,"timed_out":false,"_shards":{"total":161,"successful":161,"failed":0},"hits":{"total":0,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+    http_version: 
+  recorded_at: Thu, 09 May 2019 09:47:29 GMT
+- request:
+    method: get
+    uri: http://217.182.164.215:9200/_search
+    body:
+      encoding: UTF-8
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-10m","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"user_access.resource.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.15.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"took":2,"timed_out":false,"_shards":{"total":161,"successful":161,"failed":0},"hits":{"total":0,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+    http_version: 
+  recorded_at: Thu, 09 May 2019 09:54:23 GMT
+- request:
+    method: get
+    uri: http://217.182.164.215:9200/_search
+    body:
+      encoding: UTF-8
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-30h","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"user_access.resource.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.15.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"took":7,"timed_out":false,"_shards":{"total":161,"successful":161,"failed":0},"hits":{"total":0,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+    http_version: 
+  recorded_at: Thu, 09 May 2019 09:54:23 GMT
+- request:
+    method: get
+    uri: http://217.182.164.215:9200/_search
+    body:
+      encoding: UTF-8
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"user_access.resource.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.15.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"took":2,"timed_out":false,"_shards":{"total":161,"successful":161,"failed":0},"hits":{"total":0,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+    http_version: 
+  recorded_at: Thu, 09 May 2019 09:54:23 GMT
 recorded_with: VCR 4.0.0

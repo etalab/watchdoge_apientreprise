@@ -13,12 +13,8 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["uname", "name", "total", "percent_success", "percent_not_found", "percent_other_client_errors", "percent_server_errors"],
+        "required": ["name", "total", "percent_success", "percent_not_found", "percent_other_client_errors", "percent_server_errors"],
         "properties": {
-          "uname": {
-            "type": "string",
-            "title": "The Uname of the endpoint"
-          },
           "name": {
             "type": "string",
             "title": "The displayed name of the endpoint"
