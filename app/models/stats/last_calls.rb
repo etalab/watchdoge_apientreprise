@@ -27,8 +27,6 @@ class Stats::LastCalls
   end
 
   def as_json
-    {
-      last_calls: @last_calls.map { |e| CallAdapter.new(e).as_json }
-    }
+    @last_calls.map { |e| CallAdapter.new(e).as_json }
   end
 end
