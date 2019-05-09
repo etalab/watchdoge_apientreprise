@@ -95,11 +95,11 @@ class Stats::ApisUsageService
   end
 
   def current_api_name
-    @current_api['key'].gsub('_', ' ').capitalize
+    @current_api['key'].tr('_', ' ').capitalize
   end
 
   def retrieved_aggregations
-    aggs = @client.raw_response['aggregations']['endpoints']['buckets']
+    @client.raw_response['aggregations']['endpoints']['buckets']
   end
 
   def total_hits
