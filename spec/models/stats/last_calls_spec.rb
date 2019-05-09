@@ -15,9 +15,7 @@ describe Stats::LastCalls do
   describe 'without any call' do
     it { is_expected.to match_json_schema('stats/last_calls') }
 
-    it 'has 0 element' do
-      expect(json.dig(:last_calls).size).to eq(0)
-    end
+    its(:size) { is_expected.to eq 0 }
   end
 
   describe 'only one call' do
@@ -25,9 +23,7 @@ describe Stats::LastCalls do
 
     it { is_expected.to match_json_schema('stats/last_calls') }
 
-    it 'has 1 element' do
-      expect(json.dig(:last_calls).size).to eq(1)
-    end
+    its(:size) { is_expected.to eq 1 }
   end
 
   describe 'with many calls' do
@@ -38,9 +34,7 @@ describe Stats::LastCalls do
 
       it { is_expected.to match_json_schema('stats/last_calls') }
 
-      it 'has 37 elements' do
-        expect(json.dig(:last_calls).size).to eq(37)
-      end
+      its(:size) { is_expected.to eq 37 }
     end
 
     context 'when it is called more than 50 times' do
@@ -48,9 +42,7 @@ describe Stats::LastCalls do
 
       it { is_expected.to match_json_schema('stats/last_calls') }
 
-      it 'has 50 elements' do
-        expect(json.dig(:last_calls).size).to eq(50)
-      end
+      its(:size) { is_expected.to eq 50 }
     end
   end
 end
