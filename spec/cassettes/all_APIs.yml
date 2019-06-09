@@ -2247,4 +2247,54 @@ http_interactions:
       string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1551869662-e6315e5525b4ff28b57168a02622314d7072322a-attestation_cotisation_retraite_probtp.pdf"}'
     http_version: 
   recorded_at: Wed, 06 Mar 2019 10:54:28 GMT
+- request:
+    method: get
+    uri: "<APIE_BASE_URI>/v2/certificats_rge_ademe/40790437400177?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - sandbox.entreprise.api.gouv.fr
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Strict-Transport-Security:
+      - max-age=15552000
+      Etag:
+      - W/"520c61799a4031abb1b5a4a75ff2c403"
+      X-Runtime:
+      - '2.182078'
+      X-Request-Id:
+      - a08d6349-fc63-4cda-9a09-e8672cb0cb0d
+      Date:
+      - Sun, 09 Jun 2019 13:11:57 GMT
+      X-Powered-By:
+      - Phusion Passenger 6.0.1
+      Server:
+      - nginx + Phusion Passenger 6.0.1
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJyYWlzb25fc29jaWFsZSI6IkVJRkZBR0UgQ09OU1RSVUNUSU9OIE5PUkQgUEFTIERFIENBTEFJUyIsImFkcmVzc2UiOnsicnVlIjoiWkEgUlVFIEwnRVNQT0lSIDJBICBSVUUgREUgTCdFU1BPSVIgTEVaRU5ORVMgQ1MgNjAxMjQiLCJjb2RlX3Bvc3RhbCI6IjU5MDMwIiwidmlsbGUiOiJMSUxMRSJ9LCJxdWFsaWZpY2F0aW9ucyI6W3sibm9tIjoiRWZmaWNhY2l0w6kgw6luZXJnw6l0aXF1ZSAtIFwib2ZmcmUgZ2xvYmFsZVwiIiwidXJsX2NlcnRpZmljYXQiOiJodHRwczovL3N0b3JhZ2UuZW50cmVwcmlzZS5hcGkuZ291di5mci9zaWFkZV9kZXYvMTU2MDA4NTkxNy00MDI1ZGRmMGZkMzU1OTc3ZWQ0ZjMyY2FlNzJlNjhiMGQ0ZmRhY2RjLWNlcnRpZmljYXRfcmdlX2FkZW1lLnBkZiIsIm5vbV9jZXJ0aWZpY2F0IjoiUVVBTElCQVQtUkdFIn1dLCJkb21haW5lcyI6WyJJc29sYXRpb24gZGVzIG11cnMgZXQgcGxhbmNoZXJzIGJhcyIsIlByb2pldCBjb21wbGV0IGRlIHLDqW5vdmF0aW9uIl19
+    http_version: 
+  recorded_at: Sun, 09 Jun 2019 13:11:57 GMT
 recorded_with: VCR 4.0.0

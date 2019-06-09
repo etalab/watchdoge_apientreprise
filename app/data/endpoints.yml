@@ -342,6 +342,15 @@
   http_path: '/v2/etablissements_legacy/41816609600069'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
+- uname: apie_2_certificats_rge_ademe
+  name: Certificats RGE ADEME
+  provider: ademe
+  api_name: apie
+  api_version: 2
+  ping_period: 60
+  http_path: '/v2/certificats_rge_ademe/40790437400177'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+
 # ###############
 # v3
 # ###############
