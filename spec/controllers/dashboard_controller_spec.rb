@@ -2,6 +2,8 @@ require 'rails_helper'
 
 # rubocop:disable RSpec/InstanceVariable
 describe DashboardController, type: :controller do
+  before { Rails.cache.clear }
+
   describe 'Current status happy path', vcr: { cassette_name: 'dashboard/current_status' } do
     subject { get :current_status }
 
