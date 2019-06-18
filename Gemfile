@@ -68,5 +68,6 @@ group :test do
   gem 'rspec-its'
   gem 'rspec-json_expectations'
   gem 'rspec-rails'
+  gem 'timecop'
   gem 'webmock'
 end
