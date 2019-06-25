@@ -221,6 +221,9 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     rubocop-checkstyle_formatter (0.4.0)
       rubocop (>= 0.35.1)
+    rubocop-rails (2.0.1)
+      rack (>= 1.1)
+      rubocop (>= 0.70.0)
     rubocop-rspec (1.33.0)
       rubocop (>= 0.60.0)
     ruby-progressbar (1.10.1)
@@ -299,6 +302,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-checkstyle_formatter
+  rubocop-rails
   rubocop-rspec
   sidekiq
   simplecov
@@ -313,4 +317,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   2.0.2
+   1.17.3
