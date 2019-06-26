@@ -1,4 +1,6 @@
-require: rubocop-rspec
+require:
+  - rubocop-rspec
+  - rubocop-rails
 
 #inherit_from: .rubocop_todo.yml
 
@@ -41,7 +43,6 @@ Style/BracesAroundHashParameters:
 Style/ClassAndModuleChildren:
   Enabled: false
 
-
 # Do not force documentation at the top of classes
 Documentation:
   Enabled: false
@@ -57,10 +58,6 @@ Layout/MultilineOperationIndentation:
 
 Metrics/AbcSize:
  Max: 25
-
-Metrics/BlockLength:
-  Exclude:
-    - 'Guardfile' # mono bloc inside...
 
 Metrics/LineLength:
   Enabled: false

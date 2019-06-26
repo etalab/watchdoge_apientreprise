@@ -13,9 +13,9 @@ class DashboardController < ApplicationController
         service = perform_with_cache(service_class)
 
         if service[:success]
-          render json: { results: service[:results] }, status: 200
+          render json: { results: service[:results] }, status: :ok
         else
-          render json: { message: service[:errors] }, status: 500
+          render json: { message: service[:errors] }, status: :internal_server_error
         end
       end
     end

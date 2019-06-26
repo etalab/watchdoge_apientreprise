@@ -57,6 +57,7 @@ group :development do
   # ruby syntax analyze
   gem 'rubocop', require: false
   gem 'rubocop-checkstyle_formatter', require: false
+  gem 'rubocop-rails'
   gem 'rubocop-rspec', require: false
 
   gem 'mina'
