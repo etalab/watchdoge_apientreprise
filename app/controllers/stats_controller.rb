@@ -9,9 +9,9 @@ class StatsController < ApplicationController
     usages = apis_usages
 
     if @success
-      render json: { apis_usage: usages, last_calls: last_calls_service.results }, status: 200
+      render json: { apis_usage: usages, last_calls: last_calls_service.results }, status: :ok
     else
-      render json: { message: 'an error occured' }, status: 500
+      render json: { message: 'an error occured' }, status: :internal_server_error
     end
   end
 
@@ -19,9 +19,9 @@ class StatsController < ApplicationController
     service = Stats::LastApiUsageService.new(elk_time_range: '1M').tap(&:perform)
 
     if service.success?
-      render json: service.results, status: 200
+      render json: service.results, status: :ok
     else
-      render json: { message: service.errors.join(',') }, status: 500
+      render json: { message: service.errors.join(',') }, status: :internal_server_error
     end
   end
 
@@ -29,9 +29,9 @@ class StatsController < ApplicationController
     service = Stats::LastApiUsageService.new(elk_time_range: '1y').tap(&:perform)
 
     if service.success?
-      render json: service.results, status: 200
+      render json: service.results, status: :ok
     else
-      render json: { message: service.errors.join(',') }, status: 500
+      render json: { message: service.errors.join(',') }, status: :internal_server_error
     end
   end
 
