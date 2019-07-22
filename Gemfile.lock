@@ -75,7 +75,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.11.1)
     formatador (0.2.5)
-    fuubar (2.4.0)
+    fuubar (2.4.1)
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
     globalid (0.4.2)
@@ -282,7 +282,7 @@ DEPENDENCIES
   dotiw
   elasticsearch
   factory_bot_rails
-  fuubar
+  fuubar (~> 2.4.1)
   guard
   guard-rspec
   haml

@@ -45,7 +45,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'fuubar'
+  gem 'fuubar', '~> 2.4.1'
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'simplecov'
