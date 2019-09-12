@@ -44,5 +44,5 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  Sidekiq::Logging.logger.level = Logger::WARN
+  Sidekiq.logger.level = Logger::WARN
 end

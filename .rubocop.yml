@@ -15,9 +15,6 @@ AllCops:
 Rails:
   Enabled: true
 
-Rails/DynamicFindBy:
-  Enabled: false
-
 # I don't understand it
 Style/ExpandPathArguments:
   Enabled: false

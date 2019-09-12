@@ -116,7 +116,7 @@ end
 
 task :sidekiq do
   comment 'Restarting Sidekiq (reloads code)'.green
-  command %(sudo systemctl restart sidekiq_watchdoge_#{ENV['to']})
+  command %(sudo systemctl restart sidekiq_watchdoge_#{ENV['to']}_1)
 end
 
 task :passenger do
