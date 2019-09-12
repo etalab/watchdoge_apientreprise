@@ -97,7 +97,7 @@ describe PingReport, type: :model do
 
   describe 'find or create functionnality' do
     it 'creates a new report' do
-      expect { described_class.find_or_create_by(uname: uname) }.to change { PingReport.all.count }.by(1)
+      expect { described_class.find_or_create_by(uname: uname) }.to change { described_class.all.count }.by(1)
     end
 
     context 'when it already exists' do
@@ -105,7 +105,7 @@ describe PingReport, type: :model do
 
       it 'do not increase report count' do
         # rubocop:disable Lint/AmbiguousBlockAssociation
-        expect { described_class.find_or_create_by(uname: uname) }.not_to change { PingReport.all.count }
+        expect { described_class.find_or_create_by(uname: uname) }.not_to change { described_class.all.count }
         # rubocop:enable Lint/AmbiguousBlockAssociation
       end
     end

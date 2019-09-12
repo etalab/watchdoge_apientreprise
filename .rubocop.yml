@@ -13,9 +13,6 @@ AllCops:
 Rails:
   Enabled: true
 
-Rails/DynamicFindBy:
-  Enabled: false
-
 # I don't understand it
 Style/ExpandPathArguments:
   Enabled: false
@@ -57,10 +54,6 @@ Layout/MultilineOperationIndentation:
 
 Metrics/AbcSize:
  Max: 25
-
-Metrics/BlockLength:
-  Exclude:
-    - 'Guardfile' # mono bloc inside...
 
 Metrics/LineLength:
   Enabled: false
