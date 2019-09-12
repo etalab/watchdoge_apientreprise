@@ -16,7 +16,7 @@ describe Endpoint, type: :model do
   describe 'all endpoints must be valids' do
     # rubocop:disable RSpec/ExampleLength
     it 'return 200 for all endpoints', vcr: { cassette_name: 'all_APIs' } do
-      Endpoint.all.each do |ep|
+      described_class.all.each do |ep|
         next if %w[apie_2_certificats_cnetp
                    apie_2_liasses_fiscales_dgfip_complete
                    apie_2_liasses_fiscales_dgfip_dictionnaire
@@ -64,7 +64,7 @@ describe Endpoint, type: :model do
   end
 
   describe 'ping behaviour', vcr: { cassette_name: 'apie/v2_qualibat' } do
-    subject(:ep) { Endpoint.find_by(uname: 'apie_2_certificats_qualibat') }
+    subject(:ep) { described_class.find_by(uname: 'apie_2_certificats_qualibat') }
 
     its(:http_response) { is_expected.to be_a(Net::HTTPResponse) }
 
@@ -78,7 +78,7 @@ describe Endpoint, type: :model do
 
   context 'when Net::HTTP request raises' do
     describe 'a Net::HTTPError' do
-      subject(:ep) { Endpoint.find_by(uname: 'apie_2_certificats_qualibat') }
+      subject(:ep) { described_class.find_by(uname: 'apie_2_certificats_qualibat') }
 
       before { allow(Net::HTTP).to receive(:get_response).and_raise(Net::HTTPError) }
 
@@ -89,7 +89,7 @@ describe Endpoint, type: :model do
     end
 
     describe 'a Net::HTTPBadResponse' do
-      subject(:ep) { Endpoint.find_by(uname: 'apie_2_certificats_qualibat') }
+      subject(:ep) { described_class.find_by(uname: 'apie_2_certificats_qualibat') }
 
       before { allow(Net::HTTP).to receive(:get_response).and_raise(Net::HTTPBadResponse) }
 
