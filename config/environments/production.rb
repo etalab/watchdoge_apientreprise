@@ -80,5 +80,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  Sidekiq::Logging.logger.level = Logger::WARN
+  Sidekiq.logger.level = Logger::WARN
 end
