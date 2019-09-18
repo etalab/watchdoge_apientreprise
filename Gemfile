@@ -17,7 +17,7 @@ gem 'haml'
 gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'logstasher'
 gem 'pg'
-gem 'sidekiq'
+gem 'sidekiq', '~> 5.2'
 gem 'vcr'
 gem 'whenever'
 
