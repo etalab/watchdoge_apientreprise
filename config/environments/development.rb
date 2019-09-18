@@ -64,4 +64,6 @@ Rails.application.configure do
   end
 
   Sidekiq.logger.level = Logger::WARN
+
+  config.redis_database = 'redis://localhost:6379/0'
 end

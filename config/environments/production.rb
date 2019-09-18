@@ -81,4 +81,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   Sidekiq.logger.level = Logger::WARN
+
+  config.redis_database = 'redis://localhost:6379/0'
 end
