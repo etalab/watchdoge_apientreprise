@@ -17,7 +17,7 @@ gem 'haml'
 gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'logstasher'
 gem 'pg'
-gem 'sidekiq'
+gem 'sidekiq', '~> 5.2'
 gem 'vcr'
 gem 'whenever'
 
@@ -45,7 +45,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'fuubar'
+  gem 'fuubar', '~> 2.4.1'
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'simplecov'
