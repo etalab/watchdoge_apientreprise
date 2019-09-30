@@ -54,7 +54,7 @@ describe 'watch:period_60', vcr: { cassette_name: 'all_APIs' } do
   context 'with all endpoints' do
     let(:nb_apis) { Endpoint.where(ping_period: 60).size }
 
-    it 'send exactly ping_period: 60 workers to sidekiq' do
+    pending 'send exactly ping_period: 60 workers to sidekiq' do
       task.invoke
       expect { PingWorker.drain }.to change { PingWorker.jobs.size }.from(nb_apis).to(0)
     end

@@ -15,7 +15,7 @@ describe Endpoint, type: :model do
 
   describe 'all endpoints must be valids' do
     # rubocop:disable RSpec/ExampleLength
-    it 'return 200 for all endpoints', vcr: { cassette_name: 'all_APIs' } do
+    pending 'return 200 for all endpoints', vcr: { cassette_name: 'all_APIs' } do
       described_class.all.each do |ep|
         next if %w[apie_2_certificats_cnetp
                    apie_2_liasses_fiscales_dgfip_complete
