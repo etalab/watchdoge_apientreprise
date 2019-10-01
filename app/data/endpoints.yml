@@ -285,7 +285,7 @@
   api_name: apie
   api_version: 2
   ping_period: 60
-  http_path: '/v2/certificats_opqibi/395301641'
+  http_path: '/v2/certificats_opqibi/309103877'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_associations_rna
