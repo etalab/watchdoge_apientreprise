@@ -30,6 +30,11 @@ namespace :watch do
     watch(period: 60)
   end
 
+  desc 'run watchdoge service on all endpoints with a period of 150 minutes'
+  task 'period_150': :environment do
+    watch(period: 150)
+  end
+
   def watch(period:)
     puts "Period #{period}" if Rails.env.development?
     Endpoint.where(ping_period: period).each do |endpoint|

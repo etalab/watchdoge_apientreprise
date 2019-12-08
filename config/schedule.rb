@@ -24,3 +24,7 @@ end
 every 60.minutes do
   rake 'watch:period_60'
 end
+
+every 150.minutes do
+  rake 'watch:period_150'
+end
