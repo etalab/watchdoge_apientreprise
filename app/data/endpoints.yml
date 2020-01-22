@@ -195,7 +195,7 @@
   api_name: apie
   api_version: 2
   ping_period: 60
-  http_path: '/v2/attestations_cotisation_retraite_probtp/55204599900828'
+  http_path: '/v2/attestations_cotisation_retraite_probtp/39271230300016'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_entreprises
