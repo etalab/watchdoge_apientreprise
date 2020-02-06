@@ -126,23 +126,23 @@
   http_path: '/v2/bilans_entreprises_bdf/552032534'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
-- uname: apie_2_etablissements_predecesseur
-  name: Etablissements Prédécesseur
-  provider: insee
-  api_name: apie
-  api_version: 2
-  ping_period: 60
-  http_path: '/v2/etablissements/41816609600069/predecesseur'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+#- uname: apie_2_etablissements_predecesseur
+#  name: Etablissements Prédécesseur
+#  provider: insee
+#  api_name: apie
+#  api_version: 2
+#  ping_period: 60
+#  http_path: '/v2/etablissements/41816609600069/predecesseur'
+#  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
-- uname: apie_2_etablissements_successeur
-  name: Etablissements successeur
-  provider: insee
-  api_name: apie
-  api_version: 2
-  ping_period: 60
-  http_path: '/v2/etablissements/78414518700133/successeur'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+#- uname: apie_2_etablissements_successeur
+#  name: Etablissements successeur
+#  provider: insee
+#  api_name: apie
+#  api_version: 2
+#  ping_period: 60
+#  http_path: '/v2/etablissements/78414518700133/successeur'
+#  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_liasses_fiscales_dgfip_complete
   name: Liasses fiscales (complete)
