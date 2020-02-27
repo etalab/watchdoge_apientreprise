@@ -240,7 +240,7 @@
   api_name: apie
   api_version: 2
   ping_period: 60
-  http_path: '/v2/attestations_agefiph/18002002601348'
+  http_path: '/v2/attestations_agefiph/48146131700036'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_attestations_fiscales_dgfip
