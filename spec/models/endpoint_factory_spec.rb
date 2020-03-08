@@ -26,17 +26,17 @@ describe EndpointFactory do
   context 'with find_by_http_path' do
     subject { described_class.new.find_endpoint_by_http_path(http_path: http_path, api_name: 'apie') }
 
-    describe 'find perfect match attestations cotisation retraite probtp' do
-      let(:http_path) { '/v2/attestations_cotisation_retraite_probtp/73582032600040' }
-
-      its(:uname) { is_expected.to eq('apie_2_attestations_cotisation_retraite_probtp') }
-    end
-
-    describe 'find regexp attestations cotisation retraite probtp' do
-      let(:http_path) { '/v2/attestations_cotisation_retraite_probtp/73582032656485' }
-
-      its(:uname) { is_expected.to eq('apie_2_attestations_cotisation_retraite_probtp') }
-    end
+#    describe 'find perfect match attestations cotisation retraite probtp' do
+#      let(:http_path) { '/v2/attestations_cotisation_retraite_probtp/73582032600040' }
+#
+#      its(:uname) { is_expected.to eq('apie_2_attestations_cotisation_retraite_probtp') }
+#    end
+#
+#    describe 'find regexp attestations cotisation retraite probtp' do
+#      let(:http_path) { '/v2/attestations_cotisation_retraite_probtp/73582032656485' }
+#
+#      its(:uname) { is_expected.to eq('apie_2_attestations_cotisation_retraite_probtp') }
+#    end
 
     describe 'finds perfect match msa' do
       let(:http_path) { '/v2/cotisations_msa/81104725700019' }
