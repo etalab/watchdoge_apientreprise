@@ -252,13 +252,40 @@
   http_path: '/v2/attestations_fiscales_dgfip/552032534'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
-- uname: apie_2_attestations_sociales_acoss
-  name: Attestations sociales
+#- uname: apie_2_attestations_sociales_acoss
+#  name: Attestations sociales
+#  api_name: apie
+#  provider: acoss
+#  api_version: 2
+#  ping_period: 150
+#  http_path: '/v2/attestations_sociales_acoss/799238639'
+#  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+
+- uname: apie_2_effectifs_annuels_acoss
+  name: Effectifs annuels
   api_name: apie
   provider: acoss
   api_version: 2
-  ping_period: 150
-  http_path: '/v2/attestations_sociales_acoss/799238639'
+  ping_period: 5
+  http_path: '/v2/effectifs_annuels_acoss_covid/829423052'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+
+- uname: apie_2_effectifs_mensuels_entreprise_acoss
+  name: Effectifs mensuels (entreprise)
+  api_name: apie
+  provider: acoss
+  api_version: 2
+  ping_period: 5
+  http_path: '/v2/effectifs_mensuels_acoss_covid/2020/02/entreprise/552032534'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+
+- uname: apie_2_effectifs_mensuels_etablissement_acoss
+  name: Effectifs mensuels (établissement)
+  api_name: apie
+  provider: acoss
+  api_version: 2
+  ping_period: 5
+  http_path: '/v2/effectifs_mensuels_acoss_covid/2020/02/etablissement/55203253400646'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 - uname: apie_2_certificats_qualibat
