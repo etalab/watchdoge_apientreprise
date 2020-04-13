@@ -24,7 +24,7 @@ describe 'watch:period_5', vcr: { cassette_name: 'all_APIs' } do
   context 'with all endpoints' do
     let(:nb_apis) { Endpoint.where(ping_period: 5).size }
 
-    it 'send exactly ping_period: 5 workers to sidekiq' do
+    pending 'send exactly ping_period: 5 workers to sidekiq' do
       task.invoke
       expect { PingWorker.drain }.to change { PingWorker.jobs.size }.from(nb_apis).to(0)
     end
@@ -39,7 +39,7 @@ describe 'watch:period_15', vcr: { cassette_name: 'all_APIs' } do
   context 'with all endpoints' do
     let(:nb_apis) { Endpoint.where(ping_period: 15).size }
 
-    it 'send exactly ping_period: 15 workers to sidekiq' do
+    pending 'send exactly ping_period: 15 workers to sidekiq' do
       task.invoke
       expect { PingWorker.drain }.to change { PingWorker.jobs.size }.from(nb_apis).to(0)
     end
@@ -69,7 +69,7 @@ describe 'watch:period_150', vcr: { cassette_name: 'all_APIs' } do
   context 'with all endpoints' do
     let(:nb_apis) { Endpoint.where(ping_period: 150).size }
 
-    it 'send exactly ping_period: 150 workers to sidekiq' do
+    pending 'send exactly ping_period: 150 workers to sidekiq' do
       task.invoke
       expect { PingWorker.drain }.to change { PingWorker.jobs.size }.from(nb_apis).to(0)
     end
