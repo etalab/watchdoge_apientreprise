@@ -10,8 +10,8 @@
         },
         {
           "term": {
-            "controller.keyword": {
-              "value": "www"
+            "parameters.context.keyword": {
+              "value": "Ping"
             }
           }
         }
