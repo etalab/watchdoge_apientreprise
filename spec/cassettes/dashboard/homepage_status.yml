@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://watchdoge.entreprise.api.gouv.fr:9200/_nodes/http
+    uri: http://kibana.entreprise.api.gouv.fr:9200/_nodes/http
     body:
       encoding: US-ASCII
       string: ''
@@ -27,7 +27,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 05 Dec 2017 16:10:20 GMT
 - request:
     method: get
@@ -87,6 +87,6 @@ http_interactions:
         mapping found for [@timestamp] in order to sort on","index_uuid":"3tDGuNozQ5iYSmmUqklytw","index":".kibana"}},{"shard":0,"index":"my_index","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
         mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}}]},"hits":{"total":23620,"max_score":null,"hits":[{"_index":"logstash-2017.12.05","_type":"siade","_id":"AWAnbcv6z_-J--ddy-uy","_score":null,"_source":{"controller":"www","geoip":{"timezone":"America/Chicago","ip":"69.162.124.237","latitude":32.7791,"continent_code":"NA","city_name":"Dallas","country_name":"United
         States","country_code2":"US","dma_code":623,"country_code3":"US","region_name":"Texas","location":{"lon":-96.8028,"lat":32.7791},"postal_code":"75202","region_code":"TX","longitude":-96.8028},"method":"HEAD","ip":"69.162.124.237","format":"html","source":"siade_production1","type":"siade","tags":["request"],"duration":6.06,"path":"/","view":5.32,"route":"www#index","@timestamp":"2017-12-05T16:06:33.659Z","@version":"1","host":"production1","action":"index","request_id":"c1183389-86c2-4c73-8a5c-b2b373f7c2d7","parameters":{},"db":0.0,"status":200},"sort":[1512489993659]}]}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 05 Dec 2017 16:10:20 GMT
 recorded_with: VCR 3.0.3

@@ -10,7 +10,7 @@ class ElasticClient
   end
 
   def establish_connection
-    @client = Elasticsearch::Client.new host: 'watchdoge.entreprise.api.gouv.fr', log: false
+    @client = Elasticsearch::Client.new host: 'kibana.entreprise.api.gouv.fr', log: false
     @client.transport.reload_connections!
     @connected = true
   rescue Faraday::TimeoutError

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://watchdoge.entreprise.api.gouv.fr:9200/_nodes/http
+    uri: http://kibana.entreprise.api.gouv.fr:9200/_nodes/http
     body:
       encoding: US-ASCII
       string: ''
@@ -27,7 +27,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 09 May 2019 09:54:27 GMT
 - request:
     method: get
@@ -56,6 +56,6 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"took":7,"timed_out":false,"_shards":{"total":161,"successful":161,"failed":0},"hits":{"total":2098,"max_score":0.0,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":"etablissements","doc_count":1068,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":1068}]}},{"key":"qualibat","doc_count":344,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":324},{"key":503,"doc_count":18},{"key":500,"doc_count":1},{"key":502,"doc_count":1}]}},{"key":"attestations_fiscales","doc_count":111,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":111}]}},{"key":"entreprises","doc_count":86,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":85},{"key":500,"doc_count":1}]}},{"key":"liasse_fiscale","doc_count":85,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":85}]}},{"key":"probtp","doc_count":58,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":58}]}},{"key":"associations","doc_count":30,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":30}]}},{"key":"certificat_cnetp","doc_count":30,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":29},{"key":502,"doc_count":1}]}},{"key":"certificat_opqibi","doc_count":30,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":30}]}},{"key":"fntp_carte_pro","doc_count":30,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":24},{"key":503,"doc_count":5},{"key":502,"doc_count":1}]}},{"key":"attestations_agefiph","doc_count":29,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":29}]}},{"key":"attestations_sociales","doc_count":29,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":29}]}},{"key":"exercices","doc_count":29,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":29}]}},{"key":"extrait_court_inpi","doc_count":29,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":29}]}},{"key":"documents_association","doc_count":28,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":28}]}},{"key":"extraits_rcs","doc_count":28,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":26},{"key":206,"doc_count":1},{"key":500,"doc_count":1}]}},{"key":"bilans_entreprise_bdf","doc_count":27,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":18},{"key":502,"doc_count":7},{"key":503,"doc_count":2}]}},{"key":"msa_cotisations","doc_count":27,"status-code":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[{"key":200,"doc_count":27}]}}]}}}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 09 May 2019 09:54:28 GMT
 recorded_with: VCR 4.0.0
