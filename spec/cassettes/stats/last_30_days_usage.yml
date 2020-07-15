@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://watchdoge.entreprise.api.gouv.fr:9200/_nodes/http
+    uri: http://kibana.entreprise.api.gouv.fr:9200/_nodes/http
     body:
       encoding: US-ASCII
       string: ''
