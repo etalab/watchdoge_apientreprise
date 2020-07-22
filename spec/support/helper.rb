@@ -3,7 +3,7 @@ def endpoints_count
 end
 
 def valid_jti
-  'c35a539b-5608-4dba-9ed1-12883e580232' # watchdoge JTI
+  'd8cfec8b-9b00-471e-996d-6a1d93086e1c' # watchdoge JTI
 end
 
 def sorted_fake_calls(size: 10, oldest_timestamp: 8.days)
