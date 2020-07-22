@@ -103,7 +103,7 @@ class Stats::ApisUsageService
   end
 
   def total_hits
-    @client.raw_response['hits']['total'].to_i
+    @client.raw_response['hits']['total']['value'].to_i
   end
 
   def json_query
