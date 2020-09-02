@@ -1,7 +1,7 @@
 # README [![Build Status](https://travis-ci.org/etalab/watchdoge_apientreprise.svg?branch=master)](https://travis-ci.org/etalab/watchdoge_apientreprise) [![Maintainability](https://api.codeclimate.com/v1/badges/ea09b1d44917a172d01e/maintainability)](https://codeclimate.com/github/etalab/watchdoge_apientreprise/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ea09b1d44917a172d01e/test_coverage)](https://codeclimate.com/github/etalab/watchdoge_apientreprise/test_coverage)
 [![Build Status](https://travis-ci.org/etalab/watchdoge_apientreprise.svg?branch=develop)](https://travis-ci.org/etalab/watchdoge_apientreprise) (develop branch)
 
-Watchdoge is a watchdog for [API Entreprise](https://github.com/etalab/apientreprise), the monitoring done by Watchdoge is available on the [Dashboard](https://github.com/etalab/dashboard_apientreprise)
+Watchdoge is a watchdog for [API Entreprise](https://github.com/etalab/apientreprise), the monitoring done by Watchdoge is available on the [Dashboard](https://github.com/etalab/dashboard_api_entreprise)
 
 Watchdoge run on Ruby 2.6.2
 
