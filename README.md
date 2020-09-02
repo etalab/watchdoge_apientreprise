@@ -3,7 +3,7 @@
 
 Watchdoge is a watchdog for [API Entreprise](https://github.com/etalab/apientreprise), the monitoring done by Watchdoge is available on the [Dashboard](https://github.com/etalab/dashboard_apientreprise)
 
-Watchdoge run on Ruby 2.4.2
+Watchdoge run on Ruby 2.6.2
 
 # Elasticsearch
 
