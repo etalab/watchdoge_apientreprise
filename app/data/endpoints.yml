@@ -288,6 +288,15 @@
   http_path: '/v2/effectifs_mensuels_acoss_covid/2020/02/etablissement/55203253400646'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
+- uname: apie_2_conventions_collectives
+  name: Conventions Collectives
+  provider: fabsocial
+  api_name: apie
+  api_version: 2
+  ping_period: 5
+  http_path: '/v2/conventions_collectives/82161143100015'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+
 - uname: apie_2_certificats_qualibat
   name: Certificats Qualibat
   provider: qualibat
