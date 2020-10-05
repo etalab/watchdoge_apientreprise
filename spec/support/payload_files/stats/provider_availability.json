@@ -1,0 +1,306 @@
+{
+  "took" : 105,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 478,
+    "successful" : 478,
+    "skipped" : 476,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "1d_interval" : {
+      "buckets" : [
+        {
+          "key_as_string" : "2020-09-17T00:00:00.000Z",
+          "key" : 1600300800000,
+          "doc_count" : 20,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 10
+              },
+              {
+                "key" : 451,
+                "doc_count" : 10
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-18T00:00:00.000Z",
+          "key" : 1600387200000,
+          "doc_count" : 10,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 5
+              },
+              {
+                "key" : 451,
+                "doc_count" : 5
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-19T00:00:00.000Z",
+          "key" : 1600473600000,
+          "doc_count" : 20,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 10
+              },
+              {
+                "key" : 404,
+                "doc_count" : 10
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-20T00:00:00.000Z",
+          "key" : 1600560000000,
+          "doc_count" : 10,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 10
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-21T00:00:00.000Z",
+          "key" : 1600646400000,
+          "doc_count" : 20,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 1,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 10
+              },
+              {
+                "key" : 422,
+                "doc_count" : 5
+              },
+              {
+                "key" : 451,
+                "doc_count" : 5
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-22T00:00:00.000Z",
+          "key" : 1600732800000,
+          "doc_count" : 10,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 1,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 5
+              },
+              {
+                "key" : 503,
+                "doc_count" : 5
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-23T00:00:00.000Z",
+          "key" : 1600819200000,
+          "doc_count" : 20,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 10
+              },
+              {
+                "key" : 502,
+                "doc_count" : 10
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-24T00:00:00.000Z",
+          "key" : 1600905600000,
+          "doc_count" : 10,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 10
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-25T00:00:00.000Z",
+          "key" : 1600992000000,
+          "doc_count" : 20,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 10
+              },
+              {
+                "key" : 422,
+                "doc_count" : 5
+              },
+              {
+                "key" : 451,
+                "doc_count" : 5
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-26T00:00:00.000Z",
+          "key" : 1601078400000,
+          "doc_count" : 10,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 5
+              },
+              {
+                "key" : 401,
+                "doc_count" : 5
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-27T00:00:00.000Z",
+          "key" : 1601164800000,
+          "doc_count" : 10,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 502,
+                "doc_count" : 10
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-28T00:00:00.000Z",
+          "key" : 1601251200000,
+          "doc_count" : 20,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 20
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-29T00:00:00.000Z",
+          "key" : 1601337600000,
+          "doc_count" : 10,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 5
+              },
+              {
+                "key" : 401,
+                "doc_count" : 5
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-09-30T00:00:00.000Z",
+          "key" : 1601424000000,
+          "doc_count" : 20,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 10
+              },
+              {
+                "key" : 404,
+                "doc_count" : 10
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "2020-10-01T00:00:00.000Z",
+          "key" : 1601510400000,
+          "doc_count" : 90,
+          "group_by_status" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : 200,
+                "doc_count" : 40
+              },
+              {
+                "key" : 401,
+                "doc_count" : 30
+              },
+              {
+                "key" : 502,
+                "doc_count" : 20
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+

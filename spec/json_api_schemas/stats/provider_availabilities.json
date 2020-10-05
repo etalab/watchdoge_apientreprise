@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["endpoint", "total_availability", "last_week_availability", "days_availability"],
+  "properties": {
+    "endpoint": {
+      "type": "string"
+    },
+    "total_availability": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 100.0
+    },
+    "last_week_availability": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 100.0
+    },
+    "days_availability": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^\d{2}-\d{2}-\d{4}$"
+      },
+      "patternProperties": {
+        "^502$": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "^total$": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}
