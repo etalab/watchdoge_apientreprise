@@ -1,0 +1,38 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-<%= @period %>"
+            }
+          }
+        },
+        {
+          "term": {
+            "controller.keyword": {
+              "value": "<%= @endpoint %>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "1d_interval": {
+      "date_histogram": {
+        "field": "@timestamp",
+        "fixed_interval": "1d"
+      },
+      "aggs": {
+        "group_by_status": {
+          "terms": {
+            "field": "status"
+          }
+        }
+      }
+    }
+  }
+}
