@@ -66,7 +66,10 @@ class Stats::TauxDisposFournisseursService
       formatted_date = daily_calls['key_as_string'].to_date.to_s
       res[formatted_date] = {
         'total' => daily_calls['doc_count'],
-        '502' => extract_count_for_status(502, daily_calls)
+        '404' => extract_count_for_status(404, daily_calls),
+        '502' => extract_count_for_status(502, daily_calls),
+        '503' => extract_count_for_status(503, daily_calls),
+        '504' => extract_count_for_status(504, daily_calls)
       }
     end
   end
