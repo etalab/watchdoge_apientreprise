@@ -18,17 +18,31 @@
     },
     "days_availability": {
       "type": "object",
-      "propertyNames": {
-        "pattern": "^\d{2}-\d{2}-\d{4}$"
-      },
       "patternProperties": {
-        "^502$": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "^total$": {
-          "type": "integer",
-          "minimum": 0
+        "^[0-9]{4}-[0-9]{2}-[0-9]{2}$": {
+          "required": ["404", "502", "503", "504", "total"],
+          "properties": {
+            "404": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "502": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "503": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "504": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "total": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
         }
       }
     }
