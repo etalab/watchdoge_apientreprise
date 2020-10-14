@@ -35,7 +35,7 @@
       ],
       "filter": {
         "exists": {
-          "field": "user_access.resource"
+          "field": "controller"
         }
       }
     }

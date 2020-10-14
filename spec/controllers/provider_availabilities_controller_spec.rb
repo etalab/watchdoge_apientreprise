@@ -5,6 +5,14 @@ describe ProviderAvailabilitiesController, type: :controller do
     context 'when endpoint and period parameters are present', vcr: { cassette_name: 'stats/provider_availability_valid_call' } do
       subject { get :index, params: { endpoint: 'api/v2/cartes_professionnelles_fntp', period: '6M', format: :json } }
 
+      before do
+        Timecop.freeze(Time.new(2020, 9, 7).in_time_zone)
+      end
+
+      after do
+        Timecop.return
+      end
+
       its(:status) { is_expected.to eq(200) }
       its(:body) { is_expected.to match_json_schema('stats/provider_availabilities') }
     end

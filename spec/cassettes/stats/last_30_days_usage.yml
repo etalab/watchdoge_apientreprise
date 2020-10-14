@@ -34,7 +34,7 @@ http_interactions:
     uri: http://217.182.164.215:9200/_count
     body:
       encoding: UTF-8
-      string: '{"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-1M","lte":"now/d"}}},{"wildcard":{"source":"siade_production*"}}],"must_not":[{"terms":{"controller.keyword":["api/v1/ping","api/v2/ping"]}},{"term":{"parameters.context.keyword":{"value":"Ping"}}},{"terms":{"status":["401","403"]}}],"filter":{"exists":{"field":"user_access.resource"}}}}}'
+      string: '{"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-1M","lte":"now/d"}}},{"wildcard":{"source":"siade_production*"}}],"must_not":[{"terms":{"controller.keyword":["api/v1/ping","api/v2/ping"]}},{"term":{"parameters.context.keyword":{"value":"Ping"}}},{"terms":{"status":["401","403"]}}],"filter":{"exists":{"field":"controller"}}}}}'
     headers:
       Content-Type:
       - application/json
