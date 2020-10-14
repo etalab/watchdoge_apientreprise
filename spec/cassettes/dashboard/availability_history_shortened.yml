@@ -34,7 +34,7 @@ http_interactions:
     uri: http://217.182.164.215:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":10000,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-12h","lte":"now/d"}}},{"term":{"parameters.context.keyword":{"value":"Ping"}}}],"must_not":[{"terms":{"controller.keyword":["api/v2/ping"]}}],"filter":{"exists":{"field":"user_access.resource"}}}},"sort":[{"@timestamp":{"order":"asc"}}]}'
+      string: '{"size":10000,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-12h","lte":"now/d"}}},{"term":{"parameters.context.keyword":{"value":"Ping"}}}],"must_not":[{"terms":{"controller.keyword":["api/v2/ping"]}}],"filter":{"exists":{"field":"controller"}}}},"sort":[{"@timestamp":{"order":"asc"}}]}'
     headers:
       User-Agent:
       - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
