@@ -6,7 +6,7 @@ describe ProviderAvailabilitiesController, type: :controller do
       subject { get :index, params: { endpoint: 'api/v2/cartes_professionnelles_fntp', period: '6M', format: :json } }
 
       before do
-        Timecop.freeze(Time.new(2020, 9, 7))
+        Timecop.freeze(Time.zone.new(2020, 9, 7))
       end
 
       after do
