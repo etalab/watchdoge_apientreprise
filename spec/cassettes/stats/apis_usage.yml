@@ -34,7 +34,7 @@ http_interactions:
     uri: http://51.91.107.39:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-30h","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"d8cfec8b-9b00-471e-996d-6a1d93086e1c"}}}]}},"aggs":{"endpoints":{"terms":{"field":"user_access.resource.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-30h","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"d8cfec8b-9b00-471e-996d-6a1d93086e1c"}}}]}},"aggs":{"endpoints":{"terms":{"field":"controller.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
     headers:
       User-Agent:
       - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'

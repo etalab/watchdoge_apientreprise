@@ -94,7 +94,7 @@ http_interactions:
     uri: http://51.91.107.39:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-10m","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"user_access.resource.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-10m","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"controller.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
     headers:
       User-Agent:
       - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
@@ -152,7 +152,7 @@ http_interactions:
     uri: http://51.91.107.39:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-30h","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"user_access.resource.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-30h","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"controller.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
     headers:
       User-Agent:
       - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
@@ -210,7 +210,7 @@ http_interactions:
     uri: http://51.91.107.39:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"user_access.resource.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"controller.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
     headers:
       User-Agent:
       - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
