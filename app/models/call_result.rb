@@ -22,6 +22,7 @@ class CallResult
     !endpoint.nil?
   end
 
+  # rubocop:disable Metrics/MethodLength
   def as_json
     {
       uname: endpoint.uname,
@@ -35,6 +36,7 @@ class CallResult
       controller: controller
     }
   end
+  # rubocop:enable Metrics/MethodLength
 
   def sanitize_parameters(parameters)
     parameters
