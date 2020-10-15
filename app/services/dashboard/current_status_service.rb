@@ -50,7 +50,8 @@ class Dashboard::CurrentStatusService
       provider: call_result.provider,
       api_version: call_result.api_version,
       code: call_result.code,
-      timestamp: call_result.timestamp
+      timestamp: call_result.timestamp,
+      endpoint: call_result.controller
     }
   end
 end

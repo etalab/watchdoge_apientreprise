@@ -53,7 +53,8 @@
               "includes": [
                 "path",
                 "status",
-                "@timestamp"
+                "@timestamp",
+                "controller"
               ]
             },
             "size": 1,
