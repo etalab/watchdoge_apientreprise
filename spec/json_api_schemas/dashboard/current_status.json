@@ -5,7 +5,7 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["uname", "name", "provider", "api_version", "code", "timestamp"],
+        "required": ["uname", "name", "provider", "api_version", "code", "timestamp", "endpoint"],
         "properties": {
           "uname": {
             "type": "string",
@@ -41,6 +41,11 @@
             "title": "The Timestamp of the last Ping",
             "pattern": "^\\d{4}-\\d{2}-\\d{2}.\\d{2}:\\d{2}:\\d{2}",
             "example": "2018-05-06T09:30:04.053Z"
+          },
+          "endpoint": {
+            "type": "string",
+            "title": "The controller name of this endpoint",
+            "example": "api/v2/exercices"
           }
         }
       }

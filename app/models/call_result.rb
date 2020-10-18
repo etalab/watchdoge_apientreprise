@@ -3,7 +3,7 @@ require 'forwardable'
 class CallResult
   extend Forwardable
   delegate %i[uname name api_version provider] => :endpoint
-  attr_reader :endpoint, :http_path, :code, :timestamp, :params, :provider_name, :fallback_used
+  attr_reader :endpoint, :http_path, :code, :timestamp, :params, :provider_name, :fallback_used, :controller
 
   API_NAME = 'apie'.freeze
 
@@ -15,12 +15,14 @@ class CallResult
     @params = sanitize_parameters source['parameters']
     @provider_name = source.dig('response', 'provider_name')
     @fallback_used = source.dig('response', 'fallback_used')
+    @controller = source['controller']
   end
 
   def valid?
     !endpoint.nil?
   end
 
+  # rubocop:disable Metrics/MethodLength
   def as_json
     {
       uname: endpoint.uname,
@@ -30,9 +32,11 @@ class CallResult
       code: code,
       timestamp: timestamp,
       provider_name: provider_name,
-      fallback_used: fallback_used
+      fallback_used: fallback_used,
+      controller: controller
     }
   end
+  # rubocop:enable Metrics/MethodLength
 
   def sanitize_parameters(parameters)
     parameters
