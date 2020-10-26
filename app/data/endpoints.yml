@@ -360,24 +360,6 @@
   http_path: '/v2/cartes_professionnelles_fntp/562077503'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
-- uname: apie_2_entreprises_legacy
-  name: Entreprises (legacy)
-  provider: insee
-  api_name: apie
-  api_version: 2
-  ping_period: 60
-  http_path: '/v2/entreprises_legacy/418166096'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
-
-- uname: apie_2_etablissements_legacy
-  name: Etablissements (legacy)
-  provider: insee
-  api_name: apie
-  api_version: 2
-  ping_period: 5
-  http_path: '/v2/etablissements_legacy/41816609600069'
-  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
-
 - uname: apie_2_certificats_rge_ademe
   name: Certificats RGE ADEME
   provider: ademe
