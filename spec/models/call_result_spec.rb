@@ -7,9 +7,9 @@ describe CallResult do
   let(:source_example) { JSON.parse(File.read(filename)) }
 
   describe 'parsing an element with a different parameter than in the database' do
-    let(:filename) { 'spec/support/payload_files/elk_sources/legacy_elasticsearch_source.json' }
+    let(:filename) { 'spec/support/payload_files/elk_sources/certificat_rge_ademe_source.json' }
     let(:new_siret) { '82525962500010' }
-    let(:new_path) { "/v2/etablissements_legacy/#{new_siret}" }
+    let(:new_path) { "/v2/certificats_rge_ademe/#{new_siret}" }
 
     before do
       source_example['path'] = new_path
@@ -17,7 +17,7 @@ describe CallResult do
     end
 
     its(:params) { is_expected.to include({ siret: new_siret }) }
-    its(:http_path) { is_expected.to match(%r{^\/v2\/etablissements_legacy\/#{new_siret}$}) }
+    its(:http_path) { is_expected.to match(%r{^\/v2\/certificats_rge_ademe\/#{new_siret}$}) }
   end
 
   describe 'parsing source without parameters' do
@@ -25,26 +25,26 @@ describe CallResult do
       source_example.delete_if { |k| k == 'parameters' }
     end
 
-    let(:filename) { 'spec/support/payload_files/elk_sources/legacy_elasticsearch_source.json' }
+    let(:filename) { 'spec/support/payload_files/elk_sources/certificat_rge_ademe_source.json' }
 
     its(:params) { is_expected.to be_nil }
-    its(:uname) { is_expected.to eq('apie_2_etablissements_legacy') }
+    its(:uname) { is_expected.to eq('apie_2_certificats_rge_ademe') }
   end
 
   describe 'parsing Etablissements Legacy v2' do
-    let(:filename) { 'spec/support/payload_files/elk_sources/legacy_elasticsearch_source.json' }
+    let(:filename) { 'spec/support/payload_files/elk_sources/certificat_rge_ademe_source.json' }
 
-    its(:uname) { is_expected.to eq('apie_2_etablissements_legacy') }
-    its(:name) { is_expected.to eq('Etablissements (legacy)') }
-    its(:provider) { is_expected.to eq('insee') }
+    its(:uname) { is_expected.to eq('apie_2_certificats_rge_ademe') }
+    its(:name) { is_expected.to eq('Certificats RGE ADEME') }
+    its(:provider) { is_expected.to eq('ademe') }
     its(:api_version) { is_expected.to eq(2) }
-    its(:code) { is_expected.to eq(503) }
-    its(:timestamp) { is_expected.to eq('2017-12-03T17:50:03.760Z') }
-    its(:params) { is_expected.to contain_exactly({ context: 'Ping' }, { recipient: 'SGMAP' }, { siret: '41816609600069' }) }
+    its(:code) { is_expected.to eq(200) }
+    its(:timestamp) { is_expected.to eq('2020-10-26T13:06:39.691Z') }
+    its(:params) { is_expected.to contain_exactly({ context: 'APS' }, { recipient: '44313931600022' }, { siret: '44313931600022' }, { object: 'test' }) }
     its(:provider_name) { is_expected.to be_nil }
     its(:fallback_used) { is_expected.to be_nil }
-    its(:http_path) { is_expected.to eq('/v2/etablissements_legacy/41816609600069') }
-    its(:as_json) { is_expected.to include_json(uname: 'apie_2_etablissements_legacy', name: 'Etablissements (legacy)', api_version: 2, provider: 'insee', code: 503, timestamp: '2017-12-03T17:50:03.760Z', provider_name: nil, fallback_used: nil) }
+    its(:http_path) { is_expected.to eq('/v2/certificats_rge_ademe/44313931600022') }
+    its(:as_json) { is_expected.to include_json(uname: 'apie_2_certificats_rge_ademe', name: 'Certificats RGE ADEME', api_version: 2, provider: 'ademe', code: 200, timestamp: '2020-10-26T13:06:39.691Z', provider_name: nil, fallback_used: nil) }
   end
 
   describe 'parsing Entreprises v2' do

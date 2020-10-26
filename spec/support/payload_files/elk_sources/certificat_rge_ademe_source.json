@@ -1,0 +1,56 @@
+{
+  "api_version": "v2",
+  "type": "siade",
+  "action": "show",
+  "request_id": "717694bc-67e5-4068-b39d-a73936f7c435",
+  "user_access": {
+    "jti": "3ea9d613-66d3-4b66-9b1a-88b26066a16a",
+    "user": "fd9d5157-b6fc-4775-9956-ffea7fb10ce5",
+    "access": "allow"
+  },
+  "tags": [
+    "request"
+    ],
+    "@version": "1",
+    "geoip": {
+      "country_code3": "FR",
+      "city_name": "Paris",
+      "country_code2": "FR",
+      "region_code": "75",
+      "timezone": "Europe/Paris",
+      "ip": "15.188.39.222",
+      "region_name": "Paris",
+      "location": {
+        "lat": 48.8607,
+        "lon": 2.3281
+      },
+      "postal_code": "75001",
+      "longitude": 2.3281,
+      "latitude": 48.8607,
+      "country_name": "France",
+      "continent_code": "EU"
+    },
+    "@timestamp": "2020-10-26T13:06:39.691Z",
+    "parameters": {
+      "context": "APS",
+      "siret": "44313931600022",
+      "recipient": "44313931600022",
+      "object": "test",
+      "token": "[FILTERED]"
+    },
+    "status": 200,
+    "source": "siade_production_production1.entreprise.api.gouv.fr",
+    "path": "/v2/certificats_rge_ademe/44313931600022",
+    "method": "GET",
+    "view": 3829.21,
+    "format": "html",
+    "ip": "15.188.39.222",
+    "provider_http_code": {
+      "certificats_rge_ademe": "200"
+    },
+    "route": "api/v2/certificats_rge_ademe#show",
+    "host": "production1",
+    "duration": 4222.31,
+    "controller": "api/v2/certificats_rge_ademe",
+    "domain": "gouv.fr"
+}
