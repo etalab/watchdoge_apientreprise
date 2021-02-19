@@ -4,7 +4,7 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
   c.configure_rspec_metadata!
   c.default_cassette_options = { allow_playback_repeats: true, match_requests_on: %i[method uri body] }
-  # c.default_cassette_options = { allow_playback_repeats: true, match_requests_on: %i[method uri body], record: :new_episodes }
+  #c.default_cassette_options = { allow_playback_repeats: true, match_requests_on: %i[method uri body], record: :new_episodes }
 
   # one secret = one <FILTERED_VALUE> VCR fails
   c.filter_sensitive_data('<APIE_JWT_TOKEN>')  { Rails.application.config_for(:secrets)['apie_jwt_token'].to_s }

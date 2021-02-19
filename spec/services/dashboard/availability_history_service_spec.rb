@@ -27,13 +27,7 @@ describe Dashboard::AvailabilityHistoryService, type: :service, vcr: { cassette_
       let(:providers) { results.map { |r| r['provider_name'] }.sort }
       let(:expected_providers) { Endpoint.all.map(&:provider).uniq.sort }
 
-      its(:size) { is_expected.to equal(15) }
-
-      it 'contains specifics providers', pending: 'Stop testing that' do
-        expected_providers.delete('apientreprise')
-        expected_providers.delete('sirene')
-        expect(providers).to eq(expected_providers)
-      end
+      its(:size) { is_expected.to equal(16) }
 
       it 'matches json-schema' do
         expect(json).to match_json_schema('dashboard/availability_history')

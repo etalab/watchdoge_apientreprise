@@ -14,7 +14,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - sandbox.entreprise.api.gouv.fr
+      - entreprise.api.gouv.fr
   response:
     status:
       code: 200
@@ -30,23 +30,37 @@ http_interactions:
       - 200 OK
       Cache-Control:
       - max-age=0, private, must-revalidate
+      Vary:
+      - Accept, Origin
       Strict-Transport-Security:
-      - max-age=15552000
-      Etag:
-      - W/"6e80b196f31725a318af0104c5dbe6c9"
-      X-Runtime:
-      - '0.727896'
+      - max-age=63072000; includeSubDomains
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
       X-Request-Id:
-      - b5130758-9756-4c55-8f95-2d7cad3c1bb8
+      - a391ec34-2aee-43fa-9dd0-876ad1d2287e
+      X-Download-Options:
+      - noopen
+      Etag:
+      - W/"d526288c2bd0ae37760dbf3a6a1971c7"
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Runtime:
+      - '2.092017'
+      X-Content-Type-Options:
+      - nosniff
       Date:
-      - Fri, 08 Jun 2018 09:54:28 GMT
+      - Fri, 19 Feb 2021 10:05:32 GMT
       X-Powered-By:
-      - Phusion Passenger 5.2.3
+      - Phusion Passenger 6.0.4
       Server:
-      - nginx + Phusion Passenger 5.2.3
+      - nginx + Phusion Passenger 6.0.4
     body:
       encoding: ASCII-8BIT
-      string: '{"url":"https://storage.entreprise.api.gouv.fr/siade_dev/1528451667-faf5676796fb2eeb8047178a22a820008aa2fb77-certificat_qualibat.pdf"}'
-    http_version:
-  recorded_at: Fri, 08 Jun 2018 09:54:28 GMT
-recorded_with: VCR 4.0.0
+      string: '{"url":"https://storage.entreprise.api.gouv.fr/siade/1613729130-201aedcad094c85cfd3e015617321e4a409c15e8-certificat_qualibat.pdf"}'
+    http_version: 
+  recorded_at: Fri, 19 Feb 2021 10:05:32 GMT
+recorded_with: VCR 5.0.0

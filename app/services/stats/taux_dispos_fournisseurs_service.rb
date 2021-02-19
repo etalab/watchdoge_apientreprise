@@ -42,7 +42,7 @@ class Stats::TauxDisposFournisseursService
   end
 
   def request_error?
-    endpoint_unknown? || invalid_period?
+    invalid_period? || endpoint_unknown?
   end
 
   def endpoint_unknown?
@@ -103,10 +103,10 @@ class Stats::TauxDisposFournisseursService
   end
 
   def set_error
-    if endpoint_unknown?
-      @error = { message: "No entry for endpoint `#{@endpoint}`" }
-    elsif invalid_period?
+    if invalid_period?
       @error = { message: "Invalid period format `#{@period}`" }
+    elsif endpoint_unknown?
+      @error = { message: "No entry for endpoint `#{@endpoint}`" }
     end
   end
 

@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; darwin x86_64; Faraday v0.15.4)'
+      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
       Content-Type:
       - application/json
       Accept-Encoding:
@@ -23,41 +23,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '401'
+      - '440'
     body:
       encoding: ASCII-8BIT
-      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.6.0","build_flavor":"default","build_type":"deb","build_hash":"7f634e9f44834fbc12724506cc1da681b0c3b1e3","roles":["ingest","master","data","ml"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
-    http_version:
-  recorded_at: Thu, 01 Oct 2020 13:51:20 GMT
-- request:
-    method: get
-    uri: http://51.91.107.39:9200/_search
-    body:
-      encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-6M"}}},{"term":{"controller.keyword":{"value":"notanendpoint"}}}]}},"aggs":{"1d_interval":{"date_histogram":{"field":"@timestamp","fixed_interval":"1d"},"aggs":{"group_by_status":{"terms":{"field":"status"}}}}}}'
-    headers:
-      User-Agent:
-      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; darwin x86_64; Faraday v0.15.4)'
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json; charset=UTF-8
-      Content-Length:
-      - '173'
-    body:
-      encoding: ASCII-8BIT
-      string: '{"took":44,"timed_out":false,"_shards":{"total":478,"successful":478,"skipped":369,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]},"aggregations":{"1d_interval":{"buckets":[]}}}'
-    http_version:
-  recorded_at: Thu, 01 Oct 2020 13:51:20 GMT
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.10.1","build_flavor":"default","build_type":"deb","build_hash":"1c34507e66d7db1211f66f3513706fdf548736aa","roles":["data","data_cold","data_content","data_hot","data_warm","ingest","master","ml","remote_cluster_client","transform"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","transform.node":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
+    http_version: 
+  recorded_at: Fri, 19 Feb 2021 10:05:27 GMT
 - request:
     method: get
     uri: http://51.91.107.39:9200/_search
@@ -66,7 +37,7 @@ http_interactions:
       string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-6M"}}},{"term":{"controller.keyword":{"value":""}}}]}},"aggs":{"1d_interval":{"date_histogram":{"field":"@timestamp","fixed_interval":"1d"},"aggs":{"group_by_status":{"terms":{"field":"status"}}}}}}'
     headers:
       User-Agent:
-      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; darwin x86_64; Faraday v0.15.4)'
+      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
       Content-Type:
       - application/json
       Accept-Encoding:
@@ -81,10 +52,39 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '174'
+      - '166'
     body:
       encoding: ASCII-8BIT
-      string: '{"took":22,"timed_out":false,"_shards":{"total":478,"successful":478,"skipped":369,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]},"aggregations":{"1d_interval":{"buckets":[]}}}'
-    http_version:
-  recorded_at: Thu, 01 Oct 2020 13:57:40 GMT
+      string: '{"took":1,"timed_out":false,"_shards":{"total":22,"successful":22,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]},"aggregations":{"1d_interval":{"buckets":[]}}}'
+    http_version: 
+  recorded_at: Fri, 19 Feb 2021 10:05:27 GMT
+- request:
+    method: get
+    uri: http://51.91.107.39:9200/_search
+    body:
+      encoding: UTF-8
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-6M"}}},{"term":{"controller.keyword":{"value":"notanendpoint"}}}]}},"aggs":{"1d_interval":{"date_histogram":{"field":"@timestamp","fixed_interval":"1d"},"aggs":{"group_by_status":{"terms":{"field":"status"}}}}}}'
+    headers:
+      User-Agent:
+      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '167'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"took":5,"timed_out":false,"_shards":{"total":22,"successful":22,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]},"aggregations":{"1d_interval":{"buckets":[]}}}'
+    http_version: 
+  recorded_at: Fri, 19 Feb 2021 10:29:55 GMT
 recorded_with: VCR 5.0.0

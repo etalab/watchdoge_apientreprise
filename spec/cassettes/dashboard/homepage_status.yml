@@ -7,10 +7,10 @@ http_interactions:
       encoding: US-ASCII
       string: ''
     headers:
+      User-Agent:
+      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
       Content-Type:
       - application/json
-      User-Agent:
-      - Faraday v0.13.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -22,16 +22,16 @@ http_interactions:
     headers:
       Content-Type:
       - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '440'
     body:
       encoding: ASCII-8BIT
-      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
-    http_version:
-  recorded_at: Tue, 05 Dec 2017 16:10:20 GMT
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.10.1","build_flavor":"default","build_type":"deb","build_hash":"1c34507e66d7db1211f66f3513706fdf548736aa","roles":["data","data_cold","data_content","data_hot","data_warm","ingest","master","ml","remote_cluster_client","transform"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","transform.node":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
+    http_version: 
+  recorded_at: Fri, 19 Feb 2021 10:05:26 GMT
 - request:
     method: get
-    uri: http://217.182.164.215:9200/_search
+    uri: http://51.91.107.39:9200/_search
     body:
       encoding: UTF-8
       string: |
@@ -46,9 +46,9 @@ http_interactions:
                   }
                 },
                 {
-                  "term": {
-                    "parameters.context.keyword": {
-                      "value": "Ping"
+                  "match": {
+                    "parameters.context": {
+                      "query": "Ping"
                     }
                   }
                 }
@@ -64,10 +64,10 @@ http_interactions:
           ]
         }
     headers:
+      User-Agent:
+      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
       Content-Type:
       - application/json
-      User-Agent:
-      - Faraday v0.13.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -79,14 +79,17 @@ http_interactions:
     headers:
       Content-Type:
       - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '1128'
     body:
       encoding: ASCII-8BIT
-      string: '{"took":11,"timed_out":false,"_shards":{"total":416,"successful":410,"failed":6,"failures":[{"shard":0,"index":".kibana","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
-        mapping found for [@timestamp] in order to sort on","index_uuid":"3tDGuNozQ5iYSmmUqklytw","index":".kibana"}},{"shard":0,"index":"my_index","node":"79oZqAQvTCKMyF4AGMt_Ug","reason":{"type":"query_shard_exception","reason":"No
-        mapping found for [@timestamp] in order to sort on","index_uuid":"cV-N3HxWTLSpSWf-zjH4_w","index":"my_index"}}]},"hits":{"total":23620,"max_score":null,"hits":[{"_index":"logstash-2017.12.05","_type":"siade","_id":"AWAnbcv6z_-J--ddy-uy","_score":null,"_source":{"controller":"www","geoip":{"timezone":"America/Chicago","ip":"69.162.124.237","latitude":32.7791,"continent_code":"NA","city_name":"Dallas","country_name":"United
-        States","country_code2":"US","dma_code":623,"country_code3":"US","region_name":"Texas","location":{"lon":-96.8028,"lat":32.7791},"postal_code":"75202","region_code":"TX","longitude":-96.8028},"method":"HEAD","ip":"69.162.124.237","format":"html","source":"siade_production1","type":"siade","tags":["request"],"duration":6.06,"path":"/","view":5.32,"route":"www#index","@timestamp":"2017-12-05T16:06:33.659Z","@version":"1","host":"production1","action":"index","request_id":"c1183389-86c2-4c73-8a5c-b2b373f7c2d7","parameters":{},"db":0.0,"status":200},"sort":[1512489993659]}]}}'
-    http_version:
-  recorded_at: Tue, 05 Dec 2017 16:10:20 GMT
-recorded_with: VCR 3.0.3
+      string: '{"took":15,"timed_out":false,"_shards":{"total":22,"successful":17,"skipped":4,"failed":5,"failures":[{"shard":0,"index":".async-search","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"OwD-OGI8REqXqe7wRKnP9w","index":".async-search"}},{"shard":0,"index":".kibana_1","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"V10cCC4KT3eH7CQF3o3Urg","index":".kibana_1"}},{"shard":0,"index":".kibana_2","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"7QTiDxaGT5y9mZbi7CoMLg","index":".kibana_2"}},{"shard":0,"index":".kibana_task_manager_1","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"emt0rQzeT0KCvv1fb6owSg","index":".kibana_task_manager_1"}},{"shard":0,"index":".kibana_task_manager_2","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"HY2fVUYAQc-GMhTsAhkvkw","index":".kibana_task_manager_2"}}]},"hits":{"total":{"value":10000,"relation":"gte"},"max_score":null,"hits":[{"_index":"logstash-2021-02","_type":"_doc","_id":"U2u_uXcBm1anegep_yEd","_score":null,"_source":{"source":"siade_production_production1.entreprise.api.gouv.fr","type":"siade","duration":665.41,"path":"/v2/certificats_qualibat/48787244200024","view":0.34,"host":"production1","@version":"1","action":"show","controller":"api/v2/certificats_qualibat","geoip":{"timezone":"Europe/Paris","latitude":48.8582,"ip":"217.182.164.215","country_name":"France","country_code2":"FR","continent_code":"EU","country_code3":"FR","location":{"lon":2.3387000000000002,"lat":48.8582},"longitude":2.3387000000000002},"method":"GET","ip":"217.182.164.215","format":"*/*","provider_http_code":{"certificats_qualibat":"200"},"api_version":"v2","tags":["request"],"@timestamp":"2021-02-19T10:05:03.152Z","route":"api/v2/certificats_qualibat#show","domain":"gouv.fr","user_access":{"access":"allow","user":"f5d5cb02-185a-426f-b3f4-99a25ce6cdf4","jti":"69cdbb2b-930b-46ac-8465-575906d2030d"},"request_id":"9da69c1a-8676-4979-8616-3b2f87505194","parameters":{"recipient":"SGMAP","context":"Ping","parameters_vrac":"{recipient=SGMAP,
+        context=Ping, siret=48787244200024, object=Watchdoge, token=[FILTERED]}","siret":"48787244200024","object":"Watchdoge","token":"[FILTERED]"},"status":200},"sort":[1613729103152]}]}}'
+    http_version: 
+  recorded_at: Fri, 19 Feb 2021 10:05:26 GMT
+recorded_with: VCR 5.0.0

@@ -23,18 +23,18 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '401'
+      - '440'
     body:
       encoding: ASCII-8BIT
-      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.6.0","build_flavor":"default","build_type":"deb","build_hash":"7f634e9f44834fbc12724506cc1da681b0c3b1e3","roles":["ingest","master","data","ml"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.10.1","build_flavor":"default","build_type":"deb","build_hash":"1c34507e66d7db1211f66f3513706fdf548736aa","roles":["data","data_cold","data_content","data_hot","data_warm","ingest","master","ml","remote_cluster_client","transform"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","transform.node":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Wed, 22 Jul 2020 10:19:47 GMT
+  recorded_at: Fri, 19 Feb 2021 10:05:28 GMT
 - request:
     method: get
     uri: http://51.91.107.39:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":50,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d/d","lte":"now/d"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"sort":[{"@timestamp":{"order":"desc"}}]}'
+      string: '{"size":50,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d/d","lte":"now/d"}}},{"term":{"user_access.jti":{"value":"it_has_0_data"}}}]}},"sort":[{"@timestamp":{"order":"desc"}}]}'
     headers:
       User-Agent:
       - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
@@ -52,14 +52,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '350'
+      - '455'
     body:
       encoding: ASCII-8BIT
-      string: '{"took":45,"timed_out":false,"_shards":{"total":475,"successful":473,"skipped":471,"failed":2,"failures":[{"shard":0,"index":".kibana_1","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
-        mapping found for [@timestamp] in order to sort on","index_uuid":"V10cCC4KT3eH7CQF3o3Urg","index":".kibana_1"}},{"shard":0,"index":".kibana_task_manager_1","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
-        mapping found for [@timestamp] in order to sort on","index_uuid":"emt0rQzeT0KCvv1fb6owSg","index":".kibana_task_manager_1"}}]},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]}}'
+      string: '{"took":20,"timed_out":false,"_shards":{"total":22,"successful":17,"skipped":16,"failed":5,"failures":[{"shard":0,"index":".async-search","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"OwD-OGI8REqXqe7wRKnP9w","index":".async-search"}},{"shard":0,"index":".kibana_1","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"V10cCC4KT3eH7CQF3o3Urg","index":".kibana_1"}},{"shard":0,"index":".kibana_2","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"7QTiDxaGT5y9mZbi7CoMLg","index":".kibana_2"}},{"shard":0,"index":".kibana_task_manager_1","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"emt0rQzeT0KCvv1fb6owSg","index":".kibana_task_manager_1"}},{"shard":0,"index":".kibana_task_manager_2","node":"BPVAX6J9TCmPQ8GSJEwTiw","reason":{"type":"query_shard_exception","reason":"No
+        mapping found for [@timestamp] in order to sort on","index_uuid":"HY2fVUYAQc-GMhTsAhkvkw","index":".kibana_task_manager_2"}}]},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]}}'
     http_version: 
-  recorded_at: Wed, 22 Jul 2020 10:19:48 GMT
+  recorded_at: Fri, 19 Feb 2021 10:05:28 GMT
 - request:
     method: get
     uri: http://kibana.entreprise.api.gouv.fr:9200/_nodes/http
@@ -83,18 +86,18 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '401'
+      - '440'
     body:
       encoding: ASCII-8BIT
-      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.6.0","build_flavor":"default","build_type":"deb","build_hash":"7f634e9f44834fbc12724506cc1da681b0c3b1e3","roles":["ingest","master","data","ml"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.10.1","build_flavor":"default","build_type":"deb","build_hash":"1c34507e66d7db1211f66f3513706fdf548736aa","roles":["data","data_cold","data_content","data_hot","data_warm","ingest","master","ml","remote_cluster_client","transform"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","transform.node":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Wed, 22 Jul 2020 10:19:48 GMT
+  recorded_at: Fri, 19 Feb 2021 10:05:28 GMT
 - request:
     method: get
     uri: http://51.91.107.39:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-10m","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"controller.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-10m","lte":"now"}}},{"term":{"user_access.jti":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"controller.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
     headers:
       User-Agent:
       - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
@@ -112,12 +115,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '198'
+      - '191'
     body:
       encoding: ASCII-8BIT
-      string: '{"took":13,"timed_out":false,"_shards":{"total":475,"successful":475,"skipped":474,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+      string: '{"took":2,"timed_out":false,"_shards":{"total":22,"successful":22,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
     http_version: 
-  recorded_at: Wed, 22 Jul 2020 10:19:48 GMT
+  recorded_at: Fri, 19 Feb 2021 10:05:28 GMT
 - request:
     method: get
     uri: http://kibana.entreprise.api.gouv.fr:9200/_nodes/http
@@ -141,18 +144,18 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '401'
+      - '440'
     body:
       encoding: ASCII-8BIT
-      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.6.0","build_flavor":"default","build_type":"deb","build_hash":"7f634e9f44834fbc12724506cc1da681b0c3b1e3","roles":["ingest","master","data","ml"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.10.1","build_flavor":"default","build_type":"deb","build_hash":"1c34507e66d7db1211f66f3513706fdf548736aa","roles":["data","data_cold","data_content","data_hot","data_warm","ingest","master","ml","remote_cluster_client","transform"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","transform.node":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Wed, 22 Jul 2020 10:19:48 GMT
+  recorded_at: Fri, 19 Feb 2021 10:05:28 GMT
 - request:
     method: get
     uri: http://51.91.107.39:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-30h","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"controller.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-30h","lte":"now"}}},{"term":{"user_access.jti":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"controller.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
     headers:
       User-Agent:
       - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
@@ -170,12 +173,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '198'
+      - '191'
     body:
       encoding: ASCII-8BIT
-      string: '{"took":13,"timed_out":false,"_shards":{"total":475,"successful":475,"skipped":474,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+      string: '{"took":2,"timed_out":false,"_shards":{"total":22,"successful":22,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
     http_version: 
-  recorded_at: Wed, 22 Jul 2020 10:19:48 GMT
+  recorded_at: Fri, 19 Feb 2021 10:05:28 GMT
 - request:
     method: get
     uri: http://kibana.entreprise.api.gouv.fr:9200/_nodes/http
@@ -199,18 +202,18 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '401'
+      - '440'
     body:
       encoding: ASCII-8BIT
-      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.6.0","build_flavor":"default","build_type":"deb","build_hash":"7f634e9f44834fbc12724506cc1da681b0c3b1e3","roles":["ingest","master","data","ml"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.10.1","build_flavor":"default","build_type":"deb","build_hash":"1c34507e66d7db1211f66f3513706fdf548736aa","roles":["data","data_cold","data_content","data_hot","data_warm","ingest","master","ml","remote_cluster_client","transform"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","transform.node":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
     http_version: 
-  recorded_at: Wed, 22 Jul 2020 10:19:48 GMT
+  recorded_at: Fri, 19 Feb 2021 10:05:28 GMT
 - request:
     method: get
     uri: http://51.91.107.39:9200/_search
     body:
       encoding: UTF-8
-      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d","lte":"now"}}},{"term":{"user_access.jti.keyword":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"controller.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
+      string: '{"size":0,"query":{"bool":{"must":[{"range":{"@timestamp":{"gte":"now-8d","lte":"now"}}},{"term":{"user_access.jti":{"value":"it_has_0_data"}}}]}},"aggs":{"endpoints":{"terms":{"field":"controller.keyword","size":100},"aggs":{"status-code":{"terms":{"field":"status"}}}}}}'
     headers:
       User-Agent:
       - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
@@ -228,10 +231,10 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '198'
+      - '191'
     body:
       encoding: ASCII-8BIT
-      string: '{"took":13,"timed_out":false,"_shards":{"total":475,"successful":475,"skipped":473,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
+      string: '{"took":2,"timed_out":false,"_shards":{"total":22,"successful":22,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]},"aggregations":{"endpoints":{"doc_count_error_upper_bound":0,"sum_other_doc_count":0,"buckets":[]}}}'
     http_version: 
-  recorded_at: Wed, 22 Jul 2020 10:19:48 GMT
+  recorded_at: Fri, 19 Feb 2021 10:05:28 GMT
 recorded_with: VCR 5.0.0

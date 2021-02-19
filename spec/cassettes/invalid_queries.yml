@@ -7,10 +7,10 @@ http_interactions:
       encoding: US-ASCII
       string: ''
     headers:
+      User-Agent:
+      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
       Content-Type:
       - application/json
-      User-Agent:
-      - Faraday v0.13.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -22,24 +22,24 @@ http_interactions:
     headers:
       Content-Type:
       - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '440'
     body:
       encoding: ASCII-8BIT
-      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"79oZqAQvTCKMyF4AGMt_Ug":{"name":"79oZqAQ","transport_address":"217.182.164.215:9300","host":"217.182.164.215","ip":"217.182.164.215","version":"5.5.1","build_hash":"19c13d0","roles":["master","data","ingest"],"http":{"bound_address":["[::]:9200"],"publish_address":"217.182.164.215:9200","max_content_length_in_bytes":104857600}}}}'
-    http_version:
-  recorded_at: Wed, 06 Dec 2017 09:17:46 GMT
+      string: '{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"apientreprise_es","nodes":{"BPVAX6J9TCmPQ8GSJEwTiw":{"name":"wd2","transport_address":"51.91.107.39:9300","host":"51.91.107.39","ip":"51.91.107.39","version":"7.10.1","build_flavor":"default","build_type":"deb","build_hash":"1c34507e66d7db1211f66f3513706fdf548736aa","roles":["data","data_cold","data_content","data_hot","data_warm","ingest","master","ml","remote_cluster_client","transform"],"attributes":{"ml.machine_memory":"33453887488","xpack.installed":"true","transform.node":"true","ml.max_open_jobs":"20"},"http":{"bound_address":["[::]:9200"],"publish_address":"51.91.107.39:9200","max_content_length_in_bytes":104857600}}}}'
+    http_version: 
+  recorded_at: Fri, 19 Feb 2021 10:11:34 GMT
 - request:
     method: get
-    uri: http://217.182.164.215:9200/_search
+    uri: http://51.91.107.39:9200/_search
     body:
       encoding: UTF-8
       string: '{"query":{"match_allllll":{}}}'
     headers:
+      User-Agent:
+      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
       Content-Type:
       - application/json
-      User-Agent:
-      - Faraday v0.13.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -51,26 +51,27 @@ http_interactions:
     headers:
       Content-Type:
       - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '199'
     body:
       encoding: ASCII-8BIT
-      string: '{"error":{"root_cause":[{"type":"parsing_exception","reason":"no [query]
-        registered for [match_allllll]","line":1,"col":27}],"type":"parsing_exception","reason":"no
-        [query] registered for [match_allllll]","line":1,"col":27},"status":400}'
-    http_version:
-  recorded_at: Wed, 06 Dec 2017 09:17:46 GMT
+      string: '{"error":{"root_cause":[{"type":"parsing_exception","reason":"unknown
+        query [match_allllll] did you mean [match_all]?","line":1,"col":27}],"type":"parsing_exception","reason":"unknown
+        query [match_allllll] did you mean [match_all]?","line":1,"col":27,"caused_by":{"type":"named_object_not_found_exception","reason":"[1:27]
+        unknown field [match_allllll]"}},"status":400}'
+    http_version: 
+  recorded_at: Fri, 19 Feb 2021 10:11:34 GMT
 - request:
     method: get
-    uri: http://217.182.164.215:9200/_count
+    uri: http://51.91.107.39:9200/_count
     body:
       encoding: UTF-8
       string: '{"query":{"match_allllll":{}}}'
     headers:
+      User-Agent:
+      - 'elasticsearch-ruby/7.3.0 (RUBY_VERSION: 2.6.2; linux x86_64; Faraday v0.15.4)'
       Content-Type:
       - application/json
-      User-Agent:
-      - Faraday v0.14.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -82,13 +83,14 @@ http_interactions:
     headers:
       Content-Type:
       - application/json; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '199'
     body:
       encoding: ASCII-8BIT
-      string: '{"error":{"root_cause":[{"type":"parsing_exception","reason":"no [query]
-        registered for [match_allllll]","line":1,"col":27}],"type":"parsing_exception","reason":"no
-        [query] registered for [match_allllll]","line":1,"col":27},"status":400}'
-    http_version:
-  recorded_at: Fri, 30 Mar 2018 13:27:28 GMT
-recorded_with: VCR 4.0.0
+      string: '{"error":{"root_cause":[{"type":"parsing_exception","reason":"unknown
+        query [match_allllll] did you mean [match_all]?","line":1,"col":27}],"type":"parsing_exception","reason":"unknown
+        query [match_allllll] did you mean [match_all]?","line":1,"col":27,"caused_by":{"type":"named_object_not_found_exception","reason":"[1:27]
+        unknown field [match_allllll]"}},"status":400}'
+    http_version: 
+  recorded_at: Fri, 19 Feb 2021 10:29:13 GMT
+recorded_with: VCR 5.0.0

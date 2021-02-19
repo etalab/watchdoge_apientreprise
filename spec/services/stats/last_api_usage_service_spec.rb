@@ -5,7 +5,7 @@ describe Stats::LastApiUsageService, type: :service, vcr: { cassette_name: 'stat
 
   describe 'service (e2e)' do
     its(:success?) { is_expected.to be_truthy }
-    its(:results) { is_expected.to eq(3_231_910) }
+    its(:results) { is_expected.to eq(6_512_847) }
   end
 
   describe 'service (mocked)' do

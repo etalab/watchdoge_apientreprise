@@ -30,7 +30,7 @@ describe ProviderAvailabilitiesController, type: :controller do
       end
     end
 
-    context 'when the period parameter is not specified', vcr: { cassette_name: 'stats/provider_availability_invalid_period', record: :new_episodes } do
+    context 'when the period parameter is not specified', vcr: { cassette_name: 'stats/provider_availability_invalid_period' } do
       subject(:call!) { get :index, params: { endpoint: 'api/v2/cartes_professionnelles_fntp', format: :json } }
 
       its(:status) { is_expected.to eq(422) }
