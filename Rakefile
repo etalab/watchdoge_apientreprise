@@ -5,12 +5,19 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-domain = 'watchdoge.entreprise.api.gouv.fr'
+watchdoge = 'watchdoge.entreprise.api.gouv.fr'
+wd2 = 'wd2.entreprise.api.gouv.fr'
+
+domains = [watchdoge, wd2]
 
 task :deploy_server do
-  sh "bundle exec mina deploy domain=#{domain}"
+  domains.each do |domain|
+    sh "bundle exec mina deploy domain=#{domain}"
+  end
 end
 
 task :setup_server do
-  sh "bundle exec mina setup domain=#{domain}"
+  domains.each do |domain|
+    sh "bundle exec mina setup domain=#{domain}"
+  end
 end
