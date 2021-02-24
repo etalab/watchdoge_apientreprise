@@ -402,7 +402,7 @@
   api_name: apie
   api_version: 2
   ping_period: 60
-  http_path: 'v2/eori_douanes/16002307300010'
+  http_path: '/v2/eori_douanes/16002307300010'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
 # ###############

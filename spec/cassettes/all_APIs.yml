@@ -2381,4 +2381,128 @@ http_interactions:
         eyJlbnRyZXByaXNlIjp7InNpcmVuIjoiNDE4MTY2MDk2IiwiY2FwaXRhbF9zb2NpYWwiOjUwOTUyNSwibnVtZXJvX3R2YV9pbnRyYWNvbW11bmF1dGFpcmUiOiJGUjE2NDE4MTY2MDk2IiwiZm9ybWVfanVyaWRpcXVlIjoiU0FTLCBzb2Npw6l0w6kgcGFyIGFjdGlvbnMgc2ltcGxpZmnDqWUiLCJmb3JtZV9qdXJpZGlxdWVfY29kZSI6IjU3MTAiLCJub21fY29tbWVyY2lhbCI6Ik9DVE8tVEVDSE5PTE9HWSIsInByb2NlZHVyZV9jb2xsZWN0aXZlIjpmYWxzZSwiZW5zZWlnbmUiOm51bGwsImxpYmVsbGVfbmFmX2VudHJlcHJpc2UiOiJDb25zZWlsIGVuIHN5c3TDqG1lcyBldCBsb2dpY2llbHMgaW5mb3JtYXRpcXVlcyIsIm5hZl9lbnRyZXByaXNlIjoiNjIwMkEiLCJyYWlzb25fc29jaWFsZSI6Ik9DVE8tVEVDSE5PTE9HWSIsInNpcmV0X3NpZWdlX3NvY2lhbCI6IjQxODE2NjA5NjAwMDY5IiwiY29kZV9lZmZlY3RpZl9lbnRyZXByaXNlIjoiMzIiLCJkYXRlX2NyZWF0aW9uIjo4OTEzODE2MDAsIm5vbSI6bnVsbCwicHJlbm9tIjpudWxsLCJkYXRlX3JhZGlhdGlvbiI6bnVsbCwiY2F0ZWdvcmllX2VudHJlcHJpc2UiOiJHRSIsInRyYW5jaGVfZWZmZWN0aWZfc2FsYXJpZV9lbnRyZXByaXNlIjp7ImRlIjoyNTAsImEiOjQ5OSwiY29kZSI6IjMyIiwiZGF0ZV9yZWZlcmVuY2UiOiIyMDE4IiwiaW50aXR1bGUiOiIyNTAgw6AgNDk5IHNhbGFyacOpcyJ9LCJtYW5kYXRhaXJlc19zb2NpYXV4IjpbeyJub20iOiJDSU5RVUlOIiwicHJlbm9tIjoiTFVET1ZJQyIsImZvbmN0aW9uIjoiUFJFU0lERU5UIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTcyLTAxLTI1IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjo2NTE0MjAwMCwiZGlyaWdlYW50Ijp0cnVlLCJyYWlzb25fc29jaWFsZSI6IiIsImlkZW50aWZpYW50IjoiIiwidHlwZSI6IlBQIn0seyJub20iOiIiLCJwcmVub20iOiIiLCJmb25jdGlvbiI6IkNPTU1JU1NBSVJFIEFVWCBDT01QVEVTIFRJVFVMQUlSRSIsImRhdGVfbmFpc3NhbmNlIjoiIiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjowLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiTUFaQVJTIC0gU09DSUVURSBBTk9OWU1FIiwiaWRlbnRpZmlhbnQiOiI3ODQ4MjQxNTMiLCJ0eXBlIjoiUE0ifSx7Im5vbSI6IiIsInByZW5vbSI6IiIsImZvbmN0aW9uIjoiQ09NTUlTU0FJUkUgQVVYIENPTVBURVMgVElUVUxBSVJFIiwiZGF0ZV9uYWlzc2FuY2UiOiIiLCJkYXRlX25haXNzYW5jZV90aW1lc3RhbXAiOjAsImRpcmlnZWFudCI6dHJ1ZSwicmFpc29uX3NvY2lhbGUiOiJLUE1HIC0gU09DSUVURSBBTk9OWU1FIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUE0ifSx7Im5vbSI6IlNJTU9OIiwicHJlbm9tIjoiSkVBTi1MT1VJUyIsImZvbmN0aW9uIjoiQ09NTUlTU0FJUkUgQVVYIENPTVBURVMgU1VQUExFQU5UIiwiZGF0ZV9uYWlzc2FuY2UiOiIxOTU5LTAyLTE3IiwiZGF0ZV9uYWlzc2FuY2VfdGltZXN0YW1wIjotMzQzMDk4MDAwLCJkaXJpZ2VhbnQiOnRydWUsInJhaXNvbl9zb2NpYWxlIjoiIiwiaWRlbnRpZmlhbnQiOiIiLCJ0eXBlIjoiUFAifV0sImV0YXRfYWRtaW5pc3RyYXRpZiI6eyJ2YWx1ZSI6IkEiLCJkYXRlX2Nlc3NhdGlvbiI6bnVsbH19LCJldGFibGlzc2VtZW50X3NpZWdlIjp7InNpZWdlX3NvY2lhbCI6dHJ1ZSwic2lyZXQiOiI0MTgxNjYwOTYwMDA2OSIsIm5hZiI6IjYyMDJBIiwibGliZWxsZV9uYWYiOiJDb25zZWlsIGVuIHN5c3TDqG1lcyBldCBsb2dpY2llbHMgaW5mb3JtYXRpcXVlcyIsImRhdGVfbWlzZV9hX2pvdXIiOjE2MTA2MTMyODgsInRyYW5jaGVfZWZmZWN0aWZfc2FsYXJpZV9ldGFibGlzc2VtZW50Ijp7ImRlIjoyNTAsImEiOjQ5OSwiY29kZSI6IjMyIiwiZGF0ZV9yZWZlcmVuY2UiOiIyMDE4IiwiaW50aXR1bGUiOiIyNTAgw6AgNDk5IHNhbGFyacOpcyJ9LCJkYXRlX2NyZWF0aW9uX2V0YWJsaXNzZW1lbnQiOjE0ODAyODc2MDAsInJlZ2lvbl9pbXBsYW50YXRpb24iOnsiY29kZSI6IjExIiwidmFsdWUiOiLDjmxlLWRlLUZyYW5jZSJ9LCJjb21tdW5lX2ltcGxhbnRhdGlvbiI6eyJjb2RlIjoiNzUxMDIiLCJ2YWx1ZSI6IlBhcmlzIDJlIEFycm9uZGlzc2VtZW50In0sInBheXNfaW1wbGFudGF0aW9uIjp7ImNvZGUiOiJGUiIsInZhbHVlIjoiRlJBTkNFIn0sImRpZmZ1c2FibGVfY29tbWVyY2lhbGVtZW50Ijp0cnVlLCJlbnNlaWduZSI6bnVsbCwiYWRyZXNzZSI6eyJsMSI6Ik9DVE8tVEVDSE5PTE9HWSIsImwyIjpudWxsLCJsMyI6bnVsbCwibDQiOiIzNCBBViBERSBMIE9QRVJBIiwibDUiOm51bGwsImw2IjoiNzUwMDIgUEFSSVMgMiIsImw3IjoiRlJBTkNFIiwibnVtZXJvX3ZvaWUiOiIzNCIsInR5cGVfdm9pZSI6IkFWIiwibm9tX3ZvaWUiOiJERSBMIE9QRVJBIiwiY29tcGxlbWVudF9hZHJlc3NlIjpudWxsLCJjb2RlX3Bvc3RhbCI6Ijc1MDAyIiwibG9jYWxpdGUiOiJQQVJJUyAyIiwiY29kZV9pbnNlZV9sb2NhbGl0ZSI6Ijc1MTAyIiwiY2VkZXgiOm51bGx9LCJldGF0X2FkbWluaXN0cmF0aWYiOnsidmFsdWUiOiJBIiwiZGF0ZV9mZXJtZXR1cmUiOm51bGx9fSwiZ2F0ZXdheV9lcnJvciI6ZmFsc2V9
     http_version: 
   recorded_at: Fri, 19 Feb 2021 10:07:12 GMT
+- request:
+    method: get
+    uri: "<APIE_BASE_URI>/v2/entreprises_artisanales_cma/301123626?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - entreprise.api.gouv.fr
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 403 Forbidden
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Accept, Origin
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Request-Id:
+      - b96ba865-5c8a-445f-8059-74bc305447c2
+      X-Download-Options:
+      - noopen
+      X-Runtime:
+      - '0.008073'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 24 Feb 2021 13:13:48 GMT
+      X-Powered-By:
+      - Phusion Passenger 6.0.4
+      Server:
+      - nginx + Phusion Passenger 6.0.4
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlcnJvcnMiOlsiVm90cmUgdG9rZW4gZXN0IHZhbGlkZSBtYWlzIHZvcyBwcml2aWzDqGdlcyBzb250IGluc3VmZmlzYW50cy4gTGlzdGV6IHZvcyBwcml2aWzDqGdlcyBncsOiY2Ugw6AgdW4gR0VUIHN1ciAvdjIvcHJpdmlsZWdlcz90b2tlbj1WT1RSRV9UT0tFTiJdfQ==
+    http_version: 
+  recorded_at: Wed, 24 Feb 2021 13:13:49 GMT
+- request:
+    method: get
+    uri: "<APIE_BASE_URI>/v2/eori_douanes/16002307300010?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - entreprise.api.gouv.fr
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 403 Forbidden
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Accept, Origin
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Request-Id:
+      - 593fcab6-8461-4ded-9ac3-ddf13e73ffcb
+      X-Download-Options:
+      - noopen
+      X-Runtime:
+      - '0.006303'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 24 Feb 2021 13:19:14 GMT
+      X-Powered-By:
+      - Phusion Passenger 6.0.4
+      Server:
+      - nginx + Phusion Passenger 6.0.4
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlcnJvcnMiOlsiVm90cmUgdG9rZW4gZXN0IHZhbGlkZSBtYWlzIHZvcyBwcml2aWzDqGdlcyBzb250IGluc3VmZmlzYW50cy4gTGlzdGV6IHZvcyBwcml2aWzDqGdlcyBncsOiY2Ugw6AgdW4gR0VUIHN1ciAvdjIvcHJpdmlsZWdlcz90b2tlbj1WT1RSRV9UT0tFTiJdfQ==
+    http_version: 
+  recorded_at: Wed, 24 Feb 2021 13:19:14 GMT
 recorded_with: VCR 5.0.0
