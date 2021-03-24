@@ -405,6 +405,15 @@
   http_path: '/v2/eori_douanes/16002307300010'
   http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
 
+- uname: apie_2_agence_bio
+  name: Certifications BIO
+  provider: agencebio
+  api_name: apie
+  api_version: 2
+  ping_period: 5
+  http_path: '/v2/certificats_agence_bio/48311105000025'
+  http_query: '{ "context": "Ping", "recipient": "SGMAP", "object": "Watchdoge" }'
+
 # ###############
 # v3
 # ###############
