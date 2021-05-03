@@ -2505,4 +2505,66 @@ http_interactions:
         eyJlcnJvcnMiOlsiVm90cmUgdG9rZW4gZXN0IHZhbGlkZSBtYWlzIHZvcyBwcml2aWzDqGdlcyBzb250IGluc3VmZmlzYW50cy4gTGlzdGV6IHZvcyBwcml2aWzDqGdlcyBncsOiY2Ugw6AgdW4gR0VUIHN1ciAvdjIvcHJpdmlsZWdlcz90b2tlbj1WT1RSRV9UT0tFTiJdfQ==
     http_version:
   recorded_at: Wed, 24 Feb 2021 13:19:14 GMT
+- request:
+    method: get
+    uri: "<APIE_BASE_URI>/v2/certificats_agence_bio/48311105000025?context=Ping&object=Watchdoge&recipient=SGMAP&token=<APIE_JWT_TOKEN>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - sandbox.entreprise.api.gouv.fr
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 401 Unauthorized
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Accept, Origin
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Request-Id:
+      - 49edf0b9-33d9-48ed-8247-8bd87612c1b1
+      X-Download-Options:
+      - noopen
+      X-Runtime:
+      - '0.008595'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Mon, 03 May 2021 08:10:56 GMT
+      X-Powered-By:
+      - Phusion Passenger 6.0.4
+      Server:
+      - nginx + Phusion Passenger 6.0.4
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlcnJvcnMiOlsiVm90cmUgdG9rZW4gbidlc3QgcGFzIHZhbGlkZSBvdSBuJ2VzdCBwYXMgcmVuc2VpZ27DqSJdfQ==
+    http_version:
+  recorded_at: Mon, 03 May 2021 08:10:56 GMT
 recorded_with: VCR 5.0.0
