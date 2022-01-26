@@ -4,6 +4,7 @@ require 'mina/rvm'
 require 'mina/rbenv'
 require 'mina/whenever'
 require 'colorize'
+require 'securerandom'
 
 ENV['domain'] ||= 'watchdoge.entreprise.api.gouv.fr'
 ENV['to'] ||= 'sandbox'
@@ -38,6 +39,15 @@ branch = ENV['branch'] ||
 set :branch, branch
 ensure!(:branch)
 
+def samhain_db_update
+  samhain_listfile = "/tmp/listfile-#{SecureRandom.hex(48)}"
+
+  comment %{Updating Samhain signature database}
+  command %{find "/var/www/watchdoge_#{ENV['to']}" >#{samhain_listfile}}
+  command %{sudo /usr/local/sbin/update-samhain-db.sh #{samhain_listfile}}
+  command %{rm -f #{samhain_listfile}}
+end
+
 # shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
 set :shared_dirs, fetch(:shared_dirs, []).push(
   'bin',
@@ -71,6 +81,7 @@ task setup: :remote_environment do
   # command %(rbenv install 2.3.0)
   command %(mkdir -p "#{fetch(:deploy_to)}/shared/pids/")
   command %(mkdir -p "#{fetch(:deploy_to)}/shared/log/")
+  samhain_db_update
 end
 
 desc 'Deploys the current version to the server.'
@@ -104,7 +115,7 @@ task deploy: :remote_environment do
       end
     end
   end
-
+  samhain_db_update
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
   # run(:local){ say 'done' }
 end
