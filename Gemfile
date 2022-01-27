@@ -18,7 +18,7 @@ gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'logstasher'
 gem 'pg'
 # TODO: remove version limitation when Ubuntu 18.04 deployed
-gem 'sidekiq', '~> 5.2'
+gem 'sidekiq', '~> 6.4'
 gem 'vcr'
 gem 'whenever'
 
