@@ -150,7 +150,8 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.10)
     public_suffix (4.0.1)
-    puma (3.12.6)
+    puma (4.3.11)
+      nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
     rack-cors (1.0.5)
@@ -297,7 +298,7 @@ DEPENDENCIES
   pg
   pry
   pry-byebug
-  puma (~> 3.12)
+  puma (~> 4.3)
   rack-cors
   rails (~> 5.1.1)
   rspec-its
