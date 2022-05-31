@@ -4,7 +4,6 @@ require 'mina/rvm'
 require 'mina/rbenv'
 require 'mina/whenever'
 require 'colorize'
-require 'securerandom'
 
 ENV['domain'] ||= 'watchdoge.entreprise.api.gouv.fr'
 ENV['to'] ||= 'sandbox'
@@ -13,7 +12,6 @@ ENV['to'] ||= 'sandbox'
 comment "Deploy to #{ENV['to']}\n".green
 
 set :commit, ENV['commit']
-set :user, 'deploy' if ENV['domain'] != 'localhost'
 set :application_name, 'watchdoge'
 set :domain, ENV['domain']
 
@@ -39,13 +37,8 @@ branch = ENV['branch'] ||
 set :branch, branch
 ensure!(:branch)
 
-def samhain_db_update
-  samhain_listfile = "/tmp/listfile-#{SecureRandom.hex(48)}"
-
-  comment %{Updating Samhain signature database}
-  command %{find "/var/www/watchdoge_#{ENV['to']}" >#{samhain_listfile}}
-  command %{sudo /usr/local/sbin/update-samhain-db.sh #{samhain_listfile}}
-  command %{rm -f #{samhain_listfile}}
+task :samhain_db_update do
+  command %{sudo /usr/local/sbin/update-samhain-db.sh "#{fetch(:deploy_to)}"}
 end
 
 # shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
@@ -81,7 +74,8 @@ task setup: :remote_environment do
   # command %(rbenv install 2.3.0)
   command %(mkdir -p "#{fetch(:deploy_to)}/shared/pids/")
   command %(mkdir -p "#{fetch(:deploy_to)}/shared/log/")
-  samhain_db_update
+  invoke :'ownership'
+  invoke :'samhain_db_update'
 end
 
 desc 'Deploys the current version to the server.'
@@ -97,6 +91,7 @@ task deploy: :remote_environment do
     invoke :'bundle:install'
     invoke :'rails:db_migrate' # Database must exists here ;)
     invoke :'deploy:cleanup'
+    invoke :'ownership'
 
     on :launch do
       in_path(fetch(:current_path)) do
@@ -110,12 +105,13 @@ task deploy: :remote_environment do
           comment 'Updating cronotab'.green
           invoke :'whenever:update'
         end
+        invoke :'ownership'
 
         invoke :passenger
       end
     end
   end
-  samhain_db_update
+  invoke :'samhain_db_update'
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
   # run(:local){ say 'done' }
 end
@@ -135,9 +131,13 @@ task :passenger do
   command %{
     if (sudo passenger-status | grep watchdoge_#{ENV['to']}) >/dev/null
     then
-      passenger-config restart-app /var/www/watchdoge_#{ENV['to']}/current
+      sudo passenger-config restart-app /var/www/watchdoge_#{ENV['to']}/current
     else
       echo 'Skipping: no passenger app found (will be automatically loaded)'
     fi
   }
+end
+
+task :ownership do
+  command %{sudo chown -R deploy "#{fetch(:deploy_to)}"}
 end
