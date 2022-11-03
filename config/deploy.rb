@@ -46,8 +46,6 @@ set :shared_dirs, fetch(:shared_dirs, []).push(
   'bin',
   'config/environments',
   'log',
-  'tmp/pids',
-  'tmp/cache'
 )
 
 set :shared_files, fetch(:shared_files, []).push(
@@ -74,7 +72,6 @@ task setup: :remote_environment do
   # command %(rbenv install 2.3.0)
   command %(mkdir -p "#{fetch(:deploy_to)}/shared/pids/")
   command %(mkdir -p "#{fetch(:deploy_to)}/shared/log/")
-  invoke :'ownership'
   invoke :'samhain_db_update'
 end
 
@@ -91,7 +88,6 @@ task deploy: :remote_environment do
     invoke :'bundle:install'
     invoke :'rails:db_migrate' # Database must exists here ;)
     invoke :'deploy:cleanup'
-    invoke :'ownership'
 
     on :launch do
       in_path(fetch(:current_path)) do
@@ -105,7 +101,6 @@ task deploy: :remote_environment do
           comment 'Updating cronotab'.green
           invoke :'whenever:update'
         end
-        invoke :'ownership'
 
         invoke :passenger
       end
@@ -136,8 +131,4 @@ task :passenger do
       echo 'Skipping: no passenger app found (will be automatically loaded)'
     fi
   }
-end
-
-task :ownership do
-  command %{sudo chown -R deploy "#{fetch(:deploy_to)}"}
 end
