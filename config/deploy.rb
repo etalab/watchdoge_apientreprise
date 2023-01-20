@@ -37,6 +37,17 @@ branch = ENV['branch'] ||
 set :branch, branch
 ensure!(:branch)
 
+namespace :bundle do
+  desc 'Sets the Bundler config options.'
+  task :config do
+    comment %{Setting the Bundler config options (and cleaning default options)}
+    set :bundle_options, -> { '' }
+    command %{#{fetch(:bundle_bin)} config set --local deployment 'true'}
+    command %{#{fetch(:bundle_bin)} config set --local path '#{fetch(:bundle_path)}'}
+    command %{#{fetch(:bundle_bin)} config set --local without '#{fetch(:bundle_withouts)}'}
+  end
+end
+
 task :samhain_db_update do
   command %{sudo /usr/local/sbin/update-samhain-db.sh "#{fetch(:deploy_to)}"}
 end
@@ -84,8 +95,9 @@ task deploy: :remote_environment do
     # instance of your project.
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
-    set :bundle_options, fetch(:bundle_options) + ' --clean'
+    invoke :'bundle:config'
     invoke :'bundle:install'
+    invoke :'bundle:clean'
     invoke :'rails:db_migrate' # Database must exists here ;)
     invoke :'deploy:cleanup'
 
